@@ -23,11 +23,23 @@ jobs:
         python -m pip install --upgrade pip
         pip install instructlab
 
+    - name: Clone custom taxonomy repository
+      run: |
+        git clone https://github.com/nicklamb97/taxonomy.git taxonomy
+
     - name: Initialize ilab
       run: |
-        echo -e "\n\ny" | ilab config init
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        echo -e "taxonomy\nn" | ilab config init
+
+    - name: Update custom taxonomy
+      run: |
+        cd taxonomy
+        git pull
+        cd ..
+
+    - name: Run ilab diff
+      run: |
+        ilab taxonomy diff
 
     - name: Download model
       run: ilab model download
