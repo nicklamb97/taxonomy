@@ -25,7 +25,7 @@ jobs:
 
     - name: Initialize ilab
       run: |
-        ilab config init
+        echo -e "\n\ny" | ilab config init
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
