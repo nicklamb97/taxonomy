@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -25,27 +27,37 @@ jobs:
 
     - name: Clone custom taxonomy repository
       run: |
-        git clone https://github.com/nicklamb97/taxonomy.git taxonomy
+        git clone https://github.com/YOUR_USERNAME/taxonomy.git taxonomy
 
     - name: Initialize ilab
       run: |
         echo -e "taxonomy\nn" | ilab config init
 
-    - name: Update custom taxonomy
+    - name: Create newly added files
       run: |
         cd taxonomy
-        git pull
+        git fetch origin
+        PREVIOUS_COMMIT=$(git rev-parse HEAD^)
+        CURRENT_COMMIT=$(git rev-parse HEAD)
+        git diff --name-status $PREVIOUS_COMMIT $CURRENT_COMMIT | while read status file; do
+          if [ "$status" == "A" ]; then
+            echo "Creating new file: $file"
+            mkdir -p $(dirname "$file")
+            git show $CURRENT_COMMIT:"$file" > "$file"
+          fi
+        done
         cd ..
 
     - name: Run ilab diff
       run: |
         ilab taxonomy diff
 
+    - name: Generate data
+      run: |
+        ilab data generate
+
     - name: Download model
       run: ilab model download
-
-    - name: Generate data
-      run: ilab data generate
 
     - name: Commit and push generated data
       run: |
