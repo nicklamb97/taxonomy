@@ -1,0 +1,131 @@
+version: 2
+task_description: Explain the concept, usage, and best practices of dynamic names in OpenROAD programming language.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is a dynamic name in OpenROAD?
+    answer: A dynamic name in OpenROAD is a name that can be used in a statement either dynamically (when you run the
+      application) or statically (when you create the application). Examples include table names and column names.
+  - question: How are dynamic names represented in OpenROAD syntax examples?
+    answer: In OpenROAD syntax examples, dynamic names are underlined to distinguish them from other elements.
+  - question: Can you provide an example of a statement using dynamic names in OpenROAD?
+    answer: |
+      Here's an example of an SQL statement using dynamic names for table and column names:
+      ```sql
+      update tablename set columnname = expression {, columnname = expression} where current of cursor_variable
+      ```
+      In this example, 'tablename' and 'columnname' are dynamic names.
+  - question: What are the main rules for using dynamic names in OpenROAD?
+    answer: |
+      The main rules for using dynamic names in OpenROAD are:
+      - The variable used as a dynamic name can be a global variable or any variable in the current frame or procedure.
+      - A dereferencing colon (:) must be placed before the dynamic name to differentiate it from an alphanumeric
+        identifier.
+      - If the variable is part of an object, put the colon before the full name.
+      - In SQL statements, the colon is required before variable names.
+      - Nullable variables can be used as dynamic names, but they cannot contain a null when used in SQL or 4GL
+        statements.
+      - For statically-specified dynamic names, do not use quotation marks unless the name is identical to an OpenROAD
+        word.
+      - For dynamically-specified dynamic names, use a varchar variable.
+  - question: How do you differentiate between a variable used as a dynamic name and an alphanumeric identifier?
+    answer: To differentiate between a variable used as a dynamic name and an alphanumeric identifier, put a
+      dereferencing colon (:) before the dynamic name. This colon indicates that you are using the contents of a
+      variable to supply the value for an OpenROAD name.
+  - question: How should you use the dereferencing colon with object variables?
+    answer: |
+      When using the dereferencing colon with object variables, put the colon before the full name. For example:
+      ```
+      callframe :framearray.name;
+      ```
+      Do not place the colon in the middle of the name, like this:
+      ```
+      callframe framearray.:name;
+      ```
+  - question: Why is the colon required in SQL statements when using variables?
+    answer: |
+      In SQL statements, the colon is required before variable names to distinguish between variable names and
+      column names. For example:
+      ```sql
+      select from tbl where col1 = :value;
+      ```
+      Placing the colon before "value" makes the select compare the col1 column with the value of the variable 'value'.
+      Without the colon, the select would compare the col1 column with a column named "value".
+  - question: Can nullable variables be used as dynamic names?
+    answer: Although nullable variables can be used as dynamic names, they cannot contain a null when used in an SQL
+      statement or a 4GL statement because it would cause a runtime error. If a null is used, the value will be
+      replaced with zero for numbers or "$NULL$ERROR" for character strings, which may cause a runtime error.
+  - question: How should statically-specified dynamic names be handled?
+    answer: When using statically-specified dynamic names, do not put quotation marks around the name unless the name
+      is identical to an OpenROAD word. For more information on OpenROAD words, refer to the 4GL Keywords
+      documentation.
+  - question: What type of variable should be used for dynamically-specified dynamic names?
+    answer: When using dynamically-specified dynamic names, you should specify a varchar variable. At runtime,
+      OpenROAD will substitute the current value of the variable for the name.
+  - question: What is the advantage of using dynamically-specified dynamic names?
+    answer: The advantage of using dynamically-specified dynamic names is that the values can be substituted at
+      runtime. This behavior allows processing to be guided by user input or other runtime conditions, providing more
+      flexibility in application design.
+  - question: How does OpenROAD handle runtime errors with dynamic names containing nulls?
+    answer: If a dynamic name variable contains a null when used in an SQL or 4GL statement, OpenROAD will attempt to
+      execute the statement but will replace the null value. For numbers, it will use zero, and for character strings,
+      it will use "$NULL$ERROR". This substitution may lead to a runtime error, depending on the context of the
+      statement.
+  - question: Can you use dynamic names in all parts of an OpenROAD application?
+    answer: Dynamic names can be used in various parts of an OpenROAD application, including SQL statements, 4GL
+      statements, and when referencing objects, frames, and procedures. However, it's important to follow the rules
+      and best practices for their usage to avoid runtime errors.
+  - question: How do dynamic names contribute to the flexibility of OpenROAD applications?
+    answer: Dynamic names contribute to the flexibility of OpenROAD applications by allowing developers to create more
+      adaptable and responsive programs. They enable the use of variable names for tables, columns, objects, and other
+      elements, which can be determined at runtime based on user input, application state, or other factors. This
+      capability supports the creation of more dynamic and customizable applications.
+  - question: What are some best practices for using dynamic names in OpenROAD?
+    answer: |
+      Some best practices for using dynamic names in OpenROAD include:
+      - Always use the dereferencing colon (:) correctly to avoid confusion between variables and identifiers.
+      - Validate the content of dynamic name variables before use to prevent runtime errors.
+      - Use clear and descriptive variable names for dynamic names to improve code readability.
+      - Document the use of dynamic names in your code to help other developers understand their purpose and behavior.
+      - Be cautious when using dynamic names with user input to prevent potential security vulnerabilities.
+  - question: How can dynamic names be used to create more generic and reusable code in OpenROAD?
+    answer: |
+      Dynamic names can be used to create more generic and reusable code in OpenROAD by:
+      - Creating functions or procedures that can work with different tables or columns based on input parameters.
+      - Implementing dynamic SQL queries that can adapt to different data structures or user requirements.
+      - Building flexible user interfaces that can display different data fields based on user roles or preferences.
+      - Developing modular components that can be easily customized for different applications or clients.
+  - question: What are some potential pitfalls to avoid when using dynamic names in OpenROAD?
+    answer: |
+      Some potential pitfalls to avoid when using dynamic names in OpenROAD include:
+      - Forgetting to use the dereferencing colon, which can lead to unexpected behavior or errors.
+      - Using dynamic names with unvalidated user input, which could potentially lead to SQL injection vulnerabilities.
+      - Overusing dynamic names, which can make code harder to read, maintain, and debug.
+      - Not handling potential null values properly, which can cause runtime errors.
+      - Failing to consider performance implications when using dynamic names extensively in SQL queries.
+  - question: How does the use of dynamic names impact application performance in OpenROAD?
+    answer: |
+      The use of dynamic names can impact application performance in OpenROAD in several ways:
+      - Dynamic SQL statements using dynamic names cannot be precompiled, which may lead to slightly slower execution
+        times.
+      - Excessive use of dynamic names can increase the complexity of queries, potentially affecting query optimization.
+      - Runtime resolution of dynamic names adds a small overhead to execution time.
+      - However, the flexibility provided by dynamic names can often outweigh these performance considerations,
+        especially in scenarios where adaptability is crucial.
+  - question: Can dynamic names be used with stored procedures in OpenROAD?
+    answer: Yes, dynamic names can be used with stored procedures in OpenROAD. This allows for the creation of more
+      flexible and reusable stored procedures. However, care must be taken to ensure that the dynamic names are
+      properly validated and that the stored procedure is designed to handle different table or column names safely.
+  - question: How do dynamic names interact with OpenROAD's object-oriented features?
+    answer: |
+      Dynamic names in OpenROAD can interact with object-oriented features in several ways:
+      - They can be used to dynamically call methods or access properties of objects.
+      - Dynamic names can be employed to create more flexible class hierarchies and polymorphic behavior.
+      - They allow for the creation of generic object factories or builders that can instantiate different types of
+        objects based on runtime conditions.
+      - However, excessive use of dynamic names with object-oriented code can potentially make the code harder to
+        understand and maintain, so a balance should be struck between flexibility and clarity.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: ba00b64
+  patterns: [dynamic_names.md]

@@ -1,0 +1,120 @@
+version: 2
+task_description: Explain the naming conventions and rules in OpenROAD programming language.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What items can be named in OpenROAD?
+    answer: |
+      In OpenROAD, the following items can be named:
+      - Applications
+      - Classes
+      - Databases
+      - Database tables and columns
+      - External class libraries
+      - Form fields
+      - Frames
+      - Global constants
+      - Objects
+      - Parameters
+      - Procedures
+      - Templates
+      - User events
+      - User classes
+      - Variables
+  - question: What are the rules for names (alphanumeric identifiers) in OpenROAD?
+    answer: |
+      The rules for names, also known as alphanumeric identifiers, in OpenROAD are:
+      - Names can contain up to 32 alphanumeric characters.
+      - Names can begin only with an alphabetic character or an underscore (_).
+      - Names can contain an underscore and other alphanumeric characters (including #, @, $, and 0 through 9).
+      - Names are not case sensitive.
+  - question: What is the maximum length of a name in OpenROAD?
+    answer: |
+      In OpenROAD, names can contain up to 32 alphanumeric characters.
+  - question: How can a name begin in OpenROAD?
+    answer: |
+      In OpenROAD, names can begin only with an alphabetic character or an underscore (_).
+  - question: What special characters are allowed in OpenROAD names?
+    answer: |
+      OpenROAD names can contain an underscore (_) and other alphanumeric characters, including #, @, $,
+      and numbers 0 through 9.
+  - question: Is case sensitivity important in OpenROAD names?
+    answer: |
+      No, names in OpenROAD are not case sensitive.
+  - question: Can database tables and columns be named in OpenROAD?
+    answer: |
+      Yes, database tables and columns are among the items that can be named in OpenROAD.
+  - question: Are user-defined classes and events allowed to have names in OpenROAD?
+    answer: |
+      Yes, user classes and user events are included in the list of items that can be named in OpenROAD.
+  - question: Can numbers be used in OpenROAD names?
+    answer: |
+      Yes, numbers (0 through 9) can be used in OpenROAD names, but they cannot be the first character
+      of the name.
+  - question: What are some examples of program elements that can be named in OpenROAD?
+    answer: |
+      Some examples of program elements that can be named in OpenROAD include:
+      - Applications
+      - Classes
+      - Procedures
+      - Variables
+      - Global constants
+      - Form fields
+      - Frames
+      - Templates
+  - question: Can OpenROAD names contain spaces?
+    answer: |
+      No, OpenROAD names cannot contain spaces. They are limited to alphanumeric characters, underscores,
+      and certain special characters (#, @, $).
+  - question: Is there a difference between naming conventions for different types of elements in OpenROAD?
+    answer: |
+      The basic naming rules apply to all nameable elements in OpenROAD. However, it's good practice to use
+      consistent naming conventions for different types of elements (e.g., prefixing global variables with
+      "g_") to improve code readability and maintenance.
+  - question: Can OpenROAD names be reserved words or keywords?
+    answer: |
+      No, OpenROAD names should not be reserved words or keywords used by the language. It's important to
+      avoid using names that conflict with built-in language elements.
+  - question: How does OpenROAD handle names that exceed the 32-character limit?
+    answer: |
+      OpenROAD enforces the 32-character limit for names. If a name exceeds this limit, it will typically be
+      truncated or cause an error, depending on the context in which it's used.
+  - question: Can OpenROAD names be internationalized or contain non-ASCII characters?
+    answer: |
+      The provided rules don't explicitly mention support for non-ASCII characters. It's best to stick
+      to ASCII alphanumeric characters, underscores, and the specified special characters (#, @, $) to
+      ensure compatibility across different environments.
+  - question: How do naming conventions in OpenROAD compare to other programming languages?
+    answer: |
+      OpenROAD's naming conventions are similar to many other programming languages, with restrictions on
+      length and allowed characters. However, the specific inclusion of characters like #, @, and $ in names
+      is less common in other languages.
+  - question: What is the significance of allowing underscores at the beginning of names in OpenROAD?
+    answer: |
+      Allowing underscores at the beginning of names provides flexibility in naming conventions. This can be
+      useful for indicating special types of variables or for avoiding naming conflicts with keywords or reserved
+      words.
+  - question: How does the case-insensitivity of OpenROAD names affect coding practices?
+    answer: |
+      The case-insensitivity of OpenROAD names means that 'Variable', 'variable', and 'VARIABLE' are treated as
+      the same identifier. This can simplify coding in some ways but requires careful naming to avoid unintended
+      conflicts or confusion.
+  - question: Are there any recommended naming conventions or best practices for OpenROAD development?
+    answer: |
+      While not specified in the given rules, it's generally good practice to:
+      - Use meaningful and descriptive names
+      - Use consistent capitalization (e.g., camelCase or PascalCase) even though names are case-insensitive
+      - Use prefixes or suffixes to indicate the type or scope of variables (e.g., 'g_' for global variables)
+      - Avoid using names that differ only in case to prevent confusion
+  - question: How do OpenROAD naming rules affect code portability and maintenance?
+    answer: |
+      OpenROAD's naming rules, particularly the 32-character limit and allowed special characters, can affect
+      code portability and maintenance:
+      - The character limit may require abbreviations, potentially reducing readability
+      - The use of special characters like # and @ in names might cause issues if porting code to other languages
+      - Case-insensitivity requires careful naming to avoid conflicts and maintain clarity across large codebases
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: "2685435"
+  patterns:
+    - openroad_names.md

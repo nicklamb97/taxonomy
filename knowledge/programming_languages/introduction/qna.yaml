@@ -1,0 +1,107 @@
+version: 2
+task_description: Introduce the OpenROAD programming language and application development tool.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is OpenROAD?
+    answer: |
+      OpenROAD is a database-centric, object-oriented, 4GL application development tool that enables the development
+      and deployment business applications in various environments.
+  - question: What are the principal features of OpenROAD?
+    answer: |
+      The principal features of OpenROAD include:
+      - OpenROAD Development: A complete integrated development environment (IDE) for building, testing, and deploying
+      database applications.
+      - OpenROAD Server: A robust, high-performance, distributed application development platform for deploying business
+      objects.
+      - OpenROAD Deployment: Enables deployment of applications to desktop web browsers, web servers, and mobile
+      devices.
+  - question: What types of applications can be developed using OpenROAD?
+    answer: |
+      OpenROAD allows the development of robust, scalable client/server and n-tier applications that can access
+      various databases such as Ingres, Microsoft SQL Server, Oracle, and DB2 UDB.
+  - question: What is the programming language used in OpenROAD?
+    answer: |
+      OpenROAD uses 4GL, an object-oriented programming (OOP) language that allows developers to create and reuse
+      objects across applications and platforms.
+  - question: What platforms does OpenROAD support?
+    answer: |
+      OpenROAD supports multiple platforms, including Windows, UNIX, and Linux. Applications built using OpenROAD
+      are independent of the hardware and software platforms on which they are developed.
+  - question: What is the concept of "write once, run everywhere" in OpenROAD?
+    answer: |
+      OpenROAD's cross-platform support is provided at the binary level. Application images can be moved to any
+      platform where the OpenROAD VM is supported, and the application will run identically on each platform without
+      the need for testing or alterations.
+  - question: What databases can be accessed using OpenROAD?
+    answer: |
+      OpenROAD provides high-performance open database access to the following databases:
+      - Ingres and Enterprise Access products (Oracle, DB2 UDB, and Microsoft SQL Server) for development and
+      runtime access.
+      - EDBC products (Datacom, IDMS, DB2, IMS, and CICS/VSAM) for runtime access.
+  - question: How does OpenROAD leverage Enterprise Access and EDBC?
+    answer: |
+      OpenROAD leverages the capabilities of Enterprise Access and Enterprise Database Connectivity (EDBC) to
+      provide seamless access to data from desktop, server, mainframe, or network sources.
+  - question: What is the purpose of Enterprise Access in OpenROAD?
+    answer: |
+      Enterprise Access is a middleware solution that provides organizations with the flexibility and integration
+      to access information resources from a wide array of platforms and data sources. It enables OpenROAD to offer
+      solutions for full, transparent read/write access to all existing data without changing its location or structure.
+  - question: What is the significance of 4GL in OpenROAD?
+    answer: |
+      4GL is a key part of the OpenROAD development environment. It is an object-oriented programming (OOP) language
+      that allows developers to create and reuse objects across applications and platforms.
+  - question: What are the object-oriented features supported by OpenROAD?
+    answer: |
+      OpenROAD supports object-oriented features such as inheritance, abstraction, encapsulation, and polymorphism.
+      These features enable developers to reuse components and maximize productivity.
+  - question: How does OpenROAD simplify the task of designing enterprise applications?
+    answer: |
+      OpenROAD includes predefined system classes with methods and attributes that simplify the task of designing
+      enterprise applications. These classes provide access to native Windows controls such as tab folders, tree views,
+      and list views.
+  - question: Can developers define their own classes in OpenROAD?
+    answer: |
+      Yes, developers can define their own user classes in OpenROAD. User-defined classes exhibit the same
+      object-oriented features as system classes, enabling component reuse and productivity.
+  - question: What are dynamic applications in OpenROAD?
+    answer: |
+      Dynamic applications in OpenROAD are applications that shape themselves based on actions initiated by
+      the application, data values, or the end user. They are also scalable, responding dynamically to variations
+      in data type complexity and database size.
+  - question: How does OpenROAD enable the development of dynamic applications?
+    answer: |
+      OpenROAD's visual development environment allows developers to build different functionality into an
+      application based on the end user or the mode the end user is operating in. Fields, menu items, and
+      frames have specified biases and modes that determine their availability and behavior.
+  - question: What is the benefit of OpenROAD's dynamic application development?
+    answer: |
+      The dynamic nature of OpenROAD applications increases end-user productivity and reduces the burden of coding
+      for the application development team. Developers can specify details once and let OpenROAD generate
+      the application.
+  - question: What is the role of the Getting Started guide in OpenROAD?
+    answer: |
+      The Getting Started guide is an introduction to OpenROAD that provides what developers need to know for
+      a quick and productive start. It offers an overview of OpenROAD and its features and walks through simple
+      exercises in developing a variety of applications.
+  - question: How does OpenROAD enable the migration and modernization of ABF applications?
+    answer: |
+      OpenROAD is a natural environment to migrate and modernize proven business logic from character-mode
+      applications built using ABF (Application By Forms). Actian can accelerate this transformation with custom
+      services that convert ABF applications to OpenROAD.
+  - question: What is the purpose of the OpenROAD Server?
+    answer: |
+      The OpenROAD Server provides a robust, high-performance, distributed application development platform. Business
+      objects developed in OpenROAD 4GL are deployed in the OpenROAD Server to provide services for a wide range of
+      client technologies across the Internet.
+  - question: How does OpenROAD support the deployment of applications?
+    answer: |
+      OpenROAD enables applications to be delivered to a desktop or placed on a web server for deployment when clients
+      access them from a web browser, installing them automatically if not already installed. The runtime for Windows
+      Mobile allows OpenROAD applications to be deployed to mobile phones and Pocket PC devices.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 4a8b282
+  patterns:
+    - openroad_overview.md
