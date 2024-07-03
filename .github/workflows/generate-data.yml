@@ -27,7 +27,7 @@ jobs:
 
     - name: Clone custom taxonomy repository
       run: |
-        git clone https://github.com/YOUR_USERNAME/taxonomy.git taxonomy
+        git clone https://github.com/nicklamb97/taxonomy.git taxonomy
 
     - name: Initialize ilab
       run: |
