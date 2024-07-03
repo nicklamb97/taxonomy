@@ -39,11 +39,13 @@ jobs:
         git fetch origin
         PREVIOUS_COMMIT=$(git rev-parse HEAD^)
         CURRENT_COMMIT=$(git rev-parse HEAD)
-        git diff --name-status $PREVIOUS_COMMIT $CURRENT_COMMIT | while read status file; do
-          if [ "$status" == "A" ]; then
+        git diff --name-status "$PREVIOUS_COMMIT" "$CURRENT_COMMIT" | while IFS= read -r line; do
+          status=$(echo "$line" | cut -f1)
+          file=$(echo "$line" | cut -f2-)
+          if [ "$status" = "A" ]; then
             echo "Creating new file: $file"
-            mkdir -p $(dirname "$file")
-            git show $CURRENT_COMMIT:"$file" > "$file"
+            mkdir -p "$(dirname "$file")"
+            git show "$CURRENT_COMMIT:$file" > "$file"
           fi
         done
         cd ..
