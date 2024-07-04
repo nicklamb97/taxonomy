@@ -85,7 +85,8 @@ seed_examples:
       The Getting Started guide is an introduction to OpenROAD that provides what developers need to know for
       a quick and productive start. It offers an overview of OpenROAD and its features and walks through simple
       exercises in developing a variety of applications.
-  - question: How does OpenROAD enable the migration and modernization of ABF applications?
+  - question: How does OpenROAD enable the migration and modernization of ABF
+      applications?
     answer: |
       OpenROAD is a natural environment to migrate and modernize proven business logic from character-mode
       applications built using ABF (Application By Forms). Actian can accelerate this transformation with custom

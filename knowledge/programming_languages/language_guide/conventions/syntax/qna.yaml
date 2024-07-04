@@ -1,0 +1,59 @@
+version: 2
+task_description: Explain the syntax conventions used in OpenROAD documentation.
+created_by: assistant
+domain: openroad
+seed_examples:
+  - question: What are the two main types of language items in OpenROAD?
+    answer: |
+      In OpenROAD, there are two main types of language items:
+      1. Command: An operation executed from an OpenROAD Workbench menu or at the operating system level.
+      2. Statement: An operation placed within a program or called procedure, which can be written in OpenROAD 4GL,
+      a database query language (like SQL), or a 3GL (such as C or COBOL).
+
+  - question: How are constants represented in OpenROAD documentation?
+    answer: |
+      In OpenROAD documentation, constants are represented in UPPERCASE. For example, TRUE, FALSE, and FB_DIMMED.
+
+  - question: How are 4GL keywords and statements represented in discussion text?
+    answer: |
+      In discussion text, 4GL keywords and statements are represented in lowercase. For example, "begin" keyword and
+      "callproc" statement.
+
+  - question: How are variable names typically represented in OpenROAD documentation?
+    answer: |
+      Variable names are typically represented in italic, lowercase text. For example, *cursor_variable*.
+
+  - question: What convention is used for class names, attributes, methods, and events?
+    answer: |
+      Class names, attributes, methods, and events are represented using MixedCase or Initial Capitalization. For
+      example, DataStream class, ClientData attribute, FetchRow method, and WindowResized event.
+
+  - question: In syntax representation, what does boldface indicate?
+    answer: |
+      In syntax representation, boldface indicates keywords, symbols, or punctuation that must be typed exactly as
+      shown.
+
+  - question: What do square brackets [ ] signify in OpenROAD syntax?
+    answer: |
+      In OpenROAD syntax, square brackets [ ] indicate an optional item.
+
+  - question: How are repeatable optional items represented in OpenROAD syntax?
+    answer: |
+      Repeatable optional items are represented using curly braces { }. These items can be repeated as many times as
+      appropriate.
+
+  - question: What does the vertical bar | represent in OpenROAD syntax?
+    answer: |
+      The vertical bar | in OpenROAD syntax indicates a list of mutually exclusive items, meaning you can select only
+      one item from the list.
+
+  - question: How are variable names that can be used dynamically or statically represented in syntax?
+    answer: |
+      Variable names that can be used either dynamically (when running the application) or statically (when creating the
+      application) are represented in italic, underlined text in syntax representations.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5c45e06
+  patterns:
+    - syntax.md
