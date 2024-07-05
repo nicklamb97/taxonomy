@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install instructlab
+        pip install instructlab gitpython
 
     - name: Clone custom taxonomy repository
       run: |
@@ -33,30 +33,25 @@ jobs:
       run: |
         echo -e "taxonomy\nn" | ilab config init
 
-    - name: Create newly added files
+    - name: Get diff and generate data
       run: |
         cd taxonomy
         git fetch origin
         PREVIOUS_COMMIT=$(git rev-parse HEAD^)
         CURRENT_COMMIT=$(git rev-parse HEAD)
-        git diff --name-status "$PREVIOUS_COMMIT" "$CURRENT_COMMIT" | while IFS= read -r line; do
-          status=$(echo "$line" | cut -f1)
-          file=$(echo "$line" | cut -f2-)
-          if [ "$status" = "A" ]; then
-            echo "Creating new file: $file"
-            mkdir -p "$(dirname "$file")"
-            git show "$CURRENT_COMMIT:$file" > "$file"
-          fi
-        done
-        cd ..
-
-    - name: Run ilab diff
-      run: |
-        ilab taxonomy diff
-
-    - name: Generate data
-      run: |
-        ilab data generate
+        
+        # Get list of added or modified files
+        CHANGED_FILES=$(git diff --name-only --diff-filter=AM $PREVIOUS_COMMIT $CURRENT_COMMIT)
+        
+        # Check if any qna.yaml files were changed
+        if echo "$CHANGED_FILES" | grep -q "qna.yaml"; then
+          echo "Changes detected in qna.yaml files. Generating data..."
+          cd ..
+          ilab taxonomy diff
+          ilab data generate
+        else
+          echo "No changes detected in qna.yaml files. Skipping data generation."
+        fi
 
     - name: Download model
       run: ilab model download
@@ -65,6 +60,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add generated/
-        git commit -m "Auto-generate data" || echo "No changes to commit"
-        git push
+        if [ -d "generated" ]; then
+          git add generated/
+          git commit -m "Auto-generate data" || echo "No changes to commit"
+          git push
+        else
+          echo "No generated data to commit"
+        fi
