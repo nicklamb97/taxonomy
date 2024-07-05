@@ -28,7 +28,7 @@ jobs:
 
     - name: Clone custom taxonomy repository
       run: |
-        git clone https://github.com/nicklamb97/taxonomy.git taxonomy
+        git clone https://github.com/nicklamb97/taxonomy.git $GITHUB_WORKSPACE/taxonomy
         echo "Custom taxonomy repository cloned successfully"
 
     - name: Initialize ilab
@@ -45,7 +45,7 @@ jobs:
 
     - name: Get diff and prepare for data generation
       run: |
-        cd taxonomy
+        cd $GITHUB_WORKSPACE/taxonomy
         git config --local user.name "GitHub Action"
         git config --local user.email "action@github.com"
         git fetch origin
@@ -82,7 +82,7 @@ jobs:
     - name: Run ilab taxonomy diff and generate data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
-        cd ..
+        cd $GITHUB_WORKSPACE
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
         ilab taxonomy diff || { echo "ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
@@ -102,7 +102,7 @@ jobs:
     - name: Commit and push generated data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
-        cd taxonomy
+        cd $GITHUB_WORKSPACE/taxonomy
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         echo "Git user configured"
