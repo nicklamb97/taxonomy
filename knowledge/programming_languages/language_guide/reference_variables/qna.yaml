@@ -1,0 +1,56 @@
+version: 2
+task_description: Explain reference variables in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is a reference variable in OpenROAD?
+    answer: |
+      A reference variable in OpenROAD is a variable that points to an object of a given class, allowing access to
+      the value of an object. It doesn't store its own values but uses the values in the corresponding object when
+      referenced.
+  - question: How do you declare a reference variable in OpenROAD?
+    answer: |
+      To declare a reference variable in OpenROAD, use the following syntax:
+      name = class [ [with] default null]
+      For example: strobj = StringObject;
+  - question: Are reference variables nullable in OpenROAD?
+    answer: |
+      Yes, all reference variables in OpenROAD are nullable.
+  - question: How can you access individual attributes of an object using a reference variable?
+    answer: |
+      To access an individual attribute that belongs to an object, use the dot notation:
+      referencevariable_name.attribute_name
+      For example: customer.Address
+  - question: What happens when you set a reference variable to null in OpenROAD?
+    answer: |
+      When you set a reference variable to null in OpenROAD, it no longer points to any object. If all reference
+      variables for an object are set to null or redirected, OpenROAD frees the associated object.
+  - question: How can you check if a reference variable is null in OpenROAD?
+    answer: |
+      You can check for a null reference variable using the 'is null' operator. For example:
+      if a is null then
+          /* processing statements */
+      endif;
+  - question: How can you create objects for reference variables in OpenROAD?
+    answer: |
+      You can create objects for reference variables using the Create method, defined for the Class class. For example:
+      a = Addr.Create();    /* Creates an Addr object */
+      a.Street = 'main street';
+      a.City = 'dallas';
+  - question: What happens when you declare a reference variable without specifying 'default null'?
+    answer: |
+      When you declare a reference variable without specifying 'default null', the variable points to an object whose
+      attributes are automatically initialized with the default values given in the definition of the object.
+  - question: Can you work with an entire object as a single unit using reference variables in OpenROAD?
+    answer: |
+      Yes, in OpenROAD, you can work with an object as a whole using reference variables. For example, you can pass
+      the values in a subform's fields to a procedure by naming the variable as a procedure parameter.
+  - question: What happens if you try to access an attribute that doesn't exist in a reference variable's class?
+    answer: |
+      OpenROAD checks references to attributes by name and produces compiler errors if the variable's class does not
+      contain those attributes. This helps catch errors at compile-time rather than runtime.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5697f07
+  patterns:
+    - reference_variables.md
