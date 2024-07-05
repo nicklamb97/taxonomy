@@ -1,0 +1,55 @@
+version: 2
+task_description: Explain simple variables in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is a simple variable in OpenROAD?
+    answer: |
+      A simple variable in OpenROAD is a single data item that contains only one value. It can be any of the basic
+      data types, such as integer or varchar, with the exception of table_key and object_key.
+  - question: How do you declare a simple variable in OpenROAD?
+    answer: |
+      The syntax for declaring a simple variable in OpenROAD is:
+      name = datatype [with null|not null] [not default|with default|[with] default defaultvalue]
+      For example: i = integer;
+  - question: Are simple variables nullable by default in OpenROAD?
+    answer: |
+      Yes, by default, all simple variables in OpenROAD are nullable. If you don't want the variable to be nullable,
+      you must include the 'not null' clause in the declaration, for example: i = integer not null;
+  - question: What are the default values for numeric and character simple variables in OpenROAD?
+    answer: |
+      By default, all numeric simple variables are assigned a default value of zero, and all character simple
+      variables are assigned a default value of the empty string ('').
+  - question: How can you specify a different default value for a simple variable in OpenROAD?
+    answer: |
+      To specify a different default value, you must include the default clause in the variable declaration. The
+      default value must be null, a literal, or one of the system constants defined in the Language Reference Guide.
+      For example: i = integer not null default false;
+  - question: How do you use a simple variable in OpenROAD?
+    answer: |
+      To use a simple variable in OpenROAD, you simply use the variable name. For example, to assign the value
+      'Smith' to the person variable, you would use the following statement: person = 'Smith';
+  - question: Can simple variables be elements of reference variables or arrays in OpenROAD?
+    answer: |
+      Yes, individual elements in a reference variable or an array can be simple variables in OpenROAD. For example,
+      in a reference variable 'Film' with three attributes, each of these attributes is a simple variable. Similarly,
+      in an array 'Movies', each individual element in the array is a simple variable.
+  - question: How can you use simple variables as elements of reference variables or arrays in a 4GL script?
+    answer: |
+      In a 4GL script, you can use simple variables as reference or array variable elements in any context that you
+      can use other simple variables. For example:
+      film.Director = 'Hitchcock';
+      if movies[].Title = 'ANNIE HALL' then ...
+  - question: What are some clauses in simple variable declaration that are provided for SQL compatibility?
+    answer: |
+      The 'with null', 'not default', and 'with default' (without a value) clauses are provided for syntactic
+      compatibility with SQL, but they have no effect in OpenROAD.
+  - question: Where can you find information about referencing individual elements in reference or array variables?
+    answer: |
+      Information about referencing the individual elements in a reference or array variable can be found in the
+      sections on Reference Variables and Dynamic Array Variables in the OpenROAD documentation.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: cbab723
+  patterns:
+    - simply_variables.md

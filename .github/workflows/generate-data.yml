@@ -31,12 +31,12 @@ jobs:
         git clone https://github.com/nicklamb97/taxonomy.git taxonomy
         echo "Custom taxonomy repository cloned successfully"
 
-    - name: Initialise ilab
+    - name: Initialize ilab
       run: |
         echo -e "taxonomy\nn" | ilab config init
-        echo "ilab initialised successfully"
+        echo "ilab initialized successfully"
 
-    - name: Get diff and generate data
+    - name: Get diff and prepare for data generation
       run: |
         cd taxonomy
         git fetch origin
@@ -52,32 +52,41 @@ jobs:
         
         # Check if any qna.yaml files were changed
         if echo "$CHANGED_FILES" | grep -q "qna.yaml"; then
-          echo "Changes detected in qna.yaml files. Generating data..."
-          cd ..
-          echo "Current directory: $(pwd)"
-          echo "Running: ilab taxonomy diff"
-          ilab taxonomy diff
-          echo "Running: ilab data generate"
-          ilab data generate
-          echo "Data generation complete"
+          echo "Changes detected in qna.yaml files. Preparing for data generation..."
           
-          # Set a flag to indicate that data was generated
-          echo "DATA_GENERATED=true" >> $GITHUB_ENV
+          # Create a temporary branch
+          git checkout -b temp_branch
+          
+          # Reset to the previous commit
+          git reset --hard $PREVIOUS_COMMIT
+          
+          # Apply the changes from the current commit
+          git cherry-pick $CURRENT_COMMIT
+          
+          echo "Changes applied to temporary branch. Ready for ilab taxonomy diff."
         else
           echo "No changes detected in qna.yaml files. Skipping data generation."
-          echo "DATA_GENERATED=false" >> $GITHUB_ENV
+          exit 0
         fi
 
-    - name: Download model
-      if: env.DATA_GENERATED == 'true'
+    - name: Run ilab taxonomy diff and generate data
       run: |
-        echo "Data was generated, downloading model..."
+        cd taxonomy
+        echo "Current directory: $(pwd)"
+        echo "Running: ilab taxonomy diff"
+        ilab taxonomy diff
+        echo "Running: ilab data generate"
+        ilab data generate
+
+    - name: Download model
+      run: |
+        echo "Downloading model..."
         ilab model download
         echo "Model downloaded successfully"
 
     - name: Commit and push generated data
-      if: env.DATA_GENERATED == 'true'
       run: |
+        cd taxonomy
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         echo "Git user configured"
@@ -85,7 +94,7 @@ jobs:
           echo "Generated directory found"
           git add generated/
           git commit -m "Auto-generate data" || echo "No changes to commit"
-          git push
+          git push origin temp_branch:main
           echo "Changes pushed to repository"
         else
           echo "No generated directory found. Nothing to commit."
