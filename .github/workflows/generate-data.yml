@@ -73,7 +73,6 @@ jobs:
 
     - name: Run ilab taxonomy diff and generate data
       run: |
-        cd taxonomy
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
         ilab taxonomy diff
