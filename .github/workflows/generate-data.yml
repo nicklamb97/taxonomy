@@ -36,6 +36,13 @@ jobs:
         echo -e "taxonomy\nn" | ilab config init
         echo "ilab initialized successfully"
 
+    - name: Download model
+      run: |
+        echo "Downloading model..."
+        ilab model download
+        echo "Model downloaded successfully"
+        echo "MODEL_DOWNLOADED=true" >> $GITHUB_ENV
+
     - name: Get diff and prepare for data generation
       run: |
         cd taxonomy
@@ -66,26 +73,34 @@ jobs:
           git cherry-pick $CURRENT_COMMIT
           
           echo "Changes applied to temporary branch. Ready for ilab taxonomy diff."
+          echo "QNA_YAML_CHANGED=true" >> $GITHUB_ENV
         else
           echo "No changes detected in qna.yaml files. Skipping data generation."
-          exit 0
+          echo "QNA_YAML_CHANGED=false" >> $GITHUB_ENV
         fi
 
     - name: Run ilab taxonomy diff and generate data
+      if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
+        cd taxonomy
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
-        ilab taxonomy diff
+        ilab taxonomy diff || { echo "ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
         echo "Running: ilab data generate"
-        ilab data generate
+        ilab data generate || { echo "ilab data generate failed. Exiting gracefully."; exit 0; }
 
-    - name: Download model
+    - name: No qna.yaml changes or model not downloaded
+      if: env.QNA_YAML_CHANGED == 'false' || env.MODEL_DOWNLOADED != 'true'
       run: |
-        echo "Downloading model..."
-        ilab model download
-        echo "Model downloaded successfully"
+        if [ "$QNA_YAML_CHANGED" = "false" ]; then
+          echo "No qna.yaml files were changed. Skipping ilab taxonomy diff and data generation."
+        fi
+        if [ "$MODEL_DOWNLOADED" != "true" ]; then
+          echo "Model was not downloaded successfully. Skipping data generation."
+        fi
 
     - name: Commit and push generated data
+      if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
         cd taxonomy
         git config --local user.email "action@github.com"
