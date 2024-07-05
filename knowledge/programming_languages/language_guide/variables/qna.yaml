@@ -1,0 +1,55 @@
+version: 2
+task_description: Introduce the concept of variables in OpenROAD and their types.
+created_by: assistant
+domain: openroad
+seed_examples:
+  - question: What are OpenROAD variables used for?
+    answer: |
+      OpenROAD variables contain or point to data that the application manipulates. This can be data that is displayed
+      to the user or used solely in scripts and procedures.
+  - question: How are variables associated in OpenROAD?
+    answer: |
+      In OpenROAD, a variable is associated either with the application (global variables) or with a specific frame,
+      procedure, method, field script, or event block (local variables).
+  - question: What are global variables in OpenROAD?
+    answer: |
+      Global variables provide data that is pertinent to the entire application and are available for use in any script
+      or procedure. They are declared using the OpenROAD Workbench.
+  - question: What are the types of local variables in OpenROAD?
+    answer: |
+      Local variables in OpenROAD include:
+      1. Variables declared in the initialize statement for a frame or a field script
+      2. Variables associated with field and menu items
+      3. Variables declared in a procedure, method, or event block definition
+  - question: How are variables associated with fields handled in OpenROAD?
+    answer: |
+      When a variable is associated with a field on the displayed form, setting its value updates the display to show
+      the new value. Conversely, referring to the variable reflects the current setting of the displayed form, including
+      updates performed by the user.
+  - question: What are the three types of variables in OpenROAD?
+    answer: |
+      The three types of variables in OpenROAD are:
+      1. Simple variables
+      2. Reference variables
+      3. Dynamic array variables
+  - question: How are variables associated with field and menu items declared?
+    answer: |
+      Variables associated with field and menu items are declared implicitly when you create the fields on a form. They
+      can also be declared at runtime as described in the Language Reference Guide online help.
+  - question: Where can you find more information about declaring global variables in OpenROAD?
+    answer: |
+      More information about declaring global variables can be found in the Workbench User Guide.
+  - question: What is the scope of variables declared in a procedure, method, or event block?
+    answer: |
+      Variables declared in a procedure, method, or event block are available for use only in the procedure, method, or
+      event block that defines them.
+  - question: How are frame variables different from field-associated variables?
+    answer: |
+      Frame variables, declared in the initialize statement for a frame or a field script, are not associated with
+      fields and the information in them is not displayed to the user directly. In contrast, field-associated variables
+      are displayed directly on the form.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 0d0fab9
+  patterns:
+    - variables.md
