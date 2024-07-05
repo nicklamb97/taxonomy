@@ -31,10 +31,10 @@ jobs:
         git clone https://github.com/nicklamb97/taxonomy.git taxonomy
         echo "Custom taxonomy repository cloned successfully"
 
-    - name: Initialise ilab
+    - name: Initialize ilab
       run: |
         echo -e "taxonomy\nn" | ilab config init
-        echo "ilab initialised successfully"
+        echo "ilab initialized successfully"
 
     - name: Download model
       run: |
@@ -77,6 +77,7 @@ jobs:
         else
           echo "No changes detected in qna.yaml files. Skipping data generation."
           echo "QNA_YAML_CHANGED=false" >> $GITHUB_ENV
+        fi
 
     - name: Run ilab taxonomy diff and generate data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
