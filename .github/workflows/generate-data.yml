@@ -82,7 +82,6 @@ jobs:
     - name: Run ilab taxonomy diff and generate data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
-        cd taxonomy
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
         ilab taxonomy diff || { echo "ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
