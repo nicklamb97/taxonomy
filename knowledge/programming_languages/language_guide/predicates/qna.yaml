@@ -1,0 +1,73 @@
+version: 2
+task_description: Explain predicates and search conditions in SQL
+created_by: nicklamb97
+domain: sql
+seed_examples:
+  - question: What are the types of predicates supported in SQL?
+    answer: |
+      SQL supports the following types of predicates:
+      - Comparison
+      - Like
+      - Between
+      - In
+      - Is
+      - Any-or-All
+      - Exists
+      - Is null
+  - question: What is the syntax for a LIKE predicate in SQL?
+    answer: |
+      The LIKE predicate in SQL has the following syntax:
+      expression [NOT] LIKE pattern [ESCAPE escape_character]
+      The expression can be a column name or an expression containing string functions. The pattern parameter is
+      usually a string literal but could be an arbitrary string expression.
+  - question: How does the BETWEEN predicate work in SQL?
+    answer: |
+      The BETWEEN predicate in SQL works as follows:
+      - y BETWEEN x AND z is equivalent to x <= y AND y <= z
+      - y NOT BETWEEN x AND z is equivalent to NOT (y BETWEEN x AND z)
+      - There's also a SYMMETRIC version that allows for reversed ranges
+  - question: What is the purpose of the IS predicate in SQL?
+    answer: |
+      The IS predicate in SQL is used to determine whether a particular result is or is not of a given data type.
+      It's useful for cleaning data or validating data input. When applied to row value expressions, all elements
+      must test the same.
+  - question: How does the EXISTS predicate work in SQL?
+    answer: |
+      The EXISTS predicate in SQL takes the form:
+      [NOT] EXISTS (subquery)
+      It evaluates to true if the set returned by the subquery is not empty. It's often used with correlated
+      subqueries to check for the existence of related records.
+  - question: Why is the IS NULL predicate necessary in SQL?
+    answer: |
+      The IS NULL predicate is necessary in SQL because you cannot test for null values using the standard
+      comparison operators (like =). NULL represents an unknown value, and comparisons with NULL typically
+      result in UNKNOWN, not TRUE or FALSE. The IS NULL predicate specifically checks if a value is NULL.
+  - question: How are search conditions formed in SQL WHERE and HAVING clauses?
+    answer: |
+      Search conditions in SQL WHERE and HAVING clauses are formed by combining predicates using logical operators
+      (AND, OR, NOT) and parentheses. For example:
+      (salary BETWEEN 10000 AND 20000 AND edept LIKE 'eng_%') OR edept LIKE 'admin_%'
+  - question: How do predicates evaluate in SQL?
+    answer: |
+      Predicates in SQL evaluate to true, false, or unknown. They evaluate to unknown if one or both operands are
+      null (with the exception of the IS NULL predicate). The final result of a WHERE or HAVING clause is always
+      true or false, with unknown values considered as false.
+  - question: What is the difference between the IN and EXISTS predicates in SQL?
+    answer: |
+      The IN and EXISTS predicates in SQL are used in different scenarios:
+      - IN is used to check if a value matches any value in a list or subquery result.
+      - EXISTS is used to check if a subquery returns any rows.
+      IN is often more readable for simple cases, while EXISTS can be more efficient for complex subqueries,
+      especially when combined with correlation.
+  - question: How does the ANY predicate work in SQL?
+    answer: |
+      The ANY predicate in SQL is used with a comparison operator and a subquery. It returns TRUE if the comparison
+      is true for at least one row returned by the subquery. For example:
+      x > ANY (subquery)
+      This is true if x is greater than at least one value returned by the subquery. If the subquery returns no
+      rows, the ANY comparison is false.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a992d96
+  patterns:
+    - predicates.md
