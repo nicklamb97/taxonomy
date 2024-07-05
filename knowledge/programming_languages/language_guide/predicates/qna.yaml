@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain predicates and search conditions in SQL in OpenROAD
+task_description: Explain predicates and search conditions in SQL
 created_by: nicklamb97
 domain: sql
 seed_examples:

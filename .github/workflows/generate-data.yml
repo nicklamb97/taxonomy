@@ -31,10 +31,10 @@ jobs:
         git clone https://github.com/nicklamb97/taxonomy.git taxonomy
         echo "Custom taxonomy repository cloned successfully"
 
-    - name: Initialize ilab
+    - name: Initialise ilab
       run: |
         echo -e "taxonomy\nn" | ilab config init
-        echo "ilab initialized successfully"
+        echo "ilab initialised successfully"
 
     - name: Download model
       run: |
@@ -77,16 +77,16 @@ jobs:
         else
           echo "No changes detected in qna.yaml files. Skipping data generation."
           echo "QNA_YAML_CHANGED=false" >> $GITHUB_ENV
-        fi
 
     - name: Run ilab taxonomy diff and generate data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
+        cd ..
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
         ilab taxonomy diff || { echo "ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
         echo "Running: ilab data generate"
-        ilab data generate || { echo "ilab data generate failed. Exiting gracefully."; exit 0; }
+        ilab data generate --output-dir ./taxonomy/generated || { echo "ilab data generate failed. Exiting gracefully."; exit 0; }
 
     - name: No qna.yaml changes or model not downloaded
       if: env.QNA_YAML_CHANGED == 'false' || env.MODEL_DOWNLOADED != 'true'
@@ -109,7 +109,7 @@ jobs:
           echo "Generated directory found"
           git add generated/
           git commit -m "Auto-generate data" || echo "No changes to commit"
-          git push origin temp_branch:main
+          git push origin main
           echo "Changes pushed to repository"
         else
           echo "No generated directory found. Nothing to commit."
