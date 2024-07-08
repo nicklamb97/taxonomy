@@ -5,7 +5,7 @@ domain: openroad
 seed_examples:
   - question: What are expressions in OpenROAD?
     answer: |
-      Expressions in OpenROAD are language constructs that resolve to a value, a set of values, or TRUE or FALSE. 
+      Expressions in OpenROAD are language constructs that resolve to a value, a set of values, or TRUE or FALSE.
       They can contain various language elements and are widely used in 4GL.
   - question: What types of language elements can be used in OpenROAD expressions?
     answer: |
@@ -42,7 +42,7 @@ seed_examples:
       Yes, logical (boolean) expressions can be used in OpenROAD expressions.
   - question: Are expressions in OpenROAD limited to simple data types?
     answer: |
-      No, expressions in OpenROAD are not limited to simple data types. They can involve complex elements like 
+      No, expressions in OpenROAD are not limited to simple data types. They can involve complex elements like
       values returned by procedures.
   - question: How are expressions related to control structures in OpenROAD?
     answer: |
