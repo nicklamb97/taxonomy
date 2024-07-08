@@ -1,0 +1,64 @@
+version: 2
+task_description: Explain SQL functions in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the two main types of SQL functions in OpenROAD?
+    answer: |
+      The two main types of SQL functions in OpenROAD are:
+      1. Scalar functions - These take single-valued expressions as arguments
+      2. Aggregate functions - These take a set of values as arguments
+  - question: In which SQL statements can functions be used in OpenROAD?
+    answer: |
+      SQL functions in OpenROAD can be used in the following statements:
+      - SELECT
+      - INSERT
+      - UPDATE
+      - DELETE
+      - WHILE
+      - IF
+  - question: What are some categories of scalar functions in OpenROAD?
+    answer: |
+      Major categories of scalar functions in OpenROAD include:
+      - Data Type Conversion Functions (e.g. CAST, TO_CHAR)
+      - Numeric Functions (e.g. ABS, ROUND, SQRT)
+      - String Functions (e.g. CONCAT, SUBSTRING, UPPER)
+      - Date Functions (e.g. YEAR, MONTH, DAY)
+      - HASH Functions
+      - Random Number Functions
+  - question: What are the two main categories of aggregate functions in OpenROAD?
+    answer: |
+      The two main categories of aggregate functions in OpenROAD are:
+      1. Unary aggregate functions (e.g. SUM, AVG, COUNT)
+      2. Binary aggregate functions (e.g. CORR, COVAR_POP)
+  - question: How does the IFNULL function work in OpenROAD?
+    answer: |
+      The IFNULL function in OpenROAD is used to specify a value to be returned when a null is encountered.
+      It's syntax is:
+      IFNULL(v1, v2)
+      If v1 is not null, it returns v1. If v1 is null, it returns v2.
+  - question: How are NULL values generally handled by aggregate functions in OpenROAD?
+    answer: |
+      In OpenROAD, NULL values are generally ignored by aggregate functions, with the exception of COUNT(*).
+      For example, SUM, AVG, MAX, and MIN will not include NULL values in their calculations.
+  - question: What is the purpose of the GROUP BY clause when used with aggregate functions?
+    answer: |
+      The GROUP BY clause in OpenROAD allows aggregate functions to be performed on subsets of the rows in a table.
+      The subsets are defined by the GROUP BY clause. This enables calculations to be done on groups of data rather
+      than the entire dataset.
+  - question: Can aggregate functions be nested in OpenROAD?
+    answer: |
+      No, aggregate functions cannot be nested in OpenROAD. This is a restriction on their use.
+  - question: What does the COUNT(*) function do in OpenROAD?
+    answer: |
+      In OpenROAD, the COUNT(*) function counts the number of rows in a result table, including rows that contain
+      nulls. Unlike other aggregate functions, it does not ignore null values.
+  - question: How can you eliminate duplicate values when using aggregate functions in OpenROAD?
+    answer: |
+      To eliminate duplicate values when using aggregate functions in OpenROAD, you can use the DISTINCT keyword.
+      For example: SELECT COUNT(DISTINCT column_name) FROM table_name;
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 6d93256
+  patterns:
+    - functions.md
