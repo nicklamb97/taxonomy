@@ -12,7 +12,7 @@ seed_examples:
     answer: |
       When a procedure returns a value in OpenROAD, it can function as an expression. For example:
       returnval = procname() + 1;
-      When calling a procedure in an expression, don't use the callproc keyword, include parentheses even if not 
+      When calling a procedure in an expression, don't use the callproc keyword, include parentheses even if not
       passing parameters, and explicitly name the procedure.
   - question: What are the rules for calling a procedure as part of an expression in OpenROAD?
     answer: |
@@ -29,7 +29,7 @@ seed_examples:
     answer: |
       In OpenROAD:
       - Nulls can only be tested using the 'is null' or 'is not null' operators.
-      - If any item (other than a reference variable) in an expression has a null value, the value of the entire 
+      - If any item (other than a reference variable) in an expression has a null value, the value of the entire
         expression is null.
       - If any simple variable in a comparison is null, the result of the comparison is null.
   - question: How can expressions be used in SQL statements in OpenROAD?
@@ -41,18 +41,18 @@ seed_examples:
       Expressions can specify values to be retrieved (in SELECT clauses) or compared (in WHERE clauses).
   - question: Can the field function be used in database statements in OpenROAD?
     answer: |
-      No, the field function is not allowed in database statements in OpenROAD. Also, procedure or method 
+      No, the field function is not allowed in database statements in OpenROAD. Also, procedure or method
       invocations are not allowed in database statements.
   - question: Where can expressions containing aggregate functions appear in SQL statements in OpenROAD?
     answer: |
-      In OpenROAD, expressions that contain aggregate functions can appear only in SELECT and HAVING clauses of 
+      In OpenROAD, expressions that contain aggregate functions can appear only in SELECT and HAVING clauses of
       SQL statements. Additionally, aggregate functions cannot be nested.
   - question: How does OpenROAD handle an expression enclosed in parentheses?
     answer: |
       In OpenROAD, an expression can be enclosed in parentheses without affecting its value.
   - question: Can you use a variable for the name of a method in an expression in OpenROAD?
     answer: |
-      Yes, you can use a variable for the name of a method in an expression in OpenROAD if you assign the name to 
+      Yes, you can use a variable for the name of a method in an expression in OpenROAD if you assign the name to
       a varchar variable. For example: a = objectref.:varmeth();
       However, you cannot use operators when assigning a variable as the method name.
 document:
