@@ -1,0 +1,61 @@
+version: 2
+task_description: Explain literals and system variables in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the three types of literals in OpenROAD?
+    answer: |
+      The three types of literals in OpenROAD are:
+      1. String
+      2. Numeric
+      3. Date/time
+  - question: How can you specify a Unicode literal in OpenROAD?
+    answer: |
+      In OpenROAD, you can specify a Unicode literal using the U& notation followed by a string with escaped
+      sequences of hex digits. For example: U&'Hello\202Fworld\+029E71'
+      Alternatively, you can use the N'x' notation.
+  - question: How are string literals specified in OpenROAD?
+    answer: |
+      String literals in OpenROAD are specified by one or more characters enclosed in single quotes. The default
+      data type for string literals is varchar.
+  - question: How can you include a single quote inside a string literal in OpenROAD?
+    answer: |
+      To include a single quote inside a string literal in OpenROAD, you must double it. For example:
+      'The following letter is quoted: ''A''.'
+  - question: What are the three types of numeric literals in OpenROAD?
+    answer: |
+      The three types of numeric literals in OpenROAD are:
+      1. Integer
+      2. Decimal
+      3. Floating point
+  - question: How are floating point literals specified in OpenROAD?
+    answer: |
+      Floating point literals in OpenROAD must be specified using scientific notation. The format is:
+      [+|-] {digit} [.{digit}] e|E [+|-] {digit}
+      For example: 2.3e-02
+  - question: What is a named constant in OpenROAD?
+    answer: |
+      A named constant in OpenROAD is a literal value to which you give a name. You can then use the name in place
+      of the constant in any 4GL expression. Named constants are global to the application and their values are
+      specified using the OpenROAD Workbench.
+  - question: Can you change the value of a named constant at runtime in OpenROAD?
+    answer: |
+      No, you cannot change the value of a named constant at runtime in OpenROAD. Although you can reference the
+      named constant in your 4GL code, you must use the Constant Editor to change its value.
+  - question: What are system variables in OpenROAD?
+    answer: |
+      System variables in OpenROAD are built-in variables that are available in all frames and scripts. They
+      provide information about the current execution context, errors, and query results.
+  - question: Name five system variables available in OpenROAD.
+    answer: |
+      Five system variables available in OpenROAD are:
+      1. CurEventScope
+      2. CurFrame
+      3. CurSession
+      4. IIDBMSerror
+      5. IIrowcount
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 3c9af5d
+  patterns:
+    - literals.md
