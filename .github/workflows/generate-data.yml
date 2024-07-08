@@ -1,4 +1,4 @@
-name: Generate Data
+name: Generate Synthetic Data for InstructLab
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  generate-data:
+  Generate:
     runs-on: ubuntu-latest
     
     steps:
