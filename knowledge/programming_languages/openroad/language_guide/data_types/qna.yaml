@@ -1,0 +1,62 @@
+version: 2
+task_description: Explain data types in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the main categories of data types in OpenROAD?
+    answer: |
+      The main categories of data types in OpenROAD are:
+      1. Character Types
+      2. Numeric Types
+      3. Date and Time Types
+      4. Other Types (such as money and boolean)
+  - question: What are the character data types supported in OpenROAD?
+    answer: |
+      The character data types supported in OpenROAD are:
+      1. char / character
+      2. varchar / character varying
+      3. long varchar / clob / character large object / char large object
+      4. nchar / nvarchar
+  - question: What are the numeric data types supported in OpenROAD?
+    answer: |
+      The numeric data types supported in OpenROAD are:
+      1. integer / integer4
+      2. smallint / integer2
+      3. bigint / integer8
+      4. decimal
+      5. float / float8 / double precision
+  - question: What date and time data types are supported in OpenROAD?
+    answer: |
+      OpenROAD supports the following date and time data types:
+      1. date
+      2. timestamp (including with/without time zone), though it's not an intrinsic data type
+  - question: What other data types are supported in OpenROAD?
+    answer: |
+      Other data types supported in OpenROAD include:
+      1. money
+      2. boolean (though not as an intrinsic data type)
+  - question: Are all data types in OpenROAD nullable by default?
+    answer: |
+      Yes, by default, all data types in OpenROAD are nullable. However, you can use the `not null` clause to
+      declare a data type non-nullable. It's important to note that a class data type is always nullable.
+  - question: What is the OpenROAD Built-in Scalar Object for the varchar data type?
+    answer: |
+      The OpenROAD Built-in Scalar Object for the varchar data type is StringObject.
+  - question: Does OpenROAD support the boolean data type as an intrinsic type?
+    answer: |
+      No, OpenROAD does not support the boolean data type as an intrinsic data type. However, it does support
+      server-side coercion for boolean types.
+  - question: What is the note regarding nchar and nvarchar data types in OpenROAD?
+    answer: |
+      OpenROAD's transparent Unicode support negates the need for nchar and nvarchar data types in OpenROAD 4GL
+      applications. The varchar data type with UTF8 encoding is sufficient for Unicode support.
+  - question: What should be consulted for more detailed information about specific data types in OpenROAD?
+    answer: |
+      For more detailed information about specific data types, including length and storage formats, you should
+      refer to the Storage Formats of Data Types documentation. If using Enterprise Access, you should consult
+      the Enterprise Access documentation for data type specifics.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: bb5e638
+  patterns:
+    - data_types.md
