@@ -1,0 +1,68 @@
+version: 2
+task_description: Explain dynamic array variables in OpenROAD 4GL programming language.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is a dynamic array variable in OpenROAD?
+    answer: |
+      A dynamic array variable in OpenROAD is a named set of rows. All the rows in the array are reference variables
+      that point to objects of a given class (or any of its subclasses). The array is called dynamic because you can
+      add or subtract rows, and the array automatically adjusts.
+  - question: How are rows numbered in a dynamic array?
+    answer: |
+      Rows in a dynamic array are numbered. Some arrays may have rows with non-positive numbers, which are marked as
+      "deleted". These deleted rows are not visible when the array is displayed in a table field, but they are not yet
+      actually removed from the array.
+  - question: What is an ArrayObject in OpenROAD?
+    answer: |
+      In OpenROAD, each array is associated with an array object, which is an object of the class ArrayObject. The
+      methods used to manipulate arrays are defined for this class, as described in the ArrayObject Class documentation.
+  - question: How do you declare a dynamic array variable in OpenROAD?
+    answer: |
+      To declare a dynamic array variable in OpenROAD, you specify any system class or user class for the objects
+      associated with the variable. The syntax is:
+      name = array of class [with] default null]
+      For example: emparray = array of Emp;
+  - question: Are dynamic arrays automatically populated when declared?
+    answer: |
+      No, when you declare a dynamic array in OpenROAD, it is empty. OpenROAD does not populate the array automatically.
+      There are various methods you can use to add rows to an array, which are described in the Programming Guide.
+  - question: How can you reference a dynamic array as a whole unit?
+    answer: |
+      To reference a dynamic array as a whole unit in OpenROAD, you simply use the array name. For example, if 'movies'
+      is the name of an array, you can pass it to a frame like this:
+      callframe movie_list (mv_fld = movies);
+  - question: How do you reference an individual row in a dynamic array?
+    answer: |
+      To reference an individual row in a dynamic array, use the syntax: arrayname[n]
+      where arrayname is the name of the array and n is the number of the row. For example:
+      callproc update_row (mv_row = movies[i]);
+  - question: What is the syntax for referencing a column in a dynamic array?
+    answer: |
+      To reference a column in a dynamic array, use the syntax: arrayname[*].columnname
+      where arrayname is the name of the array and columnname is the name of the column. This is often used for
+      detecting events on the column when the array is displayed in a table field.
+  - question: How do you reference an individual element of a dynamic array?
+    answer: |
+      To reference an individual element of a dynamic array, use the syntax: arrayname[n].columnname
+      where arrayname is the name of the array, n is the number of the row, and columnname is the name of the column.
+  - question: Can dynamic arrays contain nested objects or arrays?
+    answer: |
+      Yes, dynamic arrays in OpenROAD can contain nested objects or arrays. An individual element of an array can be
+      a reference variable or an array. You can reference elements of these nested objects or arrays in your 4GL code.
+  - question: What is the syntax for referencing a nested object in a dynamic array?
+    answer: |
+      To reference a nested object in a dynamic array, use the syntax: arrayname[n].nestedobject.attribute
+      where arrayname is the name of the object, n is the number of the row, nestedobject is the name of the nested
+      object, and attribute is any attribute of that nested object.
+  - question: What is the syntax for referencing a nested array in a dynamic array?
+    answer: |
+      To reference a nested array in a dynamic array, use the syntax: arrayname[n].nestedarrayname[x].attribute
+      where arrayname is the name of the outer array, n is the row number in that array, nestedarrayname is the name
+      of the nested array, x is the number of the row within the nested array, and attribute is any attribute of the
+      nested array.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 581c7bc
+  patterns:
+    - dynamic_arrays.md
