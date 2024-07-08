@@ -1,0 +1,108 @@
+version: 2
+task_description: Explain the conversion of C# code to Actian 4GL for OpenROAD.
+created_by: nicklamb97
+domain: programming_language
+seed_examples:
+  - question: What are the main variables used in the C# and Actian 4GL examples?
+    answer: |
+      The main variables used in both examples are:
+      - age: An integer representing the person's age
+      - isPremiumMember: A boolean indicating if the person is a premium member
+      - totalPurchase: A decimal (or double in C#) representing the total purchase amount
+      - membershipStatus: A string representing the membership status ("Premium" or "Regular")
+      - isEligibleForDiscount: A boolean indicating if the person is eligible for a discount
+  - question: How is the membership status determined in both languages?
+    answer: |
+      In C#, the membership status is determined using a ternary operator:
+      string membershipStatus = isPremiumMember ? "Premium" : "Regular";
+
+      In Actian 4GL, it's determined using an IF-ELSE statement:
+      IF isPremiumMember THEN
+          LET membershipStatus = "Premium"
+      ELSE
+          LET membershipStatus = "Regular"
+      END IF
+  - question: Explain the complex conditional expression for discount eligibility in C#.
+    answer: |
+      The complex conditional expression in C# is:
+      bool isEligibleForDiscount =
+         isPremiumMember ? true :
+         (membershipStatus == "Regular" && (age > 60 || totalPurchase > 100));
+
+      This expression first checks if the person is a premium member. If true, they're eligible for a discount.
+      If not, it checks if they're a regular member AND either their age is over 60 OR their total purchase is
+      over $100.
+  - question: How is the discount eligibility determined in Actian 4GL?
+    answer: |
+      In Actian 4GL, discount eligibility is determined using nested IF statements:
+      IF isPremiumMember THEN
+          LET isEligibleForDiscount = TRUE
+      ELSE
+          IF membershipStatus = "Regular" AND (age > 60 OR totalPurchase > 100) THEN
+              LET isEligibleForDiscount = TRUE
+          ELSE
+              LET isEligibleForDiscount = FALSE
+          END IF
+      END IF
+  - question: What is the difference in variable declaration between C# and Actian 4GL?
+    answer: |
+      In C#, variables are declared with their type and can be initialized in the same line:
+      int age = 65;
+      bool isPremiumMember = false;
+      double totalPurchase = 120.50;
+
+      In Actian 4GL, variables are declared using the DEFINE keyword and initialized separately:
+      DEFINE age INTEGER
+      DEFINE isPremiumMember BOOLEAN
+      DEFINE totalPurchase DECIMAL(10,2)
+
+      LET age = 65
+      LET isPremiumMember = FALSE
+      LET totalPurchase = 120.50
+  - question: How is output handled in C# versus Actian 4GL?
+    answer: |
+      In C#, output is handled using Console.WriteLine with string interpolation:
+      Console.WriteLine($"Age: {age}");
+      Console.WriteLine($"Membership Status: {membershipStatus}");
+
+      In Actian 4GL, output is handled using the DISPLAY statement:
+      DISPLAY "Age: ", age
+      DISPLAY "Membership Status: ", membershipStatus
+  - question: What is the purpose of the totalPurchase variable in both examples?
+    answer: |
+      The totalPurchase variable represents the total amount of the person's purchase. It's used as part of the
+      condition to determine discount eligibility. If the person is not a premium member and their age is not over 60,
+      they can still be eligible for a discount if their total purchase is over $100.
+  - question: How does the code handle premium members differently from regular members?
+    answer: |
+      In both C# and Actian 4GL versions, premium members are automatically eligible for the discount. For regular
+      members, additional conditions (age > 60 or totalPurchase > 100) must be met to be eligible for the discount.
+  - question: What data type is used for the totalPurchase variable in C# and Actian 4GL?
+    answer: |
+      In C#, the totalPurchase variable is declared as a double:
+      double totalPurchase = 120.50;
+
+      In Actian 4GL, it's declared as a DECIMAL with 10 digits total and 2 decimal places:
+      DEFINE totalPurchase DECIMAL(10,2)
+  - question: How would you modify the Actian 4GL code to include a new condition for discount eligibility?
+    answer: |
+      To add a new condition for discount eligibility in Actian 4GL, you would modify the nested IF statement. For
+      example, to add a condition that customers with a loyalty card are also eligible:
+
+      DEFINE hasLoyaltyCard BOOLEAN
+      LET hasLoyaltyCard = TRUE
+
+      IF isPremiumMember THEN
+          LET isEligibleForDiscount = TRUE
+      ELSE
+          IF membershipStatus = "Regular" AND (age > 60 OR totalPurchase > 100 OR hasLoyaltyCard) THEN
+              LET isEligibleForDiscount = TRUE
+          ELSE
+              LET isEligibleForDiscount = FALSE
+          END IF
+      END IF
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: b8cbb9f
+  patterns:
+    - c#_to_actian_4gl_if_then_else.md
