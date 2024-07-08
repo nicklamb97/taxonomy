@@ -1,0 +1,62 @@
+version: 2
+task_description: Explain date/time data types in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the primary date/time data type used in OpenROAD?
+    answer: |
+      The primary date/time data type used in OpenROAD is INGRESDATE (also known as DATE). It allows storage of
+      empty dates, date-only values, date/time values accurate to a second, and interval values.
+  - question: What are the main data type input formats supported by OpenROAD for date/time data?
+    answer: |
+      OpenROAD supports two main data type input formats for date/time data:
+      1. INGRESDATE
+      2. DATE (Note: In OpenROAD, DATE and INGRESDATE are interchangeable)
+  - question: What types of data can the date(ingresdate) data type contain in OpenROAD?
+    answer: |
+      The date(ingresdate) data type in OpenROAD can contain:
+      1. Absolute date input
+      2. Absolute time input
+      3. Combined date and time input
+      4. Date interval
+      5. Time interval
+  - question: How is the date format determined in OpenROAD?
+    answer: |
+      The date format in OpenROAD is determined by the II_DATE_FORMAT setting. The default is US format (mm/dd/yyyy).
+      Other formats include MULTINATIONAL (dd/mm/yy), ISO (yyyymmdd), and GERMAN (dd.mm.yyyy).
+  - question: What is the format for absolute time input in OpenROAD?
+    answer: |
+      The format for absolute time input in OpenROAD is: hh:mm[:ss] [am|pm] [timezone]
+      It uses a 24-hour clock, and if timezone is omitted, local time zone is assumed. Times are stored as GMT and
+      displayed using II_TIMEZONE_NAME adjustment.
+  - question: How are date intervals specified in OpenROAD?
+    answer: |
+      Date intervals in OpenROAD are specified in terms of years, months, days, or combinations. Examples include:
+      - '5 years'
+      - '8 months 14 days'
+      - '5 yrs 8 mos 14 days'
+  - question: How are time intervals specified in OpenROAD?
+    answer: |
+      Time intervals in OpenROAD are specified as hours, minutes, seconds, or combinations. Examples include:
+      - '23 hours'
+      - '38 minutes 53 secs'
+      - '23:38:53 hours'
+  - question: How are dates and times displayed in OpenROAD?
+    answer: |
+      In OpenROAD, dates and times are displayed as 25-character strings with trailing blanks. The output format is
+      specified by II_DATE_FORMAT. Time intervals display the most significant portions that fit in 25 characters.
+  - question: What types of coercion does OpenROAD 6.2 support for date/time data types?
+    answer: |
+      OpenROAD 6.2 supports:
+      - Ingres DATE (INGRESDATE or DATE) data type
+      - Coercion of various Ingres ANSI INTERVAL, TIME, DATE, and TIMESTAMP columns into OpenROAD DATE variables
+      - Selection, update, and insertion of INGRESDATE, ANSI DATE, TIME, and TIMESTAMP string literals to target DBMS
+  - question: What happens when coercing between INGRES TIMESTAMP and INGRESDATE in OpenROAD?
+    answer: |
+      When coercing INGRES TIMESTAMP to INGRESDATE in OpenROAD, milliseconds are truncated. When coercing INGRESDATE
+      to INGRES TIMESTAMP, the result lacks millisecond precision.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: e528562
+  patterns:
+    - date_time_data_types.md
