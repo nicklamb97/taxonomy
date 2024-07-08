@@ -1,0 +1,53 @@
+version: 2
+task_description: Explain character data types in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the three character data types in OpenROAD?
+    answer: |
+      The three character data types in OpenROAD are:
+      1. char (fixed-length)
+      2. varchar (variable-length)
+      3. long varchar (variable-length)
+  - question: What is the maximum length of a character column in OpenROAD?
+    answer: |
+      The maximum length of a character column in OpenROAD depends on the installation:
+      - For a non-UTF-8 installation: 32,000 bytes
+      - For a UTF-8 installation: 16,000 bytes
+  - question: How are char strings padded in OpenROAD?
+    answer: |
+      In OpenROAD, char strings are padded with blanks to the declared length.
+  - question: How are leading and embedded blanks treated when comparing char strings in OpenROAD?
+    answer: |
+      In OpenROAD, leading and embedded blanks are significant when comparing char strings. For example,
+      'A B C' and 'ABC' are considered different.
+  - question: Is length significant when comparing char strings in OpenROAD?
+    answer: |
+      No, length is not significant when comparing char strings in OpenROAD. The shorter string is (logically)
+      padded to the length of the longer. For example, 'ABC' and 'ABC ' are considered equal.
+  - question: How are blanks treated in varchar data types in OpenROAD?
+    answer: |
+      In OpenROAD, blanks are significant in the varchar data type, except when comparing with char data.
+      For example, 'the store is closed' and 'thestoreisclosed' are not considered equal as varchar strings.
+  - question: How are varchar strings of unequal length compared in OpenROAD?
+    answer: |
+      When comparing varchar strings of unequal length in OpenROAD, the shorter string is padded with trailing
+      blanks until it equals the length of the longer string.
+  - question: How is the long varchar data type supported in OpenROAD?
+    answer: |
+      The intrinsic Ingres DBMS long varchar data type is supported in OpenROAD through the LongVarcharObject
+      system class.
+  - question: Can varchar data types in OpenROAD contain non-printing characters?
+    answer: |
+      Yes, varchar data types in OpenROAD can contain any character, including non-printing characters and the
+      ASCII null character ('\0').
+  - question: How does OpenROAD compare varchar strings with different ASCII characters?
+    answer: |
+      When comparing varchar strings with different ASCII characters in OpenROAD, it considers the ASCII values.
+      For example, 'abcd' > 'abcd\001' because the blank character added to 'abcd' to make the strings the same
+      length has a higher value than ControlA ('\040' is greater than '\001').
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 196e0ab
+  patterns:
+    - character_data_types.md
