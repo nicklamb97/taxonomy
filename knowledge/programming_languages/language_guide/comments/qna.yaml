@@ -1,0 +1,63 @@
+version: 2
+task_description: Explain comments in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the two types of comments in OpenROAD 4GL scripts?
+    answer: |
+      The two types of comments in OpenROAD 4GL scripts are:
+      1. End-of-line comments
+      2. Block comments
+  - question: How do you write an end-of-line comment in OpenROAD?
+    answer: |
+      In OpenROAD, you can write an end-of-line comment by preceding the comment with "//". For example:
+      // This is a single-line comment
+  - question: Can you use end-of-line comments to comment out multiple lines of code in OpenROAD?
+    answer: |
+      Yes, you can use end-of-line comments to comment out multiple lines of code in OpenROAD by preceding each
+      line with "//". For example:
+      //insert into employees(salary, age)
+      //values(:salfield, :agefield);
+      //commit work;
+  - question: How do you start and end a block comment in OpenROAD?
+    answer: |
+      In OpenROAD, a block comment begins with "/*" and ends with "*/". For example:
+      /* This is a single-line block comment */
+  - question: Can block comments span multiple lines in OpenROAD?
+    answer: |
+      Yes, block comments can span multiple lines in OpenROAD. For example:
+      /*
+      ** This is a multi-line block
+      ** comment.
+      */
+  - question: Can you use block comments at the end of a line in OpenROAD?
+    answer: |
+      Yes, you can use block comments at the end of a line in OpenROAD. For example:
+      insert into employees(salary, age)
+      values(:salfield, :agefield); /*This is a comment*/
+      commit work;
+  - question: Can you nest comments in OpenROAD?
+    answer: |
+      No, you cannot nest comments in OpenROAD.
+  - question: What is the difference between end-of-line comments and block comments in OpenROAD?
+    answer: |
+      The main differences between end-of-line comments and block comments in OpenROAD are:
+      1. Syntax: End-of-line comments use "//" while block comments use "/*" and "*/".
+      2. Span: End-of-line comments are typically used for single lines, while block comments can easily span
+         multiple lines.
+      3. Usage: End-of-line comments are often used for brief explanations or to comment out single lines of code,
+         while block comments are useful for longer explanations or commenting out larger blocks of code.
+  - question: Where can you include comments in OpenROAD 4GL scripts?
+    answer: |
+      You can include comments anywhere in your OpenROAD 4GL scripts.
+  - question: How can you comment out a partial line of code in OpenROAD?
+    answer: |
+      You can comment out a partial line of code in OpenROAD by using an end-of-line comment. Simply add "//"
+      after the code you want to keep, and the rest of the line will be treated as a comment. For example:
+      insert into employees(salary, age) // This part will be executed
+      values(:salfield, :agefield); // This is a comment
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: f33662f
+  patterns:
+    - comments.md
