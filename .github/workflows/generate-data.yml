@@ -35,7 +35,7 @@ jobs:
       run: |
         mkdir -p $GITHUB_WORKSPACE/generated
         echo "version: 1.0" > $GITHUB_WORKSPACE/generated/test_config.yaml
-        echo "name: Test Configuration File" >> $GITHUB_WORKSPACE/generated/test_config.yaml
+        echo "name: Test Configuration File" >> $GITHUB_WORKSPACE/generated/test_config_copy.yaml
         echo "description: This is a basic YAML file for testing purposes" >> $GITHUB_WORKSPACE/generated/test_config.yaml
         echo "Basic YAML file created successfully"
 
