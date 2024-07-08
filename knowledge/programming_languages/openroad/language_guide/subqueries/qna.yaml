@@ -1,0 +1,77 @@
+version: 2
+task_description: Explain subqueries in OpenROAD SQL
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is a subquery in OpenROAD SQL?
+    answer: |
+      A subquery in OpenROAD SQL is a SELECT statement nested within another SELECT statement.
+  - question: How can subqueries be used in the WHERE clause?
+    answer: |
+      Subqueries in the WHERE clause can be used to qualify a column against a set of rows. They often take the
+      place of expressions in predicates. For example:
+      SELECT ename
+      FROM employee
+      WHERE dept IN
+             (SELECT dno
+             FROM dept
+             WHERE floor = 3);
+  - question: Can a subquery use correlation names defined in the outer query?
+    answer: |
+      Yes, a subquery can see and use correlation names defined (explicitly or implicitly) outside the subquery.
+      For example:
+      SELECT ename
+      FROM employee empx
+      WHERE salary >
+             (SELECT AVG(salary)
+             FROM employee empy
+             WHERE empy.dept = empx.dept);
+  - question: What are derived tables in OpenROAD SQL?
+    answer: |
+      Derived tables in OpenROAD SQL are subqueries used in the FROM clause of a SELECT statement. They allow you
+      to create or simplify complex queries, especially useful in data warehousing applications.
+  - question: How is a derived table specified in OpenROAD SQL?
+    answer: |
+      A derived table is specified by coding a SELECT statement in the FROM clause of another SELECT statement.
+      The subquery must be enclosed in parentheses and must include a correlation name. For example:
+      SELECT relid, x.attname
+      FROM (SELECT attrelid, attrelidx, attname,
+          attfrml FROM iiattribute) x, iirelation
+      WHERE reltid = attrelid AND reltidx = x.attrelidx
+  - question: How can column names be specified in derived tables?
+    answer: |
+      Column names in derived tables can be specified in two ways:
+      1. Using an override list of column names in parentheses after the correlation name.
+      2. Using AS clauses in the SELECT list of the derived table.
+  - question: Can aggregate functions appear directly in a WHERE clause?
+    answer: |
+      No, aggregate functions cannot appear directly in a WHERE clause. However, they can appear in the SELECT
+      clause or the HAVING clause of a subselect, which itself appears in a WHERE clause.
+  - question: What are the benefits of using derived tables over pre-defined views?
+    answer: |
+      Derived tables offer several benefits over pre-defined views:
+      1. They are more concise.
+      2. They avoid the need to define persistent objects that may be used for a single query only.
+      3. They allow complex queries to be implemented without pre-defined views.
+  - question: In which clauses of the containing query can columns in the derived table be referenced?
+    answer: |
+      Columns in the derived table can be referenced in the following clauses of the containing query:
+      1. SELECT
+      2. ON
+      3. WHERE
+      4. GROUP BY
+      5. HAVING
+      These references may need to be qualified by the correlation name if necessary.
+  - question: How can you change column names in a derived table using the AS clause?
+    answer: |
+      You can change column names in a derived table using the AS clause in the SELECT list of the derived table.
+      For example:
+      SELECT e.ename FROM employee e,
+          (SELECT AVG(e1.salary) AS avgsal, e1.dno FROM employee e1
+              GROUP BY e1.dno) e2
+          WHERE e.dno = e2.dno AND e.salary > e2.salary
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 37f65c4
+  patterns:
+    - subqueries.md
