@@ -1,0 +1,9 @@
+Title: IF-THEN-ELSE Statement in Actian 4GL for OpenROAD
+Author: Unknown
+Source: Not specified
+
+The content about the IF-THEN-ELSE statement in Actian 4GL is based on general programming knowledge and common 
+practices in 4GL languages. As the specific source was not provided, this information should be verified against 
+official Actian 4GL documentation for accuracy and completeness.
+
+This content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
