@@ -1,0 +1,63 @@
+version: 2
+task_description: Explain numeric data types in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the two main categories of numeric data types in OpenROAD?
+    answer: |
+      The two main categories of numeric data types in OpenROAD are:
+      1. Exact numeric data types
+      2. Approximate numeric data types
+  - question: What are the integer data types available in OpenROAD and their ranges?
+    answer: |
+      OpenROAD provides the following integer data types:
+      1. integer1 (tinyint): One-byte integer, range -128 to +127
+      2. smallint (integer2): Two-byte integer, range -32,768 to +32,767
+      3. integer (integer4): Four-byte integer, range -2,147,483,648 to +2,147,483,647
+      4. integer8 (bigint): Eight-byte integer, range -9,223,372,036,854,775,808 to +9,223,372,036,854,775,807
+  - question: How is the decimal data type defined in OpenROAD?
+    answer: |
+      In OpenROAD, the decimal data type is an exact numeric type defined by its precision (total number of digits)
+      and scale (number of digits to the right of the decimal point). The syntax is decimal(p,s) where p is precision
+      and s is scale. The minimum precision is 1, maximum precision is 39, and scale cannot exceed precision (can be 0).
+  - question: What are the floating point data types in OpenROAD?
+    answer: |
+      OpenROAD provides two types of floating point data:
+      1. float4 (real): 4-byte floating point
+      2. float (float8, double precision): 8-byte floating point
+  - question: What is the precision of floating point numbers in OpenROAD?
+    answer: |
+      In OpenROAD:
+      - 8-byte floating point numbers are rounded to 15 decimal digits
+      - 4-byte floating point number precision is processor-dependent
+  - question: How can you specify the precision of a float data type in OpenROAD?
+    answer: |
+      In OpenROAD, you can use the optional syntax float(n) where n is binary precision (0-53):
+      - 0 to 23: 4-byte float
+      - 24 to 53: 8-byte float
+  - question: What are some important considerations when using numeric data types in OpenROAD?
+    answer: |
+      Important considerations for numeric data types in OpenROAD include:
+      1. Be cautious with data type conversions, especially with floating point numbers.
+      2. Exact matches on floating point numbers are discouraged due to their approximate nature.
+      3. Float and float4 are approximate numeric values, while integer and decimal are exact.
+      4. The decimal data type is preferable for currency calculations where precision is crucial.
+      5. Floating point numbers are stored in four or eight bytes, depending on the type and specified precision.
+  - question: Why is the decimal data type suitable for storing currency data in OpenROAD?
+    answer: |
+      The decimal data type in OpenROAD is suitable for storing currency data where the required range or precision
+      exceeds the money data type. It allows for exact representation of decimal fractions, which is crucial for
+      financial calculations. However, it doesn't include a currency sign for display purposes.
+  - question: What are the synonyms for the decimal data type in OpenROAD?
+    answer: |
+      In OpenROAD, the synonyms for the decimal data type are 'dec' and 'numeric'.
+  - question: How should one choose the appropriate numeric data type in OpenROAD?
+    answer: |
+      When choosing a numeric data type in OpenROAD, consider your specific requirements for range, precision, and
+      exactness of calculations. Use integer types for whole numbers, decimal for exact fractional numbers
+      (especially for currency), and floating point types for approximate values where a larger range is needed.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 89f2176
+  patterns:
+    - numeric_data_types.md
