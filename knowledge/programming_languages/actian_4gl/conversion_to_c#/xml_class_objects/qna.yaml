@@ -1,0 +1,58 @@
+version: 2
+task_description: Explain the XML representation of Actian 4GL class objects in OpenROAD.
+created_by: nicklamb97
+domain: actian_4gl
+seed_examples:
+  - question: How does Actian 4GL in OpenROAD represent class objects?
+    answer: |
+      Actian 4GL in OpenROAD uses XML to represent class objects. These XML representations can be directly
+      converted to C#.
+
+  - question: What is the C# equivalent of varchar(1) in Actian 4GL?
+    answer: |
+      In Actian 4GL, `varchar(1)` can be represented as a `char` in C#.
+
+  - question: What is the root element in the XML representation of an Actian 4GL class?
+    answer: |
+      The root element in the XML representation of an Actian 4GL class is `<OPENROAD>`.
+
+  - question: What does the `<COMPONENT>` element represent in the XML structure?
+    answer: |
+      The `<COMPONENT>` element defines a specific component. It has attributes like `name` and `xsi:type` that
+      specify the component's name and type respectively.
+
+  - question: How is inheritance represented in the XML structure?
+    answer: |
+      Inheritance is represented using the `<superclass>` element. It specifies the superclass from which the
+      component inherits behavior and properties.
+
+  - question: What is the purpose of the `<attributes>` element in the XML structure?
+    answer: |
+      The `<attributes>` element encapsulates a list of attributes or fields that describe the properties of the
+      component. It contains multiple `<row>` elements, each defining a specific attribute.
+
+  - question: How are individual attributes defined in the XML structure?
+    answer: |
+      Individual attributes are defined using `<row>` elements within the `<attributes>` section. Each `<row>`
+      contains a `<displayname>` (identifier) and a `<datatype>` (specifying the data type of the attribute).
+
+  - question: What does the `<row_class>` element represent?
+    answer: |
+      The `<row_class>` element possibly indicates a classification or type associated with the rows within
+      `<attributes>`. It could denote a specific category or classification of attributes within the component.
+
+  - question: What namespace is declared in the XML representation?
+    answer: |
+      The XML representation declares a namespace prefix `xsi` associated with a specific URL (SOME_URL). This prefix
+      is typically used for attributes in XML that indicate schema information.
+
+  - question: How is the component type specified in the XML structure?
+    answer: |
+      The component type is specified using the `xsi:type` attribute in the `<COMPONENT>` element. For example,
+      `xsi:type="somesource"` indicates that the component is of type "somesource".
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 7b9c445
+  patterns:
+    - conversion_to_c#_xml_class_objects.md

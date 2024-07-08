@@ -1,0 +1,7 @@
+Title: Actian 4GL in OpenROAD: XML Representation of Class Objects
+Author: Oliver Boyes-Park
+Source: Custom explanation provided by Oliver Boyes-Park
+
+The content on Actian 4GL in OpenROAD and its XML representation of class objects is based on information provided by
+Oliver Boyes-Park. This content is used for educational purposes and to enhance the knowledge base of the InstructLab
+taxonomy.
