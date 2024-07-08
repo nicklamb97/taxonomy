@@ -28,7 +28,7 @@ jobs:
 
     - name: Clone custom taxonomy repository
       run: |
-        git clone https://github.com/nicklamb97/taxonomy.git $GITHUB_WORKSPACE/taxonomy
+        git clone "https://github.com/nicklamb97/taxonomy.git" "$GITHUB_WORKSPACE/taxonomy"
         echo "Custom taxonomy repository cloned successfully"
 
     - name: Initialise ilab
@@ -41,11 +41,11 @@ jobs:
         echo "Downloading model..."
         ilab model download
         echo "Model downloaded successfully"
-        echo "MODEL_DOWNLOADED=true" >> $GITHUB_ENV
+        echo "MODEL_DOWNLOADED=true" >> "$GITHUB_ENV"
 
     - name: Get diff and prepare for data generation
       run: |
-        cd $GITHUB_WORKSPACE/taxonomy
+        cd "$GITHUB_WORKSPACE/taxonomy"
         git config --local user.name "Nick Lamb"
         git config --local user.email "nick.lamb@diegesis.co.uk"
         git fetch origin
@@ -55,7 +55,7 @@ jobs:
         echo "Current commit: $CURRENT_COMMIT"
         
         # Get list of added or modified files
-        CHANGED_FILES=$(git diff --name-only --diff-filter=AM $PREVIOUS_COMMIT $CURRENT_COMMIT)
+        CHANGED_FILES=$(git diff --name-only --diff-filter=AM "$PREVIOUS_COMMIT" "$CURRENT_COMMIT")
         echo "Changed files:"
         echo "$CHANGED_FILES"
         
@@ -67,22 +67,22 @@ jobs:
           git checkout -b temp_branch
           
           # Reset to the previous commit
-          git reset --hard $PREVIOUS_COMMIT
+          git reset --hard "$PREVIOUS_COMMIT"
           
           # Apply the changes from the current commit
-          git cherry-pick $CURRENT_COMMIT
+          git cherry-pick "$CURRENT_COMMIT"
           
           echo "Changes applied to temporary branch. Ready for ilab taxonomy diff."
-          echo "QNA_YAML_CHANGED=true" >> $GITHUB_ENV
+          echo "QNA_YAML_CHANGED=true" >> "$GITHUB_ENV"
         else
           echo "No changes detected in qna.yaml files. Skipping data generation."
-          echo "QNA_YAML_CHANGED=false" >> $GITHUB_ENV
+          echo "QNA_YAML_CHANGED=false" >> "$GITHUB_ENV"
         fi
 
     - name: Run ilab taxonomy diff and generate data
       if: env.QNA_YAML_CHANGED == 'true' && env.MODEL_DOWNLOADED == 'true'
       run: |
-        cd $GITHUB_WORKSPACE
+        cd "$GITHUB_WORKSPACE"
         echo "Current directory: $(pwd)"
         echo "Running: ilab taxonomy diff"
         ilab taxonomy diff || { echo "ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
@@ -104,17 +104,17 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GENERATED_REPO_TOKEN }}
       run: |
-        cd $GITHUB_WORKSPACE
+        cd "$GITHUB_WORKSPACE"
         if [ -d "generated" ]; then
           echo "Generated files directory found"
-          git clone https://github.com/nicklamb97/generated.git temp_generated
+          git clone "https://github.com/nicklamb97/generated.git" temp_generated
           cd temp_generated
           git config user.name "Nick Lamb"
           git config user.email "nick.lamb@diegesis.co.uk"
           cp -r ../generated/* .
           git add .
           git commit -m "Auto-generated synthetic data" || echo "No changes to commit"
-          git push https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git main
+          git push "https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git" main
           echo "Changes pushed to generated repository"
           cd ..
           rm -rf temp_generated
