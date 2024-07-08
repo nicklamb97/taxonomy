@@ -1,0 +1,51 @@
+version: 2
+task_description: Explain nulls in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What does a null represent in OpenROAD?
+    answer: |
+      In OpenROAD, a null represents an undefined or unknown value. It is specified by the keyword null.
+  - question: Is a null the same as zero, a blank, or an empty string in OpenROAD?
+    answer: |
+      No, in OpenROAD, a null is not the same as a zero, a blank, or an empty string.
+  - question: How can you assign a null to a nullable variable in OpenROAD?
+    answer: |
+      You can assign a null to any nullable variable in OpenROAD by using the null constant. For example:
+      age = null;
+  - question: What is the correct way to check if a variable is null in OpenROAD?
+    answer: |
+      The correct way to check if a variable is null in OpenROAD is to use the 'is null' operator. For example:
+      if x is null ...
+      You should not use: if x = null ...
+  - question: What happens if you set a reference variable to null in OpenROAD?
+    answer: |
+      If you set a reference variable to null in OpenROAD, the reference variable is no longer associated with an
+      object. OpenROAD frees any object that does not have at least one reference variable pointing at it.
+  - question: What are some ways to handle nulls in expressions in OpenROAD?
+    answer: |
+      In OpenROAD, you can handle nulls in expressions using:
+      1. The ifnull() function
+      2. The is [not] null operator
+  - question: Can nulls be assigned to non-nullable variables in OpenROAD?
+    answer: |
+      No, nulls can only be assigned to nullable variables in OpenROAD.
+  - question: What is the purpose of the 'is null' operator in OpenROAD?
+    answer: |
+      The 'is null' operator in OpenROAD is used to check if a variable is null. It's the correct way to perform
+      null checks, as opposed to using equality comparison (=).
+  - question: What is the difference between 'is null' and 'is not null' operators in OpenROAD?
+    answer: |
+      In OpenROAD:
+      - 'is null' checks if a variable is null
+      - 'is not null' checks if a variable is not null
+      These operators provide a way to handle both cases when dealing with potentially null values.
+  - question: Where can you find more information about the 'is null' operator in OpenROAD?
+    answer: |
+      For more information about the 'is null' operator in OpenROAD, you can refer to the documentation section on
+      the Is [Not] Null Operator.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 456dc0d
+  patterns:
+    - nulls.md
