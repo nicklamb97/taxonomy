@@ -1,0 +1,76 @@
+version: 2
+task_description: Explain operators in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the arithmetic operators supported in OpenROAD?
+    answer: |
+      OpenROAD supports the following arithmetic operators:
+      - `+`: Addition
+      - `-`: Subtraction
+      - `*`: Multiplication
+      - `/`: Division
+      - `**`: Exponentiation
+  - question: How does operator precedence work for arithmetic operators in OpenROAD?
+    answer: |
+      The operator precedence for arithmetic operators in OpenROAD, from highest to lowest, is:
+      1. `**` (Exponentiation)
+      2. `*`, `/` (Multiplication and Division)
+      3. `+`, `-` (Addition and Subtraction)
+      Operators with equal precedence are processed from left to right. Parentheses can be used to force
+      alternate precedence.
+  - question: What is the string concatenation operator in OpenROAD?
+    answer: |
+      In OpenROAD, the concatenation operator for joining string expressions is the plus sign (`+`).
+      For example: answer = prompt 'Please enter department for ' + name + ': ';
+  - question: What are the logical operators in OpenROAD and their precedence?
+    answer: |
+      The logical operators in OpenROAD are AND, OR, and NOT. Their precedence, from highest to lowest, is:
+      1. NOT
+      2. AND
+      3. OR
+      Parentheses can be used to change the order of evaluation.
+  - question: What are some comparison operators in OpenROAD?
+    answer: |
+      Some comparison operators in OpenROAD include:
+      - `=`: Equal to
+      - `!=`, `<>`, `^=`: Not equal to
+      - `<`: Less than
+      - `<=`: Less than or equal to
+      - `>`: Greater than
+      - `>=`: Greater than or equal to
+      - `is null`: Value is null
+      - `is not null`: Value is other than null
+      - `like`: Value matches a pattern-matching string
+      - `not like`: Value doesn't match a pattern-matching string
+  - question: How does the LIKE operator work in OpenROAD?
+    answer: |
+      The LIKE operator in OpenROAD compares two strings for resemblance. Its syntax is:
+      charvar [not] like pattern [escape escapechar]
+      It uses special characters in the pattern:
+      - `_`: Matches any single character
+      - `%`: Matches any string of characters, regardless of length
+      - `[]`: Matches any character within the brackets (when preceded by escape character)
+  - question: How can you test if a value is null in OpenROAD?
+    answer: |
+      In OpenROAD, you can test if a value is null using the IS NULL operator. The syntax is:
+      expression is [not] null
+      For example:
+      if salary is null then
+          sal_msg = 'Salary amount is unknown.'
+      endif;
+  - question: Can OpenROAD perform date arithmetic?
+    answer: |
+      Yes, OpenROAD supports date arithmetic. For example, you can add days to a date like this:
+      start_date = start_date + '2 days';
+  - question: What is the result of True AND Null in OpenROAD?
+    answer: |
+      In OpenROAD, the result of True AND Null is Null.
+  - question: What is the result of False OR Null in OpenROAD?
+    answer: |
+      In OpenROAD, the result of False OR Null is Null.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 628cf73
+  patterns:
+    - operators.md
