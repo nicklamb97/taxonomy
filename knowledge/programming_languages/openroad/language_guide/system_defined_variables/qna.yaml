@@ -1,0 +1,55 @@
+version: 2
+task_description: Explain system-defined functions in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the four types of SQL functions in OpenROAD?
+    answer: |
+      The four types of SQL functions in OpenROAD are:
+      1. Ingres scalar SQL functions
+      2. Aggregate functions
+      3. The ifnull() function
+      4. The dbmsinfo() function
+  - question: Where can Ingres scalar SQL functions be used in OpenROAD?
+    answer: |
+      Ingres scalar SQL functions can be used in all OpenROAD statements and in all SQL statements that are used
+      locally within OpenROAD, except for object_key() and table_key().
+  - question: How are aggregate functions used in OpenROAD?
+    answer: |
+      Aggregate functions, which take a set of values (for example, the contents of a column in a table) as their
+      arguments, can only be used in OpenROAD within SQL statements.
+  - question: How can OpenROAD access database functions from other systems like MSSQL or Oracle?
+    answer: |
+      OpenROAD can access database functions from other systems like Ingres, MSSQL, Oracle, as well as UDFs
+      (user-defined functions) by using Execute Immediate Statement and Direct Execute Immediate Statement.
+  - question: What's the difference between running a function on the client side versus the database side in OpenROAD?
+    answer: |
+      Running a function on the client side versus the database side can yield different results. For example:
+      ld_date = DATE('now'); // returns the client current date and time
+      SELECT :ld_date = DATE('now'); // returns the server current date and time
+  - question: Does OpenROAD support all Ingres scalar functions?
+    answer: |
+      No, OpenROAD does not support many Ingres scalar functions. Although you can use them in SQL statements,
+      OpenROAD cannot process them locally.
+  - question: Can all OpenROAD 4GL functions be used in both 4GL programming and SQL statements?
+    answer: |
+      Most OpenROAD 4GL functions share the same name and functionality as the equivalent SQL function and can be
+      used in both. However, some functions are specific to either 4GL or SQL. For example, the upper() function
+      can be used in both, while count() is only for SQL and field() is only for 4GL.
+  - question: How does OpenROAD handle the replace() string function?
+    answer: |
+      The replace() string function is currently available only in SQL statements in OpenROAD. OpenROAD runs the
+      SQL SELECT on the server side and returns the result to the OpenROAD variable. For example:
+      select :lv_searchString = REPLACE('I like bananas','bananas','apples');
+  - question: What is the field() function in OpenROAD?
+    answer: |
+      The field() function is a non-SQL function supported by OpenROAD. It is available only in 4GL code and cannot
+      be used in SQL statements.
+  - question: Where can developers find more information about OpenROAD functions?
+    answer: |
+      For more information about OpenROAD functions, developers can refer to the Function Libraries documentation.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a3149ba
+  patterns:
+    - system_defined_functions.md
