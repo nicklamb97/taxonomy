@@ -37,9 +37,11 @@ jobs:
         echo "ilab initialised successfully"
 
     - name: Download model
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        echo "Downloading model..."
-        ilab model download
+        echo "Downloading CodeLlama-7B-Instruct-GGUF model..."
+        HF_TOKEN=$HF_TOKEN ilab model download --repository=TheBloke/CodeLlama-7B-Instruct-GGUF --filename=codellama-7b-instruct.Q4_K_M.gguf
         echo "Model downloaded successfully"
         echo "MODEL_DOWNLOADED=true" >> "$GITHUB_ENV"
 
