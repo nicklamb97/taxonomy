@@ -1,0 +1,66 @@
+version: 2
+task_description: Explain the conversion of Actian 4GL XML class objects to C# in OpenROAD.
+created_by: nicklamb97
+domain: actian_4gl
+seed_examples:
+  - question: How does Actian 4GL in OpenROAD represent class objects?
+    answer: |
+      Actian 4GL in OpenROAD uses XML to represent class objects, which can be directly converted to C#.
+
+  - question: What is the purpose of the 'class comp' declaration in the C# example?
+    answer: |
+      The 'class comp' declaration creates a new class named comp, which is used to encapsulate data and behavior
+      related to a specific entity within a software system.
+
+  - question: "What does ': superClass' indicate in the class declaration?"
+    answer: |
+      ': superClass' specifies that the comp class inherits from (extends) another class named superClass. This
+      allows comp to inherit properties and behaviors from superClass, promoting code reuse and establishing an
+      "is-a" relationship.
+
+  - question: What are the field declarations in the comp class?
+    answer: |
+      The field declarations in the comp class are:
+      - int i_no;
+      - char i_f_no;
+      - string v_f_name;
+      - int i_st;
+      These declare four private fields within the comp class.
+
+  - question: What is the purpose of fields in a class?
+    answer: |
+      Fields are variables that store data associated with an object of the class. They define the state or
+      characteristics of instances of the class.
+
+  - question: What are the types of fields used in the comp class?
+    answer: |
+      The comp class uses the following field types:
+      - int (integer) for i_no and i_st
+      - char (character) for i_f_no
+      - string for v_f_name
+
+  - question: What do the fields in the comp class represent?
+    answer: |
+      The fields in the comp class represent specific attributes or properties (i_no, i_f_no, v_f_name, i_st) that
+      instances of comp will possess.
+
+  - question: How does inheritance benefit the comp class?
+    answer: |
+      Inheritance allows the comp class to inherit properties and behaviors from superClass, promoting code reuse
+      and establishing an "is-a" relationship between comp and superClass.
+
+  - question: What is the relationship between XML and C# in Actian 4GL for OpenROAD?
+    answer: |
+      In Actian 4GL for OpenROAD, XML is used to represent class objects, which can then be directly converted to C#
+      representations.
+
+  - question: Why are fields declared as private in the comp class?
+    answer: |
+      Fields are declared as private in the comp class to encapsulate the data and prevent direct access from outside
+      the class. This promotes data hiding and helps maintain the integrity of the object's state.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 090fce9
+  patterns:
+    - actian_4gl_c#_class_objects.md
