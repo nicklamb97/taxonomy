@@ -45,16 +45,18 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         if [ -d "generated" ]; then
-          echo "Generated directory found"
-          git clone https://github.com/nicklamb97/generated.git
-          cd generated
+          echo "Generated files directory found"
+          git clone https://github.com/nicklamb97/generated.git temp_generated
+          cd temp_generated
           git config user.name "Nick Lamb"
           git config user.email "nick.lamb@diegesis.co.uk"
           cp -r ../generated/* .
           git add .
           git commit -m "Add test configuration file" || echo "No changes to commit"
-          git push https://github.com/nicklamb97/generated.git main
+          git push https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git main
           echo "Changes pushed to generated repository"
+          cd ..
+          rm -rf temp_generated
         else
-          echo "No generated directory found. Nothing to commit."
+          echo "No generated files directory found. Nothing to commit."
         fi
