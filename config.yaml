@@ -13,7 +13,7 @@ generate:
   chunk_word_count: 1000
   model: models/codellama-7b-instruct.Q4_K_M.gguf
   num_cpus: 10
-  num_instructions: 100
+  num_instructions: 75
   output_dir: generated
   prompt_file: prompt.txt
   seed_file: seed_tasks.json
