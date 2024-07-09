@@ -1,0 +1,7 @@
+Title: OpenROAD Actian 4GL BeginEndBlock
+Author: Actian Corporation
+Source: Actian OpenROAD Documentation
+
+The OpenROAD Actian 4GL BeginEndBlock knowledge content is based on the official OpenROAD documentation provided by 
+Actian Corporation. The content is used for educational purposes and to enhance the knowledge base of the InstructLab 
+taxonomy.
