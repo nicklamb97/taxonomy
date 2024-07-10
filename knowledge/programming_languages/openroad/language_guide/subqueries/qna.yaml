@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain subqueries in OpenROAD SQL
+task_description: Explain subqueries in OpenROAD Actian 4GL SQL
 created_by: nicklamb97
 domain: openroad
 seed_examples:
@@ -16,7 +16,7 @@ seed_examples:
              (SELECT dno
              FROM dept
              WHERE floor = 3);
-  - question: Can a subquery use correlation names defined in the outer query?
+  - question: Can a subquery use correlation names defined in the outer query in OpenROAD?
     answer: |
       Yes, a subquery can see and use correlation names defined (explicitly or implicitly) outside the subquery.
       For example:
@@ -38,22 +38,22 @@ seed_examples:
       FROM (SELECT attrelid, attrelidx, attname,
           attfrml FROM iiattribute) x, iirelation
       WHERE reltid = attrelid AND reltidx = x.attrelidx
-  - question: How can column names be specified in derived tables?
+  - question: How can column names be specified in derived tables in OpenROAD?
     answer: |
       Column names in derived tables can be specified in two ways:
       1. Using an override list of column names in parentheses after the correlation name.
       2. Using AS clauses in the SELECT list of the derived table.
-  - question: Can aggregate functions appear directly in a WHERE clause?
+  - question: Can aggregate functions appear directly in a WHERE clause in OpenROAD?
     answer: |
       No, aggregate functions cannot appear directly in a WHERE clause. However, they can appear in the SELECT
       clause or the HAVING clause of a subselect, which itself appears in a WHERE clause.
-  - question: What are the benefits of using derived tables over pre-defined views?
+  - question: What are the benefits of using derived tables over pre-defined views in OpenROAD?
     answer: |
       Derived tables offer several benefits over pre-defined views:
       1. They are more concise.
       2. They avoid the need to define persistent objects that may be used for a single query only.
       3. They allow complex queries to be implemented without pre-defined views.
-  - question: In which clauses of the containing query can columns in the derived table be referenced?
+  - question: In which clauses of the containing query can columns in the derived table be referenced in OpenROAD?
     answer: |
       Columns in the derived table can be referenced in the following clauses of the containing query:
       1. SELECT
@@ -62,7 +62,7 @@ seed_examples:
       4. GROUP BY
       5. HAVING
       These references may need to be qualified by the correlation name if necessary.
-  - question: How can you change column names in a derived table using the AS clause?
+  - question: How can you change column names in a derived table using the AS clause in OpenROAD?
     answer: |
       You can change column names in a derived table using the AS clause in the SELECT list of the derived table.
       For example:
