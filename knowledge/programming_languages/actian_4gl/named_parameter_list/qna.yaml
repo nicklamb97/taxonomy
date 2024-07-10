@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and syntax of 'NamedParameterListDefinition' in OpenROAD Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is a NamedParameterListDefinition in OpenROAD Actian 4GL?
+    answer: |
+      A NamedParameterListDefinition specifies local variables that can be used as parameters in OpenROAD Actian 4GL.
+  - question: What is the basic syntax of a NamedParameterListDefinition?
+    answer: |
+      The basic syntax is:
+      parametername = type{, parametername = type}
+  - question: What does 'parametername' represent in the NamedParameterListDefinition syntax?
+    answer: |
+      'parametername' specifies the name of the parameter being defined.
+  - question: Where can I find more information about the 'type' in a NamedParameterListDefinition?
+    answer: |
+      For more information about the 'type', you should refer to the Type section of the documentation.
+  - question: Can multiple parameters be defined in a single NamedParameterListDefinition?
+    answer: |
+      Yes, multiple parameters can be defined in a single NamedParameterListDefinition. They are separated by commas.
+  - question: How does a NamedParameterListDefinition differ from a LocalVariableDeclaration?
+    answer: |
+      While both define local variables, a NamedParameterListDefinition specifically defines variables that can be
+      used as parameters, potentially in function or procedure definitions.
+  - question: Is there a limit to the number of parameters that can be defined in a NamedParameterListDefinition?
+    answer: |
+      The syntax doesn't specify a limit. Multiple parameters can be defined by repeating the 'parametername = type'
+      pattern, separated by commas.
+  - question: How are the parameters in a NamedParameterListDefinition typically used?
+    answer: |
+      These parameters are typically used in function or procedure definitions to specify the input or output
+      variables that can be passed to or from the function or procedure.
+  - question: Does the NamedParameterListDefinition include parameter initialization?
+    answer: |
+      No, the NamedParameterListDefinition syntax only includes the declaration of the parameter name and its type.
+      Initialization would typically occur when the function or procedure is called.
+  - question: How does the syntax ensure each parameter has a name and a type?
+    answer: |
+      The syntax requires each parameter to be defined in the format 'parametername = type', ensuring that both
+      a name and a type are specified for each parameter.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: bc4076a
+  patterns:
+    - namedparameterlistdefinition.md
