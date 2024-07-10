@@ -23,7 +23,7 @@ seed_examples:
       associated with the variable. The syntax is:
       name = array of class [with] default null]
       For example: emparray = array of Emp;
-  - question: Are dynamic arrays automatically populated when declared?
+  - question: Are dynamic arrays automatically populated when declared in OpenROAD?
     answer: |
       No, when you declare a dynamic array in OpenROAD, it is empty. OpenROAD does not populate the array automatically.
       There are various methods you can use to add rows to an array, which are described in the Programming Guide.
@@ -32,30 +32,30 @@ seed_examples:
       To reference a dynamic array as a whole unit in OpenROAD, you simply use the array name. For example, if 'movies'
       is the name of an array, you can pass it to a frame like this:
       callframe movie_list (mv_fld = movies);
-  - question: How do you reference an individual row in a dynamic array?
+  - question: How do you reference an individual row in a dynamic array in OpenROAD?
     answer: |
       To reference an individual row in a dynamic array, use the syntax: arrayname[n]
       where arrayname is the name of the array and n is the number of the row. For example:
       callproc update_row (mv_row = movies[i]);
-  - question: What is the syntax for referencing a column in a dynamic array?
+  - question: What is the syntax for referencing a column in a dynamic array in OpenROAD?
     answer: |
       To reference a column in a dynamic array, use the syntax: arrayname[*].columnname
       where arrayname is the name of the array and columnname is the name of the column. This is often used for
       detecting events on the column when the array is displayed in a table field.
-  - question: How do you reference an individual element of a dynamic array?
+  - question: How do you reference an individual element of a dynamic array in OpenROAD?
     answer: |
       To reference an individual element of a dynamic array, use the syntax: arrayname[n].columnname
       where arrayname is the name of the array, n is the number of the row, and columnname is the name of the column.
-  - question: Can dynamic arrays contain nested objects or arrays?
+  - question: Can dynamic arrays contain nested objects or arrays in OpenROAD?
     answer: |
       Yes, dynamic arrays in OpenROAD can contain nested objects or arrays. An individual element of an array can be
       a reference variable or an array. You can reference elements of these nested objects or arrays in your 4GL code.
-  - question: What is the syntax for referencing a nested object in a dynamic array?
+  - question: What is the syntax for referencing a nested object in a dynamic array in OpenROAD?
     answer: |
       To reference a nested object in a dynamic array, use the syntax: arrayname[n].nestedobject.attribute
       where arrayname is the name of the object, n is the number of the row, nestedobject is the name of the nested
       object, and attribute is any attribute of that nested object.
-  - question: What is the syntax for referencing a nested array in a dynamic array?
+  - question: What is the syntax for referencing a nested array in a dynamic array in OpenROAD?
     answer: |
       To reference a nested array in a dynamic array, use the syntax: arrayname[n].nestedarrayname[x].attribute
       where arrayname is the name of the outer array, n is the row number in that array, nestedarrayname is the name
