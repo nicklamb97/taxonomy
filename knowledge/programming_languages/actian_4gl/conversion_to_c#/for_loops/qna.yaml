@@ -1,0 +1,93 @@
+version: 2
+task_description: Explain FOR loops in Actian 4GL for OpenROAD and compare with C#
+created_by: nicklamb97
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of the example in Actian 4GL for OpenROAD?
+    answer: |
+      The example illustrates how nested FOR loops work in Actian 4GL. It creates a multiplication table by
+      iterating over two ranges from 1 to 5, displaying the values of i and j and their product.
+
+  - question: How is the outer FOR loop structured in Actian 4GL?
+    answer: |
+      The outer FOR loop in Actian 4GL is structured as follows:
+      FOR i = 1 TO 5
+        ...
+      END FOR
+      It initializes i to 1 and continues iterating as long as i is less than or equal to 5, incrementing i by 1
+      after each iteration.
+
+  - question: How is the inner FOR loop structured in Actian 4GL?
+    answer: |
+      The inner FOR loop in Actian 4GL is structured as follows:
+      DEFINE j INTEGER
+      FOR j = 1 TO 5
+        ...
+      END FOR
+      It defines j as an integer, initializes it to 1, and continues iterating as long as j is less than or equal to 5,
+      incrementing j by 1 after each iteration.
+
+  - question: What does the DISPLAY statement inside the inner loop do in Actian 4GL?
+    answer: |
+      The DISPLAY statement inside the inner loop outputs the current values of i and j, and their product (i * j).
+      It formats the output as: "i: <value of i>, j: <value of j> - Product: <product of i and j>".
+
+  - question: How does the execution flow work in the nested FOR loops of Actian 4GL?
+    answer: |
+      The execution flow works as follows:
+      1. The outer loop starts with i = 1.
+      2. The inner loop starts with j = 1 and displays the product of i and j.
+      3. The inner loop increments j to 2 and displays the product of i and j.
+      4. This process repeats until j exceeds 5.
+      5. The outer loop increments i to 2 and repeats the inner loop process for j from 1 to 5.
+      6. This nested iteration continues until i exceeds 5.
+
+  - question: How is the outer for loop structured in C#?
+    answer: |
+      The outer for loop in C# is structured as follows:
+      for (int i = 1; i <= 5; i++)
+      {
+        ...
+      }
+      It initializes i to 1, continues iterating as long as i is less than or equal to 5, and increments i by 1
+      after each iteration.
+
+  - question: How is the inner for loop structured in C#?
+    answer: |
+      The inner for loop in C# is structured as follows:
+      for (int j = 1; j <= 5; j++)
+      {
+        ...
+      }
+      It initializes j to 1, continues iterating as long as j is less than or equal to 5, and increments j by 1
+      after each iteration.
+
+  - question: What does the Console.WriteLine statement inside the inner loop do in C#?
+    answer: |
+      The Console.WriteLine statement inside the inner loop outputs the current values of i and j, and their product
+      (i * j). It formats the output as: "i: <value of i>, j: <value of j> - Product: <product of i and j>".
+
+  - question: How does the execution flow work in the nested for loops of C#?
+    answer: |
+      The execution flow in C# works similarly to Actian 4GL:
+      1. The outer loop starts with i = 1.
+      2. The inner loop starts with j = 1 and displays the product of i and j.
+      3. The inner loop increments j to 2 and displays the product of i and j.
+      4. This process repeats until j exceeds 5.
+      5. The outer loop increments i to 2 and repeats the inner loop process for j from 1 to 5.
+      6. This nested iteration continues until i exceeds 5.
+
+  - question: What are the main differences between the Actian 4GL and C# implementations of nested FOR loops?
+    answer: |
+      The main differences are:
+      1. Syntax: Actian 4GL uses 'FOR' and 'END FOR', while C# uses 'for' with curly braces.
+      2. Variable declaration: Actian 4GL requires explicit variable definition with 'DEFINE', while C# declares
+         variables within the loop statement.
+      3. Output: Actian 4GL uses 'DISPLAY', while C# uses 'Console.WriteLine'.
+      4. String interpolation: C# uses string interpolation with $, while Actian 4GL concatenates values.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 01b6888
+  patterns:
+    - conversion_to_c#_for_loops.md

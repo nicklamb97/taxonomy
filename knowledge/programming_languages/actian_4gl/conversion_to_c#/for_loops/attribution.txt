@@ -1,0 +1,5 @@
+Title: FOR Loops Comparison: Actian 4GL for OpenROAD and C#
+Author: Oliver Boyes-Park
+Source: N/A
+
+The content comparing FOR loops in Actian 4GL for OpenROAD and C# is generated based on the provided information. It is intended for educational purposes and to enhance the knowledge base of the InstructLab taxonomy. The examples and explanations are created to illustrate the similarities and differences between the two programming languages in implementing nested FOR loops.
