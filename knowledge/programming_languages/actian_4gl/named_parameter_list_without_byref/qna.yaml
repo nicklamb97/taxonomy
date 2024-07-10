@@ -1,0 +1,50 @@
+created_by: willsjames
+document:
+  commit: 7d98702
+  patterns:
+    - named_parameter_list_without_byref.md
+  repo: https://github.com/nicklamb97/instructlab-data.git
+domain: actian_4gl
+seed_examples:
+  - answer: A Named Parameter List Without Byref specifies values that are passed as
+      parameters with parameter names. The values are specified as a series of assignments
+      separated by commas, each linking a parameter with an expression.
+    question: What is a Named Parameter List Without Byref in OpenROAD Actian 4GL?
+  - answer: 'The basic syntax is: parameter = expression{, parameter = expression}'
+    question: What is the basic syntax of a Named Parameter List Without Byref?
+  - answer: '''parameter'' specifies the name of a parameter in the called frame to
+      which you are passing a value from the calling frame, procedure, or method. It
+      is a dynamic name.'
+    question: What does 'parameter' represent in the Named Parameter List Without Byref
+      syntax?
+  - answer: '''expression'' specifies any legal 4GL expression that evaluates to the
+      appropriate data type.'
+    question: What does 'expression' represent in the Named Parameter List Without Byref
+      syntax?
+  - answer: Yes, multiple parameters can be defined in a single Named Parameter List
+      Without Byref. They are separated by commas.
+    question: Can multiple parameters be defined in a single Named Parameter List Without
+      Byref?
+  - answer: A Named Parameter List Without Byref is used for passing values to parameters,
+      while a Named Parameter List Definition is used for declaring parameters. The
+      former is used in calling a function or procedure, the latter in defining it.
+    question: How does a Named Parameter List Without Byref differ from a Named Parameter
+      List Definition?
+  - answer: The 'Without Byref' indicates that these parameters are passed by value,
+      not by reference. This means changes to the parameters inside the called function
+      or procedure do not affect the original values in the calling context.
+    question: What is the significance of 'Without Byref' in the name of this construct?
+  - answer: These parameters are typically used when calling a function or procedure,
+      to pass specific values to the parameters defined in that function or procedure.
+    question: How are the parameters in a Named Parameter List Without Byref typically
+      used?
+  - answer: The syntax doesn't specify a limit. Multiple parameters can be defined by
+      repeating the 'parameter = expression' pattern, separated by commas.
+    question: Is there a limit to the number of parameters that can be specified in
+      a Named Parameter List Without Byref?
+  - answer: The syntax requires each parameter to be defined in the format 'parameter
+      = expression', ensuring that each named parameter is explicitly assigned a value.
+    question: How does the syntax ensure each parameter is correctly assigned a value?
+task_description: Explain the concept and syntax of 'Named Parameter List Without
+  Byref' in OpenROAD Actian 4GL.
+version: 2
