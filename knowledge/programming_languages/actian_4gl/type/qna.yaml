@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and syntax of 'Type' in OpenROAD Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What does Actian 4GL OpenROAD Type specify?
+    answer: Actian 4GL OpenROAD Type specifies the data type, length, nullability, and
+      default value of a local variable or parameter.
+  - question: What are the main components of the Actian 4GL OpenROAD Type syntax?
+    answer: The main components include simple_datatype, nullability specifications,
+      default value specifications, array and collection declarations, and class name
+      specifications.
+  - question: What is a simple_datatype in Actian 4GL OpenROAD Type?
+    answer: In Actian 4GL OpenROAD Type, a simple_datatype specifies the basic data
+      type of the variable or parameter.
+  - question: How can nullability be specified in Actian 4GL OpenROAD Type?
+    answer: Nullability can be specified using 'with null' or 'not null' clauses in
+      the Actian 4GL OpenROAD Type syntax.
+  - question: What options are available for specifying default values in Actian 4GL
+      OpenROAD Type?
+    answer: Default values can be specified using 'not default', 'with default', 'default',
+      or by providing a specific defaultvalue.
+  - question: What is the significance of the 'array of' clause in Actian 4GL OpenROAD
+      Type syntax?
+    answer: The 'array of' clause is used to declare an array of a specific class type,
+      allowing for the creation of collections of objects.
+  - question: How are collections specified in Actian 4GL OpenROAD Type syntax?
+    answer: 'Collections are specified using the format: collectionname collection of
+      externalclassname.'
+  - question: What types of class names can be used in Actian 4GL OpenROAD Type?
+    answer: The classname can be the name of a system class, user class, or external
+      class, providing flexibility in defining variable types.
+  - question: Are there any clauses in Actian 4GL OpenROAD Type syntax that don't have
+      an effect in OpenROAD?
+    answer: Yes, the clauses 'with null, not default' and 'with default' are provided
+      for syntactic compatibility with SQL, but have no effect in OpenROAD.
+  - question: What are the constraints on the defaultvalue in Actian 4GL OpenROAD Type?
+    answer: The defaultvalue must be a null, a literal, or a system constant of the
+      appropriate type. Valid system constants are listed in the System Constants section
+      of the documentation.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 278cc73
+  patterns:
+    - type.md
