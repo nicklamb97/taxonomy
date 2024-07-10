@@ -3,7 +3,7 @@ task_description: Explain date/time data types in OpenROAD programming language
 created_by: nicklamb97
 domain: openroad
 seed_examples:
-  - question: What is the primary date/time data type used in OpenROAD?
+  - question: What is the primary date/time data type used in OpenROAD Actian 4GL?
     answer: |
       The primary date/time data type used in OpenROAD is INGRESDATE (also known as DATE). It allows storage of
       empty dates, date-only values, date/time values accurate to a second, and interval values.
