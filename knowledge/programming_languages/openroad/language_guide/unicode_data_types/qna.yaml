@@ -1,0 +1,54 @@
+version: 2
+task_description: Explain Unicode data types in OpenROAD programming language
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What are the Unicode data types in OpenROAD?
+    answer: |
+      The Unicode data types in OpenROAD are nchar and nvarchar. These are used to store Unicode data in the
+      UTF-16 form.
+  - question: How do char and varchar handle Unicode data in OpenROAD?
+    answer: |
+      In OpenROAD, char and varchar strings are encoded as single-byte or multi-byte forms based on the value of the
+      II_CHARSETxx variable. If II_CHARSETxx is set to UTF8, these strings are encoded as UTF-8 strings.
+  - question: What is the difference between UTF-16 and UTF-8 encoding in OpenROAD?
+    answer: |
+      In OpenROAD:
+      - UTF-16 form encodes characters of fixed length, typically using 16 bits.
+      - UTF-8 form encodes characters of variable width between one and three bytes per character.
+  - question: What are the maximum lengths for different Unicode string types in OpenROAD?
+    answer: |
+      In OpenROAD:
+      - The maximum Unicode UTF8-16 string is 16,000 characters.
+      - The maximum Unicode UTF-8 string is 16,000 bytes (octets).
+      - The maximum single-byte or multi-byte string is 32,000 bytes.
+  - question: Can a Unicode UTF-16 string be coerced to other string types in OpenROAD?
+    answer: |
+      Yes, in OpenROAD:
+      - A Unicode UTF-16 string can be coerced to a UTF-8 string.
+      - A Unicode UTF-16 string can be coerced to either a single-byte string or a multi-byte string, as long as the
+        character represented in the UTF-16 string exists in the local character set implied by the II_CHARSETxx
+        setting.
+  - question: What is the extent of Unicode support in Ingres and OpenROAD?
+    answer: |
+      Ingres and OpenROAD support the Unicode Basic Multi-Lingual Plane with the exception of the Unicode Surrogate
+      range. A Unicode Surrogate pair is treated as two independent Unicode code points.
+  - question: Where can one find information about Unicode Normalization Forms?
+    answer: |
+      Details about Unicode Normalization Forms can be found at http://www.unicode.org.
+  - question: Where can one find information about character transliteration in OpenROAD?
+    answer: |
+      Information about character transliteration with SessionObject.GetEnv method can be found in the GetEnv Method
+      documentation.
+  - question: How does the II_CHARSETxx variable affect string encoding in OpenROAD?
+    answer: |
+      In OpenROAD, the II_CHARSETxx variable determines how char and varchar strings are encoded. If II_CHARSETxx is
+      set to UTF8, these strings are encoded as UTF-8 strings.
+  - question: What types of encoded strings represent Unicode data in OpenROAD?
+    answer: |
+      In OpenROAD, both UTF-8 encoded strings and UTF-16 encoded strings represent Unicode data.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5210f2f
+  patterns:
+    - unicode_data_types.md
