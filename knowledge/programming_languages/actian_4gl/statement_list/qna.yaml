@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and syntax of 'Statement List' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is a Statement List in OpenROAD Actian 4GL?
+    answer: A Statement List specifies a list of any legal OpenROAD statements. It allows
+      the use of any legal 4GL statements separated by semicolons.
+  - question: What is the basic syntax of a Statement List?
+    answer: 'The basic syntax is: {statement}'
+  - question: What does 'statement' represent in the Statement List syntax?
+    answer: '''statement'' represents any valid 4GL statement, with some exceptions.
+      It allows for multiple statements to be grouped together.'
+  - question: Are there any statements that cannot be used in a Statement List?
+    answer: 'Yes, there are four statements that cannot be used in a Statement List:
+      Initialize, Method, On, and Procedure.'
+  - question: How are multiple statements separated in a Statement List?
+    answer: Multiple statements in a Statement List are separated by semicolons.
+  - question: Can you nest Statement Lists within each other?
+    answer: The syntax doesn't explicitly forbid nesting, but it's important to note
+      that certain statements (Initialize, Method, On, Procedure) are not allowed within
+      a Statement List.
+  - question: What is the purpose of using a Statement List in OpenROAD Actian 4GL?
+    answer: A Statement List allows developers to group multiple 4GL statements together,
+      which can be useful for organizing code, creating code blocks, or defining a series
+      of actions to be executed together.
+  - question: How does a Statement List differ from a regular sequence of statements
+      in a program?
+    answer: A Statement List is specifically defined as a syntactic element in OpenROAD
+      Actian 4GL, while a regular sequence of statements is just a part of the normal
+      flow of a program. The Statement List has specific rules about what can be included.
+  - question: Is there a limit to the number of statements that can be included in a
+      Statement List?
+    answer: The syntax doesn't specify a limit to the number of statements. You can
+      include multiple statements, each separated by a semicolon.
+  - question: How might a Statement List be used in practice in OpenROAD Actian 4GL
+      development?
+    answer: A Statement List might be used to define a block of code to be executed
+      in a specific context, such as in response to an event, as part of a loop, or
+      as the body of a custom function or procedure.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 4307a50
+  patterns:
+    - statement_list.md
