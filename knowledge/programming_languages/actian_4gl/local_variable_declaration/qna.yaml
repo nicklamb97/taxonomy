@@ -1,11 +1,4 @@
-commit: 5e6b6ef
-created_by: willsjames
-document: {}
-domain: actian_4gl
-patterns:
-- local_variable_declaration.md
-repo: https://github.com/nicklamb97/instructlab-data.git
-syamlCopyversion: 2
+version: 2
 task_description: Explain the concept and syntax of 'LocalVariableDeclaration' in OpenROAD Actian 4GL.
 created_by: willsjames
 domain: actian_4gl
@@ -47,5 +40,8 @@ seed_examples:
     answer: |
       The LocalVariableDeclaration can be used within a DeclareBlockWithProcedures to declare local variables
       alongside local procedures.
-task_description: Introduce the LocalVariableDeclaration element in OpenROAD.
-version: 2
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5e6b6ef
+  patterns:
+    - local_variable_declaration.md
