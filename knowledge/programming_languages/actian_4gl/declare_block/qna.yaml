@@ -44,7 +44,6 @@ seed_examples:
       LocalVariableDeclaration section.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 
-8730d33
+  commit: 8730d33
   patterns:
     - declare_block.md
