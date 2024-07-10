@@ -1,0 +1,7 @@
+Title: OpenROAD Actian 4GL DeclareBlock
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/12.0/index.html#page/LangRef/DeclareBlock.htm
+
+The content on DeclareBlock in programming is based on general programming language syntax and concepts. The 
+specific source of this information was not provided. This content is used for educational purposes and to enhance 
+the knowledge base of the InstructLab taxonomy.
