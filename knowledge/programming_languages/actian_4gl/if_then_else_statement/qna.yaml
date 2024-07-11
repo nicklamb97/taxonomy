@@ -1,0 +1,50 @@
+version: 2
+task_description: Explain the concept and usage of 'If-Then-Else Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD If-Then-Else Statement?
+    answer: An Actian 4GL OpenROAD If-Then-Else Statement chooses between alternative
+      paths of execution, controlling the flow of an application by establishing logical
+      relationships.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD If-Then-Else Statement?
+    answer: 'The basic syntax is: if condition then statementlist [{elseif condition
+      then statementlist}] [else statementlist] endif;'
+  - question: What are the main variants of the Actian 4GL OpenROAD If-Then-Else Statement?
+    answer: The main variants are if-then-endif, if-then-else-endif, and if-then-elseif-then-else-endif.
+  - question: How does the if-then-endif variant of the Actian 4GL OpenROAD If-Then-Else
+      Statement work?
+    answer: In the if-then-endif variant, if the condition is true, the statements after
+      'then' are executed. If false or null, execution continues after 'endif'.
+  - question: What happens in the if-then-else-endif variant of the Actian 4GL OpenROAD
+      If-Then-Else Statement?
+    answer: In the if-then-else-endif variant, if the condition is true, statements
+      after 'then' are executed. If false or null, statements after 'else' are executed.
+  - question: How does the if-then-elseif-then-else-endif variant work in Actian 4GL
+      OpenROAD?
+    answer: This variant allows multiple conditions to be tested in sequence, executing
+      the corresponding statementlist for the first true condition, or the 'else' block
+      if all are false or null.
+  - question: Can Actian 4GL OpenROAD If-Then-Else Statements be nested?
+    answer: Yes, Actian 4GL OpenROAD If-Then-Else Statements can be nested within each
+      other.
+  - question: How can an Actian 4GL OpenROAD If-Then-Else Statement be used to control
+      frame flow in an application?
+    answer: It can be used to call different frames based on conditions, e.g., 'if status
+      = 'n' then callframe new; elseif status = 'c' then callframe completed; else callframe
+      inprogress; endif;'
+  - question: What happens if all conditions in an Actian 4GL OpenROAD If-Then-Else
+      Statement are false or null?
+    answer: If all conditions are false or null and an 'else' clause is present, the
+      statements in the 'else' block are executed. If no 'else' clause exists, no statements
+      within the if structure are executed.
+  - question: How can an Actian 4GL OpenROAD If-Then-Else Statement be used for input
+      validation?
+    answer: It can be used to check input and prompt for correct values, e.g., 'if empnum
+      = 0 then enum = prompt 'Please enter employee number'; endif;'
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 187c807
+  patterns:
+    - if-then-else_statement.md
