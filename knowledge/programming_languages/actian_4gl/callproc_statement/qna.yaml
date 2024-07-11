@@ -1,0 +1,49 @@
+version: 2
+task_description: Explain the concept and usage of 'Callproc Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Callproc Statement?
+    answer: An Actian 4GL OpenROAD Callproc Statement is used to call a procedure from
+      a frame, a procedure, or a method for a user class.
+  - question: What types of procedures can be called using the Actian 4GL OpenROAD Callproc
+      Statement?
+    answer: The Actian 4GL OpenROAD Callproc Statement can call global or local procedures
+      written in 4GL, and procedures written in other high-level programming languages
+      (3GL languages such as C or FORTRAN).
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Callproc Statement?
+    answer: 'The basic syntax is: [returnvariable =] callproc procname[(parameterlist)];'
+  - question: How does the Actian 4GL OpenROAD Callproc Statement handle procedure name
+      resolution?
+    answer: If an actual procedure name is used, OpenROAD resolves the reference at
+      compile time. If a variable is used, the procedure reference is resolved at runtime.
+  - question: How can parameters be passed in an Actian 4GL OpenROAD Callproc Statement?
+    answer: Parameters can be passed by value or by reference. To pass values by reference,
+      the byref(variable) option is used.
+  - question: What is the importance of data type compatibility in Actian 4GL OpenROAD
+      Callproc Statement?
+    answer: The data type of the variable receiving the return value must be compatible
+      with the return type of the called procedure. For database procedures, the return
+      type is always integer.
+  - question: Can the Actian 4GL OpenROAD Callproc Statement be used without the 'callproc'
+      keyword?
+    answer: Yes, when calling a procedure as part of an expression, the 'callproc' keyword
+      is not needed.
+  - question: What is the 'returnvariable' parameter in an Actian 4GL OpenROAD Callproc
+      Statement?
+    answer: The 'returnvariable' specifies the name of the variable in the calling frame
+      or procedure that receives the return value from the called procedure.
+  - question: How should procedure names that are the same as 4GL keywords be handled
+      in an Actian 4GL OpenROAD Callproc Statement?
+    answer: Procedure names that are the same as 4GL keywords must be enclosed in single
+      quotes.
+  - question: What is the difference between using NamedParameterList and UnnamedParameterList
+      in an Actian 4GL OpenROAD Callproc Statement?
+    answer: NamedParameterList is used for 4GL procedures, while UnnamedParameterList
+      is used for 3GL procedures.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5b0896b
+  patterns:
+    - callproc_statement.md
