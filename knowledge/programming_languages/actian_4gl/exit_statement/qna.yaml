@@ -1,0 +1,47 @@
+version: 2
+task_description: Introduce the OpenROAD Actian 4GL exit statement
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the syntax for the Actian 4GL OpenROAD Exit Statement?
+    answer: "The syntax for the Actian 4GL OpenROAD Exit Statement is:\n``` \nexit;\n\
+      ```"
+  - question: What does the Actian 4GL OpenROAD Exit Statement do?
+    answer: The `exit` statement closes an application and returns control to the location
+      where the application was originally entered. This statement terminates all open
+      frames.
+  - question: What event is sent to each open frame before the application exits in
+      Actian 4GL OpenROAD?
+    answer: Before the application exits, the `exit` statement sends each open frame
+      a `Terminate` event.
+  - question: How can you ensure a clean shutdown of an application using the Actian
+      4GL OpenROAD Exit Statement?
+    answer: You can ensure a clean shutdown by placing in each frame an event block
+      that activates on the `Terminate` event and contains any necessary shutdown operations.
+  - question: Where can you find more information about closing applications in Actian
+      4GL OpenROAD?
+    answer: For more information about closing applications, see `Terminate Event`.
+      See also the `SetExitTrap Method`, which provides the functionality to interrupt
+      normal `exit` statement handling.
+  - question: What does the Terminate event do in Actian 4GL OpenROAD?
+    answer: The Terminate event allows for necessary shutdown operations to be performed
+      for each frame before the application finally exits.
+  - question: What method in Actian 4GL OpenROAD provides functionality to interrupt
+      normal exit statement handling?
+    answer: The `SetExitTrap Method` provides the functionality to interrupt normal
+      `exit` statement handling.
+  - question: What happens to all open frames when the Actian 4GL OpenROAD Exit Statement
+      is executed?
+    answer: The `exit` statement terminates all open frames.
+  - question: What is the purpose of the Actian 4GL OpenROAD Exit Statement?
+    answer: The purpose of the `exit` statement is to close the application and return
+      control to the location where the application was originally entered.
+  - question: What should be placed in each frame to handle the Terminate event in Actian
+      4GL OpenROAD?
+    answer: An event block that activates on the `Terminate` event and contains any
+      necessary shutdown operations should be placed in each frame.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: d376aff
+  patterns:
+    - exit_statement.md
