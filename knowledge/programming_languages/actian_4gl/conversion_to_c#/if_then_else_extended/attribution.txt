@@ -1,0 +1,11 @@
+Title: Comparison of Actian 4GL and C# Code Examples
+Author: Compiled by InstructLab
+Source: Based on examples and documentation from Actian Corporation and Microsoft
+
+This comparison of Actian 4GL (used in OpenROAD) and C# code examples is created for educational purposes. The content 
+is derived from official documentation and examples provided by Actian Corporation for OpenROAD and Microsoft for C#. 
+The comparison is intended to highlight the similarities and differences between these two programming languages and 
+environments, enhancing the knowledge base of the InstructLab taxonomy.
+
+Actian 4GL and OpenROAD are trademarks or registered trademarks of Actian Corporation. C# and .NET are trademarks or 
+registered trademarks of Microsoft Corporation.

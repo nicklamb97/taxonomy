@@ -1,0 +1,62 @@
+version: 2
+task_description: Compare Actian 4GL (used in OpenROAD) and C# code examples for various scenarios.
+created_by: nicklamb97
+domain: programming_languages
+seed_examples:
+  - question: What are the main differences between Actian 4GL and C# in variable declaration and initialization?
+    answer: |
+      In Actian 4GL, variables are declared using the DEFINE keyword, and initialized using LET. In C#, variables are
+      declared with their type and can be initialized in the same line. For example:
+      Actian 4GL: DEFINE age INTEGER
+                  LET age = 20
+      C#: int age = 20;
+  - question: How do Actian 4GL and C# handle decimal numbers?
+    answer: |
+      Both Actian 4GL and C# support decimal numbers, but with slight differences:
+      - In Actian 4GL, decimals are defined using DECIMAL(x,y) where x is the total number of digits and y is the
+        number of decimal places.
+      - In C#, the decimal type is used, and values are denoted with an 'M' suffix (e.g., 72.5M).
+  - question: What are the differences in conditional statements between Actian 4GL and C#?
+    answer: |
+      The main differences in conditional statements are:
+      - Actian 4GL uses IF, ELSE IF, ELSE, and END IF.
+      - C# uses if, else if, and else with curly braces {} to define blocks.
+      - In Actian 4GL, the comparison operator is a single equals sign (=), while C# uses double equals (==).
+  - question: How do Actian 4GL and C# differ in displaying output?
+    answer: |
+      - Actian 4GL uses the DISPLAY keyword to show output.
+      - C# uses Console.WriteLine() method to display output to the console.
+  - question: What are the differences in character type handling between Actian 4GL and C#?
+    answer: |
+      - In Actian 4GL, character types are defined as CHAR(n) where n is the length.
+      - In C#, a single character is of type char, and strings are used for multiple characters.
+  - question: How do Actian 4GL and C# compare in terms of code structure?
+    answer: |
+      - Actian 4GL uses keywords like DEFINE, LET, IF, ELSE IF, ELSE, and END IF to structure code.
+      - C# uses curly braces {} to define code blocks and doesn't require explicit end statements.
+  - question: What are the main advantages of using Actian 4GL in OpenROAD compared to C#?
+    answer: |
+      Actian 4GL in OpenROAD offers:
+      - Integrated database access and manipulation
+      - Rapid application development capabilities
+      - Built-in support for distributed computing
+      - Cross-platform deployment options
+  - question: How do Actian 4GL and C# differ in their approach to object-oriented programming?
+    answer: |
+      While both support object-oriented programming:
+      - Actian 4GL in OpenROAD provides a more database-centric approach to OOP.
+      - C# offers a more general-purpose OOP model with extensive class libraries.
+  - question: What are the key differences in data types between Actian 4GL and C#?
+    answer: |
+      - Actian 4GL uses types like INTEGER, DECIMAL(x,y), and CHAR(n).
+      - C# uses types like int, decimal, and char, with more precise control over size and range.
+  - question: How do Actian 4GL and C# compare in terms of platform support and deployment?
+    answer: |
+      - Actian 4GL in OpenROAD offers cross-platform deployment with its own runtime environment.
+      - C# traditionally runs on .NET Framework, but with .NET Core, it now supports cross-platform development and
+        deployment as well.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 634e2eb
+  patterns:
+    - conversion_to_c#_if_then_else.md
