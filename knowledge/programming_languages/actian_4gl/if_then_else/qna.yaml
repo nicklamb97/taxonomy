@@ -1,0 +1,74 @@
+version: 2
+task_description: Explain the IF-THEN-ELSE statement in Actian 4GL for OpenROAD
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of the IF-THEN-ELSE statement in Actian 4GL?
+    answer: |
+      The IF-THEN-ELSE statement is a fundamental control structure in Actian 4GL that allows for conditional
+      execution of code blocks based on specified conditions. It directs the flow of a program, enabling it to make
+      decisions and execute specific code segments accordingly.
+
+  - question: What is the basic syntax of the IF-THEN-ELSE statement in Actian 4GL?
+    answer: |
+      The basic syntax of the IF-THEN-ELSE statement in Actian 4GL is:
+      IF condition THEN
+          statements
+      ELSE IF condition THEN
+          statements
+      ELSE
+          statements
+      END IF
+
+  - question: Are the ELSE IF and ELSE clauses mandatory in an IF-THEN-ELSE statement?
+    answer: |
+      No, the ELSE IF and ELSE clauses are optional. An IF statement can be as simple as a single condition and a
+      single block of statements to execute if that condition is true.
+
+  - question: What type of value must conditions in an IF-THEN-ELSE statement evaluate to?
+    answer: |
+      Conditions in an IF-THEN-ELSE statement must evaluate to a boolean value (TRUE or FALSE). Conditions are
+      typically composed of comparisons or logical expressions.
+
+  - question: Is Actian 4GL case-sensitive when it comes to IF-THEN-ELSE keywords?
+    answer: |
+      No, Actian 4GL is case-insensitive for keywords. So IF, if, and If are all valid. However, conventionally,
+      all caps should be used for readability and consistency.
+
+  - question: How are conditions evaluated in an IF-THEN-ELSE statement with multiple conditions?
+    answer: |
+      Conditions in an IF-THEN-ELSE statement are evaluated in sequence from top to bottom. As soon as a true
+      condition is found, the corresponding block of statements is executed, and the remaining conditions are ignored.
+
+  - question: What are some common comparison operators used in Actian 4GL IF-THEN-ELSE statements?
+    answer: |
+      Common comparison operators in Actian 4GL include:
+      - = : Equal to
+      - != or <> : Not equal to
+      - < : Less than
+      - > : Greater than
+      - <= : Less than or equal to
+      - >= : Greater than or equal to
+
+  - question: What logical operators are available in Actian 4GL for combining or inverting conditions?
+    answer: |
+      The logical operators available in Actian 4GL are:
+      - AND : Logical AND
+      - OR : Logical OR
+      - NOT : Logical NOT
+
+  - question: Can multiple ELSE IF clauses be used in a single IF-THEN-ELSE statement?
+    answer: |
+      Yes, multiple ELSE IF clauses can be included in a single IF-THEN-ELSE statement to check additional
+      conditions sequentially.
+
+  - question: What happens when a condition in an IF-THEN-ELSE statement evaluates to true?
+    answer: |
+      When a condition in an IF-THEN-ELSE statement evaluates to true, the corresponding block of statements is
+      executed, and the remaining conditions (if any) are ignored.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 59324ba
+  patterns:
+    - if_then_else.md
