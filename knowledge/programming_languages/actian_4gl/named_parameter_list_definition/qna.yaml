@@ -10,38 +10,38 @@ seed_examples:
     used as parameters in OpenROAD Actian 4GL.
   question: What is a Named Parameter List Definition in OpenROAD Actian 4GL?
 - answer: 'The basic syntax is: parametername = type{, parametername = type}'
-  question: What is the basic syntax of a Named Parameter List Definition?
+  question: What is the basic syntax of a Named Parameter List Definition OpenROAD Actian 4GL?
 - answer: '''parametername'' specifies the name of the parameter being defined.'
   question: What does 'parametername' represent in the Named Parameter List Definition
-    syntax?
+    syntax OpenROAD Actian 4GL?
 - answer: For more information about the 'type', you should refer to the Type section
     of the documentation.
   question: Where can I find more information about the 'type' in a Named Parameter
-    List Definition?
+    List Definition OpenROAD Actian 4GL?
 - answer: Yes, multiple parameters can be defined in a single Named Parameter List
     Definition. They are separated by commas.
-  question: Can multiple parameters be defined in a single Named Parameter List Definition?
+  question: Can multiple parameters be defined in a single Named Parameter List Definition OpenROAD Actian 4GL?
 - answer: While both define local variables, a Named Parameter List Definition specifically
     defines variables that can be used as parameters, potentially in function or procedure
     definitions.
   question: How does a Named Parameter List Definition differ from a Local Variable
-    Declaration?
+    Declaration OpenROAD Actian 4GL?
 - answer: The syntax doesn't specify a limit. Multiple parameters can be defined by
     repeating the 'parametername = type' pattern, separated by commas.
   question: Is there a limit to the number of parameters that can be defined in a
-    Named Parameter List Definition?
+    Named Parameter List Definition OpenROAD Actian 4GL?
 - answer: These parameters are typically used in function or procedure definitions
     to specify the input or output variables that can be passed to or from the function
     or procedure.
   question: How are the parameters in a Named Parameter List Definition typically
-    used?
+    used OpenROAD Actian 4GL?
 - answer: No, the Named Parameter List Definition syntax only includes the declaration
     of the parameter name and its type. Initialization would typically occur when
     the function or procedure is called.
-  question: Does the Named Parameter List Definition include parameter initialization?
+  question: Does the Named Parameter List Definition include parameter initialization OpenROAD Actian 4GL?
 - answer: The syntax requires each parameter to be defined in the format 'parametername
     = type', ensuring that both a name and a type are specified for each parameter.
-  question: How does the syntax ensure each parameter has a name and a type?
+  question: How does the syntax ensure each parameter has a name and a type OpenROAD Actian 4GL?
 task_description: Explain the concept and syntax of 'Named Parameter List Definition'
   in OpenROAD Actian 4GL.
 version: 2
