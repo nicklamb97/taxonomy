@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and usage of 'Call System Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Call System Statement?
+    answer: An Actian 4GL OpenROAD Call System Statement is used to call the operating
+      system from an application.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Call System Statement?
+    answer: 'The basic syntax is: call system [systemcommand];'
+  - question: How does execution resume after an Actian 4GL OpenROAD Call System Statement?
+    answer: Execution resumes with the statement immediately following the call system
+      statement when control returns to the application.
+  - question: Can an Actian 4GL OpenROAD Call System Statement return status information?
+    answer: Yes, the Call System Statement can return status information to the application
+      through the SessionObject class attribute CallSystemStatus Attribute.
+  - question: What happens if no system command is specified in an Actian 4GL OpenROAD
+      Call System Statement?
+    answer: If no system command is specified and CurSession.ProcessWindow=TRUE, the
+      statement puts the user at the operating system prompt.
+  - question: How does the CurSession.ProcessWait attribute affect the Actian 4GL OpenROAD
+      Call System Statement?
+    answer: If CurSession.ProcessWait=FALSE, the statement returns immediately after
+      starting the command. If TRUE, it waits until the command has finished.
+  - question: Can direct communication occur between an OpenROAD application and an
+      application called via Call System Statement?
+    answer: No, there is no direct communication method. Indirect communication can
+      be achieved through file writing or database operations.
+  - question: What is a more efficient way to start a new OpenROAD application than
+      using Call System Statement?
+    answer: Using the call runimage statement is more efficient for starting a new OpenROAD
+      application.
+  - question: What does the systemcommand parameter in an Actian 4GL OpenROAD Call System
+      Statement specify?
+    answer: The systemcommand parameter specifies a string expression that must evaluate
+      to a single operating system command.
+  - question: How can a user return to the application after being put at the operating
+      system prompt by a Call System Statement?
+    answer: The user can return to the application by entering the exit command at the
+      operating system prompt.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5a4b920
+  patterns:
+    - call_system_statement.md
