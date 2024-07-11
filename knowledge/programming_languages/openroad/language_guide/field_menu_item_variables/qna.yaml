@@ -21,7 +21,7 @@ seed_examples:
       To reference the object represented by a field or menu item instead of its value, use the FIELD() function
       with the field or menu item variable. For example:
       FIELD(title).BgColor = CC_ORANGE;
-  - question: When does OpenROAD initialize variables?
+  - question: When does OpenROAD Actian 4GL initialize variables?
     answer: |
       OpenROAD initializes variables in the following situations:
       1. When starting an application, it initializes any global variables associated with the application.
