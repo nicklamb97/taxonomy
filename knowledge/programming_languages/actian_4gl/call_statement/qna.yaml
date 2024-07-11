@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and usage of 'Call Statement' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is an Actian 4GL OpenROAD Call Statement?
+    answer: An Actian 4GL OpenROAD Call Statement is used to call another application,
+      specifying optional parameters.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Call Statement?
+    answer: 'The basic syntax is: call subsystem ([parametername = value {, parametername
+      = value}]);'
+  - question: How does an Actian 4GL OpenROAD Call Statement affect the calling application?
+    answer: The Call Statement blocks all frames in the calling OpenROAD application
+      until the user exits from the called subsystem.
+  - question: What happens when an Actian 4GL OpenROAD Call Statement is issued within
+      a transaction?
+    answer: If issued within a transaction, the Call Statement commits the transaction
+      without a warning before invoking the subsystem.
+  - question: What are the main parameters of an Actian 4GL OpenROAD Call Statement?
+    answer: The main parameters are subsystem (specifies the tool or application to
+      call), parametername (specifies a parameter to pass), and value (specifies the
+      value of the parameter).
+  - question: How can flags be passed in an Actian 4GL OpenROAD Call Statement?
+    answer: Flags can be passed either as keyword synonyms (parametername = value) or
+      using the flags parameter (flags = 'flag_list').
+  - question: What are some examples of subsystem types in Actian 4GL OpenROAD Call
+      Statements?
+    answer: Examples include call application, call isql, call qbf, call report, call
+      rundbapp, call rungraph, call runimage, and call sql.
+  - question: How is the Call Statement used to run a Query-By-Forms (QBF) in Actian
+      4GL OpenROAD?
+    answer: 'To run QBF, you can use: call qbf(qbfname = ''qbf_name'', flags = ''flag_list'');'
+  - question: What is the purpose of the call rundbapp statement in Actian 4GL OpenROAD?
+    answer: The call rundbapp statement is used to start execution of another OpenROAD
+      application stored in the same database.
+  - question: How can you call an OpenROAD application from an image file using the
+      Call Statement?
+    answer: You can use the call runimage statement, specifying the filename and optionally
+      the starting component.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a152611
+  patterns:
+    - call_statement.md
