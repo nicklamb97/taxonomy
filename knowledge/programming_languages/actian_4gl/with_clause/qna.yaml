@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and usage of 'With Clause' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of the Actian 4GL OpenROAD With Clause?
+    answer: The Actian 4GL OpenROAD With Clause is used to override the called frame's
+      original definition, specifying a list of attributes in the GhostExec or FrameExec
+      definition.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD With Clause?
+    answer: 'The basic syntax is: WITH attribute = expression{, attribute = expression}'
+  - question: What does 'attribute' represent in the Actian 4GL OpenROAD With Clause?
+    answer: '''attribute'' specifies any of the attributes that can be set for the GhostExec
+      or FrameExec class, depending on the type of frame being called.'
+  - question: How are expressions used in the Actian 4GL OpenROAD With Clause?
+    answer: In the Actian 4GL OpenROAD With Clause, 'expression' specifies any legal
+      expression that evaluates to the appropriate data type for the attribute being
+      set.
+  - question: What happens to attributes not explicitly set in an Actian 4GL OpenROAD
+      With Clause?
+    answer: Attributes not explicitly set in an Actian 4GL OpenROAD With Clause default
+      to the values they have in the GhostExec or FrameExec object.
+  - question: What is the scope of attributes set using the Actian 4GL OpenROAD With
+      Clause?
+    answer: Attributes set using the Actian 4GL OpenROAD With Clause are valid only
+      for that specific instance of the frame.
+  - question: Can multiple attributes be set in a single Actian 4GL OpenROAD With Clause?
+    answer: Yes, multiple attributes can be set in a single Actian 4GL OpenROAD With
+      Clause, separated by commas.
+  - question: How does the Actian 4GL OpenROAD With Clause affect the original frame
+      definition?
+    answer: The Actian 4GL OpenROAD With Clause overrides the original frame definition
+      for the specific instance, but does not permanently change the frame's attributes.
+  - question: In what context is the Actian 4GL OpenROAD With Clause typically used?
+    answer: The Actian 4GL OpenROAD With Clause is typically used when calling a frame
+      and needing to modify its behavior or properties for that specific call.
+  - question: How does the Actian 4GL OpenROAD With Clause contribute to code flexibility?
+    answer: The Actian 4GL OpenROAD With Clause allows for dynamic modification of frame
+      properties, enabling more flexible and context-specific behavior of frames in
+      the application.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: '9663888'
+  patterns:
+    - with_clause.md
