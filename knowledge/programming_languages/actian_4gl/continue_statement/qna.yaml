@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and usage of 'Continue Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Continue Statement?
+    answer: An Actian 4GL OpenROAD Continue Statement skips the remainder of a loop
+      iteration and then continues processing the next iteration of the loop.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Continue Statement?
+    answer: 'The basic syntax is: continue [label];'
+  - question: In which types of loops can the Actian 4GL OpenROAD Continue Statement
+      be used?
+    answer: The Actian 4GL OpenROAD Continue Statement can be used in for, select, and
+      while loops.
+  - question: What is the purpose of the 'label' parameter in an Actian 4GL OpenROAD
+      Continue Statement?
+    answer: The 'label' parameter in an Actian 4GL OpenROAD Continue Statement specifies
+      the loop that you want to continue using, allowing control of nested loops.
+  - question: What happens if no label is specified in an Actian 4GL OpenROAD Continue
+      Statement?
+    answer: If no label is specified in an Actian 4GL OpenROAD Continue Statement, OpenROAD
+      continues with the innermost loop.
+  - question: Can keywords be used as labels in an Actian 4GL OpenROAD Continue Statement?
+    answer: No, labels in an Actian 4GL OpenROAD Continue Statement must be character
+      strings without quotation marks and cannot be keywords.
+  - question: How can the Actian 4GL OpenROAD Continue Statement be used to process
+      only changed rows in a loop?
+    answer: The Actian 4GL OpenROAD Continue Statement can be used to skip iterations
+      where the row state is not changed, allowing processing of only changed rows.
+  - question: How does the Actian 4GL OpenROAD Continue Statement work in nested loops?
+    answer: In nested loops, the Actian 4GL OpenROAD Continue Statement can use labels
+      to specify which loop to continue, allowing control over inner or outer loop continuation.
+  - question: What is the difference between using a labeled and unlabeled Continue
+      Statement in nested loops?
+    answer: A labeled Actian 4GL OpenROAD Continue Statement allows specifying which
+      loop to continue, while an unlabeled one always continues the innermost loop.
+  - question: Can the Actian 4GL OpenROAD Continue Statement be used outside of a loop?
+    answer: No, the Actian 4GL OpenROAD Continue Statement is specifically designed
+      for use within loops (for, select, and while loops).
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 1fc5cfa
+  patterns:
+    - continue_statement.md
