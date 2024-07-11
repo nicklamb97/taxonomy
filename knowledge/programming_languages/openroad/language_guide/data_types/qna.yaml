@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain data types in OpenROAD programming language
+task_description: Explain data types in OpenROAD Actian 4GL programming language
 created_by: nicklamb97
 domain: openroad
 seed_examples:
