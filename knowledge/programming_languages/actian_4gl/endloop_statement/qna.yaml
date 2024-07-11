@@ -1,0 +1,64 @@
+version: 2
+task_description: Explain the Endloop Statement in Actian 4GL OpenROAD
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of the Endloop Statement in Actian 4GL OpenROAD?
+    answer: The Endloop Statement in Actian 4GL OpenROAD is used to terminate a for,
+      select, or while loop. It transfers control to the first statement following the
+      terminated loop's endfor, end, or endwhile statement.
+  - question: What is the syntax of the Endloop Statement in Actian 4GL OpenROAD?
+    answer: 'The syntax of the Endloop Statement in Actian 4GL OpenROAD is:
+
+
+      endloop [label];
+
+
+      The ''label'' parameter is optional and specifies which loop to terminate.'
+  - question: How does the Endloop Statement differ from the resume statement in Actian
+      4GL OpenROAD?
+    answer: In Actian 4GL OpenROAD, the Endloop Statement differs from the resume statement
+      in that it only terminates the loop, while the resume statement can terminate
+      both the loop and the current event block.
+  - question: What is the difference between the Endloop Statement and the continue
+      statement in Actian 4GL OpenROAD?
+    answer: In Actian 4GL OpenROAD, the Endloop Statement terminates the loop entirely,
+      while the continue statement skips over remaining statements in the current iteration
+      of a loop but continues with the next iteration.
+  - question: Can you explain the 'label' parameter in the Endloop Statement of Actian
+      4GL OpenROAD?
+    answer: In the Endloop Statement of Actian 4GL OpenROAD, the 'label' parameter is
+      optional. It specifies which loop to terminate, allowing for control of nested
+      loops. The label must be a character string without quotation marks and cannot
+      be a keyword.
+  - question: How can the Endloop Statement be used with nested loops in Actian 4GL
+      OpenROAD?
+    answer: "In Actian 4GL OpenROAD, the Endloop Statement can be used with nested loops\
+      \ by specifying a label. For example:\n\nB: while condition1 do\n   while condition2\
+      \ do\n      if condition3 then\n         endloop B;\n      endif;\n   endwhile\n\
+      endwhile;\n\nHere, 'endloop B' terminates both the inner and outer loops when\
+      \ condition3 is true."
+  - question: What happens if no label is specified in the Endloop Statement in Actian
+      4GL OpenROAD?
+    answer: If no label is specified in the Endloop Statement in Actian 4GL OpenROAD,
+      it terminates only the innermost loop that contains the endloop statement.
+  - question: Can the Endloop Statement in Actian 4GL OpenROAD be used with all types
+      of loops?
+    answer: Yes, the Endloop Statement in Actian 4GL OpenROAD can be used with for loops,
+      select loops, and while loops.
+  - question: What is the effect of the Endloop Statement on the loop's index variable
+      in Actian 4GL OpenROAD?
+    answer: The Endloop Statement in Actian 4GL OpenROAD terminates the loop immediately.
+      As a result, the loop's index variable (if any) is not incremented or decremented
+      further, and its final value is undefined after the loop terminates.
+  - question: How does the Endloop Statement contribute to flow control in Actian 4GL
+      OpenROAD programs?
+    answer: The Endloop Statement in Actian 4GL OpenROAD contributes to flow control
+      by providing a way to exit loops prematurely based on certain conditions. This
+      allows for more flexible and efficient program execution, especially when dealing
+      with complex or nested loop structures.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: d308d0e
+  patterns:
+    - endloop_statement.md
