@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and usage of 'For Statement' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD For Statement?
+    answer: An Actian 4GL OpenROAD For Statement repeats a series of statements, incrementing
+      or decrementing an index variable.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD For Statement?
+    answer: 'The basic syntax is: [label:] for indexvariable = startexpression to|downto
+      endexpression do statementlist endfor;'
+  - question: How does the 'to' and 'downto' keywords affect the Actian 4GL OpenROAD
+      For Statement?
+    answer: In an Actian 4GL OpenROAD For Statement, 'to' causes the index variable
+      to increment, while 'downto' causes it to decrement.
+  - question: What are the ways to break out of an Actian 4GL OpenROAD For loop?
+    answer: You can break out of an Actian 4GL OpenROAD For loop using the endloop,
+      continue, resume, or return statements.
+  - question: How does the 'endloop' statement work in an Actian 4GL OpenROAD For Statement?
+    answer: The 'endloop' statement in an Actian 4GL OpenROAD For Statement closes the
+      loop immediately and continues execution with the first statement following the
+      endfor statement.
+  - question: What is the purpose of labels in nested Actian 4GL OpenROAD For Statements?
+    answer: Labels in nested Actian 4GL OpenROAD For Statements allow control over breaking
+      out of specific levels of nested loops using endloop or continue statements.
+  - question: How does the 'continue' statement affect an Actian 4GL OpenROAD For loop?
+    answer: The 'continue' statement in an Actian 4GL OpenROAD For loop skips the remaining
+      statements in the current iteration, adjusts the index variable, and begins the
+      next iteration.
+  - question: What happens to the index variable after an Actian 4GL OpenROAD For loop
+      exits?
+    answer: The contents of the index variable upon exit from an Actian 4GL OpenROAD
+      For loop are undefined.
+  - question: How is the end condition evaluated in an Actian 4GL OpenROAD For Statement?
+    answer: In an Actian 4GL OpenROAD For Statement, the end condition is re-evaluated
+      before each iteration, including the first one.
+  - question: Can Actian 4GL OpenROAD For Statements be nested?
+    answer: Yes, Actian 4GL OpenROAD For Statements can be nested, allowing for complex
+      looping structures.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 7bc8f9e
+  patterns:
+    - for_statement.md
