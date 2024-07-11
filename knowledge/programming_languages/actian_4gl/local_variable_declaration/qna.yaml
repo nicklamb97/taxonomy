@@ -6,37 +6,37 @@ seed_examples:
   - question: What is a LocalVariableDeclaration in OpenROAD Actian 4GL?
     answer: |
       A LocalVariableDeclaration is used to specify a local variable in OpenROAD Actian 4GL.
-  - question: What is the basic syntax of a LocalVariableDeclaration?
+  - question: What is the basic syntax of a LocalVariableDeclaration in OpenROAD Actian 4GL?
     answer: |
       The basic syntax is:
       variablename = type;
-  - question: What does 'variablename' represent in the LocalVariableDeclaration syntax?
+  - question: What does 'variablename' represent in the LocalVariableDeclaration syntax in OpenROAD Actian 4GL?
     answer: |
       'variablename' specifies the name of the local variable being declared.
-  - question: Where can I find more information about the 'type' in a LocalVariableDeclaration?
+  - question: Where can I find more information about the 'type' in a LocalVariableDeclaration in OpenROAD Actian 4GL?
     answer: |
       For more information about the 'type', you should refer to the Type section of the documentation.
-  - question: Is the semicolon (;) required at the end of a LocalVariableDeclaration?
+  - question: Is the semicolon (;) required at the end of a LocalVariableDeclaration in OpenROAD Actian 4GL?
     answer: |
       Yes, the semicolon (;) is required at the end of a LocalVariableDeclaration, as shown in the syntax.
-  - question: How does a LocalVariableDeclaration differ from a global variable declaration?
+  - question: How does a LocalVariableDeclaration differ from a global variable declaration in OpenROAD Actian 4GL?
     answer: |
       A LocalVariableDeclaration is used for variables that are only accessible within the specific block or function
       where they are declared, while global variables have a broader scope and can be accessed from other parts of
       the program.
-  - question: Can multiple local variables be declared in succession?
+  - question: Can multiple local variables be declared in succession in OpenROAD Actian 4GL?
     answer: |
       Yes, multiple local variables can be declared in succession, each following the syntax:
       variablename = type;
-  - question: What is the purpose of using local variables in OpenROAD Actian 4GL?
+  - question: What is the purpose of using local variables in OpenROAD Actian 4GL in OpenROAD Actian 4GL?
     answer: |
       Local variables in OpenROAD Actian 4GL are used to store temporary data that is only needed within a specific
       block or function of the code, helping to organize and modularize the program.
-  - question: Is initialization of the variable included in the LocalVariableDeclaration syntax?
+  - question: Is initialization of the variable included in the LocalVariableDeclaration syntax in OpenROAD Actian 4GL?
     answer: |
       No, the basic LocalVariableDeclaration syntax only includes the declaration of the variable name and its type.
       Initialization would typically be done in a separate statement.
-  - question: How does the LocalVariableDeclaration relate to the DeclareBlockWithProcedures?
+  - question: How does the LocalVariableDeclaration relate to the DeclareBlockWithProcedures in OpenROAD Actian 4GL?
     answer: |
       The LocalVariableDeclaration can be used within a DeclareBlockWithProcedures to declare local variables
       alongside local procedures.
