@@ -1,0 +1,50 @@
+version: 2
+task_description: Explain the concept and syntax of 'Unnamed Parameter List' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is an Actian 4GL OpenROAD Unnamed Parameter List?
+    answer: An Actian 4GL OpenROAD Unnamed Parameter List lists parameters that are
+      passed positionally, for example, for 3GL procedures and methods of external classes.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Unnamed Parameter List?
+    answer: 'The basic syntax is: expression | byref(variable){, expression | byref(variable)}'
+  - question: What does 'expression' represent in the Actian 4GL OpenROAD Unnamed Parameter
+      List syntax?
+    answer: In the Actian 4GL OpenROAD Unnamed Parameter List, 'expression' specifies
+      any legal expression that evaluates to the appropriate data type.
+  - question: How is the byref function used in Actian 4GL OpenROAD Unnamed Parameter
+      List?
+    answer: The byref(variable) function in Actian 4GL OpenROAD Unnamed Parameter List
+      passes the value of the variable to the called procedure or method by reference.
+  - question: Can multiple parameters be specified in an Actian 4GL OpenROAD Unnamed
+      Parameter List?
+    answer: Yes, multiple parameters can be specified in an Actian 4GL OpenROAD Unnamed
+      Parameter List, separated by commas.
+  - question: What is the difference between passing a parameter by value and by reference
+      in Actian 4GL OpenROAD Unnamed Parameter List?
+    answer: In Actian 4GL OpenROAD Unnamed Parameter List, passing by value (using an
+      expression) sends a copy of the value, while passing by reference (using byref)
+      allows the called procedure to modify the original variable.
+  - question: How does Actian 4GL OpenROAD Unnamed Parameter List differ from a Named
+      Parameter List?
+    answer: Actian 4GL OpenROAD Unnamed Parameter List passes parameters positionally
+      without names, while a Named Parameter List explicitly names each parameter.
+  - question: In what contexts is Actian 4GL OpenROAD Unnamed Parameter List typically
+      used?
+    answer: Actian 4GL OpenROAD Unnamed Parameter List is typically used for 3GL procedures
+      and methods of external classes where parameters are passed positionally.
+  - question: Can Actian 4GL OpenROAD Unnamed Parameter List mix expressions and byref
+      parameters?
+    answer: Yes, Actian 4GL OpenROAD Unnamed Parameter List can mix expressions (passed
+      by value) and byref parameters (passed by reference) in the same list.
+  - question: What is the importance of parameter order in Actian 4GL OpenROAD Unnamed
+      Parameter List?
+    answer: In Actian 4GL OpenROAD Unnamed Parameter List, the order of parameters is
+      crucial as they are matched positionally to the parameters of the called procedure
+      or method.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 54ddadc
+  patterns:
+    - unnamed_parameter_list.md
