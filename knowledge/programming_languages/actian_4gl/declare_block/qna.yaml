@@ -1,43 +1,43 @@
 version: 2
-task_description: Explain the concept and syntax of 'DeclareBlock' in programming.
+task_description: Explain the concept and syntax of 'DeclareBlock' in programming in Actian 4GL
 created_by: willsjames
 domain: actian_4gl
 seed_examples:
-  - question: What is a DeclareBlock in programming?
+  - question: What is a DeclareBlock in programming in OpenROAD Actian 4GL?
     answer: |
       A DeclareBlock is used to declare local variables in a program.
-  - question: What is the basic syntax of a DeclareBlock?
+  - question: What is the basic syntax of a DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       The basic syntax of a DeclareBlock is:
       declare {localvariabledeclaration} [enddeclare]
-  - question: Is the 'enddeclare' keyword mandatory in a DeclareBlock?
+  - question: Is the 'enddeclare' keyword mandatory in a DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       No, the 'enddeclare' keyword is optional in a DeclareBlock, as indicated by the square brackets in the syntax.
-  - question: What does the term 'localvariabledeclaration' refer to in the DeclareBlock syntax?
+  - question: What does the term 'localvariabledeclaration' refer to in the DeclareBlock syntax in OpenROAD Actian 4GL?
     answer: |
       The term 'localvariabledeclaration' refers to the declaration of local variables. For more details, one should
       refer to the LocalVariableDeclaration section.
-  - question: Can multiple local variables be declared in a single DeclareBlock?
+  - question: Can multiple local variables be declared in a single DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       Yes, multiple local variables can be declared in a single DeclareBlock. This is indicated by the curly braces
       {} around 'localvariabledeclaration' in the syntax, which suggest that multiple declarations are allowed.
-  - question: What is the purpose of using a DeclareBlock?
+  - question: What is the purpose of using a DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       The purpose of using a DeclareBlock is to declare local variables, which are typically used within a specific
       scope or block of code.
-  - question: How does a DeclareBlock differ from global variable declarations?
+  - question: How does a DeclareBlock differ from global variable declarations in OpenROAD Actian 4GL?
     answer: |
       A DeclareBlock is specifically used for local variables, which have a limited scope, usually within the block
       or function where they are declared. Global variables, on the other hand, have a broader scope and are
       accessible throughout the entire program.
-  - question: Where can I find more information about how to declare local variables?
+  - question: Where can I find more information about how to declare local variables in OpenROAD Actian 4GL?
     answer: |
       For more information about how to declare local variables, you should refer to the LocalVariableDeclaration
       section of the documentation.
-  - question: Is the 'declare' keyword required to start a DeclareBlock?
+  - question: Is the 'declare' keyword required to start a DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       Yes, the 'declare' keyword is required to start a DeclareBlock, as shown in the syntax.
-  - question: Can you explain the structure of a DeclareBlock?
+  - question: Can you explain the structure of a DeclareBlock in OpenROAD Actian 4GL?
     answer: |
       A DeclareBlock starts with the 'declare' keyword, followed by one or more local variable declarations. It can
       optionally end with the 'enddeclare' keyword. The actual variable declarations are defined in the
