@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and usage of 'Gotoframe Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Gotoframe Statement?
+    answer: An Actian 4GL OpenROAD Gotoframe Statement passes control from the current
+      frame to another frame, closing the current frame and its window.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Gotoframe Statement?
+    answer: 'The basic syntax is: gotoframe framename([parameterlist]) [withclause];'
+  - question: How does the Actian 4GL OpenROAD Gotoframe Statement differ from the Callframe
+      Statement?
+    answer: The Gotoframe Statement closes the calling frame and its window, while the
+      Callframe Statement generally expects a return to the current frame.
+  - question: Can you use the byref clause in an Actian 4GL OpenROAD Gotoframe Statement?
+    answer: No, you cannot use the byref clause in an Actian 4GL OpenROAD Gotoframe
+      Statement.
+  - question: How does the Actian 4GL OpenROAD Gotoframe Statement handle frame name
+      resolution?
+    answer: If an actual frame name is used, it's resolved at compile time. If a variable
+      is used, it's resolved at runtime.
+  - question: What types of values can be passed in the parameter list of an Actian
+      4GL OpenROAD Gotoframe Statement?
+    answer: Values can be displayed or local variables from the calling frame, constants,
+      or any legal 4GL expression.
+  - question: Does the Actian 4GL OpenROAD Gotoframe Statement send a Terminate event
+      to the closing frame?
+    answer: No, the Gotoframe Statement does not send a Terminate event to the frame
+      issuing the statement (the frame that is closing).
+  - question: What happens if the current frame was called with an expected return value
+      when using a Gotoframe Statement?
+    answer: If a return value is expected, the last frame called by the Gotoframe Statement
+      must complete the call sequence and provide the return value.
+  - question: What is the requirement for return types when using an Actian 4GL OpenROAD
+      Gotoframe Statement?
+    answer: The return type of the called frame must be the same as that of the calling
+      frame when using a Gotoframe Statement.
+  - question: Can you provide an example of using an Actian 4GL OpenROAD Gotoframe Statement?
+    answer: 'An example is: on click file.transfer = begin gotoframe nextframe(sequence
+      = 3); end'
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 328c863
+  patterns:
+    - gotoframe_statement.md
