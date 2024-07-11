@@ -1,0 +1,41 @@
+version: 2
+task_description: Explain the concept and usage of 'Condition' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is an Actian 4GL OpenROAD Condition?
+    answer: An Actian 4GL OpenROAD Condition specifies a Boolean expression that has
+      a value of TRUE, FALSE, or null.
+  - question: What types of expressions can be used in an Actian 4GL OpenROAD Condition?
+    answer: Actian 4GL OpenROAD Conditions can include Boolean expressions with comparison
+      operators and logical operators such as AND, OR, and NOT.
+  - question: Can Actian 4GL OpenROAD Conditions evaluate to null?
+    answer: Yes, Actian 4GL OpenROAD Conditions involving nulls can evaluate to null.
+  - question: How does an Actian 4GL OpenROAD Condition behave if it evaluates to null?
+    answer: Any Actian 4GL OpenROAD Condition whose result is null behaves as if it
+      evaluated to FALSE.
+  - question: What are the possible values of an Actian 4GL OpenROAD Condition?
+    answer: An Actian 4GL OpenROAD Condition can have a value of TRUE, FALSE, or null.
+  - question: How are comparison operators used in Actian 4GL OpenROAD Conditions?
+    answer: Comparison operators in Actian 4GL OpenROAD Conditions are used to compare
+      values and return a Boolean result.
+  - question: What logical operators can be used in Actian 4GL OpenROAD Conditions?
+    answer: The logical operators AND, OR, and NOT can be used in Actian 4GL OpenROAD
+      Conditions.
+  - question: How do Actian 4GL OpenROAD Conditions handle complex logical expressions?
+    answer: Actian 4GL OpenROAD Conditions can handle complex logical expressions by
+      combining multiple comparison and logical operators.
+  - question: What is the significance of Actian 4GL OpenROAD Conditions in program
+      flow control?
+    answer: Actian 4GL OpenROAD Conditions are crucial for program flow control, often
+      used in if statements, loops, and other decision-making structures.
+  - question: How do Actian 4GL OpenROAD Conditions differ from conditions in standard
+      SQL?
+    answer: While similar, Actian 4GL OpenROAD Conditions have specific behavior regarding
+      null values, treating them as FALSE in the final evaluation.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: c1289ae
+  patterns:
+    - condition.md
