@@ -1,0 +1,48 @@
+version: 2
+task_description: Explain the concept and syntax of 'Type Without Default' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What does Actian 4GL OpenROAD Type Without Default specify?
+    answer: Actian 4GL OpenROAD Type Without Default specifies the data type, nullability,
+      and length of the local procedure's associated variable.
+  - question: What are the main components of the Actian 4GL OpenROAD Type Without Default
+      syntax?
+    answer: The main components include simple_datatype, nullability specifications,
+      array declarations, and collection specifications.
+  - question: How does Actian 4GL OpenROAD Type Without Default differ from regular
+      Type?
+    answer: Actian 4GL OpenROAD Type Without Default does not include options for specifying
+      default values, unlike the regular Type.
+  - question: What is a simple_datatype in Actian 4GL OpenROAD Type Without Default?
+    answer: In Actian 4GL OpenROAD Type Without Default, a simple_datatype specifies
+      the basic data type of the variable.
+  - question: How can nullability be specified in Actian 4GL OpenROAD Type Without Default?
+    answer: Nullability can be specified using 'with null' or 'not null' clauses in
+      the Actian 4GL OpenROAD Type Without Default syntax.
+  - question: What is the significance of the 'array of' clause in Actian 4GL OpenROAD
+      Type Without Default syntax?
+    answer: The 'array of' clause is used to declare an array of a specific class type,
+      allowing for the creation of collections of objects.
+  - question: How are collections specified in Actian 4GL OpenROAD Type Without Default
+      syntax?
+    answer: 'Collections are specified using the format: collectionname collection of
+      externalclassname.'
+  - question: What does the classname represent in Actian 4GL OpenROAD Type Without
+      Default?
+    answer: The classname in Actian 4GL OpenROAD Type Without Default specifies the
+      name of the class for the variable or parameter.
+  - question: What is the purpose of the externalclassname in Actian 4GL OpenROAD Type
+      Without Default?
+    answer: The externalclassname in Actian 4GL OpenROAD Type Without Default specifies
+      the name of an external class when defining a collection.
+  - question: In what context is Actian 4GL OpenROAD Type Without Default typically
+      used?
+    answer: Actian 4GL OpenROAD Type Without Default is typically used in the context
+      of local procedures, where specifying a default value is not necessary or desired.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 661fb15
+  patterns:
+    - type_without_default.md
