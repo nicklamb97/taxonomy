@@ -1,0 +1,51 @@
+version: 2
+task_description: Explain the concept and usage of 'Case Statement' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Case Statement?
+    answer: An Actian 4GL OpenROAD Case Statement selects one of a number of possible
+      actions based on the value of an expression.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Case Statement?
+    answer: 'The basic syntax is: case key of valuelist: statement | beginendblock {valuelist:
+      statement | beginendblock} endcase;'
+  - question: What types of expressions can be used as the key in an Actian 4GL OpenROAD
+      Case Statement?
+    answer: The key in an Actian 4GL OpenROAD Case Statement can be any valid OpenROAD
+      data type, including integers, floating point, or string values.
+  - question: How does the 'nextcase' statement relate to the Actian 4GL OpenROAD Case
+      Statement?
+    answer: The 'nextcase' statement is used to jump from the current statement to the
+      beginning of the next statement block in an Actian 4GL OpenROAD Case Statement,
+      similar to a fall-through case in C.
+  - question: How are empty strings evaluated in Actian 4GL OpenROAD Case Statements
+      compared to SQL statements?
+    answer: In Actian 4GL OpenROAD Case Statements, '' and ' ' are not evaluated equally,
+      unlike in SQL statements where they are treated the same.
+  - question: Can the valuelist in an Actian 4GL OpenROAD Case Statement contain multiple
+      expressions?
+    answer: Yes, the valuelist in an Actian 4GL OpenROAD Case Statement can specify
+      a single expression or a list of expressions of the same type as the key expression,
+      separated by commas.
+  - question: How is the 'default' case handled in an Actian 4GL OpenROAD Case Statement?
+    answer: The 'default' case can be included as a valuelist option in an Actian 4GL
+      OpenROAD Case Statement. There can only be one default statement block, and it
+      doesn't have to be at the end.
+  - question: Can Actian 4GL OpenROAD Case Statements be used for object class comparisons?
+    answer: Yes, Actian 4GL OpenROAD Case Statements can be used efficiently for comparing
+      object classes by using the object's Class attribute.
+  - question: Is it necessary to use 'begin' and 'end' for every case in an Actian 4GL
+      OpenROAD Case Statement?
+    answer: No, if only a single statement is necessary for a case, 'begin' and 'end'
+      are not required, allowing for briefer code.
+  - question: How does an Actian 4GL OpenROAD Case Statement compare to an if-elseif
+      structure for class comparisons?
+    answer: An Actian 4GL OpenROAD Case Statement can provide cleaner and faster execution
+      for class comparisons compared to an if-elseif structure, especially when using
+      the object's Class attribute.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 252e1d7
+  patterns:
+    - case_statement.md
