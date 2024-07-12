@@ -1,6 +1,5 @@
 version: 2
-task_description: Convert Actian 4GL OpenROAD FOR Loops to C# and implement nested
-  loop structures
+task_description: Write 4GL For loops
 created_by: willsjames
 seed_examples:
   - question: How would you implement nested FOR loops in Actian 4GL OpenROAD FOR Loops
