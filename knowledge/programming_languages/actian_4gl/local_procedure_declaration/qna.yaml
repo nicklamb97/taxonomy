@@ -2,44 +2,44 @@ created_by: willsjames
 document:
   commit: 3e07963
   patterns:
-  - local_procedure_declaration.md
+    - local_procedure_declaration.md
   repo: https://github.com/nicklamb97/instructlab-data.git
 domain: openroad
 seed_examples:
-- answer: A LocalProcedureDeclaration is used to declare the name and return type
-    of a local procedure defined within the script in OpenROAD Actian 4GL.
-  question: What is a LocalProcedureDeclaration in OpenROAD Actian 4GL?
-- answer: 'The basic syntax is:
+  - answer: A LocalProcedureDeclaration is used to declare the name and return type
+      of a local procedure defined within the script in OpenROAD Actian 4GL.
+    question: What is a LocalProcedureDeclaration in OpenROAD Actian 4GL?
+  - answer: 'The basic syntax is:
 
-    localprocname = procedure [returning [typewithoutdefault | none]];'
-  question: What is the basic syntax of a LocalProcedureDeclaration?
-- answer: No, specifying a return type is optional. The 'returning' clause is enclosed
-    in square brackets, indicating it's optional.
-  question: Is specifying a return type mandatory in a LocalProcedureDeclaration?
-- answer: '''localprocname'' specifies the name of the local procedure defined within
-    the script.'
-  question: What does 'localprocname' represent in the LocalProcedureDeclaration syntax?
-- answer: You can specify either a 'typewithoutdefault' or 'none' as the return type.
-    If 'none' is specified, it indicates the procedure doesn't return a value.
-  question: What are the options for specifying the return type in a LocalProcedureDeclaration?
-- answer: For more information about the types that can be used, you should refer
-    to the TypeWithoutDefault section of the documentation.
-  question: Where can I find more information about the types that can be used in
-    a LocalProcedureDeclaration?
-- answer: Yes, the 'procedure' keyword is required in a LocalProcedureDeclaration,
-    as shown in the syntax.
-  question: Is the 'procedure' keyword required in a LocalProcedureDeclaration?
-- answer: A LocalProcedureDeclaration is used for procedures that are only accessible
-    within the script where they are defined, while global procedures have a broader
-    scope and can be accessed from other parts of the program.
-  question: How does a LocalProcedureDeclaration differ from a global procedure declaration?
-- answer: Yes, multiple local procedures can be declared in a script. Each would require
-    its own LocalProcedureDeclaration.
-  question: Can multiple local procedures be declared in a script?
-- answer: Local procedures in OpenROAD Actian 4GL are used to encapsulate functionality
-    that is only needed within a specific script, promoting code organization and
-    modularity.
-  question: What is the purpose of using local procedures in OpenROAD Actian 4GL?
+      localprocname = procedure [returning [typewithoutdefault | none]];'
+    question: What is the basic syntax of a LocalProcedureDeclaration?
+  - answer: No, specifying a return type is optional. The 'returning' clause is enclosed
+      in square brackets, indicating it's optional.
+    question: Is specifying a return type mandatory in a LocalProcedureDeclaration?
+  - answer: '''localprocname'' specifies the name of the local procedure defined within
+      the script.'
+    question: What does 'localprocname' represent in the LocalProcedureDeclaration syntax?
+  - answer: You can specify either a 'typewithoutdefault' or 'none' as the return type.
+      If 'none' is specified, it indicates the procedure doesn't return a value.
+    question: What are the options for specifying the return type in a LocalProcedureDeclaration?
+  - answer: For more information about the types that can be used, you should refer
+      to the TypeWithoutDefault section of the documentation.
+    question: Where can I find more information about the types that can be used in
+      a LocalProcedureDeclaration?
+  - answer: Yes, the 'procedure' keyword is required in a LocalProcedureDeclaration,
+      as shown in the syntax.
+    question: Is the 'procedure' keyword required in a LocalProcedureDeclaration?
+  - answer: A LocalProcedureDeclaration is used for procedures that are only accessible
+      within the script where they are defined, while global procedures have a broader
+      scope and can be accessed from other parts of the program.
+    question: How does a LocalProcedureDeclaration differ from a global procedure declaration?
+  - answer: Yes, multiple local procedures can be declared in a script. Each would require
+      its own LocalProcedureDeclaration.
+    question: Can multiple local procedures be declared in a script?
+  - answer: Local procedures in OpenROAD Actian 4GL are used to encapsulate functionality
+      that is only needed within a specific script, promoting code organization and
+      modularity.
+    question: What is the purpose of using local procedures in OpenROAD Actian 4GL?
 task_description: Explain the concept and syntax of 'LocalProcedureDeclaration' in
   OpenROAD Actian 4GL.
 version: 2
