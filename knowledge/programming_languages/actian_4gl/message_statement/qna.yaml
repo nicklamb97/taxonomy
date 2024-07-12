@@ -1,0 +1,43 @@
+version: 2
+task_description: Explain the concept and usage of 'Message Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Message Statement?
+    answer: An Actian 4GL OpenROAD Message Statement displays a message (character string)
+      on the screen in a pop-up window.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Message Statement?
+    answer: 'The basic syntax is: message varcharstringexpr;'
+  - question: Where is the pop-up window displayed in an Actian 4GL OpenROAD Message
+      Statement?
+    answer: The pop-up window is centered in the frame that executes the statement.
+  - question: How long does the pop-up window remain displayed in an Actian 4GL OpenROAD
+      Message Statement?
+    answer: The pop-up remains on display until the user clicks its OK button.
+  - question: What happens to the calling frame when an Actian 4GL OpenROAD Message
+      Statement is executed?
+    answer: The calling frame is inactive while the pop-up is displayed.
+  - question: What is the parameter for an Actian 4GL OpenROAD Message Statement?
+    answer: The parameter is varcharstringexpr, which specifies a character string containing
+      the message to be displayed.
+  - question: How should string literals be formatted in an Actian 4GL OpenROAD Message
+      Statement?
+    answer: String literals should be enclosed in quotes in an Actian 4GL OpenROAD Message
+      Statement.
+  - question: Is there an alternative way to display simple messages in Actian 4GL OpenROAD
+      besides the Message Statement?
+    answer: Yes, the ProcExec class InfoPopup Method can also be used to display simple
+      messages in Actian 4GL OpenROAD.
+  - question: Can you provide an example of using an Actian 4GL OpenROAD Message Statement?
+    answer: 'An example of using an Actian 4GL OpenROAD Message Statement is: message
+      ''Bad Value'';'
+  - question: Does the Actian 4GL OpenROAD Message Statement allow for customization
+      of the pop-up window?
+    answer: The provided information does not mention customization options for the
+      pop-up window in the Message Statement.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: f2b82f6
+  patterns:
+    - message_statement.md
