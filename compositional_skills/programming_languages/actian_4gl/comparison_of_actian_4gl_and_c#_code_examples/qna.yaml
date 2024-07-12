@@ -1,0 +1,71 @@
+version: 2
+task_description: Convert Actian 4GL OpenROAD code examples to C#
+created_by: willsjames
+seed_examples:
+  - question: 'How would you convert the following Actian 4GL OpenROAD Comparison of
+      Actian 4GL and C# Code Examples for age classification to C#?
+
+      ```4gl
+
+      DEFINE age INTEGER
+
+      LET age = 20
+
+      IF age < 18 THEN
+
+      DISPLAY "You are a minor."
+
+      ELSEIF age >= 18 AND age < 65 THEN
+
+      DISPLAY "You are an adult."
+
+      ELSE
+
+      DISPLAY "You are a senior."
+
+      ENDIF
+
+      ```'
+    answer: "Here's the C# equivalent:\n```csharp\nint age = 20;\nif (age < 18)\n{\n\
+      \    Console.WriteLine(\"You are a minor.\");\n}\nelse if (age >= 18 && age <\
+      \ 65)\n{\n    Console.WriteLine(\"You are an adult.\");\n}\nelse\n{\n    Console.WriteLine(\"\
+      You are a senior.\");\n}\n```"
+  - question: "How would you convert the following Actian 4GL OpenROAD Comparison of\
+      \ Actian 4GL and C# Code Examples for temperature classification to C#?\n```4gl\n\
+      DEFINE temperature DECIMAL(5,2)\nLET temperature = 72.5\nIF temperature < 60 THEN\n\
+      \    DISPLAY \"It's cold.\"\nELSEIF temperature >= 60 AND temperature < 80 THEN\n\
+      \    DISPLAY \"It's pleasant.\"\nELSE\n    DISPLAY \"It's hot.\"\nENDIF\n```"
+    answer: "Here's the C# equivalent:\n```csharp\ndecimal temperature = 72.5M;\nif\
+      \ (temperature < 60)\n{\n    Console.WriteLine(\"It's cold.\");\n}\nelse if (temperature\
+      \ >= 60 && temperature < 80)\n{\n    Console.WriteLine(\"It's pleasant.\");\n\
+      }\nelse\n{\n    Console.WriteLine(\"It's hot.\");\n}\n```"
+  - question: "How would you convert the following Actian 4GL OpenROAD Comparison of\
+      \ Actian 4GL and C# Code Examples for grade evaluation to C#?\n```4gl\nDEFINE\
+      \ grade CHAR(1)\nLET grade = 'B'\nIF grade = 'A' THEN\n    DISPLAY \"Excellent!\"\
+      \nELSEIF grade = 'B' THEN\n    DISPLAY \"Good!\"\nELSEIF grade = 'C' THEN\n  \
+      \  DISPLAY \"Average.\"\nELSEIF grade = 'D' THEN\n    DISPLAY \"Below Average.\"\
+      \nELSE\n    DISPLAY \"Failing.\"\nENDIF\n```"
+    answer: "Here's the C# equivalent:\n```csharp\nchar grade = 'B';\nif (grade == 'A')\n\
+      {\n    Console.WriteLine(\"Excellent!\");\n}\nelse if (grade == 'B')\n{\n    Console.WriteLine(\"\
+      Good!\");\n}\nelse if (grade == 'C')\n{\n    Console.WriteLine(\"Average.\");\n\
+      }\nelse if (grade == 'D')\n{\n    Console.WriteLine(\"Below Average.\");\n}\n\
+      else\n{\n    Console.WriteLine(\"Failing.\");\n}\n```"
+  - question: "How would you convert the following Actian 4GL OpenROAD Comparison of\
+      \ Actian 4GL and C# Code Examples for income classification to C#?\n```4gl\nDEFINE\
+      \ salary DECIMAL(10,2)\nLET salary = 55000.00\nIF salary < 30000 THEN\n    DISPLAY\
+      \ \"Low income.\"\nELSEIF salary >= 30000 AND salary < 70000 THEN\n    DISPLAY\
+      \ \"Middle income.\"\nELSE\n    DISPLAY \"High income.\"\nENDIF\n```"
+    answer: "Here's the C# equivalent:\n```csharp\ndecimal salary = 55000.00M;\nif (salary\
+      \ < 30000)\n{\n    Console.WriteLine(\"Low income.\");\n}\nelse if (salary >=\
+      \ 30000 && salary < 70000)\n{\n    Console.WriteLine(\"Middle income.\");\n}\n\
+      else\n{\n    Console.WriteLine(\"High income.\");\n}\n```"
+  - question: "How would you convert the following Actian 4GL OpenROAD Comparison of\
+      \ Actian 4GL and C# Code Examples for discount calculation to C#?\n```4gl\nDEFINE\
+      \ totalPurchase DECIMAL(10,2)\nLET totalPurchase = 120.50\nIF totalPurchase <\
+      \ 50 THEN\n    DISPLAY \"No discount.\"\nELSEIF totalPurchase >= 50 AND totalPurchase\
+      \ < 100 THEN\n    DISPLAY \"5% discount.\"\nELSE\n    DISPLAY \"10% discount.\"\
+      \nENDIF\n```"
+    answer: "Here's the C# equivalent:\n```csharp\ndecimal totalPurchase = 120.50M;\n\
+      if (totalPurchase < 50)\n{\n    Console.WriteLine(\"No discount.\");\n}\nelse\
+      \ if (totalPurchase >= 50 && totalPurchase < 100)\n{\n    Console.WriteLine(\"\
+      5% discount.\");\n}\nelse\n{\n    Console.WriteLine(\"10% discount.\");\n}\n```"
