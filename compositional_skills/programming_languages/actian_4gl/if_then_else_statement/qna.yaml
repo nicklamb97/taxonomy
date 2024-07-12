@@ -1,0 +1,31 @@
+version: 2
+task_description: Convert Actian 4GL OpenROAD If-Then-Else statements to C#
+created_by: willsjames
+seed_examples:
+  - question: How do you convert a basic Actian 4GL OpenROAD If-Then-Else Statement
+      to C#?
+    answer: Replace 'if' with 'if', 'then' with '{', 'else' with '} else {', and 'endif;'
+      with '}'. Use '==' for equality comparison.
+  - question: What's the C# equivalent of the Actian 4GL OpenROAD elseif clause?
+    answer: 'Replace ''elseif'' with ''else if'' and structure it like: } else if (condition)
+      {'
+  - question: How do you handle nested if statements when converting from Actian 4GL
+      OpenROAD to C#?
+    answer: Maintain the nesting structure, replacing 'then' with '{' and 'endif;' with
+      '}' for each level of nesting.
+  - question: What's the C# equivalent of the Actian 4GL OpenROAD 'prompt' function
+      in an if statement?
+    answer: Use Console.Write() for the prompt and Console.ReadLine() to get user input.
+      Assign the result to a variable.
+  - question: How do you convert an Actian 4GL OpenROAD if statement checking for a
+      null value to C#?
+    answer: Replace the null check with '== null' in C#. For value types, use the nullable
+      type (e.g., int?) and check with HasValue.
+  - question: What's the C# equivalent of the Actian 4GL OpenROAD 'callframe' function
+      in an if-then-else statement?
+    answer: Replace 'callframe' with a method call. Define methods for each frame and
+      call them based on the condition.
+  - question: How do you handle multiple conditions in an Actian 4GL OpenROAD if statement
+      when converting to C#?
+    answer: 'Use the same logical operators: ''AND'' becomes ''&&'', ''OR'' becomes
+      ''||''. Parentheses can be used for grouping conditions.'
