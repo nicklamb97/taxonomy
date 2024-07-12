@@ -1,0 +1,48 @@
+version: 2
+task_description: Convert Actian 4GL OpenROAD Initialize Statements to C# constructors
+  and initialization code
+created_by: willsjames
+seed_examples:
+  - question: 'How do you convert this Actian 4GL OpenROAD Initialize Statement to a
+      C# constructor?
+
+      ```
+
+      initialize(idnum = integer default 0)=
+
+      ```'
+    answer: "Convert to C# constructor:\n```csharp\npublic ClassName(int idnum = 0)\n\
+      {\n    // Constructor body\n}\n```"
+  - question: "How to handle this declare block in Actian 4GL OpenROAD Initialize Statement\
+      \ when converting to C#?\n```\ndeclare\n    addr = ADDR;\n```"
+    answer: "Convert to C# class-level field:\n```csharp\nprivate ADDR addr;\n\n// Initialize\
+      \ in constructor\npublic ClassName()\n{\n    addr = new ADDR();\n}\n```"
+  - question: "Convert this Actian 4GL OpenROAD Initialize Statement's begin-end block\
+      \ to C# constructor:\n```\nbegin\n    emptable[1].ssn = 999999999;\nend\n```"
+    answer: "C# constructor:\n```csharp\npublic ClassName()\n{\n    emptable = new List<Employee>();\n\
+      \    emptable.Add(new Employee { SSN = 999999999 });\n}\n```"
+  - question: 'How to convert this Actian 4GL OpenROAD Initialize Statement with SQL
+      query to C#?
+
+      ```
+
+      select :emparray[i].name = name from emptable
+
+      ```'
+    answer: "C# with ADO.NET:\n```csharp\nusing (var command = new SqlCommand(\"SELECT\
+      \ name FROM emptable\", connection))\n{\n    using (var reader = command.ExecuteReader())\n\
+      \    {\n        while (reader.Read())\n        {\n            emparray.Add(new\
+      \ Employee { Name = reader.GetString(0) });\n        }\n    }\n}\n```"
+  - question: "Convert this Actian 4GL OpenROAD user class constructor to C#:\n```\n\
+      initialize =\ndeclare\n    value = integer not null;\nbegin\n    value = 50;\n\
+      end\n```"
+    answer: "C# class with constructor:\n```csharp\npublic class MyClass\n{\n    private\
+      \ int value;\n\n    public MyClass()\n    {\n        value = 50;\n    }\n}\n```"
+  - question: "How to convert this Actian 4GL OpenROAD Initialize Statement method to\
+      \ C#?\n```\nmethod GetInstValue() =\n{\n    return value;\n}\n```"
+    answer: "C# method:\n```csharp\npublic int GetInstValue()\n{\n    return value;\n\
+      }\n```"
+  - question: "Convert this Actian 4GL OpenROAD Initialize Statement procedure to C#:\n\
+      ```\nprocedure timetwo(num = integer not null) =\n{\n    return num*2;\n}\n```"
+    answer: "C# method:\n```csharp\nprivate int TimeTwo(int num)\n{\n    return num\
+      \ * 2;\n}\n```"
