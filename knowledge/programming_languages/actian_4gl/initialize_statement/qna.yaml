@@ -1,0 +1,61 @@
+version: 2
+task_description: Explain the concept and usage of 'Initialize Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Initialize Statement?
+    answer: An Actian 4GL OpenROAD Initialize Statement declares local variables and
+      local procedures, and performs specified start-up operations for a frame, field,
+      or userclass script.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Initialize Statement?
+    answer: 'The basic syntax is: initialize [([parameterlist])] = [declareblockwithprocedures]
+      beginendblock[;]'
+  - question: Where can the parameterlist be specified in an Actian 4GL OpenROAD Initialize
+      Statement?
+    answer: The parameterlist can be specified only in an Actian 4GL OpenROAD Initialize
+      Statement for a frame script, not in a script of a field or user class.
+  - question: Can the Actian 4GL OpenROAD Initialize Statement be used in procedures?
+    answer: No, the Actian 4GL OpenROAD Initialize Statement cannot be used in procedures.
+      Local variables for 4GL procedures are declared by the procedure statement.
+  - question: Is the Actian 4GL OpenROAD Initialize Statement mandatory in a script?
+    answer: The Actian 4GL OpenROAD Initialize Statement is optional, but when used,
+      it must be the first statement in the frame, field, or user class script.
+  - question: How does the Actian 4GL OpenROAD Initialize Statement relate to frame
+      display?
+    answer: OpenROAD executes the Initialize Statements before initializing and displaying
+      a frame, allowing for start-up operations before the frame is displayed or user
+      class methods/attributes are accessed.
+  - question: What is the execution order of Actian 4GL OpenROAD Initialize Statements
+      in nested structures?
+    answer: The Initialize Statement in a frame script is executed before those in field
+      scripts for the frame. Similarly, for composite fields, the parent's Initialize
+      Statement executes before the children's.
+  - question: What are user class constructors in Actian 4GL OpenROAD and how do they
+      relate to Initialize Statements?
+    answer: User class constructors in Actian 4GL OpenROAD are Initialize blocks that
+      specify how user classes are initialized when instantiated, paralleling the capabilities
+      of Initialize Statements for frames or field scripts.
+  - question: How do Actian 4GL OpenROAD user class constructors affect debugging?
+    answer: When debugging, stepping over one statement might run one or more user class
+      constructor code blocks without the developer being aware, as they execute before
+      the next logical statement in the application.
+  - question: What is the scope of variables declared in an Actian 4GL OpenROAD user
+      class constructor?
+    answer: Variables declared in an Actian 4GL OpenROAD user class constructor are
+      local to the user class instance being created and available to all methods defined
+      for the user class, but hidden from external 4GL code.
+  - question: What precaution should be taken when defining global variables in Actian
+      4GL OpenROAD that map to user classes with constructors?
+    answer: To avoid undefined behavior, global variables that reference user classes
+      with constructors should be declared as default null and assigned the relevant
+      object during application startup.
+  - question: Is posting userevents within the initialize block of a user class supported
+      in Actian 4GL OpenROAD?
+    answer: No, posting userevents (using SendUserEvent) within the initialize block
+      of a user class is unsupported in Actian 4GL OpenROAD.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 4d95b0a
+  patterns:
+    - initialize_statement.md
