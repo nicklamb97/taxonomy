@@ -1,5 +1,5 @@
 version: 2
-task_description: Write 4GL For loops
+task_description: Write 4GL for_loops
 created_by: willsjames
 seed_examples:
   - question: How would you implement nested FOR loops in Actian 4GL OpenROAD FOR Loops
