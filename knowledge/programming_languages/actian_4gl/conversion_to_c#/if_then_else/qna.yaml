@@ -82,7 +82,7 @@ seed_examples:
       In C#, the totalPurchase variable is declared as a double:
       double totalPurchase = 120.50;
 
-      In Actian 4GL, it's declared as a DECIMAL with 10 digits total and 2 decimal places:
+      In Actian 4GL it's declared as a DECIMAL with 10 digits total and 2 decimal places:
       DEFINE totalPurchase DECIMAL(10,2)
   - question: How would you modify the Actian 4GL code to include a new condition for discount eligibility?
     answer: |
