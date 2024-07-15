@@ -1,0 +1,25 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD For Statements
+created_by: willsjames
+seed_examples:
+  - question: How do you write a basic for loop in Actian 4GL OpenROAD For Statement?
+    answer: "Write a basic for loop like this:\n```\nfor i = 1 to array.Lastrow do\n\
+      \    arr[i].PaymentReceived = TRUE;\nendfor;\n```"
+  - question: How can you use the 'downto' keyword in an Actian 4GL OpenROAD For Statement?
+    answer: "Use the 'downto' keyword in a for loop like this:\n```\nfor i = 10 downto\
+      \ 1 do\n    message 'Countdown: ' || char(i);\nendfor;\n```"
+  - question: How would you break out of a for loop using 'endloop' in Actian 4GL OpenROAD
+      For Statement?
+    answer: "Break out of a for loop using 'endloop' like this:\n```\nfor i = 1 to arr.Lastrow\
+      \ do\n    if arr[i].Name = '' then\n        endloop;\n    endif;\n    // Process\
+      \ non-empty names\nendfor;\n```"
+  - question: How can you use labels with nested for loops in Actian 4GL OpenROAD For
+      Statement?
+    answer: "Use labels with nested for loops like this:\n```\nouter: for i = 1 to arr1.Lastrow\
+      \ do\n    inner: for j = 1 to arr2.Lastrow do\n        if condition then\n   \
+      \         endloop outer;\n        endif;\n    endfor;\nendfor;\n```"
+  - question: How would you use the 'continue' statement in an Actian 4GL OpenROAD For
+      Statement?
+    answer: "Use the 'continue' statement in a for loop like this:\n```\nfor i = 1 to\
+      \ arr.Lastrow do\n    if arr[i].Skip = TRUE then\n        continue;\n    endif;\n\
+      \    // Process non-skipped items\nendfor;\n```"
