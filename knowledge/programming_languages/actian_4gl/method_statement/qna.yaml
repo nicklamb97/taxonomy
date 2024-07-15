@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the concept and usage of 'Method Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Method Statement?
+    answer: An Actian 4GL OpenROAD Method Statement defines a 4GL method.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Method Statement?
+    answer: 'The basic syntax is: method methodname [(parameterlist)] = [declareblock]
+      beginendblock[;]'
+  - question: What do the parameterlist and declareblock define in an Actian 4GL OpenROAD
+      Method Statement?
+    answer: The parameterlist and declareblock define local variables for the method
+      in an Actian 4GL OpenROAD Method Statement.
+  - question: What data types can be used for local variables in an Actian 4GL OpenROAD
+      Method Statement?
+    answer: Local variables in an Actian 4GL OpenROAD Method Statement can be any simple
+      data type, a system class, or user class.
+  - question: What does the beginendblock specify in an Actian 4GL OpenROAD Method Statement?
+    answer: The beginendblock in an Actian 4GL OpenROAD Method Statement specifies the
+      actions to be performed by the method.
+  - question: For global methods, how should the methodname be specified in an Actian
+      4GL OpenROAD Method Statement?
+    answer: For global methods, the methodname in an Actian 4GL OpenROAD Method Statement
+      must be the one specified in the Class Editor.
+  - question: Can you provide an example of an Actian 4GL OpenROAD Method Statement
+      that adds tax to an amount?
+    answer: 'An example is: method addtax (tax = float) = begin CurObject.amount = CurObject.amount
+      + CurObject.amount*tax; end;'
+  - question: How can an Actian 4GL OpenROAD Method Statement be used to display a message
+      in the trace window?
+    answer: 'Example: method printmsg = begin CurMethod.Trace(text = CurObject.FirstName);
+      end;'
+  - question: Are parameters always required in an Actian 4GL OpenROAD Method Statement?
+    answer: No, parameters are not always required in an Actian 4GL OpenROAD Method
+      Statement, as shown in the printmsg example.
+  - question: What is the purpose of the CurObject keyword in Actian 4GL OpenROAD Method
+      Statements?
+    answer: The CurObject keyword in Actian 4GL OpenROAD Method Statements refers to
+      the current object, allowing access to its attributes.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 3bd1d2d
+  patterns:
+    - method_statement.md
