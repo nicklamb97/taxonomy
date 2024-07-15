@@ -1,0 +1,6 @@
+Title: Actian 4GL SQL Select Statements Syntax
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/12.0/index.html#page/LangRef/Select_Statement.htm
+
+The knowledge content is based on the general syntax and usage of Actian 4GL SQL select statements for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
+

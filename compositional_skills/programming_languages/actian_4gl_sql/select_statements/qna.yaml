@@ -1,0 +1,94 @@
+version: 2
+task_description: Learn about the syntax of Actian 4GL SQL select statements.
+created_by: vernonguy
+seed_examples:
+  - question: What is the basic syntax for a select statement in Actian 4GL?
+    answer: |
+      The basic syntax for a select statement in Actian 4GL is:
+      ```4gl
+      SELECT column1, column2 FROM table_name WHERE condition;
+      ```
+  - question: How do you use the WHERE clause in Actian 4GL select statements?
+    answer: |
+      The WHERE clause in Actian 4GL is used to filter records:
+      ```4gl
+      SELECT column1, column2 FROM table_name WHERE condition;
+      ```
+      Example:
+      ```4gl
+      SELECT col1, col2 FROM my_table WHERE col3 = 'value';
+      ```
+  - question: How do you handle variables in Actian 4GL select statements?
+    answer: |
+      You can use variables in Actian 4GL select statements by prefixing them with a colon:
+      ```4gl
+      DEFINE var1 CHAR(20);
+      LET var1 = 'value';
+      SELECT col1, col2 FROM table WHERE col3 = :var1;
+      ```
+  - question: How do you write a select statement with joins in Actian 4GL?
+    answer: |
+      To write a select statement with joins in Actian 4GL:
+      ```4gl
+      SELECT a.col1, b.col2 FROM table1 a, table2 b WHERE a.col3 = b.col3;
+      ```
+  - question: How do you use the ORDER BY clause in Actian 4GL select statements?
+    answer: |
+      The ORDER BY clause is used to sort the result set:
+      ```4gl
+      SELECT column1, column2 FROM table_name ORDER BY column1 ASC;
+      ```
+      Example:
+      ```4gl
+      SELECT col1, col2 FROM my_table ORDER BY col1 DESC;
+      ```
+  - question: How do you perform a group by operation in Actian 4GL select statements?
+    answer: |
+      Use the GROUP BY clause to group rows that have the same values in specified columns:
+      ```4gl
+      SELECT column1, COUNT(*) FROM table_name GROUP BY column1;
+      ```
+      Example:
+      ```4gl
+      SELECT department, COUNT(*) FROM employees GROUP BY department;
+      ```
+  - question: How do you use aggregate functions in Actian 4GL select statements?
+    answer: |
+      Aggregate functions like COUNT, SUM, AVG, MAX, and MIN can be used in select statements:
+      ```4gl
+      SELECT COUNT(*), SUM(column1), AVG(column2) FROM table_name;
+      ```
+      Example:
+      ```4gl
+      SELECT AVG(salary) FROM employees WHERE department = 'HR';
+      ```
+  - question: How do you limit the number of rows returned in Actian 4GL?
+    answer: |
+      To limit the number of rows returned, use the FIRST keyword:
+      ```4gl
+      SELECT FIRST n column1, column2 FROM table_name;
+      ```
+      Example:
+      ```4gl
+      SELECT FIRST 10 col1, col2 FROM my_table;
+      ```
+  - question: Can you use subqueries in Actian 4GL select statements?
+    answer: |
+      Yes, subqueries can be used within Actian 4GL select statements:
+      ```4gl
+      SELECT column1 FROM table1 WHERE column2 = (SELECT column2 FROM table2 WHERE condition);
+      ```
+      Example:
+      ```4gl
+      SELECT name FROM employees WHERE department_id = (SELECT id FROM departments WHERE name = 'Sales');
+      ```
+  - question: How do you use the DISTINCT keyword in Actian 4GL select statements?
+    answer: |
+      The DISTINCT keyword is used to return only distinct (different) values:
+      ```4gl
+      SELECT DISTINCT column1 FROM table_name;
+      ```
+      Example:
+      ```4gl
+      SELECT DISTINCT department FROM employees;
+      ```
