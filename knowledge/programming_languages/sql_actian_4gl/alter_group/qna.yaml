@@ -1,0 +1,53 @@
+version: 2
+task_description: Learn about the syntax of Actian 4GL SQL alter group statements.
+created_by: vernonguy
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the alter group statement in Actian 4GL?
+    answer: |
+      The alter group statement modifies the list of users associated with a group identifier. Individual users
+      can be added or dropped, or the entire list can be dropped.
+  - question: What is the syntax of the alter group statement in Actian 4GL?
+    answer: |
+      The syntax for the alter group statement is:
+      ```4gl
+      alter group group_id {, group_id}
+      add users (user_id {, user_id}) | drop users (user_id {, user_id}) | drop all;
+      ```
+  - question: Can you add and drop users in the same alter group statement?
+    answer: |
+      No, an add and a drop operation cannot be performed in the same alter group statement.
+  - question: What happens if a non-existent group_id is specified in an alter group statement?
+    answer: |
+      If a non-existent group_id is specified, a warning is issued and processing continues with the next valid
+      group_id in the list.
+  - question: What are the requirements for adding users to a group in Actian 4GL?
+    answer: |
+      The user_ids must exist to be added to a group. If a specified user_id does not exist, an error is issued
+      and processing continues with the remaining user_ids. Additional occurrences of the same user_id in the
+      list are ignored.
+  - question: What happens if a user_id is not in the group user list when dropping users?
+    answer: |
+      If a specified user_id is not in the group user list, an error is issued and processing continues with the
+      remaining user_ids.
+  - question: Can a user be dropped from their default group in Actian 4GL?
+    answer: |
+      No, a user cannot be dropped from a group if that group is the default group of the user. Use the alter user
+      statement to change a user's default group.
+  - question: What happens if a user is dropped from a group during an active session?
+    answer: |
+      If a user is dropped from a group in a session associated with that group, the user retains the privileges
+      of the group until the session terminates.
+  - question: What permissions are required to execute the alter group statement?
+    answer: |
+      The maintain_users privilege is required to execute the alter group statement.
+  - question: How does the alter group statement affect the iiusergroup catalog?
+    answer: |
+      The alter group statement locks pages in the iiusergroup catalog in the iidbdb. This causes sessions
+      attempting to connect to the server to be suspended until the alter group statement is completed.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 7c3771e
+  patterns:
+    - alter_group.md
