@@ -1,0 +1,44 @@
+version: 2
+task_description: Explain the concept and usage of 'On Statement' in OpenROAD Actian
+  4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD On Statement?
+    answer: An Actian 4GL OpenROAD On Statement specifies an event block for one or
+      more events.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD On Statement?
+    answer: 'The basic syntax is: on eventtype [fieldname] | [''eventname''] [(parameterlist)]
+      = [declareblock] beginendblock[;]'
+  - question: When should you include a value for 'eventname' in an Actian 4GL OpenROAD
+      On Statement?
+    answer: Include 'eventname' only if the event type is userevent, extclassevent,
+      or dbevent.
+  - question: What happens if you don't specify an event name in an Actian 4GL OpenROAD
+      On Statement?
+    answer: OpenROAD executes the block whenever the frame receives any user event or
+      database event, respectively.
+  - question: What does the 'fieldname' parameter specify in an Actian 4GL OpenROAD
+      On Statement?
+    answer: It specifies the name of the field or menu item that triggers the event.
+  - question: Can you use the field function with the field or menu item name in an
+      Actian 4GL OpenROAD On Statement?
+    answer: No, you should not use the field function with the field or menu item name.
+  - question: What is the purpose of the 'parameterlist' in an Actian 4GL OpenROAD On
+      Statement?
+    answer: It defines parameters for the event, which can be specified on a SendUserEvent
+      method invocation.
+  - question: How can you send user-named parameters with userevents in Actian 4GL OpenROAD?
+    answer: You can specify user-named parameters as arguments to the SendUserEvent
+      method defined for the GhostExec class.
+  - question: What happens if there's a data type mismatch in parameter passing in Actian
+      4GL OpenROAD On Statements?
+    answer: It's flagged with an error at runtime when the event recipient's activation
+      block is activated, not by the compiler.
+  - question: Can you provide an example of an Actian 4GL OpenROAD On Statement?
+    answer: 'Example: on click return_button = begin return; end'
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: "2497084"
+  patterns:
+    - on_statement.md
