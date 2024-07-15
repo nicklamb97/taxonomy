@@ -1,0 +1,48 @@
+version: 2
+task_description: Explain the concept and usage of 'Procedure Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Procedure Statement?
+    answer: An Actian 4GL OpenROAD Procedure Statement defines a 4GL procedure, either
+      global or local.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Procedure Statement?
+    answer: 'The basic syntax is: procedure procname [(parameterlist)] = [declareblock]
+      beginendblock[;]'
+  - question: Can local procedures be defined within global procedures in Actian 4GL
+      OpenROAD?
+    answer: Yes, a global 4GL procedure can define local procedures, but a local procedure
+      cannot define other procedures.
+  - question: How should the procname be specified for a global procedure in Actian
+      4GL OpenROAD?
+    answer: For a global procedure, the procname must match the name specified when
+      coding the procedure in OpenROAD Workbench.
+  - question: How should the procname be specified for a local procedure in Actian 4GL
+      OpenROAD?
+    answer: For a local procedure, the procname must match the name specified in a declare
+      block or initialize statement.
+  - question: What is the purpose of the parameterlist in an Actian 4GL OpenROAD Procedure
+      Statement?
+    answer: The parameterlist defines the parameters that the procedure accepts, following
+      the NamedParameterListDefinition.
+  - question: How does the declareblock differ for global and local procedures in Actian
+      4GL OpenROAD?
+    answer: For local procedures, it follows DeclareBlock; for global procedures, it
+      follows DeclareBlockWithProcedures.
+  - question: What is the purpose of the beginendblock in an Actian 4GL OpenROAD Procedure
+      Statement?
+    answer: The beginendblock contains the actual code that defines the procedure's
+      functionality.
+  - question: Can you provide an example of an Actian 4GL OpenROAD Procedure Statement
+      that adds tax to an amount?
+    answer: procedure addtax (tax = float, amount = money) = begin return amount + amount*tax;
+      end
+  - question: Is it possible to define an Actian 4GL OpenROAD procedure without parameters?
+    answer: 'Yes, for example: procedure printmsg = begin message ''Here is a message'';
+      end'
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 916de5d
+  patterns:
+    - procedure_statement.md
