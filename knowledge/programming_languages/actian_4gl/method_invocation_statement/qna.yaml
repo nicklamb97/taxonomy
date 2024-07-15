@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and usage of 'Method Invocation Statement' in
+  OpenROAD Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Method Invocation Statement?
+    answer: An Actian 4GL OpenROAD Method Invocation Statement invokes a method that
+      is defined on a class of a reference variable.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Method Invocation Statement?
+    answer: 'The basic syntax is: [returnvariable =] referencevariable.method(parameterlist);'
+  - question: What types of methods can be invoked using an Actian 4GL OpenROAD Method
+      Invocation Statement?
+    answer: Methods of user classes, system classes, and external classes can be invoked.
+  - question: Can inherited methods be invoked using an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: Yes, any inherited method from the variable's superclasses can be invoked.
+  - question: Are parameters always required in an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: No, parameters can be optional, but parentheses must always be included
+      even if no parameters are specified.
+  - question: How are parameters specified in an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: Parameters can be specified in any order, and their names are dynamic and
+      can be specified at runtime.
+  - question: What is the purpose of the returnvariable in an Actian 4GL OpenROAD Method
+      Invocation Statement?
+    answer: The returnvariable receives the return value from the method. Its data type
+      must match the method's return type.
+  - question: What is the referencevariable in an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: The referencevariable is the name of a reference variable or an expression
+      that resolves to a reference variable.
+  - question: Can an Actian 4GL OpenROAD Method Invocation Statement be used as part
+      of an expression?
+    answer: Yes, a method can be invoked as part of an expression.
+  - question: How are parameters specified differently for system/user classes vs external
+      classes in Actian 4GL OpenROAD?
+    answer: For system/user classes, NamedParameterList is used. For external classes,
+      UnnamedParameterList is used.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: cd5550c
+  patterns:
+    - method_invocation_statement.md
