@@ -1,0 +1,45 @@
+version: 2
+task_description: Explain the concept and usage of 'Openframe Statement' in OpenROAD
+  Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: What is the purpose of an Actian 4GL OpenROAD Openframe Statement?
+    answer: An Actian 4GL OpenROAD Openframe Statement opens a new frame to run concurrently
+      with the calling ProcExec.
+  - question: What is the basic syntax of an Actian 4GL OpenROAD Openframe Statement?
+    answer: 'The basic syntax is: [GhostExec_object =] openframe framename ([parameterlist])
+      [withclause];'
+  - question: How does the Actian 4GL OpenROAD Openframe Statement handle the framename
+      parameter?
+    answer: The framename is a dynamic name, allowing use of an actual frame name or
+      a variable resolving to a frame name at runtime.
+  - question: Can Actian 4GL OpenROAD Openframe Statements be nested?
+    answer: Yes, opened frames can be nested. A called frame can call or open another
+      frame, and so on.
+  - question: What is the purpose of the GhostExec_object in an Actian 4GL OpenROAD
+      Openframe Statement?
+    answer: It's a reference variable of type GhostExec, assigned the GhostExec object
+      of the opened frame for communication.
+  - question: How can frames communicate in Actian 4GL OpenROAD when using the Openframe
+      Statement?
+    answer: Communication between frames is accomplished with the SendUserEvent Method.
+  - question: What is the function of the withclause in an Actian 4GL OpenROAD Openframe
+      Statement?
+    answer: The withclause can be used to set the ParentFrame attribute, determining
+      the parent-child relationship of frames.
+  - question: What happens if the ParentFrame attribute is set to null in an Actian
+      4GL OpenROAD Openframe Statement?
+    answer: If ParentFrame is null, the called frame runs as a detached frame, independent
+      of other frames in the application.
+  - question: Can the Actian 4GL OpenROAD Openframe Statement be used in an expression?
+    answer: No, the Openframe Statement cannot be used in an expression.
+  - question: How does control flow work when using an Actian 4GL OpenROAD Openframe
+      Statement?
+    answer: Control returns to the calling frame immediately after the new frame is
+      opened, allowing concurrent execution.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 6675f4e
+  patterns:
+    - openframe_statement.md
