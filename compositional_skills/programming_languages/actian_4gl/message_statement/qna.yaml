@@ -1,91 +1,26 @@
 version: 2
-task_description: Convert Actian 4GL OpenROAD Message Statements to C# equivalents
+task_description: Write Actian 4GL OpenROAD Message Statements
 created_by: willsjames
 seed_examples:
-  - question: 'How do you convert this Actian 4GL OpenROAD Message Statement to C#?
-
-      ```
-
-      message ''Bad Value'';
-
-      ```'
-    answer: 'C# equivalent using MessageBox:
-
-      ```csharp
-
-      MessageBox.Show("Bad Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-      ```'
-  - question: 'Convert this Actian 4GL OpenROAD Message Statement with a variable to
-      C#:
-
-      ```
-
-      message errorMsg;
-
-      ```'
-    answer: 'C# equivalent:
-
-      ```csharp
-
-      MessageBox.Show(errorMsg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-      ```'
-  - question: How to replicate the centering behavior of Actian 4GL OpenROAD Message
-      Statement in C# WinForms?
-    answer: 'Set Form as owner:
-
-      ```csharp
-
-      MessageBox.Show(this, "Message", "Title", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-      ```'
-  - question: 'Convert this Actian 4GL OpenROAD Message Statement with concatenation
-      to C#:
-
-      ```
-
-      message ''Error: '' + errorCode;
-
-      ```'
-    answer: 'C# equivalent:
-
-      ```csharp
-
-      MessageBox.Show($"Error: {errorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-      ```'
-  - question: How to make a C# MessageBox modal like Actian 4GL OpenROAD Message Statement?
-    answer: 'Use ShowDialog method:
-
-      ```csharp
-
-      MessageBox.ShowDialog("Message", "Title", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-      ```'
-  - question: 'Convert this Actian 4GL OpenROAD Message Statement with a function call
-      to C#:
-
-      ```
-
-      message GetErrorMessage(errorCode);
-
-      ```'
-    answer: 'C# equivalent:
-
-      ```csharp
-
-      MessageBox.Show(GetErrorMessage(errorCode), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-      ```'
-  - question: How to replicate Actian 4GL OpenROAD Message Statement's behavior of covering
-      the calling frame in C# WinForms?
-    answer: 'Use Form.ShowDialog() method:
-
-      ```csharp
-
-      Form messageForm = new Form();
-
-      messageForm.ShowDialog(this);
-
-      ```'
+  - question: How do you display a simple error message using an Actian 4GL OpenROAD
+      Message Statement?
+    answer: "Use the message statement with a string literal:\n            message 'Error:\
+      \ Invalid input';\n"
+  - question: How can you display a dynamic message using a variable in an Actian 4GL
+      OpenROAD Message Statement?
+    answer: "Declare a variable and use it in the message statement:\n            DEFINE\
+      \ error_msg VARCHAR(100);\nLET error_msg = 'Error code: ' || error_code;\nmessage\
+      \ error_msg;"
+  - question: How would you display a multi-line message using an Actian 4GL OpenROAD
+      Message Statement?
+    answer: "Use line breaks within the message string:\n            message 'Warning:\n\
+      Line 1 of the message\nLine 2 of the message';"
+  - question: How can you incorporate a numeric value into an Actian 4GL OpenROAD Message
+      Statement?
+    answer: "Convert the numeric value to a string and concatenate:\n            DEFINE\
+      \ count INTEGER;\nLET count = 5;\nmessage 'Total items: ' || char(count);"
+  - question: How would you use an Actian 4GL OpenROAD Message Statement within a conditional
+      statement?
+    answer: "Incorporate the message statement in an IF-THEN structure:\n          \
+      \  IF status = 'error' THEN\nmessage 'An error occurred. Please try again.';\n\
+      ELSE\nmessage 'Operation completed successfully.';\nENDIF;"
