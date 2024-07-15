@@ -1,0 +1,6 @@
+Title: Actian 4GL and OpenROAD Q&A
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/12.0/index.html#page/Welcome/OpenROAD_12.0_Guides.htm
+
+The content in the qna.yaml file is based on official documentation from Actian Corporation for Actian 4GL and OpenROAD. It is used for educational 
+purposes to enhance the knowledge base of the InstructLab taxonomy.

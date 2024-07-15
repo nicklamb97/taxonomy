@@ -1,0 +1,61 @@
+version: 2
+task_description: Explain the usage of the while statement in Actian 4GL.
+created_by: nicklamb97
+seed_examples:
+  - question: What is the basic syntax of the `while` statement in Actian 4GL?
+    answer: |
+      The basic syntax of the `while` statement in Actian 4GL is:
+      ```4gl
+      while condition
+      do
+          -- statements to execute
+      endwhile
+      ```
+
+  - question: How does the `endloop` statement differ from `endwhile` in Actian 4GL?
+    answer: |
+      The `endloop` statement is used to exit a loop early based on an internal condition, whereas `endwhile`
+      terminates the loop only when the condition evaluates to false.
+
+  - question: Can you provide an example of using `endloop` in Actian 4GL?
+    answer: |
+      ```4gl
+      define i integer = 1
+
+      while true
+      do
+          call printf("%d\n", i)
+          let i = i + 1
+
+          if i > 3 then
+              endloop
+          endif
+      endwhile
+      ```
+
+  - question: How is user input handled in a `while` loop in Actian 4GL?
+    answer: |
+      ```4gl
+      define user_input integer
+
+      call printf("Enter a number (0 to exit): ")
+      call scanf("%d", user_input)
+
+      while user_input != 0
+      do
+          call printf("You entered: %d\n", user_input)
+          call printf("Enter another number (0 to exit): ")
+          call scanf("%d", user_input)
+      endwhile
+      call printf("Exited the loop.\n")
+      ```
+
+  - question: What is the purpose of the `endwhile` statement in Actian 4GL?
+    answer: |
+      The `endwhile` statement marks the end of a `while` loop block in Actian 4GL, ensuring that the loop continues
+      to execute until the condition becomes false.
+
+  - question: How does Actian 4GL handle loop constructs compared to other programming languages?
+    answer: |
+      Actian 4GL provides robust loop constructs like `while` and `endloop` to control flow based on conditions,
+      similar to other structured programming languages.
