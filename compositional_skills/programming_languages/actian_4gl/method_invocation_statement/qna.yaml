@@ -1,0 +1,23 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Method Invocation Statements
+created_by: willsjames
+seed_examples:
+  - question: How do you invoke a method with parameters in Actian 4GL OpenROAD Method
+      Invocation Statement?
+    answer: "Invoke a method with parameters like this:\n            retval = strobj.WriteToFile(filename\
+      \ = filename);"
+  - question: How can you invoke a method without parameters in Actian 4GL OpenROAD
+      Method Invocation Statement?
+    answer: "Invoke a method without parameters like this:\n            field(statechoices).UpdchoiceList();"
+  - question: How would you use a dynamic name to set an attribute value in Actian 4GL
+      OpenROAD Method Invocation Statement?
+    answer: "Use a dynamic name to set an attribute value like this:\n            attname\
+      \ = 'city';\nvalue = 'Chicago';\nempaddr.SetAttribute(:attname = value);"
+  - question: How can you invoke a method with a return value in Actian 4GL OpenROAD
+      Method Invocation Statement?
+    answer: "Invoke a method with a return value like this:\n            returnVariable\
+      \ = objectReference.MethodName(param1 = value1, param2 = value2);"
+  - question: How would you use the GetAttribute method in Actian 4GL OpenROAD Method
+      Invocation Statement?
+    answer: "Use the GetAttribute method like this:\n            attname = 'city';\n\
+      empaddr.GetAttribute(:attname = byref(value));"
