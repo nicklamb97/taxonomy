@@ -1,0 +1,6 @@
+Title: Create Group Statement
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FCreate_Group_Statement.htm%23
+
+The content regarding the create group statement is based on the official Ingres Corporation documentation.
+It is used for educational purposes to enhance the knowledge base of the InstructLab taxonomy.
