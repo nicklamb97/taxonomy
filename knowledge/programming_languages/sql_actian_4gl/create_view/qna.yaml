@@ -1,0 +1,66 @@
+version: 2
+task_description: Explain the features and parameters of the create view statement in actian 4gl sql.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the create view statement?
+    answer: |
+      The syntax of the create view statement in Ingres is as follows:
+      ```
+      create view view_name
+                    [(column_name {, column_name})]
+                    as select_stmt
+                    [with check option];
+      ```
+
+  - question: What parameters can be used in the create view statement?
+    answer: |
+      Parameters for the create view statement in Ingres include:
+      - view_name: Defines the name of the view, which must be a valid object name.
+      - column_name: Specifies the name of a column in the view.
+      - select_stmt: Specifies a select statement that defines the view's contents.
+      - with check option: Optional clause that prevents inserts or updates
+        violating the view's qualification.
+
+  - question: How does the create view statement define a virtual table?
+    answer: |
+      The create view statement in Ingres uses a select statement to define
+      the contents of a virtual table. The view definition is stored in the
+      system catalogs. When the view is used in a statement, it operates on
+      the underlying tables.
+
+  - question: What are the restrictions on updates, inserts, and deletes for views in Ingres?
+    answer: |
+      Updates, inserts, and deletes on views in Ingres are subject to several
+      restrictions:
+      - The view must be based on a single updatable table or view.
+      - All columns must directly map to columns in the base table or view
+        (no aggregate functions or derived columns allowed).
+      - The select statement must omit distinct, group by, union, and having
+        clauses.
+      - Inserts are not allowed if a mandatory (not null not default) column
+        in a base table is omitted from the view.
+      - Up to 1024 columns can be specified for a view.
+
+  - question: What is the purpose of the with check option clause in the create view statement?
+    answer: |
+      The with check option clause prevents inserts or updates to a view that
+      would create rows not compliant with the view's definition (specified in
+      the where clause of the defining select statement).
+
+  - question: What considerations should be taken for using create view in a distributed environment in Ingres?
+    answer: |
+      In a distributed environment with Ingres, the create view statement has
+      additional considerations. For detailed information, refer to the Ingres
+      Star User Guide.
+
+  - question: What permissions are required to execute select statements that define a view?
+    answer: |
+      To execute select statements that define a view in Ingres, you must have
+      all privileges required to access the underlying base tables of the view.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: cf1f60d
+  patterns:
+    - create_view.md
