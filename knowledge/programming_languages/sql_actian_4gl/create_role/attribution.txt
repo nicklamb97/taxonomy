@@ -1,0 +1,7 @@
+Title: Create Role Statement
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FCreate_Role_Statement.htm%23
+
+The Create Role knowledge content is based on the official Create Role documentation provided by Ingres Corporation. 
+The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
+
