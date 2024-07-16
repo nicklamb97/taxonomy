@@ -1,0 +1,75 @@
+version: 2
+task_description: Explain the features and parameters of the declare global temporary
+  table statement in actian 4gl sql.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the declare global temporary table statement?
+    answer: |
+      The syntax of the declare global temporary table statement in Ingres is as
+      follows:
+      ```
+      declare global temporary table session.table_name
+                    (column_name format {, column_name format})
+                    [with clause];
+      ```
+
+  - question: How can you create a temporary table using a subselect in Ingres?
+    answer: |
+      To create a temporary table using a subselect in Ingres, use the following
+      syntax:
+      ```
+      declare global temporary table session.table_name
+                    (column_name {, column_name})
+                    as subselect
+                    [with clause];
+      ```
+
+  - question: What are the benefits of using temporary tables in Ingres applications?
+    answer: |
+      Temporary tables in Ingres offer benefits such as:
+      - No logging and reduced disk I/O, enhancing performance.
+      - Session scope, ensuring data isolation and automatic cleanup.
+      - Flexibility to manipulate intermediate result sets efficiently.
+
+  - question: What is the purpose of the location parameter in the with clause of
+      declare global temporary table?
+    answer: |
+      The location parameter in the with clause specifies where the temporary table
+      data should be stored within the database. It helps manage storage and optimize
+      performance.
+
+  - question: Can you specify multiple parameters in the with clause of declare
+      global temporary table?
+    answer: |
+      Yes, you can specify multiple parameters in the with clause of declare global
+      temporary table as a comma-separated list. These parameters control aspects
+      like storage allocation, structure, and compression.
+
+  - question: How are temporary tables managed during an online checkpoint in Ingres?
+    answer: |
+      Temporary tables in Ingres can be created, deleted, or modified during an
+      online checkpoint. This flexibility allows applications to adjust to changing
+      data needs without disrupting operations.
+
+  - question: What restrictions apply to the use of temporary tables in Ingres?
+    answer: |
+      Temporary tables in Ingres have several restrictions:
+      - They cannot be used within database procedures or view definitions.
+      - Constraints, integrities, and user-defined defaults (except for not null
+        and not default) are not supported.
+      - Certain SQL statements like create index and create view cannot be applied
+        to temporary tables.
+
+  - question: How does the with check option clause impact updates to temporary tables
+      in Ingres?
+    answer: |
+      The with check option clause prevents updates to a temporary table that would
+      result in rows not compliant with the view or subselect definition. It ensures
+      data integrity during updates.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 38fa257
+  patterns:
+    - declare_global_temporary_table.md
