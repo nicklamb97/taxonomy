@@ -1,0 +1,50 @@
+version: 2
+task_description: Explain the features and parameters of the direct execute immediate statement in actian 4gl sql.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the direct execute immediate statement?
+    answer: |
+      The syntax of the direct execute immediate statement is:
+      ```
+      direct execute immediate string | string_variable;
+      ```
+      This statement sends DBMS-specific commands to the DBMS without translation.
+
+  - question: What is the purpose of the direct execute immediate statement?
+    answer: |
+      The direct execute immediate statement allows sending DBMS-specific commands
+      directly to the connected DBMS or Enterprise Access product. It bypasses
+      translation and is useful for executing commands that are not natively
+      supported by the DBMS.
+
+  - question: How does the direct execute immediate statement handle string literals?
+    answer: |
+      You can specify the statement using either a string literal or a host language
+      variable. If using a string literal, avoid embedding quotes within the literal
+      to adhere to OpenSQL string-delimiting conventions.
+
+  - question: Can the direct execute immediate statement be used to return rows?
+    answer: |
+      No, the direct execute immediate statement cannot be used to return rows to a
+      session. It is specifically designed for executing commands that do not involve
+      returning result sets.
+
+  - question: What are some examples of commands suitable for the direct execute immediate statement?
+    answer: |
+      Commands suitable for direct execute immediate include:
+      - Setting database parameters.
+      - Executing DDL statements like create, alter, and drop.
+      - Managing system-level configurations not accessible via standard SQL.
+
+  - question: What are the potential security implications of using direct execute immediate statements?
+    answer: |
+      Using direct execute immediate statements requires careful consideration of
+      security implications. Improperly constructed statements or insufficient
+      validation can lead to SQL injection vulnerabilities or unintended data loss.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: b1de2e1
+  patterns:
+    - direct_execute_immediate.md

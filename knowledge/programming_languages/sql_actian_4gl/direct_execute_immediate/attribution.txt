@@ -1,0 +1,6 @@
+Title: Actian 4GL SQL Direct Execute Immediate Statements Syntax
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FDirect_Execute_Immediate_Statement.htm%23
+
+The knowledge content is based on the general syntax and usage of Actian 4GL SQL direct execute immediate statements for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
