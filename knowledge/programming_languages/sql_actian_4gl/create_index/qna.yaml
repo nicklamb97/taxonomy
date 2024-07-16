@@ -1,0 +1,46 @@
+version: 2
+task_description: Explain the syntax and usage of the create index statement in 4gl sql statements.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the create index statement?
+    answer: |
+      The create index statement in Ingres databases creates an index on an existing table to improve query processing
+      by organizing the data in specified columns. Indexes can be unique or non-unique and use storage structures
+      like BTREE, ISAM, HASH, or RTREE.
+  - question: What is the syntax of the create index statement?
+    answer: |
+      The syntax of the create index statement is:
+      ```
+      create [unique] index [schema.]index_name
+                on [schema.]table_name
+                (column_name {, column_name})
+                [with with_clause];
+      ```
+      Here, `index_name` specifies the name of the index, `table_name` is the table on which the index is created, and
+      `column_name` lists the columns included in the index. Optional clauses like `with` can specify additional
+      parameters such as storage structure (`structure`) and key columns (`key`).
+  - question: What are the parameters available for the create index statement?
+    answer: |
+      The create index statement supports parameters such as `index_name`, `table_name`, `column_name`, `structure`,
+      `with_clause`, and more. These parameters define the name, table, columns, storage structure, and additional
+      settings for the index creation.
+  - question: What permissions are required to execute the create index statement?
+    answer: |
+      To execute the create index statement, the user must be the owner of the table where the index is being created.
+      Special permissions are required to create indexes on system tables or when using specific index options.
+  - question: How does the create index statement affect database locking?
+    answer: |
+      Creating an index on a table requires an exclusive lock on the table, preventing other sessions from accessing
+      the table until the index creation is complete. This ensures data integrity during the indexing process.
+  - question: What are some related statements to the create index statement?
+    answer: |
+      Related statements include:
+      - Modify Statement: Used to change index properties after creation.
+      - Drop Statement: Used to delete an index from a table.
+      - Create Table Statement: Used to create new tables where indexes can be applied.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a4eb822
+  patterns:
+    - create_index.md
