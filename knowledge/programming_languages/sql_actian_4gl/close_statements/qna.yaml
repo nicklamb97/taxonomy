@@ -1,0 +1,48 @@
+version: 2
+task_description: Explain the features and parameters of the close statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the close statement?
+    answer: |
+      The syntax of the close statement is:
+      ```
+      close cursor_variable;
+      ```
+      This statement closes an open cursor in Actian 4GL SQL.
+
+  - question: What happens when you execute the close statement?
+    answer: |
+      When you execute the close statement, it closes the specified cursor and sets
+      the State attribute of the CursorObject to CS_CLOSED. Subsequent attempts to
+      use the cursor require reopening it with an open statement.
+
+  - question: When should you use the close statement?
+    answer: |
+      You should use the close statement to explicitly close a cursor after you have
+      finished processing the rows fetched by it. This helps in releasing resources
+      and maintaining efficient cursor management.
+
+  - question: What happens to a cursor after it is closed?
+    answer: |
+      After a cursor is closed using the close statement, it cannot be used for
+      further processing unless it is reopened with a new open statement. The
+      cursor's state transitions to CS_CLOSED.
+
+  - question: How do commit and rollback statements affect open cursors?
+    answer: |
+      The commit and rollback statements implicitly close all open cursors. It is
+      important to note this behavior to ensure proper cursor management and avoid
+      errors due to accessing closed cursors.
+
+  - question: What are the benefits of explicitly closing cursors?
+    answer: |
+      Explicitly closing cursors with the close statement helps in releasing
+      database resources promptly, which can improve application performance and
+      reduce the risk of resource leaks.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 0f829c2
+  patterns:
+    - close_statement.md
