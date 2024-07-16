@@ -1,0 +1,68 @@
+version: 2
+task_description: Learn about the syntax of Actian 4GL SQL commit statements.
+created_by: vernonguy
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the commit statement in Actian 4GL?
+    answer: |
+      The commit statement commits the current database transaction, making any changes permanent and closing
+      any open cursors.
+  - question: What is the syntax of the commit statement in Actian 4GL?
+    answer: |
+      The syntax for the commit statement is:
+      ```4gl
+      commit [work];
+      ```
+  - question: What does the optional work keyword do in the commit statement?
+    answer: |
+      The optional work keyword is used only for compatibility with some versions of SQL and does not change
+      the behavior of the commit statement.
+  - question: What happens after issuing a commit statement?
+    answer: |
+      After issuing a commit statement, you cannot undo (roll back) any changes to the database made by the committed
+      transaction. A commit statement also closes any open cursors.
+  - question: What occurs if an application terminates while a transaction is open?
+    answer: |
+      If an application terminates while a transaction is open, the database issues an implicit commit before
+      terminating the application.
+  - question: Is it necessary to issue explicit commit statements with autocommit on?
+    answer: |
+      No, it is not necessary to issue explicit commit statements if autocommit is on. When autocommit is on, the
+      database automatically commits each database statement when it completes successfully. The default for
+      autocommit is off.
+  - question: What happens if the commit statement is successful?
+    answer: |
+      If the commit statement is successful, it sets the system variable IIerrornumber to zero. Otherwise, it sets
+      IIerrornumber to the appropriate error number. In both cases, IIrowcount is set to -1.
+  - question: What is the equivalent method to the commit statement in the DBSessionObject class?
+    answer: |
+      The CommitWork method of the DBSessionObject class is equivalent to the commit statement. For more information
+      about this system class and method, see DBSessionObject Class.
+  - question: Can you provide an example of a commit statement?
+    answer: |
+      Sure, here's an example:
+      ```4gl
+      insert into employees(salary, age)
+      values(:salfield, :agefield);
+      commit work;
+      ```
+  - question: Can you provide an example of using a commit statement in an event block?
+    answer: |
+      Sure, here's an example:
+      ```4gl
+      on terminate =
+      begin
+          if CurFrame.ConfirmPopup(messagetext =
+          'Commit database changes?') = PU_OK then
+              commit work;
+          else
+              rollback work;
+          endif;
+      end;
+      ```
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 2bcecf7
+  patterns:
+    - commit_statement.md
