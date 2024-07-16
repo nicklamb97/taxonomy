@@ -1,0 +1,49 @@
+version: 2
+task_description: Explain the syntax and usage of the create dbevent statement in Actian databases.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the create dbevent statement?
+    answer: |
+      The create dbevent statement in Actian databases defines a database event that enables applications to pass
+      status information to other applications.
+  - question: What is the syntax of the create dbevent statement?
+    answer: |
+      The syntax of the create dbevent statement is:
+      ```
+      create dbevent [schema.]event_name;
+      ```
+      Here, `schema` is optional and specifies the schema where the event is created, and `event_name` is the
+      identifier for the event, which must be a valid object name.
+  - question: Who can create a database event using the create dbevent statement?
+    answer: |
+      Any user, group, or role that has been granted the necessary permissions (raise or register) by the owner of
+      the event or by public can create a database event using the create dbevent statement.
+  - question: What permissions are required to create a database event?
+    answer: |
+      To create a database event, the session's user, group, or role identifier must have been granted the raise or
+      register permission by the owner of the event or by public.
+  - question: How are database events registered or raised?
+    answer: |
+      Database events can be registered or raised by any session that has been granted the appropriate permissions
+      (raise or register) by the event owner or by public.
+  - question: Can any user drop a database event?
+    answer: |
+      No, only the user, group, or role that created a database event has the permission to drop that event using
+      the drop dbevent statement.
+  - question: What locking behavior does the create dbevent statement exhibit?
+    answer: |
+      The create dbevent statement locks pages in the iievent catalog during execution.
+  - question: What are the related statements to the create dbevent statement?
+    answer: |
+      The create dbevent statement is related to:
+      - Drop Dbevent Statement: Used to remove a database event from the system.
+      - Grant (privilege) Statement: Grants permissions (raise or register) to users, groups, or roles for database
+        events.
+      - Raise Dbevent Statement: Raises (signals) a database event to notify other sessions.
+      - Register Dbevent Statement: Registers interest in receiving notifications when a database event occurs.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: fa171ab
+  patterns:
+    - create_dbevent.md
