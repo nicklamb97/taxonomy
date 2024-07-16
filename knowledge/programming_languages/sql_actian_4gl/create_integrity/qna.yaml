@@ -1,0 +1,53 @@
+version: 2
+task_description: Explain the syntax and usage of the create integrity statement in 4gl sql statements.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the create integrity statement?
+    answer: |
+      The create integrity statement in Ingres databases defines an integrity
+      constraint on a specified base table. It ensures that data modifications
+      adhere to the defined search condition, maintaining data consistency and
+      reliability within the database.
+  - question: What is the syntax of the create integrity statement?
+    answer: |
+      The syntax of the create integrity statement is:
+      ```
+      create integrity on table_name [corr_name] is search_condition;
+      ```
+      Here, `table_name` specifies the table for which the integrity
+      constraint is defined, `corr_name` is an optional correlation name for
+      the table, and `search_condition` defines the constraint condition that
+      must be satisfied for all rows in the table.
+  - question: What are the parameters available for the create integrity statement?
+    answer: |
+      Parameters include `table_name`, `corr_name`, and `search_condition`.
+      These define the table, optional correlation name, and the condition that
+      ensures data integrity by restricting updates that violate the defined
+      constraint.
+  - question: What permissions are required to execute the create integrity statement?
+    answer: |
+      To execute the create integrity statement, the user must own the table
+      on which the integrity constraint is being defined. This permission
+      ensures that only authorized users can define and enforce data integrity
+      rules.
+  - question: How does the create integrity statement affect database locking?
+    answer: |
+      Creating an integrity constraint with the create integrity statement
+      takes an exclusive lock on the specified table. This exclusive lock
+      prevents other sessions from modifying the table concurrently, ensuring
+      the integrity constraint is correctly applied during the constraint
+      definition.
+  - question: What are some related statements to the create integrity statement?
+    answer: |
+      Related statements include:
+      - Drop Integrity Statement: Used to remove an existing integrity
+        constraint from a table.
+      - Modify Statement: Used to alter existing integrity constraints.
+      - Create Table Statement: Used to create new tables with initial
+        integrity constraints.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: f7a22e7
+  patterns:
+    - create_integrity.md

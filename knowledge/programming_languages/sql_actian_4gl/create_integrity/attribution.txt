@@ -1,0 +1,6 @@
+Title: Create Integrity Statement
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FCreate_Integrity_Statement.htm%23
+
+The content regarding the create integrity statement is based on the official Ingres Corporation documentation.
+It is used for educational purposes to enhance the knowledge base of the InstructLab taxonomy.
