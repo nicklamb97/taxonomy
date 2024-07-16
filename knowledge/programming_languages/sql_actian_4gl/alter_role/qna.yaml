@@ -1,0 +1,64 @@
+version: 2
+task_description: Learn about the syntax of Actian 4GL SQL alter role statements.
+created_by: vernonguy
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the alter role statement in Actian 4GL?
+    answer: |
+      The alter role statement changes the attributes associated with a role identifier.
+  - question: What is the syntax of the alter role statement in Actian 4GL?
+    answer: |
+      The syntax for the alter role statement is:
+      ```4gl
+      alter role role_id {, role_id}
+      [with with_option {, with_option}];
+      ```
+  - question: What does the role_id parameter specify in the alter role statement?
+    answer: |
+      The role_id parameter specifies an existing role ID created with the create role statement. If any specified
+      role identifiers do not exist, the DBMS Server issues a warning, but all valid role identifiers are processed.
+  - question: What is the role_password parameter used for in the alter role statement?
+    answer: |
+      The role_password parameter defines the password for the role. If no password is specified, any session has
+      access to the specified role identifier and its associated permissions.
+  - question: What options can be specified with the with_option parameter in the alter role statement?
+    answer: |
+      The with_option parameter specifies one of the following password options:
+      - nopassword
+      - password = 'role_password'
+  - question: What permissions are required to execute the alter role statement?
+    answer: |
+      You must have maintain_users privilege and be connected to the iidbdb database. Additionally, you must have
+      maintain_audit privilege to change security audit attributes.
+  - question: How does the alter role statement affect the iirole catalog?
+    answer: |
+      The alter role statement locks pages in the iirole catalog of the iidbdb. This can cause sessions attempting to
+      connect to the server to suspend until the statement is completed.
+  - question: What happens if a specified role identifier does not exist in an alter role statement?
+    answer: |
+      If one or more specified role identifiers do not exist, the DBMS Server issues a warning, but all valid role
+      identifiers are processed.
+  - question: What related statements should be known in context with the alter role statement?
+    answer: |
+      Related statements include:
+      - Create Role Statement
+      - Drop Role Statement
+  - question: Can you provide an example of changing the password for a role identifier?
+    answer: |
+      Sure, here's an example:
+      ```4gl
+      alter role new_accounts with
+          password = 'eggbasket';
+      ```
+  - question: Can you provide an example of removing the password for a role identifier?
+    answer: |
+      Sure, here's an example:
+      ```4gl
+      alter role chk_inventory with nopassword;
+      ```
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: b57897e
+  patterns:
+    - alter_role.md
