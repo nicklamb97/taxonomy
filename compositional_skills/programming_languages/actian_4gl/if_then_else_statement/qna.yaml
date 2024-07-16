@@ -1,5 +1,5 @@
 version: 2
-task_description: Write Actian 4GL OpenROAD If-Then-Else Statements
+task_description: Write Actian 4GL OpenROAD If-Then-Else Statement
 created_by: willsjames
 seed_examples:
   - question: How to use a basic if-then-endif statement in Actian 4GL OpenROAD If Then
