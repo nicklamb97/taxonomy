@@ -1,32 +1,174 @@
 version: 2
-task_description: Convert Actian 4GL OpenROAD Assignment Statements to C#
+task_description: Write Actian 4GL OpenROAD Assignment Statements
 created_by: willsjames
 seed_examples:
-  - question: How do you convert a simple Actian 4GL OpenROAD Assignment Statement to
-      C#?
-    answer: 'Use the same syntax: variable = expression; Ensure variable types match.
-      For decimals, use decimal type in C#.'
-  - question: How do you handle Actian 4GL OpenROAD Assignment Statement with reference
-      variables in C#?
-    answer: Use object references in C#. Replace 'newcustomer = customer;' with 'Customer
-      newcustomer = customer;' Define Customer class.
-  - question: What's the C# equivalent of assigning to an array element in Actian 4GL
-      OpenROAD Assignment Statement?
-    answer: Use square brackets for array indexing. 'client[4].Address = '4307 Olive
-      St';' becomes 'client[4].Address = "4307 Olive St";'
-  - question: How do you convert Actian 4GL OpenROAD Assignment Statement with null
-      assignment to C#?
-    answer: Use null keyword in C#. 'newcustomer = null;' remains the same. Ensure the
-      variable type is nullable or a reference type.
-  - question: How to handle Actian 4GL OpenROAD Assignment Statement with dynamic arrays
-      in C#?
-    answer: Use List<T> or array in C#. 'child[2].name = 'Sally';' becomes 'children[2].Name
-      = "Sally";' Define a Child class.
-  - question: What's the C# equivalent of Actian 4GL OpenROAD Assignment Statement for
-      current row in a table field?
-    answer: Use LINQ or a loop to find the current row. 'child[].name = 'Steven';' becomes
-      'currentChild.Name = "Steven";'
-  - question: How to convert Actian 4GL OpenROAD Assignment Statement with object attributes
-      to C#?
-    answer: Use dot notation for properties. 'address.City = 'New York';' becomes 'address.City
-      = "New York";' Define Address class.
+  - question: How to assign a value to a simple scalar variable in Actian 4GL OpenROAD
+      Assignment Statement?
+    answer: 'To assign a value to a simple scalar variable:
+
+      ```
+
+      service_fee = 5.50;
+
+      ```
+
+      This assigns the value 5.50 to the variable service_fee.'
+  - question: Write code to demonstrate assigning values to different types of variables
+      in Actian 4GL OpenROAD Assignment Statement.
+    answer: 'Here are examples of assigning values to different types of variables:
+
+      ```
+
+      /* Scalar variable */
+
+      name = ''John'';
+
+      empnum = 35;
+
+
+      /* Reference variable attribute */
+
+      newcustomer.Name = ''Jones'';
+
+
+      /* Array element */
+
+      client[4].Address = ''4307 Olive St'';
+
+      ```
+
+      These examples show assignments to a scalar variable, a reference variable attribute,
+      and an array element.'
+  - question: How to assign values to a dynamic array in Actian 4GL OpenROAD Assignment
+      Statement?
+    answer: 'To assign values to a dynamic array:
+
+      ```
+
+      child[2].name = ''Sally'';
+
+      child[2].age = 8;
+
+
+      /* Assigning to current row */
+
+      child[].name = ''Steven'';
+
+      child[].age = 11;
+
+      ```
+
+      This code assigns values to specific rows and the current row of a dynamic array.'
+  - question: Write code to demonstrate reference variable assignment in Actian 4GL
+      OpenROAD Assignment Statement.
+    answer: 'Here''s an example of reference variable assignment:
+
+      ```
+
+      /* Assigning one reference variable to another */
+
+      newcustomer = customer;
+
+
+      /* Assigning a row reference from a dynamic array */
+
+      newcustomer = client[5];
+
+
+      /* Assigning null to a reference variable */
+
+      newcustomer = null;
+
+      ```
+
+      These examples show different ways to assign reference variables.'
+  - question: How to redirect an array variable in Actian 4GL OpenROAD Assignment Statement?
+    answer: 'To redirect an array variable:
+
+      ```
+
+      client = old_customers;
+
+      ```
+
+      This statement redirects the array variable ''client'' to point to the same array
+      as ''old_customers''.'
+  - question: Write code to show how multiple reference variables can point to the same
+      object in Actian 4GL OpenROAD Assignment Statement.
+    answer: 'Here''s an example of multiple reference variables pointing to the same
+      object:
+
+      ```
+
+      address.City = ''New York'';
+
+      address2 = address;
+
+      currcity = address2.City;
+
+      /* currcity is now ''New York'' */
+
+      ```
+
+      This code demonstrates that changes to one reference variable are visible through
+      another pointing to the same object.'
+  - question: How to handle potential string truncation in Actian 4GL OpenROAD Assignment
+      Statement?
+    answer: 'To handle potential string truncation:
+
+      ```
+
+      DEFINE short_string VARCHAR(5);
+
+      long_string = ''This is a long string'';
+
+      short_string = long_string;
+
+      /* short_string will contain ''This '' */
+
+      ```
+
+      OpenROAD automatically truncates the string if it''s longer than the variable
+      can hold.'
+  - question: Write code to demonstrate assigning values of different system classes
+      in Actian 4GL OpenROAD Assignment Statement.
+    answer: 'Here''s an example of assigning values of different system classes:
+
+      ```
+
+      DEFINE firstfield ActiveField;
+
+      DEFINE surname EntryField;
+
+      firstfield = surname;
+
+      ```
+
+      This is valid because EntryField is a subclass of ActiveField.'
+  - question: How to assign values to individual rows of an array in Actian 4GL OpenROAD
+      Assignment Statement?
+    answer: 'To assign values to individual rows of an array:
+
+      ```
+
+      client[5] = newcustomer;
+
+      ```
+
+      This assigns the value of newcustomer to the 5th row of the client array.'
+  - question: Write code to show how assignments affect values displayed in frames in
+      Actian 4GL OpenROAD Assignment Statement.
+    answer: 'Here''s how assignments affect values displayed in frames:
+
+      ```
+
+      /* Assuming ''customer_name'' is associated with a field in a frame */
+
+      customer_name = ''John Doe'';
+
+      /* The new value will be displayed when the event block completes */
+
+      ```
+
+      The new value will be displayed in the frame when the event block completes or
+      the form is refreshed.'
