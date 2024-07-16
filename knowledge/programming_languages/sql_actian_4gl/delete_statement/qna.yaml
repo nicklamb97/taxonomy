@@ -1,0 +1,50 @@
+version: 2
+task_description: Explain the features and parameters of the delete statement in actian 4gl sql.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the non-cursor delete statement?
+    answer: |
+      The syntax of the non-cursor delete statement is:
+      ```
+      delete from tablename [corrname]
+           [where searchcondition];
+      ```
+      If the where clause is omitted, all rows in the table are deleted.
+
+  - question: How does the repeated option enhance performance in delete statements?
+    answer: |
+      The repeated keyword in delete statements for Ingres encodes and saves the
+      query execution plan, improving performance for repeated executions of the
+      statement.
+
+  - question: What is the purpose of the cursor version of the delete statement?
+    answer: |
+      The cursor version of the delete statement deletes the row currently pointed
+      to by the specified cursor_variable. It operates on one row at a time.
+
+  - question: What must be done before issuing a cursor delete statement in Ingres?
+    answer: |
+      Before issuing a cursor delete statement, you must open the cursor, fetch a
+      row, and ensure the delete operation occurs within the same DBMS session.
+
+  - question: How does Ingres handle the state of the cursor after a successful cursor delete?
+    answer: |
+      After a successful cursor delete in Ingres, the State attribute of the
+      CursorObject is set to CS_NOCURRENT, indicating the cursor points after the
+      deleted row but before the next row.
+
+  - question: What parameters can be used in the delete statement in Ingres?
+    answer: |
+      The delete statement in Ingres supports the following parameters:
+      - tablename: Specifies the table from which rows are deleted.
+      - corrname: Correlation name used in the non-cursor version.
+      - searchcondition: Logical expression specifying rows to delete.
+      - cursor_variable: Reference variable pointing to the CursorObject in the
+        cursor version.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: be7110e
+  patterns:
+    - delete_statement.md
