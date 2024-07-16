@@ -1,5 +1,5 @@
-Title: Actian 4GL Sleep Statement Overview
+Title: OpenROAD Actian 4GL Sleep Statement
 Author: Actian Corporation
-Source: https://docs.actian.com/actian-4gl/latest/sleep-statement.html
+Source: "https://docs.actian.com/openroad/6.2/index.html#page/Welcome%2FOpenROAD_6.2_Guides.htm%23"
 
-The Actian 4GL Sleep Statement knowledge content is based on the official Actian 4GL documentation provided by Actian Corporation. The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
+The OpenROAD knowledge content is based on the official OpenROAD documentation provided by Actian Corporation. The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.

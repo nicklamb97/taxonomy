@@ -1,51 +1,123 @@
 version: 2
-task_description: Explain the sleep statement in Actian 4GL and its usage in application development.
-created_by: nicklamb97
+task_description: Write Actian 4GL OpenROAD Sleep Statements
+created_by: willsjames
 seed_examples:
-  - question: What is the purpose of the sleep statement in Actian 4GL?
-    answer: |
-      The sleep statement in Actian 4GL is used to pause program execution for a specified duration,
-      typically in seconds.
+  - question: How to use the basic sleep statement to pause a program in Actian 4GL
+      OpenROAD Sleep Statement?
+    answer: 'Here''s how to use the basic sleep statement:
 
-  - question: How is the duration specified in the sleep statement?
-    answer: |
-      The duration in the sleep statement must be an integer literal or variable representing the
-      number of seconds to pause.
+      ```
 
-  - question: Can the sleep duration be a fractional number?
-    answer: |
-      No, the sleep duration must be a whole number (integer) in Actian 4GL.
+      sleep 5;
 
-  - question: What happens during the sleep operation?
-    answer: |
-      During the sleep operation, the program execution is halted for the specified duration, after
-      which it resumes from where it left off.
+      ```
 
-  - question: What are some typical use cases for using sleep in Actian 4GL?
-    answer: |
-      Sleep statements are often used to introduce delays in program execution, wait for user input,
-      or pace actions within an application.
+      This code pauses the program execution for 5 seconds.'
+  - question: Write code to demonstrate using sleep within a loop in Actian 4GL OpenROAD
+      Sleep Statement.
+    answer: "Here's an example of using sleep within a loop:\n```\ni = integer;\ni =\
+      \ 1;\nWHILE i <= 3 DO\n    MESSAGE i;\n    let i = i + 1;\n    sleep 2;\nENDWHILE;\n\
+      ```\nThis code displays a message, increments i, and pauses for 2 seconds in each\
+      \ iteration."
+  - question: How to use sleep with an integer variable in Actian 4GL OpenROAD Sleep
+      Statement?
+    answer: 'Here''s how to use sleep with an integer variable:
 
-  - question: Is the sleep statement a blocking operation in Actian 4GL?
-    answer: |
-      Yes, the sleep statement blocks the program execution during the specified sleep duration.
+      ```
 
-  - question: How can developers handle timing requirements in Actian 4GL applications?
-    answer: |
-      Developers can use the sleep statement to meet timing requirements for operations such as
-      polling, animation, or synchronization.
+      pause_duration = integer;
 
-  - question: Can the sleep duration be dynamically determined at runtime?
-    answer: |
-      Yes, developers can calculate or retrieve the sleep duration from variables based on runtime
-      conditions in Actian 4GL.
+      pause_duration = 3;
 
-  - question: What is the effect of using a negative value or zero as the sleep duration?
-    answer: |
-      Using a negative value or zero as the sleep duration typically results in an immediate return
-      from the sleep statement without pausing.
+      sleep pause_duration;
 
-  - question: How does the sleep statement contribute to application performance in Actian 4GL?
-    answer: |
-      Proper use of the sleep statement helps in managing application responsiveness and resource
-      utilization by introducing controlled delays.
+      ```
+
+      This code pauses the program for the number of seconds specified in pause_duration.'
+  - question: Write code to demonstrate using sleep before user input in Actian 4GL
+      OpenROAD Sleep Statement.
+    answer: 'Here''s an example of using sleep before user input:
+
+      ```
+
+      MESSAGE "Preparing to receive input...";
+
+      sleep 3;
+
+      user_input = prompt "Enter a number:";
+
+      ```
+
+      This code displays a message, waits for 3 seconds, then prompts for user input.'
+  - question: How to create a simple countdown timer using sleep in Actian 4GL OpenROAD
+      Sleep Statement?
+    answer: "Here's a simple countdown timer using sleep:\n```\ncountdown = integer;\n\
+      countdown = 5;\nWHILE countdown > 0 DO\n    MESSAGE \"Time remaining: \" || char(countdown);\n\
+      \    sleep 1;\n    let countdown = countdown - 1;\nENDWHILE;\nMESSAGE \"Time's\
+      \ up!\";\n```\nThis code creates a 5-second countdown, displaying the remaining\
+      \ time each second."
+  - question: Write code to show how sleep interacts with conditional statements in
+      Actian 4GL OpenROAD Sleep Statement.
+    answer: "Here's an example of sleep interacting with conditional statements:\n```\n\
+      user_input = 10;\nIF user_input > 10 then\n    MESSAGE \"Input is greater than\
+      \ 10.\";\n    sleep 2;\nELSE\n    MESSAGE \"Input is less than or equal to 10.\"\
+      ;\n    sleep 1;\nENDIF;\nMESSAGE \"End of program.\";\n```\nThis code uses different\
+      \ sleep durations based on the condition."
+  - question: How to use sleep to create timed responses in Actian 4GL OpenROAD Sleep
+      Statement?
+    answer: "Here's how to create timed responses using sleep:\n```\nMESSAGE \"You have\
+      \ 5 seconds to respond.\";\nsleep 5;\nresponse = prompt \"Enter your response:\"\
+      ;\nIF response = \"\" THEN\n    MESSAGE \"Time's up! No response received.\";\n\
+      ELSE\n    MESSAGE \"Response received: \" || response;\nENDIF;\n```\nThis code\
+      \ gives the user 5 seconds to prepare before prompting for a response."
+  - question: Write code to demonstrate error handling related to sleep in Actian 4GL
+      OpenROAD Sleep Statement.
+    answer: "Here's an example of error handling related to sleep:\n```\nduration =\
+      \ integer;\nduration = prompt \"Enter sleep duration (in seconds):\";\nIF duration\
+      \ <= 0 THEN\n    MESSAGE \"Invalid duration. Using default of 1 second.\";\n \
+      \   duration = 1;\nENDIF;\nsleep duration;\nMESSAGE \"Resumed after \" || char(duration)\
+      \ || \" second(s).\";\n```\nThis code handles invalid input for sleep duration."
+  - question: How to use sleep to simulate a process with delays in Actian 4GL OpenROAD
+      Sleep Statement?
+    answer: 'Here''s how to simulate a process with delays:
+
+      ```
+
+      MESSAGE "Starting process...";
+
+      sleep 2;
+
+      MESSAGE "Step 1 complete";
+
+      sleep 1;
+
+      MESSAGE "Step 2 complete";
+
+      sleep 1;
+
+      MESSAGE "Step 3 complete";
+
+      sleep 2;
+
+      MESSAGE "Process finished.";
+
+      ```
+
+      This code simulates a multi-step process with varying delays between steps.'
+  - question: Write code to show the blocking nature of sleep in Actian 4GL OpenROAD
+      Sleep Statement.
+    answer: 'Here''s an example showing the blocking nature of sleep:
+
+      ```
+
+      MESSAGE "Starting long operation...";
+
+      sleep 5;
+
+      MESSAGE "Long operation complete.";
+
+      MESSAGE "This message appears after the sleep period.";
+
+      ```
+
+      This code demonstrates that no other operations occur during the sleep period.'
