@@ -1,0 +1,76 @@
+version: 2
+task_description: Explain the features and parameters of the create table statement in Ingres.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the create table statement?
+    answer: |
+      The syntax of the create table statement in Ingres is as follows:
+      ```
+      create table [schema.] table_name
+                    (column_specification {, column_specification})
+                    [with with_clause];
+      ```
+
+  - question: How does the create table...as select statement work in Ingres?
+    answer: |
+      The create table...as select statement in Ingres creates a new table
+      populated with rows from another table or tables. It has the syntax:
+      ```
+      create table table_name
+                    (column_name {, column_name}) as
+                                  subselect
+                                  {union [all]
+                                  subselect}
+                    [with with_clause];
+      ```
+
+  - question: What parameters can be used in the with clause of the create table statement?
+    answer: |
+      The with clause in the create table statement in Ingres supports various
+      options such as location, journaling, duplicates, page_size,
+      security_audit, autostruct, encryption, and more. These options provide
+      flexibility in table creation and management.
+
+  - question: What are the maximum number of columns allowed in a base table in Ingres?
+    answer: |
+      In Ingres, a base table can have a maximum of 1024 columns.
+
+  - question: How does the page_size option affect table creation in Ingres?
+    answer: |
+      The page_size option in the create table statement specifies the size of
+      data pages for the table, influencing storage efficiency and performance.
+      Valid page sizes in Ingres include 2K, 4K, 8K, 16K, 32K, and 64K bytes.
+
+  - question: What is the significance of the autostruct option in the with clause of create table?
+    answer: |
+      The autostruct option in the with clause of the create table statement
+      allows Ingres to automatically determine whether to use a B-tree or heap
+      storage structure for the table based on the presence of constraint
+      definitions. It provides automation in determining the optimal storage
+      structure.
+
+  - question: How can encryption be applied to columns in a newly created table using the create table statement?
+    answer: |
+      Encryption for columns in a newly created table can be specified using
+      the encryption option in the with clause. Supported encryption types
+      include AES128, AES192, and AES256. The aeskey parameter can be used to
+      specify an internal key, or a passphrase can be provided for encryption.
+
+  - question: What is the purpose of the security_audit option in the with clause of create table?
+    answer: |
+      The security_audit option in the with clause enables auditing for rows or
+      tables at either the table level or row level. It helps track operations
+      such as insert, delete, update, and select for auditing purposes.
+
+  - question: How can a table be created in multiple physical locations using the create table statement?
+    answer: |
+      To create a table in multiple physical locations, specify the location
+      option in the with clause with a comma-separated list of location names.
+      These locations must exist and be extended to corresponding database
+      areas.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: c4f502c
+  patterns:
+    - create_table.md
