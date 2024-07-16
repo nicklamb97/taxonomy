@@ -1,0 +1,79 @@
+version: 2
+task_description: Explain the syntax and usage of Actian 4GL SQL COPY statements for data import and export, with focus
+  on delimiters and advanced options.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of Actian 4GL SQL COPY statements?
+    answer: |
+      Actian 4GL SQL COPY statements are used for importing data from external files into Actian databases or exporting
+      data from Actian databases to external files. They streamline data transfer processes and ensure data integrity
+      across different environments.
+  - question: How do you specify the direction of data transfer in Actian 4GL SQL COPY statements?
+    answer: |
+      In Actian 4GL SQL COPY statements, the direction of data transfer is specified using keywords:
+      - `FROM` for importing data into Actian databases from external files.
+      - `TO` for exporting data from Actian databases to external files.
+  - question: What are the key components of an Actian 4GL SQL COPY statement?
+    answer: |
+      An Actian 4GL SQL COPY statement consists of:
+      - The `COPY` keyword to initiate the statement.
+      - Optional keywords such as `FROM` or `TO` to indicate the direction of data transfer.
+      - Table or file names specifying the source or destination of data.
+      - Optional clauses like `USING` to specify file formats or delimiters.
+  - question: How do you import data from an external file using Actian 4GL SQL COPY statements?
+    answer: |
+      To import data from an external file into an Actian database, use the following syntax:
+      ```
+      COPY table_name FROM 'external_file_path' [USING options];
+      ```
+      Replace `table_name` with the name of the Actian database table and `external_file_path` with the path to the
+      external file containing data to be imported. `USING options` is optional and specifies additional parameters
+      like file formats or delimiters.
+  - question: How do you export data from an Actian database to an external file using Actian 4GL SQL COPY statements?
+    answer: |
+      To export data from an Actian database to an external file, use the following syntax:
+      ```
+      COPY table_name TO 'external_file_path' [USING options];
+      ```
+      Replace `table_name` with the name of the database table from which data is exported and `external_file_path`
+      with the path to the external file where data will be exported. `USING options` is optional and can include file
+      format specifications or delimiters.
+  - question: What file formats are supported in Actian 4GL SQL COPY statements?
+    answer: |
+      Actian 4GL SQL COPY statements support various file formats for data import and export operations, including:
+      - Delimited text files (e.g., CSV, TSV) using delimiters such as commas or tabs.
+      - Fixed-width text files where data fields are aligned based on predefined column widths.
+      - Actian database-specific formats optimized for efficient data transfer and storage.
+  - question: How do Actian 4GL SQL COPY statements handle data format conversions?
+    answer: |
+      Actian 4GL SQL COPY statements automatically handle data format conversions between external files and Actian
+      database tables. This ensures compatibility and data integrity during import and export operations.
+  - question: Can Actian 4GL SQL COPY statements handle large volumes of data efficiently?
+    answer: |
+      Yes, Actian 4GL SQL COPY statements are designed to handle large volumes of data efficiently, optimizing
+      performance during data import and export processes across Actian database environments.
+  - question: What are delimiters in Actian 4GL SQL COPY statements?
+    answer: |
+      Delimiters in Actian 4GL SQL COPY statements are characters that separate fields and mark the end of records
+      in data files. They include characters like newline (`nl`), tab (`tab`), space (`sp`), comma (`comma`), and more.
+      Delimiters are specified to parse data correctly during import or export operations.
+  - question: How do CSV and SSV delimiters differ in Actian 4GL SQL COPY statements?
+    answer: |
+      CSV (Comma Separated Values) and SSV (Semicolon Separated Values) delimiters in Actian 4GL SQL COPY statements
+      are used to handle specific formats of data files. CSV uses commas to separate values, with special handling for
+      quoted fields containing commas. SSV uses semicolons for separation, following similar rules as CSV.
+  - question: What considerations are important when choosing delimiters in Actian 4GL SQL COPY statements?
+    answer: |
+      When choosing delimiters for Actian 4GL SQL COPY statements, it's crucial to avoid characters that may appear
+      in data or padding within files. Incorrect delimiter selection can lead to parsing errors or data corruption.
+  - question: How does the `WITH NULL` clause work in Actian 4GL SQL COPY statements?
+    answer: |
+      The `WITH NULL` clause in Actian 4GL SQL COPY statements allows specifying how null values are handled during
+      data import or export. It can define marker values for nulls in data files or specify values to be written as null
+      in database columns, ensuring data consistency and integrity.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 44bf18e
+  patterns:
+    - copy_statement.md
