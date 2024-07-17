@@ -1,0 +1,36 @@
+version: 2
+task_description: Explain the features and parameters of the drop rule statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop rule statement?
+    answer: |
+      The syntax of the drop rule statement in Ingres is as follows:
+      ```
+      drop rule [schema.]rulename;
+      ```
+  - question: What does the drop rule statement do?
+    answer: |
+      The drop rule statement removes the specified rule from the database. A rule is automatically dropped if the
+      table on which the rule is defined is dropped.
+  - question: What parameter specifies the rule to be dropped?
+    answer: |
+      The rulename parameter specifies the name of the rule to be dropped.
+  - question: What permissions are required to drop a rule?
+    answer: |
+      You must be the owner of a rule to drop it. This ensures that only authorized users can remove rules.
+  - question: What happens to a rule if the table on which it is defined is dropped?
+    answer: |
+      A rule is automatically dropped if the table on which the rule is defined is dropped. This ensures database
+      integrity by removing dependent objects.
+  - question: Can you provide an example of dropping a rule using the drop rule statement?
+    answer: |
+      Here is an example of dropping the chk_name rule:
+      ```
+      drop rule chk_name;
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 67cbe63
+  patterns:
+    - drop_rule_statement.md
