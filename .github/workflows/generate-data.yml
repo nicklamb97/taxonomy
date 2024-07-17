@@ -106,11 +106,33 @@ jobs:
           cd temp_generated
           git config user.name "Nick Lamb"
           git config user.email "nick.lamb@diegesis.co.uk"
+          
+          # Create a new branch
+          BRANCH_NAME="auto-generated-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b $BRANCH_NAME
+          
           cp -r ../generated/* .
           git add .
           git commit -m "Auto-generated synthetic data" || echo "No changes to commit"
-          git push "https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git" main
-          echo "Changes pushed to generated repository"
+          
+          # Push the new branch
+          git push "https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git" $BRANCH_NAME
+          
+          echo "Changes pushed to generated repository on branch $BRANCH_NAME"
+          
+          # Create a pull request
+          PR_URL=$(curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/nicklamb97/generated/pulls \
+               -d '{
+                 "title": "Auto-generated synthetic data",
+                 "body": "This PR contains automatically generated synthetic data. Please review and merge.",
+                 "head": "'"$BRANCH_NAME"'",
+                 "base": "main"
+               }' | jq -r .html_url)
+          
+          echo "Pull request created: $PR_URL"
+          
           cd ..
           rm -rf temp_generated
         else
