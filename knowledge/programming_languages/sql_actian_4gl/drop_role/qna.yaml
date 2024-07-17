@@ -1,0 +1,47 @@
+version: 2
+task_description: Explain the features and parameters of the drop role statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop role statement?
+    answer: |
+      The syntax of the drop role statement in Ingres is as follows:
+      ```
+      drop role role_id {, role_id};
+      ```
+  - question: What does the drop role statement do?
+    answer: |
+      The drop role statement removes the specified role identifiers from the installation. Sessions using a role
+      identifier when it is dropped continue to run with the privileges defined for that identifier.
+  - question: What parameter specifies the role identifier to be dropped?
+    answer: |
+      The role_id parameter specifies an existing role identifier to be dropped. If any role_ids in the list do not
+      exist, the DBMS Server returns an error for each non-existent role_id but does not abort the statement.
+  - question: What happens if a role identifier does not exist when using the drop role statement?
+    answer: |
+      If the list of role_ids contains any that do not exist, the DBMS Server returns an error for each non-existent
+      role_id but does not abort the statement. Valid, existing role identifiers in the list are removed.
+  - question: What permissions are required to drop role identifiers?
+    answer: |
+      To drop role identifiers, you must have MAINTAIN_USERS privilege and be connected to the iidbdb database. This
+      ensures that only authorized users can remove role identifiers.
+  - question: What locking mechanism does the drop role statement use?
+    answer: |
+      The drop role statement locks pages in the iirole catalog in the iidbdb. This ensures data integrity during the
+      operation.
+  - question: What related statements should I know about for managing role identifiers?
+    answer: |
+      Related statements for managing role identifiers include:
+      - Create Role Statement
+      - Alter Role Statement
+  - question: Can you provide an example of dropping a single role identifier using the drop role statement?
+    answer: |
+      Here is an example of dropping the sales_report role identifier:
+      ```
+      drop role sales_report;
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 1ec55e0
+  patterns:
+    - drop_role_statement.md
