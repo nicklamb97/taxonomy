@@ -2,22 +2,87 @@ version: 2
 task_description: Write Actian 4GL OpenROAD Method Invocation Statements
 created_by: willsjames
 seed_examples:
-  - question: How do you invoke a method with parameters in Actian 4GL OpenROAD Method
-      Invocation Statement?
-    answer: "Invoke a method with parameters like this:\n            retval = strobj.WriteToFile(filename\
-      \ = filename);"
-  - question: How can you invoke a method without parameters in Actian 4GL OpenROAD
+  - question: How to invoke a simple method with no parameters in Actian 4GL OpenROAD
       Method Invocation Statement?
-    answer: "Invoke a method without parameters like this:\n            field(statechoices).UpdchoiceList();"
-  - question: How would you use a dynamic name to set an attribute value in Actian 4GL
-      OpenROAD Method Invocation Statement?
-    answer: "Use a dynamic name to set an attribute value like this:\n            attname\
-      \ = 'city';\nvalue = 'Chicago';\nempaddr.SetAttribute(:attname = value);"
-  - question: How can you invoke a method with a return value in Actian 4GL OpenROAD
+    answer: 'To invoke a method with no parameters:
+
+      ```
+
+      field(statechoices).UpdchoiceList();
+
+      ```
+
+      This invokes the UpdchoiceList method on the statechoices field object.'
+  - question: Write code to demonstrate invoking a method with a return value and assigning
+      it to a variable in Actian 4GL OpenROAD Method Invocation Statement.
+    answer: "Here's how to invoke a method with a return value:\n```\ndeclare\n    strobj\
+      \ = StringObject;\n    retval = integer not null;\nbegin\n    retval = strobj.WriteToFile(filename\
+      \ = 'output.txt');\n    if retval != ER_OK then\n        message 'Error writing\
+      \ file.';\n    endif;\nend\n```\nThis invokes WriteToFile and assigns the return\
+      \ value to retval."
+  - question: How to use named parameters in an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: 'To use named parameters:
+
+      ```
+
+      empaddr.SetAttribute(attname = ''city'', value = ''Chicago'');
+
+      ```
+
+      This invokes SetAttribute with named parameters attname and value.'
+  - question: Write code to demonstrate invoking an inherited method in Actian 4GL OpenROAD
+      Method Invocation Statement.
+    answer: "To invoke an inherited method:\n```\ndeclare\n    myObject = MyClass;\n\
+      begin\n    myObject.ToString();  -- Inherited from Object class\nend\n```\nThis\
+      \ invokes the ToString method inherited from the Object class."
+  - question: How to invoke a method as part of an expression in Actian 4GL OpenROAD
       Method Invocation Statement?
-    answer: "Invoke a method with a return value like this:\n            returnVariable\
-      \ = objectReference.MethodName(param1 = value1, param2 = value2);"
-  - question: How would you use the GetAttribute method in Actian 4GL OpenROAD Method
+    answer: 'To invoke a method in an expression:
+
+      ```
+
+      total_length = strobj1.Length() + strobj2.Length();
+
+      ```
+
+      This invokes the Length method on two StringObjects and adds the results.'
+  - question: Write code to demonstrate using a dynamic method name in Actian 4GL OpenROAD
+      Method Invocation Statement.
+    answer: "To use a dynamic method name:\n```\ndeclare\n    methodName = varchar(32)\
+      \ not null;\n    obj = MyClass;\nbegin\n    methodName = 'Calculate';\n    obj.:methodName();\n\
+      end\n```\nThis invokes the method specified by the methodName variable."
+  - question: How to handle optional parameters in an Actian 4GL OpenROAD Method Invocation
+      Statement?
+    answer: 'To handle optional parameters:
+
+      ```
+
+      myObject.ProcessData(input = ''data'', validate = TRUE);
+
+      ```
+
+      This invokes ProcessData with two parameters, where ''validate'' might be optional.'
+  - question: Write code to demonstrate error handling in an Actian 4GL OpenROAD Method
+      Invocation Statement.
+    answer: "Error handling in method invocation:\n```\ndeclare\n    result = integer\
+      \ not null;\nbegin\n    result = obj.RiskyOperation();\n    if result < 0 then\n\
+      \        message 'Error occurred: ' || char(result);\n    endif;\nend\n```\nThis\
+      \ checks the return value of RiskyOperation for errors."
+  - question: How to invoke a method on a system class in Actian 4GL OpenROAD Method
       Invocation Statement?
-    answer: "Use the GetAttribute method like this:\n            attname = 'city';\n\
-      empaddr.GetAttribute(:attname = byref(value));"
+    answer: "To invoke a method on a system class:\n```\ndeclare\n    strObj = StringObject;\n\
+      \    length = integer;\nbegin\n    strObj.Value = 'Hello, World!';\n    length\
+      \ = strObj.Length();\nend\n```\nThis invokes methods on the StringObject system\
+      \ class."
+  - question: Write code to demonstrate chaining method invocations in Actian 4GL OpenROAD
+      Method Invocation Statement.
+    answer: 'To chain method invocations:
+
+      ```
+
+      result = obj.GetData().Process().Format();
+
+      ```
+
+      This invokes GetData, then Process on its result, then Format on that result.'
