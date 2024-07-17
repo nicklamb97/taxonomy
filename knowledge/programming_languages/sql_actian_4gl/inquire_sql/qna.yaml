@@ -1,0 +1,65 @@
+version: 2
+task_description: Explain the features and parameters of the inquire_sql statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the inquire_sql statement?
+    answer: |
+      The syntax of the inquire_sql statement in Ingres is as follows:
+      ```
+      inquire_sql(variablename = inquire_sql_constant
+            {, variablename = inquire_sql_constant});
+      ```
+  - question: What does the inquire_sql statement do?
+    answer: |
+      The inquire_sql statement retrieves runtime status information about the most recently executed SQL statement.
+      It can provide information such as error numbers, error messages, the number of rows affected, and whether a
+      transaction is open.
+  - question: How do you specify the variable to hold information in the inquire_sql statement?
+    answer: |
+      You specify a field or local variable that was declared in the procedure or frame issuing the inquire_sql
+      statement. The variable's data type must be compatible with the data type of the information being assigned to it.
+  - question: What constant can you use to get the error number of the last query?
+    answer: |
+      You can use the `errorno` constant to get the error number of the last query. This number is also stored in the
+      system variable IIerrornumber.
+  - question: What constant can you use to get the error message text of the last query?
+    answer: |
+      You can use the `errortext` constant to get the error message text of the last query. The text includes the error
+      number and a trailing newline character.
+  - question: How can you determine if the previous fetch statement found no more rows to return?
+    answer: |
+      You can use the `endquery` constant. If the previous fetch statement found no more rows to return, `endquery`
+      returns the value one. If it returned a valid row, the value returned is zero.
+  - question: What constant returns the session identifier of the current database session?
+    answer: |
+      The `session` constant returns the session identifier of the current database session. If no session is active,
+      it returns zero.
+  - question: How can you find out if a transaction is open?
+    answer: |
+      You can use the `transaction` constant. It returns a value of one if a transaction is open, or zero if no
+      transaction is open.
+  - question: What does the `rowcount` constant return?
+    answer: |
+      The `rowcount` constant returns the total number of rows affected by the last SQL statement. This includes
+      statements such as insert, delete, update, select, fetch, modify, create index, create table as, select, or copy.
+  - question: What does the `messagetext` constant return?
+    answer: |
+      The `messagetext` constant returns the message text of the last SQL message statement executed inside a database
+      procedure. If the message statement had no text, it returns a blank.
+  - question: Can you provide an example of using inquire_sql to check for an error before committing?
+    answer: |
+      ```
+      insert into newemp(name, address, town)
+          values('Jones', '143 Longview Dr', 'Anytown');
+      inquire_sql(mistake = errorno);
+      if mistake = 0 then
+          commit;
+      else
+          ...
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 45d7784
+  patterns:
+    - inquire_sql_statement.md
