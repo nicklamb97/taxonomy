@@ -1,5 +1,5 @@
 version: 2
-task_description: Learn about the syntax of Actian 4GL SQL alter role statements.
+task_description: Learn about the syntax and usage of Actian 4GL SQL alter role statements.
 created_by: vernonguy
 domain: sql_actian_4gl
 seed_examples:
