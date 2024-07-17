@@ -1,0 +1,68 @@
+version: 1
+task_description: Explain the features and parameters of the savepoint statement in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+- question: What is the purpose of the savepoint statement in Actian 4GL SQL?
+  answer: |
+    The savepoint statement declares a named savepoint marker within a transaction. Savepoints can be used in conjunction with the rollback statement to roll back a transaction to the specified savepoint when necessary. This can eliminate the need to roll back an entire transaction if it is not necessary.
+
+- question: What is the syntax of the savepoint statement?
+  answer: |
+    The syntax of the savepoint statement is:
+    
+    savepoint savepoint_name;
+
+    Where savepoint_name defines the name of the savepoint.
+
+- question: What are the rules for naming a savepoint?
+  answer: |
+    The savepoint name can be any unquoted character string conforming to rules for object names, except that the first character need not be alphabetic. This enables numeric savepoint names to be specified.
+
+- question: Can multiple savepoints be declared within a transaction?
+  answer: |
+    Yes, any number of savepoints can be declared within a transaction.
+
+- question: Can the same savepoint name be used more than once in a transaction?
+  answer: |
+    Yes, the same savepoint name can be used more than once. However, if the transaction is aborted to a savepoint whose name is used more than once, the transaction is backed out to the most recent use of that savepoint name.
+
+- question: What happens to savepoints when a transaction is terminated?
+  answer: |
+    All savepoints of a transaction are rendered inactive when the transaction is terminated (with either a commit, a rollback, or a system intervention upon deadlock).
+
+- question: Who has permission to use the savepoint statement?
+  answer: |
+    The savepoint statement is available to all users.
+
+- question: How does the savepoint statement relate to other SQL statements?
+  answer: |
+    The savepoint statement is closely related to the rollback statement, which can be used to roll back a transaction to a specified savepoint.
+
+- question: Can you provide an example of using savepoints in a transaction?
+  answer: |
+    Here's an example of using savepoints in a transaction:
+
+    insert into emp (name, sal, bdate)
+        values ('Jones,Bill', 10000, 1945);
+    savepoint setone;
+    insert into emp (name, sal, bdate)
+        values ('Smith,Stan', 20000, 1948);
+    savepoint 2;
+    insert into emp (name, sal, bdate)
+        values ('Engel,Harry', 18000, 1954);
+    rollback to 2;
+    rollback to setone;
+    commit;
+
+    In this example, three inserts are performed with savepoints set after the first and second inserts. The transaction then rolls back to the second savepoint, then to the first, before committing. As a result, only the first insert is committed.
+
+- question: What happens if you roll back to a savepoint that doesn't exist?
+  answer: |
+    The documentation doesn't explicitly state what happens in this case. However, typically in SQL databases, attempting to roll back to a non-existent savepoint would result in an error.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 855de1e
+  patterns:
+    - savepoint_statement.md

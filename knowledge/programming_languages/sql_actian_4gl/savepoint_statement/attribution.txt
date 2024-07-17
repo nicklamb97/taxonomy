@@ -1,0 +1,6 @@
+Title: Actian 4GL SQL Savepoint Statements Syntax
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FSavepoint_Statement.htm%23
+
+The knowledge content is based on the general syntax and usage of Actian 4GL SQL savepoint statements for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
