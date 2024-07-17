@@ -1,0 +1,53 @@
+version: 2
+task_description: Explain the features and parameters of the drop dbevent statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop dbevent statement?
+    answer: |
+      The syntax of the drop dbevent statement in Ingres is as follows:
+      ```
+      drop dbevent [schema.]event_name;
+      ```
+
+  - question: What parameter does the drop dbevent statement require?
+    answer: |
+      The drop dbevent statement requires the following parameter:
+      - `event_name`: Specifies the name of the event to drop.
+
+  - question: What permissions are required to use the drop dbevent statement?
+    answer: |
+      You must be the owner of a database event to use the drop dbevent statement. This ensures that unauthorized users
+      cannot drop database events.
+
+  - question: What happens to registrations if a dbevent is dropped?
+    answer: |
+      If applications are currently registered to receive the database event, the registrations are not dropped. The
+      event notifications remain queued, and applications can receive them using the get dbevent statement.
+
+  - question: Can you provide an example of the drop dbevent statement?
+    answer: |
+      Here is an example of the drop dbevent statement:
+      ```
+      drop dbevent drill_hot;
+      ```
+      This statement deletes the `drill_hot` dbevent.
+
+  - question: What happens to queued notifications if a dbevent is dropped?
+    answer: |
+      If the database event was raised prior to being dropped, the notifications remain queued. Applications can still
+      receive them using the get dbevent statement.
+
+  - question: What are some related statements to drop dbevent?
+    answer: |
+      Related statements to drop dbevent include:
+      - Create Dbevent Statement
+      - Grant (privilege) Statement
+      - Raise Dbevent Statement
+      - Register Dbevent Statement
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: bf4c834
+  patterns:
+    - drop_dbevent.md
