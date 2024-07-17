@@ -1,0 +1,73 @@
+version: 1
+task_description: Explain the features and parameters of the revoke statement in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+- question: What is the purpose of the revoke statement in Actian 4GL SQL?
+  answer: |
+    The revoke statement is used to remove database privileges or role access that were previously granted to specified users, groups, roles, or PUBLIC. It's the counterpart to the grant statement.
+
+- question: What is the basic syntax of the revoke statement?
+  answer: |
+    The basic syntax of the revoke statement is:
+
+    revoke
+      all [privileges] | privilege {, privilege} | object_name {, object_name}
+      [on object_type]
+      from public | [auth_type] auth_id {, auth_id};
+
+- question: What are some examples of privileges that can be revoked?
+  answer: |
+    Some examples of privileges that can be revoked include:
+    - [no]access
+    - [no]connect_time_limit
+    - [no]create_procedure
+    - [no]create_table
+    - [no]db_admin
+    - [no]query_cost_limit
+    - [no]select_syscat
+    - [no]update_syscat
+
+    The specific privileges available depend on the object type.
+
+- question: What are the valid object types for the revoke statement?
+  answer: |
+    The valid object types for the revoke statement are:
+    - database
+    - current installation
+
+- question: How do you specify the users, groups, or roles from which privileges are being revoked?
+  answer: |
+    You specify the users, groups, or roles using the auth_type and auth_id parameters. The auth_type can be user, group, or role (default is user), and the auth_id specifies the specific users, groups, or roles. You can also use PUBLIC to revoke from all users.
+
+- question: What happens if you try to revoke a privilege that wasn't granted to a specified auth_id?
+  answer: |
+    If an attempt is made to revoke a privilege that was not granted to a specified auth_id, no changes are made to the privileges of that auth_id.
+
+- question: How do you revoke a privilege that was granted using its "no" form?
+  answer: |
+    If a privilege was granted using its "no" form (e.g., nocreate_table), the same form must be used when revoking the privilege. For example:
+    
+    revoke nocreate_table on database employee from user karenk;
+
+- question: Who can execute the revoke statement?
+  answer: |
+    The revoke statement can be executed by a user who is either the owner of the target object or has been granted permission (using with grant option) to use the statement on the specific target object by another user.
+
+- question: What locking behavior does the revoke statement exhibit?
+  answer: |
+    The revoke statement locks pages in the iidbpriv catalog (if revoking database privileges) or iiprotect catalog, plus pages in the system catalogs that correspond to the object type (table, view, database event, or database procedure).
+
+- question: Can you provide an example of using the revoke statement?
+  answer: |
+    Here's an example of using the revoke statement:
+
+    revoke query_row_limit on database employee from role review_emp;
+
+    This statement revokes the query_row_limit privilege defined for the role identifier review_emp on the employee database.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 5c8afc9
+  patterns:
+    - revoke_statement.md
