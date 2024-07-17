@@ -1,0 +1,46 @@
+version: 2
+task_description: >-
+  Explain the features and parameters of the remove dbevent statement in Actian
+  4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the remove dbevent statement?
+    answer: |
+      The syntax of the remove dbevent statement in OpenROAD SQL is as follows:
+      ```
+      remove dbevent [schema.]event_name;
+      ```
+  - question: What does the remove dbevent statement do?
+    answer: >
+      The remove dbevent statement removes a database event for which an
+      application has previously registered, indicating that the application no
+      longer intends to receive the specified event.
+  - question: >-
+      What happens to queued events when the remove dbevent statement is
+      executed?
+    answer: >
+      If the database event has been raised before the application removes the
+      registration, the event remains queued and will be received when the
+      application issues the get dbevent statement.
+  - question: >-
+      What is the purpose of the event_name parameter in the remove dbevent
+      statement?
+    answer: >
+      The event_name parameter specifies the name of the database event to be
+      removed.
+  - question: Can you provide an example of using the remove dbevent statement?
+    answer: |
+      ```
+      remove dbevent user_event;
+      ```
+  - question: >-
+      Which statement is used to receive queued database events after they have
+      been raised?
+    answer: |
+      The get dbevent statement is used to receive queued database events.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: 35d0cde
+  patterns:
+    - remove_dbevent_statement.md
