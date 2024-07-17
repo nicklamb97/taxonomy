@@ -1,0 +1,77 @@
+version: 2
+task_description: Explain the features and parameters of the fetch statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the fetch statement?
+    answer: |
+      The syntax of the fetch statement in Ingres is as follows:
+      ```
+      fetch cursor_variable into variable_list;
+      ```
+  - question: What does the fetch statement do?
+    answer: |
+      The fetch statement retrieves a row from an open cursor, loads it into 4GL variables, moves the cursor forward
+      one row, and sets the State and RowCount attributes of the CursorObject class.
+  - question: How does the fetch statement interact with the cursor?
+    answer: |
+      The fetch statement moves the cursor forward one row in the result table and puts the values from the specified
+      columns into the specified variables.
+  - question: When must you specify column names in the fetch statement?
+    answer: |
+      You must specify column names when you fetch column values out of order, that is, not in the same order they
+      were specified in the select statement.
+  - question: What happens if the fetch statement is successful?
+    answer: |
+      If the fetch statement is successful, 4GL sets the value of the iirowcount system variable to one, and the
+      retrieved row becomes the current row.
+  - question: What happens if the fetch statement is unsuccessful or there are no more rows to fetch?
+    answer: |
+      If the fetch statement is unsuccessful or there are no more rows to fetch, 4GL sets iirowcount to zero, does
+      not change the variables, and sets the State attribute to CS_NO_MORE_ROWS.
+  - question: What must you do if the select expressions in the open statement exceed the variables in the fetch
+      statement?
+    answer: |
+      The fetch statement can contain fewer variables than select expressions, but it cannot contain more. The data
+      types of the variables and the values assigned must be compatible.
+  - question: How can you check if there are more rows to fetch after each fetch statement?
+    answer: |
+      You can check the State attribute of the CursorObject. If it is set to CS_NO_MORE_ROWS, there are no more rows
+      to fetch.
+  - question: What should you do to find out how many rows have been successfully fetched?
+    answer: |
+      Check the RowCount attribute of the CursorObject class. It is set to zero whenever the cursor is opened and
+      increments after each successful fetch.
+  - question: What happens if there's a mismatch in variable data types during fetch?
+    answer: |
+      If there's a mismatch in variable data types, OpenROAD reports it in the iierrornumber system variable, although
+      the row is still fetched and becomes the current row.
+  - question: Can you provide an example of using the fetch statement to check the State attribute?
+    answer: |
+      ```
+      fetch emp_cursor into :emp_name = name, :emp_age = age;
+      if emp_cursor.State = CS_CURRENT then
+          /* A new row has been fetched. */
+      ...
+      elseif emp_cursor.State = CS_NO_MORE_ROWS then
+          /* All rows have been fetched. */
+      ...
+      else
+          /* There is an error. */
+      endif;
+      ```
+  - question: Can you provide an example of using the fetch statement to check the RowCount attribute?
+    answer: |
+      ```
+      /* Fetches no more than 5 rows from CursorObject */
+      if emp_cursor.RowCount <= 5 then
+           fetch emp_cursor into :emp_name = name, :emp_age = age;
+      else
+           close emp_cursor;
+      endif;
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: d1174bf
+  patterns:
+    - fetch_statement.md
