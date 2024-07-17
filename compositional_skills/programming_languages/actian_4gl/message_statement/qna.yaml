@@ -2,25 +2,103 @@ version: 2
 task_description: Write Actian 4GL OpenROAD Message Statements
 created_by: willsjames
 seed_examples:
-  - question: How do you display a simple error message using an Actian 4GL OpenROAD
-      Message Statement?
-    answer: "Use the message statement with a string literal:\n            message 'Error:\
-      \ Invalid input';\n"
-  - question: How can you display a dynamic message using a variable in an Actian 4GL
-      OpenROAD Message Statement?
-    answer: "Declare a variable and use it in the message statement:\n            DEFINE\
-      \ error_msg VARCHAR(100);\nLET error_msg = 'Error code: ' || error_code;\nmessage\
-      \ error_msg;"
-  - question: How would you display a multi-line message using an Actian 4GL OpenROAD
-      Message Statement?
-    answer: "Use line breaks within the message string:\n            message 'Warning:\n\
-      Line 1 of the message\nLine 2 of the message';"
-  - question: How can you incorporate a numeric value into an Actian 4GL OpenROAD Message
+  - question: How to display a simple message using the Actian 4GL OpenROAD Message
       Statement?
-    answer: "Convert the numeric value to a string and concatenate:\n            DEFINE\
-      \ count INTEGER;\nLET count = 5;\nmessage 'Total items: ' || char(count);"
-  - question: How would you use an Actian 4GL OpenROAD Message Statement within a conditional
-      statement?
-    answer: "Incorporate the message statement in an IF-THEN structure:\n          \
-      \  IF status = 'error' THEN\nmessage 'An error occurred. Please try again.';\n\
-      ELSE\nmessage 'Operation completed successfully.';\nENDIF;"
+    answer: 'To display a simple message:
+
+      ```
+
+      message ''Hello, World!'';
+
+      ```
+
+      This will show a pop-up window with the message "Hello, World!".'
+  - question: Write code to show an error message using the Actian 4GL OpenROAD Message
+      Statement.
+    answer: 'Here''s how to display an error message:
+
+      ```
+
+      message ''Error: Invalid input. Please try again.'';
+
+      ```
+
+      This will show a pop-up window with the error message.'
+  - question: How to use a variable in an Actian 4GL OpenROAD Message Statement?
+    answer: 'To use a variable in a message:
+
+      ```
+
+      define user_name = varchar(50);
+
+      let user_name = ''John'';
+
+      message ''Welcome, '' || user_name || ''!'';
+
+      ```
+
+      This will display a personalized welcome message using the user_name variable.'
+  - question: Write code to display a multi-line message using the Actian 4GL OpenROAD
+      Message Statement.
+    answer: "To display a multi-line message:\n```\nmessage 'Line 1 of the message\n\
+      ' ||\n        'Line 2 of the message\n' ||\n        'Line 3 of the message';\n\
+      ```\nThis will show a pop-up with a three-line message. Note the use of '\n' for\
+      \ line breaks."
+  - question: How to display a message with numeric values using the Actian 4GL OpenROAD
+      Message Statement?
+    answer: 'To display a message with numeric values:
+
+      ```
+
+      define total_items = integer;
+
+      define total_cost = money;
+
+      let total_items = 5;
+
+      let total_cost = 100.50;
+
+      message ''You have '' || char(total_items) || '' items, totaling $'' || char(total_cost);
+
+      ```
+
+      This will show a message with the number of items and total cost.'
+  - question: Write code to use the Actian 4GL OpenROAD Message Statement for debugging
+      purposes.
+    answer: "Here's how to use a message for debugging:\n```\ndefine debug_flag = integer;\n\
+      let debug_flag = 1;\nif debug_flag = 1 then\n    message 'Debug: Entering process_data()\
+      \ function';\nendif;\n```\nThis will display a debug message only when the debug\
+      \ flag is set."
+  - question: How to use the Actian 4GL OpenROAD Message Statement to display the result
+      of a database operation?
+    answer: 'To display a database operation result:
+
+      ```
+
+      define rows_affected = integer;
+
+      select count(*) into :rows_affected from customers where status = ''Active'';
+
+      message ''Number of active customers: '' || char(rows_affected);
+
+      ```
+
+      This will show the number of active customers retrieved from the database.'
+  - question: Write code to use the Actian 4GL OpenROAD Message Statement in an error
+      handling scenario.
+    answer: "Here's an error handling scenario using a message:\n```\ndefine error_code\
+      \ = integer;\nif error_code != 0 then\n    message 'An error occurred. Error code:\
+      \ ' || char(error_code) || '. Please contact support.';\nendif;\n```\nThis will\
+      \ display an error message with the error code when an error occurs."
+  - question: How to use the Actian 4GL OpenROAD Message Statement to provide user instructions?
+    answer: "To provide user instructions:\n```\nmessage 'Please follow these steps:\n\
+      ' ||\n        '1. Enter customer information\n' ||\n        '2. Verify the details\n\
+      ' ||\n        '3. Click Submit to save';\n```\nThis will display a pop-up with\
+      \ step-by-step instructions for the user."
+  - question: Write code to use the Actian 4GL OpenROAD Message Statement to display
+      application status.
+    answer: "Here's how to display application status:\n```\ndefine app_status = varchar(20);\n\
+      define last_update = date;\nlet app_status = 'Running';\nlet last_update = today;\n\
+      message 'Application Status: ' || app_status || '\n' ||\n        'Last Updated:\
+      \ ' || char(last_update);\n```\nThis will show a pop-up with the current application\
+      \ status and last update date."
