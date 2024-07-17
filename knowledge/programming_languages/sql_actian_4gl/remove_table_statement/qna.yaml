@@ -1,0 +1,50 @@
+version: 2
+task_description: >-
+  Explain the features and parameters of the remove table statement in Actian
+  4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the remove table statement?
+    answer: |
+      The syntax of the remove table statement in OpenROAD SQL is as follows:
+      ```
+      remove table [schema.]table_name;
+      ```
+  - question: What does the remove table statement do?
+    answer: >
+      The remove table statement removes the registration of a security log file
+      and the mapping of a file to a virtual table.
+  - question: What is required to execute the remove table statement?
+    answer: >
+      To execute the remove table statement, you must have SECURITY privilege.
+      If the target table is a security audit gateway table, you must have
+      MAINTAIN_AUDIT privilege.
+  - question: What tables are locked by the remove table statement?
+    answer: >
+      The remove table statement locks the iirelation, iiattribute, iiqrytext,
+      and iiregistrations catalogs.
+  - question: How does the remove table statement differ from the remove statement?
+    answer: >
+      The remove table statement specifically removes the registration of a
+      security log file, whereas the remove statement is a different statement
+      described in the Ingres Star User Guide.
+  - question: Can you provide an example of using the remove table statement?
+    answer: |
+      ```
+      remove table logfile_xyz;
+      ```
+  - question: >-
+      What is the purpose of the table_name parameter in the remove table
+      statement?
+    answer: >
+      The table_name parameter specifies the name of the table whose
+      registration is to be removed.
+  - question: Which related statement is used to map files to virtual tables?
+    answer: |
+      The register table statement is used to map files to virtual tables.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: 194c9e0
+  patterns:
+    - remove_table_statement.md
