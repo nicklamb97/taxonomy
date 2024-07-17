@@ -1,0 +1,62 @@
+version: 1
+task_description: Explain the features and parameters of the rollback statement in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+- question: What is the purpose of the rollback statement in Actian 4GL SQL?
+  answer: |
+    The rollback statement is used to undo part or all of the current database transaction. It can be used to cancel changes made during a transaction or to return to a specific savepoint within the transaction.
+
+- question: What is the syntax of the rollback statement?
+  answer: |
+    The syntax of the rollback statement is:
+    
+    rollback [work] [to savepointname];
+
+    The 'work' keyword is optional and is included for compatibility with some versions of SQL. The 'to savepointname' clause is optional and is used to roll back to a specific savepoint.
+
+- question: What happens if you use the rollback statement without the 'to savepointname' clause?
+  answer: |
+    If you omit the 'to savepointname' clause, the statement terminates the entire transaction and rolls back any changes made by the transaction. It also closes any open cursors.
+
+- question: How does the 'to savepointname' clause affect the rollback operation?
+  answer: |
+    If you use the 'to savepointname' clause, the transaction is not terminated, and only those changes made after the specified savepoint are rolled back. Processing resumes with the statement following the rollback statement.
+
+- question: Can the rollback statement be used in a database procedure?
+  answer: |
+    You can use the rollback statement in a database procedure only if the procedure is directly executed and is not invoked by a rule.
+
+- question: What happens if you try to use the rollback statement when autocommit is on?
+  answer: |
+    If you are running in the autocommit on transaction management state, it is not possible to use the rollback statement, because the DBMS automatically commits each database statement when the statement completes.
+
+- question: How does the rollback statement affect locks?
+  answer: |
+    If the rollback statement is issued without the 'to savepointname' option, the statement terminates the transaction and releases all locks held during the transaction. If the 'to savepointname' option is included, no locks are released.
+
+- question: What are the performance implications of using the rollback statement?
+  answer: |
+    Executing a rollback undoes some or all of the work done by a transaction. The time required to do this is generally the same amount of time taken to perform the work.
+
+- question: Who has permission to use the rollback statement?
+  answer: |
+    The rollback statement is available to all users.
+
+- question: Can you provide an example of using the rollback statement?
+  answer: |
+    Here's an example of using the rollback statement:
+
+    insert into employees(salary, age) values(:salfield, :agefield);
+    if iierrornumber != 0 then
+        message 'A bad thing happened.';
+        rollback work;
+    endif;
+
+    This example inserts a record into the employees table and rolls back the transaction if an error occurs.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: f3def97
+  patterns:
+    - rollback_statement.md
