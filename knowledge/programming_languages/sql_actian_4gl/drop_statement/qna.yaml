@@ -1,0 +1,88 @@
+version: 2
+task_description: Explain the features and parameters of the drop statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop statement?
+    answer: |
+      The syntax of the drop statement in Ingres is as follows:
+      ```
+      drop [object_type] [schema.]object_name {, [schema.]object_name};
+      ```
+
+  - question: What types of objects can be dropped using the drop statement?
+    answer: |
+      The drop statement can be used to destroy the following object types:
+      - table
+      - view
+      - index
+      Additionally, the following object types can also be dropped with specific drop statements:
+      - dbevent
+      - group
+      - integrity
+      - link
+      - procedure
+      - role
+      - rule
+
+  - question: What happens when you drop a table?
+    answer: |
+      When you drop a table, the specified table is removed from the database. Any indexes, views, privileges, and
+      integrities defined on that table are also automatically dropped. Synonyms and comments defined for the table
+      are also removed.
+
+  - question: How does specifying the object type keyword affect the drop statement?
+    answer: |
+      Specifying the object type keyword ensures that only objects of the specified type are dropped. For example,
+      if you specify `drop table`, only tables will be dropped, even if other object types are listed. If the object
+      type keyword is omitted, Ingres assumes you are dropping a table, view, or index.
+
+  - question: Can you drop multiple objects in a single drop statement?
+    answer: |
+      Yes, you can drop multiple objects in a single drop statement by listing them separated by commas. For example:
+      ```
+      drop table employee, dept;
+      ```
+      This statement drops both the employee and dept tables.
+
+  - question: What permissions are required to use the drop statement?
+    answer: |
+      You must be the owner of the table, view, or index to drop it. This ensures that unauthorized users cannot
+      delete database objects.
+
+  - question: What lock is taken by the drop statement?
+    answer: |
+      The drop statement takes an exclusive lock on the specified table. This lock prevents other transactions from
+      accessing the table while it is being dropped.
+
+  - question: What happens if you drop an object used in a database procedure?
+    answer: |
+      If an object used in the definition of a database procedure is dropped, all permits on the procedure are
+      dropped. The procedure itself is not dropped but cannot be executed until all required objects exist.
+
+  - question: What are some examples of using the drop statement?
+    answer: |
+      Here are some examples of using the drop statement:
+      1. Drop the employee and dept tables:
+         ```
+         drop table employee, dept;
+         ```
+      2. Drop the salary table, its index salidx, and the view emp_sal:
+         ```
+         drop salary, salidx, accounting.emp_sal;
+         ```
+      3. In an OpenROAD program, drop two views:
+         ```
+         drop view tempview1, tempview2;
+         ```
+
+  - question: Are temporary tables automatically dropped?
+    answer: |
+      Yes, all temporary tables are automatically deleted at the end of the session. This ensures that temporary data
+      does not persist beyond the session's duration.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: ee6eeec
+  patterns:
+    - drop_statement.md
