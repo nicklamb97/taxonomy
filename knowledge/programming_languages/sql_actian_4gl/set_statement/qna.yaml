@@ -1,0 +1,75 @@
+version: 1
+task_description: Explain the features and parameters of the set statement in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+- question: What is the purpose of the set statement in Actian 4GL SQL?
+  answer: |
+    The set statement specifies a runtime option for the current session. The selected option remains in effect until the session is terminated or the option is changed using another set statement.
+
+- question: What are some common options that can be set using the set statement?
+  answer: |
+    Some common options include:
+    - set autocommit on | off
+    - set date_format [value]
+    - set decimal [value]
+    - set [no]flatten
+    - set [no]hash
+    - set joinop notimeout | timeout | timeout 'nnn'
+    - set [no]logging
+    - set lockmode (with various parameters)
+    - set [no]parallel [degree of parallelism]
+    - set role none | rolename [with password = 'pwd']
+    - set [no]rules
+
+- question: How does the 'set autocommit' option work?
+  answer: |
+    The set autocommit on statement directs the DBMS Server to treat each query as a single-query transaction. Set autocommit off (the default) means an explicit commit or rollback statement or terminating the session is required to terminate a transaction.
+
+- question: What does the 'set [no]flatten' option do?
+  answer: |
+    Set flatten specifies that query flattening be used to optimize queries, including queries involving aggregate subselects or singleton subselects. By default, Ingres performs query flattening. Set noflatten disables query flattening.
+
+- question: How can you change the locking behavior for a session using the set statement?
+  answer: |
+    You can use the set lockmode statement to change the system defaults for locking that are in effect for a session. For example:
+
+    set lockmode session where level = page,
+        readlock = nolock,
+        maxlocks = 50, timeout = 10;
+
+    This sets the lock level to page, disables read locks, sets a maximum of 50 locks, and a timeout of 10 seconds for the current session.
+
+- question: What is the purpose of the 'set role' option?
+  answer: |
+    Set role allows the session role to be changed during the life of the session. It has the following syntax:
+    set role none | role [with password = 'role_password']
+    This allows users to switch roles, activating or deactivating associated privileges and security audit attributes.
+
+- question: How can you control query optimization using the set statement?
+  answer: |
+    Several options affect query optimization, including:
+    - set [no]flatten: Controls query flattening
+    - set [no]hash: Allows or disallows the query optimizer to consider using hash aggregation and hash joins
+    - set [no]parallel: Controls whether the query optimizer enables the generation of parallel query execution plans
+    - set [no]statistics: Tells the query optimizer whether to use or ignore statistics for a specified table
+
+- question: What does the 'set [no]logging' option do?
+  answer: |
+    The set nologging statement allows a session to bypass the logging and recovery system. This may speed up certain types of update operations but must be used with extreme caution. To enable transaction logging, issue the set logging statement. This option should only be used by database administrators in specific circumstances.
+
+- question: How can you change the default storage structure for tables created with 'create table...as select' using the set statement?
+  answer: |
+    You can use the set result_structure statement to change the default storage structure. For example:
+    set result_structure hash;
+    This would set the default structure to hash for subsequent 'create table...as select' statements.
+
+- question: What is the purpose of the 'set transaction isolation level' option?
+  answer: |
+    The set transaction isolation level statement controls the isolation level of the transaction. It allows you to specify different levels of isolation, such as read uncommitted, read committed, repeatable read, or serializable. Each level provides different guarantees regarding phenomena like dirty reads, non-repeatable reads, and phantom reads.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 49a57a3
+  patterns:
+    - set_statement.md
