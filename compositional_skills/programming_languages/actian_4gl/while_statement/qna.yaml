@@ -1,5 +1,5 @@
 version: 2
-task_description: Write Actian 4GL OpenROAD While Statements
+task_description: Write Actian 4GL OpenROAD While Statement
 created_by: willsjames
 seed_examples:
   - question: How to use a basic while loop to repeat a prompt in Actian 4GL OpenROAD
