@@ -1,0 +1,122 @@
+version: 2
+task_description: Explain the features and parameters of the execute immediate statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the execute immediate statement?
+    answer: |
+      The syntax of the execute immediate statement in Ingres is as follows:
+      ```
+      execute immediate statement_string
+                [into variable{, variable}
+                [beginendblock]];
+      ```
+  - question: What functions does the execute immediate statement perform?
+    answer: |
+      The execute immediate statement performs the following functions:
+      - Executes SQL statements that cannot be included directly in your 4GL script
+      - Executes SQL statements constructed at runtime
+      - Includes new SQL functionality in your 4GL scripts
+  - question: What happens if no statement string is included in the execute immediate statement?
+    answer: |
+      If no statement string is included, a runtime error occurs when the execute immediate statement is executed.
+  - question: Can a select statement used in execute immediate return multiple rows?
+    answer: |
+      Yes, a select statement as the value of statement_string can return one or more rows. If it returns more than
+      one row, the select statement can contain a select loop to process the rows.
+  - question: When should the into clause be used in the execute immediate statement?
+    answer: |
+      The into clause should be used when the value of statement_string is a select statement. When the select
+      statement executes, the values it retrieves are placed in the variables named in the into clause.
+  - question: What is the parameter statement_string in the execute immediate statement?
+    answer: |
+      The statement_string parameter specifies a string literal, a varchar expression, or a reference variable of
+      class StringObject. The statement string cannot contain more than one statement.
+  - question: Which SQL statements cannot be executed using execute immediate?
+    answer: |
+      The following SQL statements cannot be executed using execute immediate:
+      - call
+      - close
+      - connect
+      - declare
+      - disconnect
+      - enddata
+      - fetch
+      - get data
+      - get dbevent
+      - help
+      - include
+      - inquire_sql
+      - open
+      - prepare to commit
+      - put data
+      - set_sql
+      - whenever
+      - Other dynamic SQL statements
+  - question: What must be ensured when using variables in the into clause?
+    answer: |
+      The number and data types of the variables in the into clause must match the number and data types of the values
+      returned by the select statement.
+  - question: What is the execute immediate statement used for?
+    answer: |
+      The execute immediate statement is used to execute a dynamically built statement string. It does not name or
+      encode the statement and cannot supply parameters.
+  - question: When is it appropriate to use the execute immediate statement?
+    answer: |
+      The execute immediate statement can be used:
+      - If a dynamic statement needs to be executed just once in your program
+      - In drop statements, where the name of the object to be dropped is not known at the time the program is compiled
+  - question: What should be done if the statement string includes embedded quotes?
+    answer: |
+      If the statement string includes embedded quotes, it is easiest to specify the string in a 4GL language variable.
+      Quoted characters within the statement string must follow the 4GL SQL string delimiting rules.
+  - question: When can the into clause be used in the execute immediate statement?
+    answer: |
+      The into clause can only be used when the statement string is a select statement. It specifies variables to store
+      the values returned by the select.
+  - question: What permissions are required to use the execute immediate statement?
+    answer: |
+      The execute immediate statement is available to all users.
+  - question: How does the execute immediate statement behave with respect to locking?
+    answer: |
+      The locking behavior of the execute immediate statement depends on which statement is executed.
+  - question: Can you provide an example of using execute immediate to create a table at runtime?
+    answer: |
+      Here is an example of creating a table defined at runtime by the user:
+      ```
+      /* User input assigned to variable new_table */
+      new_table = 'Create table expired_accts(acctno = integer, name = varchar(50) not null)';
+      ...
+      execute immediate new_table;
+      ```
+  - question: Can you provide an example of executing a statement in a string object using execute immediate?
+    answer: |
+      Here is an example of executing a statement in a string object:
+      ```
+      /* Declare the string object variable */
+      stmt_string = StringObject;
+      /* Prompt user for input */
+      status = CurFrame.ReplyPopup(messagetext = 'Enter an SQL statement', reply = stmt_string):
+      /* Execute the statement */
+      execute immediate stmt_string;
+      ```
+  - question: Can you provide an example of executing a select statement using execute immediate?
+    answer: |
+      Here is an example of executing a select statement:
+      ```
+      /* Declarations */
+      emp_no = integer not null;
+      emp_name = varchar(256) not null;
+      selstring = varchar(256) not null;
+      /* Executing code */
+      selstring = 'select e_no, e_name from emp_table';
+      execute immediate selstring into emp_no, emp_name
+      begin
+           processing statements
+      end
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 78e00ef
+  patterns:
+    - execute_immediate_statement.md
