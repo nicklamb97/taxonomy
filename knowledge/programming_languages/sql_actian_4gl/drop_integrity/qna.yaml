@@ -1,0 +1,61 @@
+version: 2
+task_description: Explain the features and parameters of the drop integrity statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop integrity statement?
+    answer: |
+      The syntax of the drop integrity statement in Ingres is as follows:
+      ```
+      drop integrity on table_name ALL | integer {, integer};
+      ```
+  - question: What does the drop integrity statement do?
+    answer: |
+      The drop integrity statement removes the specified integrity constraints from a table. When integrities are
+      dropped, the DBMS Server updates the date and timestamp of the table and recreates query plans for repeat queries
+      and database procedures when they are executed.
+  - question: Can the drop integrity statement remove constraints defined using the create table statement?
+    answer: |
+      No, the drop integrity statement does not remove constraints defined using the create table statement.
+  - question: What parameter specifies the table from which to drop integrity constraints?
+    answer: |
+      The table_name parameter specifies the name of the table for which integrity constraints are to be dropped.
+  - question: How do you drop all constraints from a table using the drop integrity statement?
+    answer: |
+      To drop all constraints from a table, use the keyword ALL in the drop integrity statement. For example:
+      ```
+      drop integrity on exhibitions all;
+      ```
+  - question: How do you drop individual constraints from a table using the drop integrity statement?
+    answer: |
+      To drop individual constraints, specify the integer values corresponding to the constraints. For example:
+      ```
+      drop integrity on job 1, 4, 5;
+      ```
+  - question: How can you obtain the integer equivalents for integrity constraints?
+    answer: |
+      To obtain the integer equivalents for integrity constraints, execute the help integrity statement.
+  - question: What permissions are required to drop integrity constraints?
+    answer: |
+      To drop integrity constraints, you must own the table. This ensures only authorized users can remove constraints.
+  - question: Can you provide an example of dropping all constraints on a table using the drop integrity statement?
+    answer: |
+      Here is an example of dropping all constraints on the exhibitions table:
+      ```
+      drop integrity on exhibitions all;
+      ```
+  - question: Can you provide an example of dropping specific constraints on a table using the drop integrity statement?
+    answer: |
+      Here is an example of dropping integrity constraints 1, 4, and 5 on the job table:
+      ```
+      drop integrity on job 1, 4, 5;
+      ```
+  - question: What related statements should I know about for managing integrity constraints?
+    answer: |
+      Related statements for managing integrity constraints include:
+      - Create Integrity Statement
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 2a5fc32
+  patterns:
+    - drop_integrity_statement.md
