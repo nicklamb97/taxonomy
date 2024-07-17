@@ -1,0 +1,115 @@
+version: 2
+task_description: Explain the features and parameters of the register table statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the register table statement?
+    answer: |
+      The syntax of the register table statement is as follows:
+      ```
+      register table [schema.]table_name
+                    (column_name column_type [is 'external_name']
+                    {, column_name column_type [is 'external_name']})
+                    as import | link from 'security_log_file_name' | 'current'
+                    with dbms = SXA [, rows = integer_value];
+      ```
+
+  - question: What does the register table statement do?
+    answer: |
+      The register table statement maps the structure of a file to the structure
+      of a table. It allows you to map the fields in a file to columns in a virtual
+      table, enabling SQL manipulation of the file's contents.
+
+  - question: What are the main parameters of the register table statement?
+    answer: |
+      The main parameters of the register table statement are:
+      - table_name: Assigns a name to the table.
+      - column_name column_type [is 'external_name']: Specifies the name and data
+        type of each column of the virtual table.
+      - as import from or as link from: Specifies the file to be imported or linked.
+      - with dbms = SXA: Specifies the origin of the table being registered.
+      - rows = integer_value: Specifies the expected number of records in the log.
+
+  - question: How can you map table columns to file fields?
+    answer: |
+      You can map table columns to file fields using the is 'external_name' clause.
+      For example:
+      ```sql
+      db_name char(32) is 'database'
+      ```
+      This maps the table column 'db_name' to the security log field 'database'.
+
+  - question: What does the 'current' option do in the register table statement?
+    answer: |
+      The 'current' option dynamically registers the current log file that is in use.
+      When 'current' is specified, SQL operations on the virtual log table always see
+      the log file in use, even if the physical log file changes.
+
+  - question: What is the default number of rows for the rows parameter?
+    answer: |
+      The default value for the rows parameter is 1000. This value is used by the
+      DBMS query optimizer to produce query plans for queries that see the
+      registered table.
+
+  - question: What SQL statements can be performed against registered tables?
+    answer: |
+      The following statements can be performed against registered tables:
+      - create view
+      - create synonym
+      - create rule
+      - comment
+      - select
+      - insert, update, and delete (if they are from an updatable Enterprise Access product)
+      - drop
+      - save
+      - register...as link (as described in the Ingres Star User Guide)
+
+  - question: What SQL statements cannot be performed against registered tables?
+    answer: |
+      The following statements cannot be performed against registered tables:
+      - modify
+      - create index
+
+  - question: What permissions are required to register a table?
+    answer: |
+      To register a table, the session must have MAINTAIN_AUDIT privilege.
+      To query the audit log, AUDITOR privilege is required.
+
+  - question: What happens when you register a security log?
+    answer: |
+      When registered, a security log is read-only. The security log shows security
+      events for the entire Ingres installation by default. If the database field is
+      omitted, the security log contains records only for the database in which the
+      log is registered.
+
+  - question: Can you provide an example of registering a security audit log?
+    answer: |
+      Here's an example of registering a security audit log:
+      ```sql
+      register table aud1 (
+          audittime          date not null,
+          user_name          char(32) not null,
+          real_name          char(32) not null,
+          userprivileges     char(32) not null,
+          objprivileges      char(32) not null,
+          database           char(32) not null,
+          auditstatus        char(1) not null,
+          auditevent         char(24) not null,
+          objecttype         char(24) not null,
+          objectname         char(32) not null,
+          objectowner        char(32) not null,
+          description        char(80) not null,
+          detailinfo         varchar(256) not null,
+          detailnum          integer4 not null,
+          sessionid          char(16) not null,
+          querytext_sequence integer4 not null
+      ) as import from 'myfile'
+      with dbms=SXA,
+      rows=2000;
+      ```
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: f1c5e57
+  patterns:
+    - register_table_statement.md
