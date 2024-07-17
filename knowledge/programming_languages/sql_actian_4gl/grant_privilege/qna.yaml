@@ -1,0 +1,83 @@
+version: 2
+task_description: Explain the features and parameters of the grant (privilege) statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the grant (privilege) statement?
+    answer: |
+      The syntax of the grant (privilege) statement in Ingres is as follows:
+      ```
+      grant all [privileges] | privilege {, privilege}
+            [on [object_type] [schema.]object_name {, [schema.]object_name}]
+            to public | [auth_type]auth_id{, auth_id};
+      ```
+  - question: What does the grant (privilege) statement do?
+    answer: |
+      The grant (privilege) statement grants privileges on the database as a whole or on individual tables, views,
+      sequences, or procedures. It controls access to database objects, roles, and DBMS resources.
+  - question: How do you remove privileges granted by the grant statement?
+    answer: |
+      To remove privileges, use the revoke statement. To determine the privileges in effect for a session, use the
+      DBMSINFO function.
+  - question: What is the ISO/ANSI-compliant method for controlling access to database objects and resources?
+    answer: |
+      The grant statement is the ISO/ANSI-compliant method for controlling access to database objects and resources.
+  - question: How can you display granted database privileges?
+    answer: |
+      To display granted database privileges, select data from the iidbprivileges system catalog.
+  - question: What are the valid object types for the grant statement?
+    answer: |
+      Valid object types for the grant statement are:
+      - table (default)
+      - database
+      - procedure
+      - dbevent
+      - current installation
+  - question: What are the valid auth_types for the grant statement?
+    answer: |
+      Valid auth_types for the grant statement are:
+      - user
+      - group
+      - role
+      Default: user
+  - question: What happens if you specify public as the auth_type?
+    answer: |
+      Specifying public grants a privilege to all users. The auth_type parameter can be omitted.
+  - question: Can privileges be granted out of order in the grant statement?
+    answer: |
+      Privileges cannot be defined for more than one type of object in a single grant statement. The object_type must
+      agree with the privilege being granted.
+  - question: What happens if there's a mismatch in variable data types during grant?
+    answer: |
+      OpenROAD reports a mismatch in the iierrornumber system variable if there's a mismatch in data types, though the
+      row is still fetched and becomes the current row.
+  - question: Can you provide an example of granting select and update privileges on a table?
+    answer: |
+      ```
+      grant select, update on table salary to group acct_clerk;
+      ```
+  - question: Can you provide an example of granting update privileges on specific columns in a table?
+    answer: |
+      ```
+      grant update(empname, empaddress) on table employee to joank, gerryr;
+      ```
+  - question: Can you provide an example of granting execute privileges on a procedure?
+    answer: |
+      ```
+      grant execute on procedure monthly_report to public;
+      ```
+  - question: Can you provide an example of granting noquery_row_limit on a database?
+    answer: |
+      ```
+      grant noquery_row_limit on database new_acct to role update_emp;
+      ```
+  - question: Can you provide an example of granting register and raise privileges on a database event?
+    answer: |
+      ```
+      grant register, raise on dbevent stock_low to role inventory_monitor;
+      ```
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a76a62a
+  patterns:
+    - grant_privilege_statement.md
