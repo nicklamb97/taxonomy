@@ -1,0 +1,56 @@
+version: 2
+task_description: Explain the features and parameters of the drop group statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actial_4gl
+seed_examples:
+  - question: What is the syntax of the drop group statement?
+    answer: |
+      The syntax of the drop group statement in Ingres is as follows:
+      ```
+      drop group group_id {, group_id};
+      ```
+  - question: What does the drop group statement do?
+    answer: |
+      The drop group statement removes the specified group identifiers from the installation. If any of the specified
+      identifiers does not exist, the DBMS Server returns an error but does not abort the statement. Other valid
+      existing group_ids in the statement are deleted.
+  - question: What is a requirement for a group identifier to be dropped?
+    answer: |
+      A group identifier must be empty, that is, have no users in its user list, before it can be dropped. If an attempt
+      is made to drop a group identifier that still has members in its user list, the DBMS Server returns an error and
+      does not delete the identifier.
+  - question: What happens if you try to drop a group identifier that has members?
+    answer: |
+      If you try to drop a group identifier that still has members in its user list, the DBMS Server returns an error
+      and does not delete the identifier. However, the statement is not aborted, and other group identifiers in the list
+      are deleted, if they are empty.
+  - question: How can you empty a group's user list before dropping it?
+    answer: |
+      Use the alter group statement to drop all the users from a group's user list before dropping the group identifier.
+  - question: What permissions are required to drop a group?
+    answer: |
+      To drop a group, you must have MAINTAIN_USERS privilege and be connected to the iidbdb database. This ensures
+      only authorized users can remove group identifiers.
+  - question: What happens to a session using a group identifier when it is dropped?
+    answer: |
+      Any session using a group identifier when it is dropped continues to run with the privileges defined for that
+      group. This ensures ongoing sessions are not disrupted by the drop operation.
+  - question: Can you provide an example of the drop group statement?
+    answer: |
+      Here are examples of the drop group statement:
+      ```
+      -- Drop the group identifier, acct_clerk.
+      drop group acct_clerk;
+      -- In an application, drop the group identifiers, tel_sales and temp_clerk.
+      drop group tel_sales, temp_clerk;
+      ```
+  - question: What related statements should I know about for managing groups?
+    answer: |
+      Related statements for managing groups include:
+      - Alter Group Statement
+      - Create Group Statement
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 039a33f
+  patterns:
+    - drop_group_statement.md
