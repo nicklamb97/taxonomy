@@ -1,0 +1,103 @@
+version: 2
+task_description: Explain the features and parameters of the open statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the open statement?
+    answer: |
+      The syntax of the open statement is as follows:
+      ```
+      open cursor_variable for select_statement
+                [for update_clause];
+      ```
+      where update_clause is one of the following:
+      ```
+      readonly
+      [deferred | direct] update of column{, column}
+      ```
+
+  - question: What does the open statement do?
+    answer: |
+      The open statement performs the following actions:
+      - Opens a cursor in the database
+      - Evaluates the specified select statement and positions the cursor immediately
+        before the first row in the select statement's result table
+      - Sets the State attribute to CS_OPEN
+
+  - question: When must you use the open statement?
+    answer: |
+      You must use the open statement before you can use any data manipulation
+      statements (fetch, update, or delete) with the cursor. After the cursor is
+      open, it stays open until you close it with the close statement or until
+      the transaction terminates.
+
+  - question: What are the possible formats for the target list of the select statement in an open statement?
+    answer: |
+      The target list of the select statement can use any of the following formats:
+      - resultname = dbexpression
+      - dbexpression as resultname
+      - *
+      - correlation_name.*
+      - dbexpression
+      Note: The asterisk selects values from all columns.
+
+  - question: What are the parameters of the open statement?
+    answer: |
+      The open statement has the following parameters:
+      - cursor_variable: Specifies the name of a local or global reference variable
+        that points to an object of type CursorObject. This variable cannot have a
+        null value.
+      - select_statement: Specifies any legal select statement. If you open the
+        cursor for update, its associated select statement can reference only one table.
+      - update_clause: Defines the operations that you intend to perform on the rows
+        retrieved by the select statement.
+
+  - question: How can you define the cursor mode in an open statement?
+    answer: |
+      The cursor mode is defined by the for update_clause. You can open a cursor
+      in either of the following modes:
+      - Read-only: Specifies that you can read the result table rows but not update
+        or delete them
+      - Update: Specifies that you can read, update, or delete rows in the result table
+      If you omit this clause, you can read or delete the result table rows but you
+      cannot update them.
+
+  - question: What is the difference between deferred and direct update cursors?
+    answer: |
+      - Deferred update cursor: Any updates or deletions made are not visible in the
+        database until the cursor is closed.
+      - Direct update cursor: Any changes or deletions are visible immediately.
+      If you do not specify one of these keywords, the default is deferred update.
+
+  - question: How many cursors can you open simultaneously under different transaction management states?
+    answer: |
+      - With autocommit off (default): You can open one deferred cursor and any number
+        of direct update cursors and any number of read-only cursors.
+      - With autocommit on: You can have only one cursor open at any one time,
+        regardless of its mode.
+
+  - question: Can you provide an example of opening a read-only cursor?
+    answer: |
+      Here's an example of opening a read-only cursor:
+      ```sql
+      open emp_cursor for select name, age
+           from emp
+           where dept = :dept#
+           for readonly;
+      ```
+
+  - question: Can you provide an example of opening a cursor for updating a specific column?
+    answer: |
+      Here's an example of opening a cursor for updating the age column:
+      ```sql
+      open emp_cursor for select name, age
+           from emp
+           where dept = :dept#
+           for direct update of age;
+      ```
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 0675828
+  patterns:
+    - open_statement.md

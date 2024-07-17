@@ -1,0 +1,6 @@
+Title: Actian 4GL SQL Open Statements Syntax
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FOpen_Statement.htm%23
+
+The knowledge content is based on the general syntax and usage of Actian 4GL SQL open statements for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
