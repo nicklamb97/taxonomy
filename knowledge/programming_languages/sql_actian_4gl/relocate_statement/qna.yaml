@@ -1,0 +1,71 @@
+version: 2
+task_description: Explain the features and parameters of the relocate statement in Actian 4GL SQL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the relocate statement?
+    answer: |
+      The syntax of the relocate statement is as follows:
+      ```
+      relocate table_name to location_name;
+      ```
+
+  - question: What does the relocate statement do?
+    answer: |
+      The relocate statement is used to move a table from its current location to
+      the area corresponding to the specified location_name. All indexes, views,
+      and protections for the table remain in force and valid regardless of the
+      new location of the table.
+
+  - question: When should the relocate statement be used?
+    answer: |
+      The relocate statement must be used when the current disk of the table
+      becomes too full.
+
+  - question: What are the parameters of the relocate statement?
+    answer: |
+      The relocate statement has two parameters:
+      - table_name: Specifies the name of the table to be relocated.
+      - location_name: Refers to the area in which the new table is created.
+
+  - question: What are the requirements for the location_name parameter?
+    answer: |
+      The location_name must meet two requirements:
+      1. It must be defined on the system.
+      2. The database must have been extended to the corresponding area.
+
+  - question: Can host language variables be used in the relocate statement?
+    answer: |
+      No, table_name and location_name must be string constants if this statement
+      is used in an embedded program. Host language variables cannot be used to
+      represent either.
+
+  - question: What happens to the table's indexes, views, and protections after relocation?
+    answer: |
+      All indexes, views, and protections for the table remain in force and valid
+      regardless of the new location of the table.
+
+  - question: Is there any limit to how many times a table can be relocated?
+    answer: |
+      The documentation does not specify any limit to the number of times a table
+      can be relocated.
+
+  - question: Does the relocate statement affect the structure or content of the table?
+    answer: |
+      No, the relocate statement only moves the table to a new location. It does
+      not affect the structure or content of the table.
+
+  - question: Can you provide an example of using the relocate statement?
+    answer: |
+      Here's an example of using the relocate statement:
+      ```sql
+      relocate employee to remote_loc;
+      ```
+      This statement relocates the employee table to the area defined by the
+      remote_loc location_name.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: a41133f
+  patterns:
+    - relocate_statement.md
