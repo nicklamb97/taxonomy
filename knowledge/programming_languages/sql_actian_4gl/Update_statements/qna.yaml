@@ -1,0 +1,75 @@
+version: 2
+task_description: Explain the features and parameters of the update statement in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax of the update statement?
+    answer: |
+      The syntax of the update statement in OpenROAD SQL is as follows:
+      ```
+      • Non-cursor version:
+      [repeated] update tablename [corrname]
+           [from fromclause]
+           set columnname = dbexpression {, columnname = dbexpression}
+           [where searchcondition];
+
+      • Cursor version:
+      update tablename set columnname = dbexpression
+           {, columnname = dbexpression} where current of cursor_variable;
+      ```
+  - question: What does the update statement do?
+    answer: >
+      The update statement updates the values of the columns in a database
+      table.
+  - question: What is the purpose of the set clause in the update statement?
+    answer: >
+      The set clause specifies the columns in the table that you want to update
+      and the new values for those columns.
+  - question: When is the repeated keyword used in the update statement?
+    answer: >
+      The repeated keyword is used to direct the DBMS to encode and save the
+      query execution plan for the statement, which enhances performance if the
+      statement will be executed more than once.
+  - question: What is the role of the where clause in the update statement?
+    answer: >
+      The where clause specifies the conditions that must be met for rows to be
+      updated. If no where clause is provided, all rows in the table are
+      updated.
+  - question: How does the update statement differ in deferred mode and direct mode?
+    answer: >
+      In deferred mode, only one operation (update or delete) can be performed
+      on each row. Direct mode does not have this restriction, but performing
+      two updates without a fetch in between can update the same row twice.
+  - question: How are variables used in the update statement?
+    answer: >
+      Variables are used in the update statement to specify dynamic values for
+      columns, conditions, and from clauses.
+  - question: Can you provide an example of updating a single row using a cursor?
+    answer: |
+      ```
+      update emptable
+           set name = :namefield, age = :agefield
+           where current of emp_cursor;
+      commit;
+      ```
+  - question: Can you provide an example of updating multiple rows based on a condition?
+    answer: |
+      ```
+      update personnel
+           set sal = :salary * 1.1
+           where empno = :empno;
+      commit;
+      ```
+  - question: What happens if an update statement is not successful?
+    answer: >
+      If the update statement is not successful, OpenROAD sets the IIrowcount
+      system variable to -1 or 0, indicating failure.
+  - question: Is it necessary to commit after each cursor update?
+    answer: >
+      No, it is not necessary to commit after each cursor update. All changes
+      are committed when you close the cursor.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: d7cfcd9
+  patterns:
+    - update_statement.md
