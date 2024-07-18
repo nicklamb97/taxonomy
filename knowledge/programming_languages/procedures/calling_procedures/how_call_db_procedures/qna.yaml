@@ -1,0 +1,56 @@
+version: 2
+task_description: Explain how you can call database procedures in Actian 4GL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the syntax for calling a database procedure?
+    answer: |
+      The syntax for calling a database procedure is:
+      ```
+      [integer_variable =] callproc procedurename [(parameter = expression {, parameter = expression})]
+      ```
+  - question: How do you specify the name of the database procedure in the callproc statement?
+    answer: |
+      You specify the procedure name you provided when you created and registered the database procedure in OpenROAD
+      Workbench.
+  - question: Can you provide an example of calling a database procedure without parameters?
+    answer: |
+      Yes, here is an example:
+      ```
+      callproc mydbprocedure;
+      ```
+  - question: How do you pass parameters to a database procedure in the callproc statement?
+    answer: |
+      You use parameter names to pass parameters, and they must be simple variables only. The syntax is:
+      ```
+      [integer_variable =] callproc procedurename [(parameter = expression {, parameter = expression})]
+      ```
+  - question: Can parameters be passed in any order when calling a database procedure?
+    answer: |
+      Yes, parameters can be passed in any order because they are specified by name rather than by position.
+  - question: What data types can be used for parameters in the callproc statement for database procedures?
+    answer: |
+      The parameters must be simple variables, such as integer, float, and varchar.
+  - question: Can you provide an example of calling a database procedure with parameters?
+    answer: |
+      Here is an example:
+      ```
+      returnvalue = callproc mydbprocedure(intparam = 256, floatparam = 3.625, charparam = 'seen any good movies
+      lately');
+      ```
+  - question: What type of variable should be used to receive the return value from a database procedure?
+    answer: |
+      When the procedure returns a value, you must specify an integer variable to receive the return value.
+  - question: How do you ensure data integrity and consistency when using database procedures?
+    answer: |
+      Database procedures are executed within the database server, which helps ensure data integrity and consistency.
+  - question: How do database procedures help in improving performance?
+    answer: |
+      Database procedures increase performance by executing within the database server, reducing the need for data
+      transfer between the server and client.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 3c848ae
+  patterns:
+    - call_database_procedures.md

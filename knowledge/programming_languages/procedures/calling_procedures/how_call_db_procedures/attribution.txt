@@ -1,0 +1,6 @@
+Title: Actian 4GL How to call database procedures in 4gl
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/Programming%2FHow_You_Can_Call_Database_Procedures.htm%23
+
+The knowledge content is based on how to call 4gl database procedures and is for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
