@@ -41,6 +41,6 @@ seed_examples:
       - Create Table Statement: Used to create new tables where indexes can be applied.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: a4eb822
+  commit: bb0f120
   patterns:
     - create_index.md
