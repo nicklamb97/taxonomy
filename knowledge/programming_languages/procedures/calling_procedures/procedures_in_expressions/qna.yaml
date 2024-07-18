@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain how you can call procedures in expressions in Actian 4GL.
+task_description: Explain how you could call procedures in expressions in Actian 4GL.
 created_by: guyvernon
 domain: sql_actian_4gl
 seed_examples:
