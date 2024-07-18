@@ -33,6 +33,6 @@ seed_examples:
       - Drop Group Statement: Used to delete a group identifier and remove associated users from the system.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 52bedd6
+  commit: 94a74bc
   patterns:
     - create_group.md
