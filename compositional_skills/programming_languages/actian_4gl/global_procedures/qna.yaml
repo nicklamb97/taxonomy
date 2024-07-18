@@ -1,0 +1,166 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Global Procedures
+created_by: willsjames
+seed_examples:
+  - question: How to define a basic global 4GL procedure in Actian 4GL OpenROAD Global Procedures?
+    answer: |
+      Here's a basic global procedure:
+      ```
+      procedure simple_proc =
+      begin
+          message 'This is a simple procedure';
+      end
+      ```
+      This defines a procedure named 'simple_proc' with no parameters or return value.
+
+  - question: >-
+      Write code to demonstrate a global procedure that takes parameters and returns a value in Actian 4GL
+      OpenROAD Global Procedures.
+    answer: |
+      Here's a procedure with parameters and a return value:
+      ```
+      procedure square_root(number = float) = float;
+      begin
+          return sqrt(number);
+      end
+      ```
+      This procedure takes a float parameter and returns its square root.
+
+  - question: How to declare and use local variables within an Actian 4GL OpenROAD Global Procedure?
+    answer: |
+      Here's how to use local variables in a procedure:
+      ```
+      procedure calculate_area(radius = float) = float;
+      declare
+          pi = float;
+      begin
+          pi = 3.14159;
+          return pi * radius * radius;
+      end
+      ```
+      This procedure declares and uses a local variable 'pi'.
+
+  - question: Write code to show nested procedure calls in Actian 4GL OpenROAD Global Procedures.
+    answer: |
+      Here's an example of nested procedure calls:
+      ```
+      procedure outer_proc(x = integer) = integer;
+      begin
+          return inner_proc(arg = x * 2);
+      end
+
+      procedure inner_proc(arg = integer) = integer;
+      begin
+          return arg + 5;
+      end
+
+      -- Usage
+      result = outer_proc(x = 10);
+      ```
+      This demonstrates calling 'inner_proc' from within 'outer_proc'.
+
+  - question: How to use a procedure as an expression in Actian 4GL OpenROAD Global Procedures?
+    answer: |
+      Here's how to use a procedure in an expression:
+      ```
+      procedure square_root(number = float) = float;
+      begin
+          return sqrt(number);
+      end
+
+      -- Usage
+      result = square_root(number = 36) * 5;
+      ```
+      This uses the 'square_root' procedure as part of a larger expression.
+
+  - question: >-
+      Write code to demonstrate calling a procedure dynamically using a variable name in Actian 4GL OpenROAD
+      Global Procedures.
+    answer: |
+      Here's how to call a procedure dynamically:
+      ```
+      procedure dynamic_call =
+      declare
+          proc_name = varchar(30);
+          result = integer;
+      begin
+          proc_name = 'calculate_value';
+          result = :proc_name(x = 5, y = 10);
+          message 'Result: ' || char(result);
+      end
+      ```
+      This calls a procedure whose name is stored in the 'proc_name' variable.
+
+  - question: >-
+      How to handle optional parentheses for procedures without parameters in Actian 4GL OpenROAD Global
+      Procedures?
+    answer: |
+      Here's how to handle optional parentheses:
+      ```
+      procedure no_params =
+      begin
+          message 'Procedure with no parameters';
+      end
+
+      -- Usage (both are valid)
+      callproc no_params;
+      callproc no_params();
+      ```
+      This shows that parentheses are optional for procedures without parameters.
+
+  - question: Write code to demonstrate error handling within an Actian 4GL OpenROAD Global Procedure.
+    answer: |
+      Here's an example of error handling in a procedure:
+      ```
+      procedure divide(a = float, b = float) = float;
+      begin
+          if b = 0 then
+              message 'Error: Division by zero';
+              return 0;
+          else
+              return a / b;
+          endif;
+      end
+      ```
+      This procedure checks for division by zero and handles the error.
+
+  - question: >-
+      How to use a procedure as a parameter in another procedure call in Actian 4GL OpenROAD Global
+      Procedures?
+    answer: |
+      Here's how to use a procedure as a parameter:
+      ```
+      procedure outer_proc(func = procedure returning integer, value = integer) = integer;
+      begin
+          return func(value);
+      end
+
+      procedure double(x = integer) = integer;
+      begin
+          return x * 2;
+      end
+
+      -- Usage
+      result = outer_proc(func = double, value = 5);
+      ```
+      This passes the 'double' procedure as a parameter to 'outer_proc'.
+
+  - question: >-
+      Write code to demonstrate a procedure that interacts with the OpenROAD database in Actian 4GL OpenROAD
+      Global Procedures.
+    answer: |
+      Here's a procedure interacting with the database:
+      ```
+      procedure get_employee_count = integer;
+      declare
+          count = integer;
+      begin
+          select count(*) into :count from employees;
+          return count;
+      end
+
+      -- Usage
+      employee_count = get_employee_count();
+      message 'Total employees: ' || char(employee_count);
+      ```
+      This procedure retrieves the count of employees from the database.
