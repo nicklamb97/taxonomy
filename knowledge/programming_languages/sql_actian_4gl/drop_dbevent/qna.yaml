@@ -41,6 +41,6 @@ seed_examples:
       - Register Dbevent Statement
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: bf4c834
+  commit: 6b8d26e
   patterns:
     - drop_dbevent.md
