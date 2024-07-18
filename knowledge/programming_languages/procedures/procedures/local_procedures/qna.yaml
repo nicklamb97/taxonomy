@@ -1,22 +1,32 @@
 version: 2
-task_description: Explain the features and creation process of local procedures in Actian 4GL SQL.
+task_description: >-
+  Explain the features and creation process of local procedures in Actian 4GL
+  SQL.
 created_by: connorgilchrist99
 domain: sql_actian_4gl
 seed_examples:
   - question: What is a local procedure in OpenROAD?
-    answer: |
-      A local procedure in OpenROAD is a callable procedure coded for a single frame, field, procedure, or user class script. It is defined and called within the same script.
-
+    answer: >
+      A local procedure in OpenROAD is a callable procedure coded for a single
+      frame, field, procedure, or user class script. It is defined and called
+      within the same script.
   - question: How do you declare a forward reference for a local procedure in OpenROAD?
-    answer: |
-      You can declare a forward reference for a local procedure using one of the following formats:
-      ```
-      localprocname = procedure returning typeofreturnvalue
-      localprocname = procedure returning none
-      localprocname = procedure
-      ```
-      The `procedure returning none` and `procedure` formats are equivalent and specify that the procedure does not return a value.
+    answer: >
+      You can declare a forward reference for a local procedure using one of the
+      following formats:
 
+      ```
+
+      localprocname = procedure returning typeofreturnvalue
+
+      localprocname = procedure returning none
+
+      localprocname = procedure
+
+      ```
+
+      The `procedure returning none` and `procedure` formats are equivalent and
+      specify that the procedure does not return a value.
   - question: What is the syntax for defining a local procedure in OpenROAD?
     answer: |
       The syntax for defining a local procedure in OpenROAD is:
@@ -29,42 +39,53 @@ seed_examples:
               statementlist
       end[;]
       ```
-
   - question: How do you call a local procedure in OpenROAD?
-    answer: |
-      Use the `callproc` statement to call a local procedure defined in the current frame or procedure. For example:
-      ```
-      tax = callproc addtax (tax = taxpercent, price = costfield);
+    answer: >
+      Use the `callproc` statement to call a local procedure defined in the
+      current frame or procedure. For example:
+
       ```
 
-  - question: Can you provide an example of a local procedure definition in OpenROAD?
-    answer: |
-      Here is an example of a local procedure definition:
+      tax = callproc addtax (tax = taxpercent, price = costfield);
+
       ```
+  - question: Can you provide an example of a local procedure definition in OpenROAD?
+    answer: >
+      Here is an example of a local procedure definition:
+
+      ```
+
       procedure addtax (tax=float8, price=float8) =
+
       {
            return (price * tax);
       }
-      ```
-      The procedure `addtax` has two parameters, `tax` and `price`, both of type `float8`. It returns the result of `price * tax`.
 
+      ```
+
+      The procedure `addtax` has two parameters, `tax` and `price`, both of type
+      `float8`. It returns the result of `price * tax`.
   - question: How can you call the `addtax` procedure with parameters in OpenROAD?
-    answer: |
+    answer: >
       You can call the `addtax` procedure as follows:
-      ```
-      tax = callproc addtax (tax = taxpercent, price = costfield);
-      ```
-      The order of parameters in the `callproc` statement does not need to match the order in the procedure definition, but the parameter names must be identical.
 
+      ```
+
+      tax = callproc addtax (tax = taxpercent, price = costfield);
+
+      ```
+
+      The order of parameters in the `callproc` statement does not need to match
+      the order in the procedure definition, but the parameter names must be
+      identical.
   - question: Can you provide another example of calling the `addtax` procedure?
     answer: |
       Here is another example of calling the `addtax` procedure:
       ```
       cost = currprice + addtax (tax = .1, price = currprice);
       ```
-
 document:
-  repo: https://github.com/nicklamb97/instructlab-data.git
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: 222be5f
   patterns:
     - local_procedures.md
