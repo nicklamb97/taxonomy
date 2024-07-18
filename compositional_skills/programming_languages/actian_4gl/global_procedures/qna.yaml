@@ -1,5 +1,5 @@
 version: 2
-task_description: Write Actian 4GL OpenROAD Global Procedures
+task_description: Write Actian 4GL OpenROAD Global Procedure
 created_by: willsjames
 seed_examples:
   - question: How to define a basic global 4GL procedure in Actian 4GL OpenROAD Global Procedures?
