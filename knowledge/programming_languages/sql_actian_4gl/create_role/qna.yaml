@@ -63,6 +63,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 2f80664
+  commit: 115b32f
   patterns:
     - create_role_statement.md
