@@ -31,6 +31,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 67cbe63
+  commit: 745b32c
   patterns:
     - drop_rule_statement.md
