@@ -1,0 +1,161 @@
+version: 2
+task_description: Write and call 4GL procedures in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to call a basic 4GL procedure with no return value or parameters in Actian 4GL OpenROAD Calling 4GL
+      Procedures?
+    answer: |
+      To call a basic 4GL procedure with no return value or parameters:
+      ```
+      callproc error_handler;
+      ```
+      This calls the 'error_handler' procedure without passing any parameters.
+
+  - question: >-
+      Write code to call a 4GL procedure that returns a value in Actian 4GL OpenROAD Calling 4GL Procedures.
+    answer: |
+      Here's how to call a 4GL procedure that returns a value:
+      ```
+      declare
+          result = integer;
+      enddeclare
+
+      result = callproc calculate_total;
+      ```
+      This calls the 'calculate_total' procedure and assigns its return value to the 'result' variable.
+
+  - question: How do you pass parameters to a 4GL procedure in Actian 4GL OpenROAD Calling 4GL Procedures?
+    answer: |
+      To pass parameters to a 4GL procedure:
+      ```
+      callproc update_customer(customer_id = 1001, new_name = 'John Doe', new_status = 'Active');
+      ```
+      This calls the 'update_customer' procedure with named parameters.
+
+  - question: >-
+      Demonstrate how to use a variable to dynamically specify a procedure name in Actian 4GL OpenROAD
+      Calling 4GL Procedures.
+    answer: |
+      Here's how to dynamically specify a procedure name:
+      ```
+      declare
+          proc_name = varchar(30);
+      enddeclare
+
+      proc_name = 'error_handler';
+      callproc :proc_name;
+      ```
+      This uses the 'proc_name' variable to specify which procedure to call.
+
+  - question: >-
+      How can you update form fields immediately after calling a procedure in Actian 4GL OpenROAD Calling 4GL
+      Procedures?
+    answer: |
+      To update form fields immediately after calling a procedure:
+      ```
+      callproc update_customer_data(customer_id = 1001);
+      CurFrame.Flush();
+      ```
+      The Flush method updates the form fields before the current event block completes.
+
+  - question: >-
+      Write code to call a procedure with multiple parameters of different types in Actian 4GL OpenROAD
+      Calling 4GL Procedures.
+    answer: |
+      Here's how to call a procedure with multiple parameters of different types:
+      ```
+      declare
+          customer_id = integer;
+          purchase_date = date;
+          total_amount = money;
+      enddeclare
+
+      customer_id = 1001;
+      purchase_date = today();
+      total_amount = 1250.75;
+
+      callproc record_purchase(
+          cust_id = customer_id,
+          date = purchase_date,
+          amount = total_amount,
+          description = 'Office supplies'
+      );
+      ```
+      This calls 'record_purchase' with parameters of various data types.
+
+  - question: >-
+      How do you call a local procedure defined in the current frame in Actian 4GL OpenROAD Calling 4GL
+      Procedures?
+    answer: |
+      To call a local procedure defined in the current frame:
+      ```
+      declare
+          local_proc = procedure;
+      enddeclare
+
+      procedure local_proc =
+      begin
+          message 'This is a local procedure';
+      end
+
+      -- Calling the local procedure
+      callproc local_proc;
+      ```
+      This defines and calls a local procedure within the same frame or procedure.
+
+  - question: >-
+      Demonstrate how to pass an array variable as a parameter in Actian 4GL OpenROAD Calling 4GL Procedures.
+    answer: |
+      Here's how to pass an array variable as a parameter:
+      ```
+      declare
+          product_ids = array of integer;
+      enddeclare
+
+      -- Populate the array
+      product_ids[1] = 101;
+      product_ids[2] = 102;
+      product_ids[3] = 103;
+
+      callproc process_products(products = product_ids);
+      ```
+      This passes the 'product_ids' array to the 'process_products' procedure.
+
+  - question: >-
+      How can you handle optional parameters when calling a procedure in Actian 4GL OpenROAD Calling 4GL
+      Procedures?
+    answer: |
+      To handle optional parameters when calling a procedure:
+      ```
+      -- Assuming the procedure is defined as:
+      -- procedure update_employee(id = integer, name = varchar(50), salary = money default null)
+
+      -- Call with all parameters
+      callproc update_employee(id = 1001, name = 'John Doe', salary = 55000.00);
+
+      -- Call with optional parameter omitted
+      callproc update_employee(id = 1002, name = 'Jane Smith');
+      ```
+      This demonstrates calling a procedure with and without an optional parameter.
+
+  - question: >-
+      Write code to demonstrate error handling when calling a procedure in Actian 4GL OpenROAD Calling 4GL
+      Procedures.
+    answer: |
+      Here's how to implement error handling when calling a procedure:
+      ```
+      declare
+          result = integer;
+      enddeclare
+
+      result = callproc risky_operation;
+
+      if result < 0 then
+          message 'Error occurred in risky_operation. Error code: ' || char(result);
+          callproc error_handler(error_code = result);
+      else
+          message 'Operation completed successfully.';
+      endif;
+      ```
+      This checks the return value of 'risky_operation' and calls an error handler if needed.
