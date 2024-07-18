@@ -48,6 +48,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 7c3771e
+  commit: 8644e08
   patterns:
     - alter_group.md
