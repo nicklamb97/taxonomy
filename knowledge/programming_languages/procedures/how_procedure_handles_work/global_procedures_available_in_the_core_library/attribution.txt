@@ -1,0 +1,6 @@
+Title: Actian 4GL Global Procedures Available in the Core Library
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/Programming%2FHow_Procedure_Handles_Work_(ProcHandle_Objects).htm%23
+
+The knowledge content is based on the general syntax and usage of Actian 4GL Global Procedures Available in the Core Library for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
