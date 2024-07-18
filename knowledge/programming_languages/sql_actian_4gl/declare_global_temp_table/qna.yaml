@@ -70,6 +70,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 38fa257
+  commit: 162b4de
   patterns:
     - declare_global_temporary_table.md
