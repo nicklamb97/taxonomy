@@ -42,6 +42,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 1ec55e0
+  commit: 09c9521
   patterns:
     - drop_role_statement.md
