@@ -83,6 +83,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: ee6eeec
+  commit: f89247a
   patterns:
     - drop_statement.md
