@@ -1,0 +1,22 @@
+version: 2
+task_description: Explain the database procedures in Actian 4GL SQL and how they are used in OpenROAD.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is a database procedure in OpenROAD?
+    answer: |
+      A database procedure is a data-oriented procedure stored in the database and executed within the database server. You can call it by name in a script or 4GL procedure. Database procedures are used to increase performance and help ensure data integrity and consistency.
+
+  - question: How do you use a database procedure in an OpenROAD application?
+    answer: |
+      To use a database procedure in an OpenROAD application, you need to create the procedure using the Database Procedure Editor and then register it with the OpenROAD Workbench. For more details on registering a database procedure, refer to the *Workbench User Guide*.
+
+  - question: Where can I find more information about calling database procedures in OpenROAD?
+    answer: |
+      For more information about calling database procedures in OpenROAD, see the section on Calling Procedures in the OpenROAD documentation.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 1c3ed7f
+  patterns:
+    - database_procedures.md
