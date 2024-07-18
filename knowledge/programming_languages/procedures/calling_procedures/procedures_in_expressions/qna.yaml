@@ -1,0 +1,65 @@
+version: 2
+task_description: Explain how you can call procedures in expressions in Actian 4GL.
+created_by: guyvernon
+domain: sql_actian_4gl
+seed_examples:
+  - question: How do you call a procedure as part of an expression in OpenROAD?
+    answer: |
+      To call a procedure as part of an expression, do not use the callproc keyword. Simply give the procedure name
+      followed by the parameter list. For example:
+      ```
+      if error_handler(frm = CurFrame, commit_evt = 'Commit') != ER_OK then
+          resume;
+      endif;
+      ```
+  - question: Do you need to include parentheses when calling a procedure in an expression without parameters?
+    answer: |
+      Yes, you must include the parentheses even if you are not passing parameters to the procedure. For example:
+      ```
+      message 'Cannot insert graphic into the database. ' +dbms_error_message();
+      ```
+  - question: What data type can the return value of a 4GL procedure be in OpenROAD?
+    answer: |
+      In OpenROAD, 4GL procedures can return a value of any type. The data type of the return value must be compatible
+      with the requirements of the expression.
+  - question: Can you provide an example of calling a procedure that returns a text value in an expression?
+    answer: |
+      Yes, here is an example:
+      ```
+      message 'Cannot insert graphic into the database. ' +dbms_error_message();
+      ```
+      In this example, the dbms_error_message procedure returns a text value, which is used within the text expression.
+  - question: How can you manipulate the return value of a procedure if it is a reference variable?
+    answer: |
+      If the return value is a reference variable, you can manipulate it as any other reference variable. For example,
+      you can use dot notation to access a specific attribute or to invoke a method of the object.
+  - question: Can you use a procedure as part of a conditional statement in OpenROAD?
+    answer: |
+      Yes, you can use a procedure as part of a conditional statement. For example:
+      ```
+      if error_handler(frm = CurFrame, commit_evt = 'Commit') != ER_OK then
+          resume;
+      endif;
+      ```
+  - question: How do you handle a procedure's return value in an expression that performs an arithmetic operation?
+    answer: |
+      You can use the procedure's return value in any operation appropriate to its type. For example, if the procedure
+      returns an integer, you can use it in arithmetic operations.
+  - question: Can you use procedures that return complex types in expressions?
+    answer: |
+      Yes, procedures can return complex types, and you can use their return values in expressions as long as the
+      operations are compatible with the return type.
+  - question: Is there any difference in calling a procedure within an expression compared to using callproc?
+    answer: |
+      When calling a procedure within an expression, you do not use the callproc keyword and must include the
+      parentheses, even if no parameters are passed. Using callproc is for standalone calls outside expressions.
+  - question: What is the significance of the return value's data type when calling a procedure in an expression?
+    answer: |
+      The return value's data type must be compatible with the expression's requirements. This ensures that the
+      expression operates correctly with the returned data.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: '5344002'
+  patterns:
+    - call_procedures_in_expressions.md
