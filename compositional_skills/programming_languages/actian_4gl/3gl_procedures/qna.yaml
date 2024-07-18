@@ -1,5 +1,5 @@
 version: 2
-task_description: Write and use 3GL Procedures in OpenROAD Actian 4GL
+task_description: Write and use 3GL Procedure in OpenROAD Actian 4GL
 created_by: willsjames
 seed_examples:
   - question: >-
