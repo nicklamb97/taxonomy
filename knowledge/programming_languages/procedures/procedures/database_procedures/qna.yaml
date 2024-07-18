@@ -23,6 +23,29 @@ seed_examples:
     answer: >
       For more information about calling database procedures in OpenROAD, see
       the section on Calling Procedures in the OpenROAD documentation.
+  - question: What is the benefit of using database procedures in OpenROAD?
+    answer: >
+      Using database procedures in OpenROAD helps to increase performance by
+      executing complex operations within the database server. They also help
+      ensure data integrity and consistency by centralizing business logic
+      within the database.
+  - question: Can you call a database procedure from a 4GL script in OpenROAD?
+    answer: >
+      Yes, you can call a database procedure from a 4GL script in OpenROAD.
+      Database procedures are executed within the database server, and you can
+      invoke them by name from within your 4GL scripts or procedures.
+  - question: What tool is used to create database procedures in OpenROAD?
+    answer: >
+      Database procedures in OpenROAD are created using the Database Procedure
+      Editor. After creating the procedure, it must be registered with the
+      OpenROAD Workbench to be used in the application.
+  - question: How does using database procedures affect application performance?
+    answer: >
+      Using database procedures can significantly improve application
+      performance by offloading complex processing to the database server. This
+      reduces the amount of data transferred between the application and the
+      database and leverages the database server's optimized processing
+      capabilities.
 document:
   repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: 1c3ed7f
