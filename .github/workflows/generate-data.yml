@@ -43,7 +43,7 @@ jobs:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
         echo "Downloading Meta-Llama-3-8B-Instruct model..."
-        HF_TOKEN=$HF_TOKEN ilab model download --repository=QuantFactory/Meta-Llama-3-8B-Instruct-GGUF --filename=Meta-Llama-3-8B-Instruct.Q4_K_M.gguf
+        HF_TOKEN=$HF_TOKEN ilab model download --repository=NickLamb/Mistral-7B-Instruct-v0.3 --filename=Mistral-7B-Instruct-v0.3.Q4_K_M.gguf
         echo "Model downloaded successfully"
         echo "MODEL_DOWNLOADED=true" >> "$GITHUB_ENV"
 
