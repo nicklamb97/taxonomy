@@ -51,6 +51,6 @@ seed_examples:
       - Create Group Statement
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 039a33f
+  commit: 189e7af
   patterns:
     - drop_group_statement.md
