@@ -1,0 +1,410 @@
+version: 2
+task_description: Write and use 3GL Procedures in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How do you declare parameters for a C procedure that will be called from Actian 4GL OpenROAD 3GL
+      Procedures?
+    answer: |
+      To declare parameters for a C procedure called from Actian 4GL OpenROAD 3GL Procedures, use these guidelines:
+
+      1. For 4GL integer: use 'long' in C
+      2. For 4GL smallint: use 'int' in C
+      3. For 4GL float or money: use 'double' in C
+      4. For 4GL char or varchar: use 'char *' in C
+      5. For 4GL date: use 'char *' in C (25-byte, null-terminated string)
+
+      Example C procedure declaration:
+
+      ```c
+      long my_proc(long int_param, double float_param, char *string_param, char *date_param)
+      {
+          // Procedure body
+          return 0;
+      }
+      ```
+
+      Remember to use pointers (*) for parameters passed by reference using the byref option in 4GL.
+
+  - question: >-
+      Write a C procedure for Actian 4GL OpenROAD 3GL Procedures that accepts an integer and a float, and
+      returns a string.
+    answer: |
+      Here's a C procedure for Actian 4GL OpenROAD 3GL Procedures that accepts an integer and a
+      float, and returns a string:
+
+      ```c
+      #include <stdio.h>
+      #include <stdlib.h>
+
+      char* int_float_to_string(long int_param, double float_param)
+      {
+          static char result[100];  // Static buffer for the result
+
+          // Format the integer and float into a string
+          snprintf(result, sizeof(result), "Integer: %ld, Float: %.2f", int_param, float_param);
+
+          return result;
+      }
+      ```
+
+      To call this procedure from Actian 4GL OpenROAD:
+
+      ```
+      declare
+          int_value = integer;
+          float_value = float;
+          result_string = varchar(100);
+      enddeclare
+
+      int_value = 42;
+      float_value = 3.14;
+
+      result_string = callproc int_float_to_string(int_value, float_value);
+      ```
+
+      Note: The use of a static buffer is for simplicity. In production, consider more robust memory management.
+
+  - question: How do you handle null values when passing parameters to Actian 4GL OpenROAD 3GL Procedures?
+    answer: |
+      To handle null values when passing parameters to Actian 4GL OpenROAD 3GL Procedures,
+      you can use one of these methods:
+
+      1. Use the ifnull function:
+         ```
+         callproc empcalc(ifnull(age, -1));
+         ```
+         This passes -1 if age is null, otherwise passes the value of age.
+
+      2. Use a separate indicator variable:
+         ```
+         null_indicator = 0;
+         if (age is null) then
+             null_indicator = -1;
+         endif;
+         callproc empcalc(age, null_indicator);
+         ```
+
+      In the C procedure, check the indicator or impossible value:
+
+      ```c
+      void empcalc(long age, long indicator)
+      {
+          if (indicator == -1 || age == -1) {
+              // Handle null case
+              printf("Age is null\n");
+          } else {
+              // Process age normally
+              printf("Age is %ld\n", age);
+          }
+      }
+      ```
+
+      Always handle potential null values to avoid runtime errors in 3GL procedures.
+
+  - question: >-
+      Demonstrate how to pass a date value from Actian 4GL OpenROAD to a 3GL Procedure and handle it in C.
+    answer: |
+      To pass a date value from Actian 4GL OpenROAD to a 3GL Procedure and handle it in C:
+
+      1. In Actian 4GL OpenROAD:
+         ```
+         declare
+             my_date = date;
+         enddeclare
+
+         my_date = today();
+         callproc handle_date(my_date);
+         ```
+
+      2. C procedure to handle the date:
+         ```c
+         #include <stdio.h>
+         #include <string.h>
+
+         void handle_date(char *date_str)
+         {
+             // date_str is a 25-byte, null-terminated string
+             printf("Received date: %s\n", date_str);
+
+             // Example: Extract year (assuming YYYY-MM-DD format)
+             char year[5];
+             strncpy(year, date_str, 4);
+             year[4] = '\0';
+             printf("Year: %s\n", year);
+
+             // Further date processing can be done here
+         }
+         ```
+
+      Remember:
+      - 4GL passes dates as 25-byte, null-terminated strings.
+      - The C procedure must handle the date as a string.
+      - When returning a date to 4GL, ensure it's in a valid format for 4GL to convert back to its internal date format.
+
+  - question: >-
+      How do you ensure portability when passing floating-point parameters to Actian 4GL OpenROAD 3GL
+      Procedures?
+    answer: |
+      To ensure portability when passing floating-point parameters to Actian 4GL OpenROAD 3GL Procedures:
+
+      1. Always use the byref qualifier when passing float parameters from 4GL:
+         ```
+         declare
+             my_float = float;
+         enddeclare
+         my_float = 3.14;
+         callproc portable_float_proc(byref(my_float));
+         ```
+
+      2. In the C procedure, declare float parameters as pointers to double:
+         ```c
+         void portable_float_proc(double *float_param)
+         {
+             // Use *float_param to access or modify the value
+             *float_param = *float_param * 2.0;
+         }
+         ```
+
+      3. When returning float values from C, use double:
+         ```c
+         double return_float()
+         {
+             return 3.14159;
+         }
+         ```
+
+      Key points for portability:
+      - Always use 'double' in C for 4GL float and money types.
+      - Pass floats by reference (byref) from 4GL to ensure consistent behavior across platforms.
+      - In C, use pointers to double (*double) for parameters passed by reference.
+      - This approach ensures that the full precision of the float is maintained across different architectures.
+
+
+  - question: "How do you implement error handling in a C procedure for Actian 4GL OpenROAD 3GL Procedures?"
+    answer: |
+      To implement error handling in a C procedure for Actian 4GL OpenROAD 3GL Procedures:
+
+      1. Define error codes in your C procedure:
+      ```c
+      #define ERR_INVALID_INPUT -1
+      #define ERR_CALCULATION -2
+
+      long calculate_result(long input, long *result)
+      {
+          if (input < 0) {
+              return ERR_INVALID_INPUT;
+          }
+
+          // Perform calculation
+          *result = input * 2;
+          if (*result > 1000000) {
+              return ERR_CALCULATION;
+          }
+
+          return 0; // Success
+      }
+      ```
+
+      2. In Actian 4GL, check the return value:
+      ```
+      declare
+          input = integer;
+          result = integer;
+          error_code = integer;
+      enddeclare
+
+      input = 100;
+      error_code = callproc calculate_result(input, byref(result));
+
+      if error_code = 0 then
+          message 'Calculation successful. Result: ' || char(result);
+      elseif error_code = -1 then
+          message 'Error: Invalid input';
+      elseif error_code = -2 then
+          message 'Error: Calculation error (result too large)';
+      else
+          message 'Unknown error occurred';
+      endif;
+      ```
+
+      This approach allows you to handle specific error conditions in your 4GL code based on the
+      error codes returned by the C procedure.
+
+  - question: "How can you pass an array from Actian 4GL OpenROAD to a 3GL Procedure and process it in C?"
+    answer: |
+      To pass an array from Actian 4GL OpenROAD to a 3GL Procedure and process it in C:
+
+      1. In Actian 4GL, declare and populate the array:
+      ```
+      declare
+          numbers = array of integer;
+          array_size = integer;
+          sum = integer;
+      enddeclare
+
+      numbers[1] = 10;
+      numbers[2] = 20;
+      numbers[3] = 30;
+      array_size = 3;
+
+      callproc sum_array(numbers, array_size, byref(sum));
+      ```
+
+      2. Define the C procedure to process the array:
+      ```c
+      void sum_array(long *arr, long size, long *result)
+      {
+          *result = 0;
+          for (long i = 0; i < size; i++) {
+              *result += arr[i];
+          }
+      }
+      ```
+
+      3. In the 3GL loader file, declare the procedure:
+      ```
+      procedure sum_array(
+          numbers = array of integer,
+          size = integer,
+          sum = integer byref
+      );
+      ```
+
+      This approach allows you to pass arrays to C procedures and perform operations on them.
+
+  - question: "How do you create and use a callback function from C to Actian 4GL OpenROAD 3GL Procedures?"
+    answer: |
+      To create and use a callback function from C to Actian 4GL OpenROAD 3GL Procedures:
+
+      1. Define the callback function in Actian 4GL:
+      ```
+      procedure my_callback(value = integer) =
+      begin
+          message 'Callback received: ' || char(value);
+      end
+      ```
+
+      2. Pass the callback to the C procedure:
+      ```
+      callproc process_with_callback(my_callback);
+      ```
+
+      3. In C, define a function pointer type and the procedure that uses the callback:
+      ```c
+      typedef void (*CallbackFunc)(long);
+
+      void process_with_callback(CallbackFunc callback)
+      {
+          for (long i = 0; i < 5; i++) {
+              callback(i);  // Call the 4GL callback function
+          }
+      }
+      ```
+
+      4. In the 3GL loader file, declare the procedure:
+      ```
+      procedure process_with_callback(
+          callback = procedure(value = integer)
+      );
+      ```
+
+      This allows C procedures to call back into 4GL code, enabling more complex interactions between 3GL and 4GL.
+
+  - question: "How can you use a C procedure to manipulate a complex data structure in
+              Actian 4GL OpenROAD 3GL Procedures?"
+    answer: |
+      To use a C procedure to manipulate a complex data structure in Actian 4GL OpenROAD 3GL Procedures:
+
+      1. Define a complex structure in 4GL:
+      ```
+      define type EMPLOYEE = class(
+          id = integer,
+          name = varchar(50),
+          salary = money
+      );
+      ```
+
+      2. Create a C procedure to manipulate the structure:
+      ```c
+      typedef struct {
+          long id;
+          char name[51];  // 50 chars + null terminator
+          double salary;
+      } Employee;
+
+      void give_raise(Employee *emp, double percentage)
+      {
+          emp->salary *= (1 + percentage);
+      }
+      ```
+
+      3. In 4GL, call the C procedure:
+      ```
+      declare
+          emp = EMPLOYEE;
+      enddeclare
+
+      emp.id = 1;
+      emp.name = 'John Doe';
+      emp.salary = 50000;
+
+      callproc give_raise(byref(emp), 0.1);  // 10% raise
+
+      message 'New salary: ' || char(emp.salary);
+      ```
+
+      4. In the 3GL loader file, declare the procedure:
+      ```
+      procedure give_raise(
+          emp = EMPLOYEE byref,
+          percentage = float
+      );
+      ```
+
+      This approach allows you to manipulate complex data structures defined in 4GL using C procedures.
+
+  - question: "How do you handle string manipulation in C procedures for Actian 4GL OpenROAD 3GL Procedures?"
+    answer: |
+      To handle string manipulation in C procedures for Actian 4GL OpenROAD 3GL Procedures:
+
+      1. Define a C procedure for string manipulation:
+      ```c
+      #include <string.h>
+      #include <ctype.h>
+
+      void capitalize_string(char *str)
+      {
+          int i = 0;
+          while (str[i]) {
+              str[i] = toupper((unsigned char)str[i]);
+              i++;
+          }
+      }
+      ```
+
+      2. In Actian 4GL, call the C procedure:
+      ```
+      declare
+          my_string = varchar(50);
+      enddeclare
+
+      my_string = 'hello world';
+      callproc capitalize_string(byref(my_string));
+      message 'Capitalized string: ' || my_string;
+      ```
+
+      3. In the 3GL loader file, declare the procedure:
+      ```
+      procedure capitalize_string(
+          str = varchar(50) byref
+      );
+      ```
+
+      Key points for string handling:
+      - Use 'char *' in C for 4GL char or varchar types.
+      - Always ensure the string is null-terminated in C.
+      - Be cautious about buffer overflows; C doesn't have built-in bounds checking.
+      - When modifying strings, ensure the 4GL variable can accommodate the modified string length.
+
+      This approach allows you to perform complex string manipulations in C and return the results to 4GL.
