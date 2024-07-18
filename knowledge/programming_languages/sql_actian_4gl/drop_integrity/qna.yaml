@@ -56,6 +56,6 @@ seed_examples:
       - Create Integrity Statement
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 2a5fc32
+  commit: 1f2d154
   patterns:
     - drop_integrity_statement.md
