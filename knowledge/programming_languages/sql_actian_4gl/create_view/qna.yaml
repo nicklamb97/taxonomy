@@ -61,6 +61,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: cf1f60d
+  commit: 1c9aeb6
   patterns:
     - create_view.md
