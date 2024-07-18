@@ -44,6 +44,6 @@ seed_examples:
       - Register Dbevent Statement: Registers interest in receiving notifications when a database event occurs.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: fa171ab
+  commit: 481ca7e
   patterns:
     - create_dbevent.md
