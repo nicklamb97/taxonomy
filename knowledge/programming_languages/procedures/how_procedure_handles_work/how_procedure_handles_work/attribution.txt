@@ -1,4 +1,4 @@
-Title: Actian 4GL How Proecdure Handles Work
+Title: Actian 4GL How Procedure Handles Work
 Author: Actian Corporation
 Source: https://docs.actian.com/openroad/6.2/#page/Programming%2FHow_Procedure_Handles_Work_(ProcHandle_Objects).htm%23
 
