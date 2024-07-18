@@ -1,0 +1,213 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Local Procedures
+created_by: willsjames
+seed_examples:
+  - question: How to declare a forward reference for a local procedure in Actian 4GL OpenROAD Local Procedures?
+    answer: |
+      Declare a forward reference like this:
+      ```
+      declare
+          calculate_tax = procedure returning float8;
+      enddeclare
+      ```
+      This declares a forward reference for a local procedure that returns a float8 value.
+
+  - question: >-
+      Write code to define and call a local procedure that calculates a discount in Actian 4GL OpenROAD Local
+      Procedures.
+    answer: |
+      Define and call a discount calculation procedure:
+      ```
+      declare
+          calculate_discount = procedure returning float8;
+      enddeclare
+
+      procedure calculate_discount(price = float8, discount_rate = float8) =
+      begin
+          return price * (1 - discount_rate);
+      end
+
+      -- Usage
+      discounted_price = callproc calculate_discount(price = 100.00, discount_rate = 0.1);
+      ```
+      This defines a procedure to calculate a discounted price and demonstrates its usage.
+
+  - question: How to define a local procedure with multiple parameters in Actian 4GL OpenROAD Local Procedures?
+    answer: |
+      Define a local procedure with multiple parameters:
+      ```
+      declare
+          calculate_total = procedure returning float8;
+      enddeclare
+
+      procedure calculate_total(quantity = integer, unit_price = float8, tax_rate = float8) =
+      begin
+          return quantity * unit_price * (1 + tax_rate);
+      end
+      ```
+      This procedure calculates the total cost including tax for a given quantity and unit price.
+
+  - question: >-
+      Write code to demonstrate using a local procedure in an expression in Actian 4GL OpenROAD Local
+      Procedures.
+    answer: |
+      Use a local procedure in an expression:
+      ```
+      declare
+          square = procedure returning integer;
+      enddeclare
+
+      procedure square(num = integer) =
+      begin
+          return num * num;
+      end
+
+      -- Usage in an expression
+      result = square(5) + square(3);
+      ```
+      This example shows how to use the 'square' procedure in a larger expression.
+
+  - question: >-
+      How to define a local procedure that modifies a local variable in Actian 4GL OpenROAD Local Procedures?
+    answer: |
+      Define a procedure that modifies a local variable:
+      ```
+      declare
+          update_counter = procedure;
+          counter = integer;
+      enddeclare
+
+      procedure update_counter =
+      begin
+          counter = counter + 1;
+      end
+
+      -- Usage
+      counter = 0;
+      callproc update_counter;
+      message 'Counter value: ' || char(counter);
+      ```
+      This procedure increments a local variable 'counter' each time it's called.
+
+  - question: Write code to show error handling within a local procedure in Actian 4GL OpenROAD Local Procedures.
+    answer: |
+      Implement error handling in a local procedure:
+      ```
+      declare
+          safe_divide = procedure returning float8;
+      enddeclare
+
+      procedure safe_divide(numerator = float8, denominator = float8) =
+      begin
+          if denominator = 0 then
+              message 'Error: Division by zero';
+              return 0;
+          else
+              return numerator / denominator;
+          endif;
+      end
+      ```
+      This procedure handles the case of division by zero and returns an error message.
+
+  - question: How to use a local procedure for a repetitive task in Actian 4GL OpenROAD Local Procedures?
+    answer: |
+      Use a local procedure for a repetitive task:
+      ```
+      declare
+          print_stars = procedure;
+      enddeclare
+
+      procedure print_stars(count = integer) =
+      begin
+          let i = 1;
+          while i <= count do
+              message '*';
+              let i = i + 1;
+          endwhile;
+      end
+
+      -- Usage
+      callproc print_stars(count = 5);
+      callproc print_stars(count = 3);
+      ```
+      This procedure prints a specified number of stars, demonstrating its use for repetitive tasks.
+
+  - question: >-
+      Write code to demonstrate passing complex data to a local procedure in Actian 4GL OpenROAD Local
+      Procedures.
+    answer: |
+      Pass complex data to a local procedure:
+      ```
+      declare
+          process_employee = procedure;
+      enddeclare
+
+      procedure process_employee(emp = EMPLOYEE) =
+      begin
+          message 'Processing employee: ' || emp.name;
+          message 'Salary: ' || char(emp.salary);
+          message 'Department: ' || emp.department;
+      end
+
+      -- Usage
+      declare
+          current_emp = EMPLOYEE;
+      enddeclare
+      current_emp.name = 'John Doe';
+      current_emp.salary = 50000;
+      current_emp.department = 'IT';
+      callproc process_employee(emp = current_emp);
+      ```
+      This example shows how to pass a complex EMPLOYEE object to a local procedure.
+
+  - question: >-
+      How to use a local procedure to implement a simple algorithm in Actian 4GL OpenROAD Local Procedures?
+    answer: |
+      Implement a simple algorithm using a local procedure:
+      ```
+      declare
+          fibonacci = procedure returning integer;
+      enddeclare
+
+      procedure fibonacci(n = integer) =
+      begin
+          if n <= 1 then
+              return n;
+          else
+              return fibonacci(n - 1) + fibonacci(n - 2);
+          endif;
+      end
+
+      -- Usage
+      result = callproc fibonacci(n = 10);
+      message 'The 10th Fibonacci number is: ' || char(result);
+      ```
+      This procedure implements the Fibonacci sequence calculation as a local procedure.
+
+  - question: >-
+      Write code to show the scope of a local procedure within a frame in Actian 4GL OpenROAD Local Procedures.
+    answer: |
+      Demonstrate the scope of a local procedure in a frame:
+      ```
+      -- In a frame script
+      declare
+          greet = procedure;
+      enddeclare
+
+      procedure greet(name = varchar(50)) =
+      begin
+          message 'Hello, ' || name || '!';
+      end
+
+      on click greet_button =
+      begin
+          callproc greet(name = 'Alice');
+      end
+
+      on click another_button =
+      begin
+          callproc greet(name = 'Bob');
+      end
+      ```
+      This example shows that the local procedure 'greet' can be called from different
+      event handlers within the same frame.
