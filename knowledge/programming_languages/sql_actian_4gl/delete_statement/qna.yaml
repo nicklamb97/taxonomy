@@ -45,6 +45,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: be7110e
+  commit: 1b06bd2
   patterns:
     - delete_statement.md
