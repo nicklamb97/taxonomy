@@ -1,0 +1,120 @@
+version: 2
+task_description: Use procedures in expressions in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to use a procedure call as part of an if statement condition in Actian 4GL OpenROAD Calling
+      Procedures in Expressions?
+    answer: |
+      Use a procedure call in an if statement condition like this:
+      ```
+      if error_handler(frm = CurFrame, commit_evt = 'Commit') != ER_OK then
+          resume;
+      endif;
+      ```
+      This calls the error_handler procedure and compares its return value to ER_OK.
+
+  - question: >-
+      Write code to concatenate a string with the result of a procedure call in Actian 4GL OpenROAD Calling
+      Procedures in Expressions.
+    answer: |
+      Concatenate a string with a procedure call result like this:
+      ```
+      message 'Cannot insert graphic into the database. ' + dbms_error_message();
+      ```
+      This concatenates a string with the return value of dbms_error_message() procedure.
+
+  - question: >-
+      How to call a procedure without parameters in an expression in Actian 4GL OpenROAD Calling Procedures
+      in Expressions?
+    answer: |
+      Call a procedure without parameters in an expression like this:
+      ```
+      total_value = get_total_value() * 1.1;
+      ```
+      Note the empty parentheses () after the procedure name, even when there are no parameters.
+
+  - question: >-
+      Demonstrate using a procedure call with comparison operators in Actian 4GL OpenROAD Calling Procedures
+      in Expressions.
+    answer: |
+      Use a procedure call with comparison operators like this:
+      ```
+      if get_user_age() >= 18 and get_user_status() = 'Active' then
+          message 'User is an active adult';
+      endif;
+      ```
+      This compares the return values of get_user_age() and get_user_status() procedures.
+
+  - question: >-
+      How to use multiple procedure calls in a single expression in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use multiple procedure calls in a single expression like this:
+      ```
+      total_price = calculate_base_price() + calculate_tax() + calculate_shipping_cost();
+      ```
+      This adds the return values of three different procedure calls.
+
+  - question: >-
+      Write code to demonstrate accessing attributes of a procedure's return value in Actian 4GL OpenROAD
+      Calling Procedures in Expressions.
+    answer: |
+      Access attributes of a procedure's return value like this:
+      ```
+      if get_current_user().is_admin = TRUE then
+          allow_access = TRUE;
+      else
+          allow_access = FALSE;
+      endif;
+      ```
+      This accesses the is_admin attribute of the object returned by get_current_user().
+
+  - question: >-
+      How to use a procedure call as an argument to another procedure in Actian 4GL OpenROAD Calling
+      Procedures in Expressions?
+    answer: |
+      Use a procedure call as an argument to another procedure like this:
+      ```
+      result = process_data(get_user_input(), validate_input(get_user_input()));
+      ```
+      This passes the return value of get_user_input() and validate_input() as arguments to process_data().
+
+  - question: >-
+      Demonstrate using a procedure call in a loop condition in Actian 4GL OpenROAD Calling Procedures in
+      Expressions.
+    answer: |
+      Use a procedure call in a loop condition like this:
+      ```
+      while has_more_data() do
+          process_next_item();
+      endwhile;
+      ```
+      This uses the return value of has_more_data() as the loop condition.
+
+  - question: >-
+      How to use a procedure call in an assignment statement in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call in an assignment statement like this:
+      ```
+      user_name = get_user_name();
+      user_age = calculate_age(get_user_birthdate());
+      ```
+      This assigns the return values of get_user_name() and calculate_age() to variables.
+
+  - question: >-
+      Write code to show error handling when using procedures in expressions in Actian 4GL OpenROAD Calling
+      Procedures in Expressions.
+    answer: |
+      Handle errors when using procedures in expressions like this:
+      ```
+      result = perform_operation();
+      if result < 0 then
+          message 'Error occurred: ' + get_error_message(result);
+          log_error(error_code = result, error_message = get_error_message(result));
+      else
+          message 'Operation successful. Result: ' + char(result);
+      endif;
+      ```
+      This checks the return value of perform_operation() and uses other procedures for error handling.
