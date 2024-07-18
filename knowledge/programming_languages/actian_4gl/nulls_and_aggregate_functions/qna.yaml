@@ -1,0 +1,49 @@
+version: 2
+task_description: Explain the concept and usage of 'Nulls and Aggregate Functions'
+  in OpenROAD Actian 4GL.
+created_by: willsjames
+domain: actian_4gl
+seed_examples:
+  - question: How does Actian 4GL OpenROAD handle nulls in aggregate functions?
+    answer: In Actian 4GL OpenROAD, aggregate functions ignore nulls when executed against
+      a column containing nulls.
+  - question: Why is it important that nulls are ignored in aggregate functions in Actian
+      4GL OpenROAD?
+    answer: Ignoring nulls prevents unknown or inapplicable values from affecting the
+      result of the aggregate.
+  - question: What is the behavior of the count() function for empty sets in Actian
+      4GL OpenROAD?
+    answer: In Actian 4GL OpenROAD, the count() function returns 0 for an empty set,
+      unlike other aggregate functions.
+  - question: What do other aggregate functions return for empty sets in Actian 4GL
+      OpenROAD?
+    answer: In Actian 4GL OpenROAD, aggregate functions other than count() return null
+      for an empty set.
+  - question: How can you handle null results from aggregate functions in Actian 4GL
+      OpenROAD?
+    answer: You can use the ifnull function to return a specific value (e.g., 0) instead
+      of null in Actian 4GL OpenROAD.
+  - question: How are nulls treated in grouping columns for aggregate functions in Actian
+      4GL OpenROAD?
+    answer: In Actian 4GL OpenROAD, nulls in grouping columns are treated as equal for
+      grouping purposes.
+  - question: What is the exception to the rule that nulls are not equal to other nulls
+      in Actian 4GL OpenROAD?
+    answer: The exception is when nulls are in a grouping column for an aggregate function
+      in Actian 4GL OpenROAD.
+  - question: How would you use the ifnull function with max() in Actian 4GL OpenROAD?
+    answer: 'In Actian 4GL OpenROAD, you can use: select ifnull(max(column),0) as x
+      from table;'
+  - question: What happens if avg() is applied to a column with nulls in Actian 4GL
+      OpenROAD?
+    answer: In Actian 4GL OpenROAD, avg() will ignore the nulls and calculate the average
+      of all known values.
+  - question: Why is it important to handle nulls correctly in aggregate functions in
+      Actian 4GL OpenROAD?
+    answer: Correct null handling prevents distortion of results, such as incorrect
+      averages, in Actian 4GL OpenROAD.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: c76f0b3
+  patterns:
+    - nulls_and_aggregate_functions.md
