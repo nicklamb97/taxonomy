@@ -71,6 +71,6 @@ seed_examples:
       areas.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: c4f502c
+  commit: e89b4fa
   patterns:
     - create_table.md
