@@ -4,56 +4,87 @@ created_by: connorgilchrist99
 domain: sql_actian_4gl
 seed_examples:
   - question: What is a 3GL procedure in OpenROAD?
-    answer: |
-      A 3GL procedure is a procedure written in a third-generation language, such as C, that you can call by name from a script or 4GL procedure in OpenROAD. They are used to perform operations outside the scope of OpenROAD.
-
+    answer: >
+      A 3GL procedure is a procedure written in a third-generation language,
+      such as C, that you can call by name from a script or 4GL procedure in
+      OpenROAD. They are used to perform operations outside the scope of
+      OpenROAD.
   - question: How do you maintain and compile 3GL procedures for OpenROAD?
-    answer: |
-      3GL procedures are maintained and compiled outside of OpenROAD. After creating and compiling the 3GL source code, you must register the procedure in the application using the OpenROAD Workbench. For more information, refer to the Workbench User Guide.
-
+    answer: >
+      3GL procedures are maintained and compiled outside of OpenROAD. After
+      creating and compiling the 3GL source code, you must register the
+      procedure in the application using the OpenROAD Workbench. For more
+      information, refer to the Workbench User Guide.
   - question: What types of variables can you pass to a 3GL procedure in OpenROAD?
-    answer: |
-      You can pass simple variables, objects, and arrays to a 3GL procedure in OpenROAD. The data type of the values must match the data types of the parameters in the 3GL procedure.
-
+    answer: >
+      You can pass simple variables, objects, and arrays to a 3GL procedure in
+      OpenROAD. The data type of the values must match the data types of the
+      parameters in the 3GL procedure.
   - question: Can you provide an example of declaring a C procedure for use in OpenROAD?
-    answer: |
+    answer: >
       Here's an example of declaring a C procedure:
+
       ```c
+
       long myCproc (long ivalue, double *fvalue)
+
       {
            // Processing statements
       }
-      ```
-      You must ensure that the C procedure is not named "main" and is not static.
 
+      ```
+
+      You must ensure that the C procedure is not named "main" and is not
+      static.
   - question: How do you pass parameters to a C procedure in OpenROAD?
-    answer: |
+    answer: >
       When passing parameters to a C procedure:
-      - Pass an integer as four bytes by value (or by reference if `byref` is specified).
-      - Pass a smallint as four bytes by value (or by reference if `byref` is specified).
-      - Pass a float as a double-format float by value (or by reference if `byref` is specified).
-      - Pass a string as a pointer to a null-terminated string.
 
+      - Pass an integer as four bytes by value (or by reference if `byref` is
+      specified).
+
+      - Pass a smallint as four bytes by value (or by reference if `byref` is
+      specified).
+
+      - Pass a float as a double-format float by value (or by reference if
+      `byref` is specified).
+
+      - Pass a string as a pointer to a null-terminated string.
   - question: How can you call a C procedure from OpenROAD?
-    answer: |
-      Use the `callproc` statement to call a C procedure from OpenROAD. Here's an example:
+    answer: >
+      Use the `callproc` statement to call a C procedure from OpenROAD. Here's
+      an example:
+
       ```4gl
+
       /* Variable declarations */
+
       test_float = float;
+
       test_integer = integer;
+
       test_return = integer;
+
       ...
+
       test_return = callproc myCproc (test_integer, byref(test_float));
+
       ```
+
       The corresponding C procedure is declared as:
+
       ```c
+
       long myCproc (long ivalue, double *fvalue)
+
       {
            // Processing statements
       }
-      ```
 
-  - question: Can you provide an example of a C procedure returning an integer to OpenROAD?
+      ```
+  - question: >-
+      Can you provide an example of a C procedure returning an integer to
+      OpenROAD?
     answer: |
       Here's an example of a C procedure returning an integer:
       ```c
@@ -62,7 +93,6 @@ seed_examples:
            return 10;
       }
       ```
-
   - question: How can a C procedure return a floating-point value to OpenROAD?
     answer: |
       A C procedure can return a floating-point value as follows:
@@ -72,20 +102,27 @@ seed_examples:
            return 10.5;
       }
       ```
-
-  - question: Can you provide an example of a C procedure returning a character string to OpenROAD?
-    answer: |
+  - question: >-
+      Can you provide an example of a C procedure returning a character string
+      to OpenROAD?
+    answer: >
       Here's an example of a C procedure returning a character string:
+
       ```c
+
       char *rets()
+
       {
            return "Returned from rets";
       }
-      ```
-      The procedure must return a pointer to a valid address (a string constant or a static/global character buffer). It cannot return a pointer to a local character buffer.
 
+      ```
+
+      The procedure must return a pointer to a valid address (a string constant
+      or a static/global character buffer). It cannot return a pointer to a
+      local character buffer.
 document:
-  repo: https://github.com/nicklamb97/instructlab-data.git
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: 1ff946f
   patterns:
     - 3GL_procedures.md
