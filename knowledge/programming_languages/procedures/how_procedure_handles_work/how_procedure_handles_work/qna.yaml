@@ -1,0 +1,97 @@
+version: 2
+task_description: >-
+  Explain the concept and usage of procedure handles (ProcHandle objects) in
+  Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is a ProcHandle object in OpenROAD?
+    answer: >
+      A ProcHandle object represents a global or local procedure and the scope
+      in which it is executed. It allows called frames to call procedures
+      declared locally in their calling frame and lets field scripts declare
+      local procedures callable from anywhere in the frame.
+  - question: How can you create a ProcHandle object in OpenROAD?
+    answer: >
+      To create a ProcHandle object, invoke the GetProcHandle method on a Scope
+      object using the following syntax:
+
+      ```4gl
+
+      prochandle = scope.GetProcHandle(name = string);
+
+      ```
+
+      The `name` parameter is a literal string or string variable specifying the
+      procedure's name. The `scope` parameter specifies where the procedure is
+      visible and executed.
+  - question: >-
+      Can you provide an example of creating a ProcHandle object for a global
+      procedure?
+    answer: >
+      To create a ProcHandle object for a global procedure named identically to
+      a local procedure, use a global scope representing the current
+      application:
+
+      ```4gl
+
+      handle = CurSession.Scope.GetProcHandle(Name = 'global_procname');
+
+      ```
+  - question: How do you execute a procedure specified by a ProcHandle object?
+    answer: >
+      To execute the procedure specified by the ProcHandle object, invoke the
+      Call method using the following syntax:
+
+      ```4gl
+
+      [retval =] prochandle.Call(parameters);
+
+      ```
+
+      Parameters are specified just as in a callproc statement.
+  - question: What restrictions apply to using the Call method on a ProcHandle object?
+    answer: >
+      The Call method can only be invoked in a statement by itself or as the
+      right side of an assignment. It cannot be invoked inside an expression.
+      Additionally, if a procedure handle represents a local procedure defined
+      in a frame or global procedure, the Call method cannot be invoked after
+      the frame or global procedure has terminated or from a different thread.
+  - question: >-
+      Can you provide an example of using a ProcHandle object to call a
+      procedure in OpenROAD?
+    answer: |
+      Here is an example:
+      ```4gl
+      handle = CurFrame.Scope.GetProcHandle(Name = 'local_procname');
+      retval = handle.Call(param1, param2);
+      ```
+  - question: >-
+      What is the significance of the scope parameter when creating a ProcHandle
+      object?
+    answer: >
+      The scope parameter specifies where the procedure is visible and executed.
+      Generally, it is CurScriptScope (the context of the currently executing
+      field script) or CurFrame.Scope. For global procedures, it can be the
+      global scope representing the current application (CurSession.Scope).
+  - question: >-
+      Can you use a ProcHandle object to call a procedure from a different
+      application?
+    answer: >
+      Yes, you can create a ProcHandle object for a procedure from a different
+      application by specifying the included application's name in the scope.
+      For example:
+
+      ```4gl
+
+      handle = CurSession.Scope.GetProcHandle(Name = 'appname!procname');
+
+      ```
+
+      `appname` must reference an application directly included by the currently
+      active application.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: 7e75e96
+  patterns:
+    - how_procedure_handles_work.md
