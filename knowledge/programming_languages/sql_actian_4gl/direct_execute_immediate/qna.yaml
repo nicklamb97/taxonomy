@@ -45,6 +45,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: b1de2e1
+  commit: e2ff544
   patterns:
     - direct_execute_immediate.md
