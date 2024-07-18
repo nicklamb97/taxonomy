@@ -74,6 +74,6 @@ seed_examples:
       in database columns, ensuring data consistency and integrity.
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 44bf18e
+  commit: 78458f6
   patterns:
     - copy_statement.md
