@@ -4,52 +4,59 @@ created_by: connorgilchrist99
 domain: sql_actian_4gl
 seed_examples:
   - question: What is a procedure in OpenROAD?
-    answer: |
-      A procedure is a named piece of code that performs a single task. Procedures process in sequence and are not associated with a form, making them useful for eliminating duplication among scripts and enhancing code readability.
-
+    answer: >
+      A procedure is a named piece of code that performs a single task.
+      Procedures process in sequence and are not associated with a form, making
+      them useful for eliminating duplication among scripts and enhancing code
+      readability.
   - question: How can procedures be defined in OpenROAD?
-    answer: |
+    answer: >
       Procedures can be defined in two ways:
-      - Globally: Accessible from any OpenROAD script within the application or from a second application if included.
-      - Locally: Accessible only from the script in which they are defined or from descendent fields within the scope of the calling script.
 
+      - Globally: Accessible from any OpenROAD script within the application or
+      from a second application if included.
+
+      - Locally: Accessible only from the script in which they are defined or
+      from descendent fields within the scope of the calling script.
   - question: What are the types of procedures available in OpenROAD?
     answer: |
       OpenROAD supports three types of procedures:
       - 4GL procedures
       - Database procedures
       - 3GL procedures
-
   - question: How are global 4GL procedures created?
     answer: |
       Global 4GL procedures are created in the OpenROAD Workbench.
-
   - question: How are local 4GL procedures declared and defined?
-    answer: |
-      Local 4GL procedures are declared and defined in the frame, field, or procedure script in which they are called.
-
+    answer: >
+      Local 4GL procedures are declared and defined in the frame, field, or
+      procedure script in which they are called.
   - question: What is the purpose of database procedures in OpenROAD?
-    answer: |
-      Database procedures are created and maintained independently of OpenROAD but must be registered with specific applications. They are available outside of OpenROAD applications.
-
+    answer: >
+      Database procedures are created and maintained independently of OpenROAD
+      but must be registered with specific applications. They are available
+      outside of OpenROAD applications.
   - question: How are 3GL procedures integrated with OpenROAD?
-    answer: |
-      3GL procedures are created and maintained independently of OpenROAD but must be registered with specific applications to be accessible.
-
+    answer: >
+      3GL procedures are created and maintained independently of OpenROAD but
+      must be registered with specific applications to be accessible.
   - question: Can you provide an example of when to use a procedure in OpenROAD?
-    answer: |
-      Procedures are used to eliminate duplication among scripts and make code more readable. For example, a common calculation performed in multiple scripts can be placed in a procedure and called whenever needed.
-
-  - question: What is the difference between event-driven code and procedures in OpenROAD?
-    answer: |
-      Unlike event-driven code that is triggered by events in frame and field scripts, procedures process in a sequential manner.
-
+    answer: >
+      Procedures are used to eliminate duplication among scripts and make code
+      more readable. For example, a common calculation performed in multiple
+      scripts can be placed in a procedure and called whenever needed.
+  - question: >-
+      What is the difference between event-driven code and procedures in
+      OpenROAD?
+    answer: >
+      Unlike event-driven code that is triggered by events in frame and field
+      scripts, procedures process in a sequential manner.
   - question: Can a procedure access 3GL languages from an OpenROAD script?
-    answer: |
-      Yes, procedures provide the means of accessing a 3GL language from an OpenROAD script.
-
+    answer: >
+      Yes, procedures provide the means of accessing a 3GL language from an
+      OpenROAD script.
 document:
-  repo: https://github.com/nicklamb97/instructlab-data.git
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: cdd6afa
   patterns:
     - procedures.md
