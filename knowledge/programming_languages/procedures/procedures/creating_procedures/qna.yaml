@@ -1,0 +1,55 @@
+version: 2
+task_description: Explain how to create procedures in Actian 4GL SQL.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: How do you create a global procedure in OpenROAD?
+    answer: |
+      Creating a global procedure in OpenROAD is a two-step process:
+      1. Declare the procedure in OpenROAD with the Procedure Editor, giving it a name and declaring the return value type.
+      2. Write the body of the procedure directly in the Script Editor using the procedure statement.
+
+  - question: How do you create a local 4GL procedure in OpenROAD?
+    answer: |
+      Creating a local 4GL procedure in OpenROAD is also a two-step process:
+      1. Declare the procedure directly in the frame, field, or procedure script.
+      2. Write the body of the procedure using the procedure statement.
+
+  - question: How are database or 3GL procedures created in OpenROAD?
+    answer: |
+      Database and 3GL procedures are registered and created using the appropriate Procedure Editor in OpenROAD Workbench. 3GL procedures are written like any 3GL program, and after creating and compiling the source code, a dynamic-link library is created to link the procedure into the application.
+
+  - question: How do you call a procedure in OpenROAD?
+    answer: |
+      To call a procedure, use the callproc statement. There are different versions of the callproc statement for each type of procedure. Calling 4GL and database procedures is described in detail in the respective subsections.
+
+  - question: What tools are used to declare and write the body of a global procedure in OpenROAD?
+    answer: |
+      The Procedure Editor is used to declare the procedure, and the Script Editor is used to write the body of the procedure using the procedure statement.
+
+  - question: Can you provide an example of declaring a local 4GL procedure in a frame script?
+    answer: |
+      ```
+      procedure local_procedure_name()
+      begin
+          // procedure body
+      end procedure;
+      ```
+
+  - question: What is the purpose of creating a dynamic-link library for 3GL procedures?
+    answer: |
+      A dynamic-link library is created to link the 3GL procedure into the application after the source code is created and compiled.
+
+  - question: Where can you find more information about creating, calling, and linking 3GL procedures in OpenROAD?
+    answer: |
+      For more information about creating, calling, and linking 3GL procedures, see the "Using 3GL in Your Application" section of the documentation.
+
+  - question: What is the main difference between global and local procedures in OpenROAD?
+    answer: |
+      Global procedures can be called from any script within the application or even from another application if included, while local procedures can only be called from the script in which they are defined or from descendent fields within the scope of the calling script.
+
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 6baba27
+  patterns:
+    - creating_procedures.md
