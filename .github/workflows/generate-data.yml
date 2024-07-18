@@ -1,4 +1,4 @@
-name: Generate Synthetic Data for InstructLab
+name: Generate Synthetic Data for InstructLab.
 
 on:
   push:
@@ -138,3 +138,4 @@ jobs:
         else
           echo "No generated directory found. Nothing to commit."
         fi
+        
