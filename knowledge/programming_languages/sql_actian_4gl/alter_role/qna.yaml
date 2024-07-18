@@ -59,6 +59,6 @@ seed_examples:
 
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: b57897e
+  commit: 8e52a23
   patterns:
     - alter_role.md
