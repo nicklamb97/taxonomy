@@ -48,6 +48,6 @@ seed_examples:
       capabilities.
 document:
   repo: 'https://github.com/nicklamb97/instructlab-data.git'
-  commit: 1c3ed7f
+  commit: 9854327
   patterns:
     - database_procedures.md
