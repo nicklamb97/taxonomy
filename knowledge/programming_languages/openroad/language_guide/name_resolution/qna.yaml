@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain name resolution and dynamic frame and procedure name resolution in OpenROAD.
+task_description: Explain name resolution and dynamic frame and procedure name resolution in OpenROAD. (2.0)
 created_by: assistant
 domain: openroad
 seed_examples:
