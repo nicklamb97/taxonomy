@@ -1,0 +1,61 @@
+version: 2
+task_description: Explain the usage of the prompt statement in Actian OpenROAD 6.2.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the purpose of the prompt statement in Actian OpenROAD 6.2?
+    answer: |
+      The prompt statement displays a message in a pop-up window and accepts input from the application user, assigning
+      the input to a variable.
+  - question: What is the syntax for the prompt statement in Actian OpenROAD 6.2?
+    answer: |
+      The syntax for the prompt statement is:
+      ```4gl
+      variable = prompt varcharstringexpr;
+      ```
+  - question: How does the prompt statement display the message to the user?
+    answer: |
+      The prompt statement displays a character string message in a pop-up window centered in the calling frame,
+      covering the calling frame until the user acknowledges the prompt.
+  - question: What does the variable parameter in the prompt statement specify?
+    answer: |
+      The variable parameter specifies the name of a varchar variable to which the user's response is assigned. If the
+      response is longer than the variable, OpenROAD truncates it on the right.
+  - question: What does the varcharstringexpr parameter in the prompt statement specify?
+    answer: |
+      The varcharstringexpr parameter specifies the message to be displayed. It must be a varchar expression with a
+      maximum length of 2000 characters.
+  - question: Can you provide an example of using the prompt statement to get a report name from the user?
+    answer: |
+      Here is an example:
+      ```4gl
+      answer = prompt 'Enter the report name: ';
+      ```
+      This prompts the user for a report name and assigns the response to the variable 'answer'.
+  - question: Can you provide an example of using the prompt statement to get a department name based on user input?
+    answer: |
+      Here is an example:
+      ```4gl
+      answer = prompt 'Enter the department for ' + fname + ' ' + lname;
+      ```
+      This prompts the user for the department of the person whose name appears in the 'fname' and 'lname' fields.
+  - question: What happens if the user's response to the prompt statement is longer than the specified variable?
+    answer: |
+      If the user's response is longer than the specified variable, OpenROAD truncates the response on the right to fit
+      into the variable.
+  - question: How is the prompt window positioned on the screen in Actian OpenROAD 6.2?
+    answer: |
+      The prompt window is positioned in the center of the calling frame and covers the calling frame until the user
+      acknowledges the prompt.
+  - question: What is the maximum length for the varcharstringexpr in the prompt statement?
+    answer: |
+      The maximum length for the varcharstringexpr in the prompt statement is 2000 characters.
+  - question: In what scenarios is the prompt statement typically used in Actian OpenROAD applications?
+    answer: |
+      The prompt statement is typically used in scenarios where the application needs to request specific input from the
+      user, such as entering a report name or department information.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 1c8690b
+  patterns:
+    - prompt_statement.md
