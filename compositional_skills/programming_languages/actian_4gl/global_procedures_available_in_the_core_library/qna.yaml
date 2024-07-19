@@ -1,0 +1,238 @@
+version: 2
+task_description: Use Global Procedures from the Core Library in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to use the _StringParseKeyword procedure to extract a value from a formatted string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      To extract a value using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          value = varchar(2000);
+      enddeclare
+
+      str1 = 'Name=John Doe;Address=101 California, USA';
+      value = _StringParseKeyword(string = str1, keyword = 'address');
+
+      -- value now contains "101 California, USA"
+      ```
+      This extracts the value associated with the 'address' keyword.
+
+  - question: >-
+      Write code to substitute multiple parameters in a string using the _StringSub procedure in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Here's how to substitute multiple parameters using _StringSub:
+      ```
+      declare
+          result = varchar(2000);
+      enddeclare
+
+      result = _StringSub(string = 'Employee: %1, Position: %2, Salary: %3',
+                          arg1 = 'John Doe',
+                          arg2 = 'Manager',
+                          arg3 = '$75,000');
+
+      -- result now contains "Employee: John Doe, Position: Manager, Salary: $75,000"
+      ```
+      This substitutes three parameters in the string.
+
+  - question: >-
+      How to use the _StringTokenSub procedure to replace a token in a string in Actian 4GL OpenROAD Global
+      Procedures Available in the Core Library?
+    answer: |
+      To replace a token using _StringTokenSub:
+      ```
+      declare
+          str1 = varchar(2000);
+          result = varchar(2000);
+          remaining_count = integer;
+      enddeclare
+
+      str1 = 'Contact: John Doe, Email: john.doe@example.com';
+      result = _StringTokenSub(string = str1,
+                               token = 'John Doe',
+                               replacewith = 'Jane Smith',
+                               remainingtokens = byref(remaining_count));
+
+      -- result now contains "Contact: Jane Smith, Email: john.doe@example.com"
+      -- remaining_count is 0 as there are no more occurrences of "John Doe"
+      ```
+      This replaces the first occurrence of 'John Doe' with 'Jane Smith'.
+
+  - question: >-
+      Demonstrate how to handle case sensitivity in keyword searches using _StringParseKeyword in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      _StringParseKeyword is not case-sensitive for keywords. Here's a demonstration:
+      ```
+      declare
+          str1 = varchar(2000);
+          value1, value2 = varchar(2000);
+      enddeclare
+
+      str1 = 'NAME=John Doe;ADDRESS=101 California, USA';
+      value1 = _StringParseKeyword(string = str1, keyword = 'name');
+      value2 = _StringParseKeyword(string = str1, keyword = 'NAME');
+
+      -- Both value1 and value2 will contain "John Doe"
+      ```
+      This shows that the keyword search is case-insensitive.
+
+  - question: >-
+      How to handle special characters like \t and \n in _StringSub in Actian 4GL OpenROAD Global Procedures
+      Available in the Core Library?
+    answer: |
+      _StringSub automatically handles \t and \n. Here's how:
+      ```
+      declare
+          result = varchar(2000);
+      enddeclare
+
+      result = _StringSub(string = 'Name: %1\tAddress: %2\nCity: %3',
+                          arg1 = 'John Doe',
+                          arg2 = '101 Main St',
+                          arg3 = 'New York');
+
+      -- result will contain:
+      -- "Name: John Doe[TAB]Address: 101 Main St[NEWLINE]City: New York"
+      -- where [TAB] is a tab character and [NEWLINE] is a newline character
+      ```
+      \t is replaced with a tab (HC_TAB) and \n with a newline (HC_NEWLINE).
+
+  - question: >-
+      Write code to demonstrate error handling when a keyword is not found using _StringParseKeyword in
+      Actian 4GL OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Here's how to handle a missing keyword with _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          value = varchar(2000);
+      enddeclare
+
+      str1 = 'Name=John Doe;Address=101 California, USA';
+      value = _StringParseKeyword(string = str1, keyword = 'Phone');
+
+      if value = '' then
+          message 'Keyword "Phone" not found in the string.';
+      else
+          message 'Phone number: ' || value;
+      endif;
+
+      -- This will display: 'Keyword "Phone" not found in the string.'
+      ```
+      _StringParseKeyword returns an empty string if the keyword is not found.
+
+  - question: >-
+      How to use _StringTokenSub in a loop for batch processing in Actian 4GL OpenROAD Global Procedures
+      Available in the Core Library?
+    answer: |
+      Here's how to use _StringTokenSub in a loop for batch processing:
+      ```
+      declare
+          texts = array of varchar(2000);
+          i = integer;
+          result = varchar(2000);
+          remaining = integer;
+      enddeclare
+
+      -- Initialize array with sample texts
+      texts[1] = 'Hello World, Hello Universe';
+      texts[2] = 'Hello Sun, Hello Moon';
+      texts[3] = 'Goodbye World, Hello New World';
+
+      for i = 1 to texts.lastrow do
+          result = _StringTokenSub(string = texts[i],
+                                   token = 'Hello',
+                                   replacewith = 'Greetings',
+                                   remainingtokens = byref(remaining));
+
+          message 'Original: ' || texts[i];
+          message 'Modified: ' || result;
+          message 'Remaining "Hello" occurrences: ' || char(remaining);
+          message '---';
+      endfor;
+      ```
+      This processes each string in the array, replacing 'Hello' with 'Greetings'.
+
+  - question: >-
+      Demonstrate chaining _StringParseKeyword and _StringSub for complex string manipulation in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Here's an example of chaining _StringParseKeyword and _StringSub:
+      ```
+      declare
+          config_string = varchar(2000);
+          template = varchar(2000);
+          result = varchar(2000);
+      enddeclare
+
+      config_string = 'Name=John Doe;Title=Manager;Department=Sales';
+      template = 'Employee %1 (%2) works in the %3 department.';
+
+      result = _StringSub(string = template,
+                          arg1 = _StringParseKeyword(string = config_string, keyword = 'Name'),
+                          arg2 = _StringParseKeyword(string = config_string, keyword = 'Title'),
+                          arg3 = _StringParseKeyword(string = config_string, keyword = 'Department'));
+
+      message result;
+      -- This will display: 'Employee John Doe (Manager) works in the Sales department.'
+      ```
+      This example extracts values using _StringParseKeyword and then uses them in _StringSub.
+
+  - question: >-
+      How to handle the maximum length constraints of the procedures in Actian 4GL OpenROAD Global
+      Procedures Available in the Core Library?
+    answer: |
+      To handle maximum length constraints, you can use string truncation:
+      ```
+      declare
+          long_string = varchar(3000);
+          result = varchar(2000);
+      enddeclare
+
+      long_string = 'This is a very long string that exceeds the 2000 character limit...'; -- Imagine
+      this is 3000 characters
+
+      if length(long_string) > 2000 then
+          message 'Warning: Input string exceeds 2000 characters. It will be truncated.';
+          long_string = left(long_string, 2000);
+      endif;
+
+      result = _StringSub(string = long_string,
+                          arg1 = 'Some replacement');
+
+      message 'Processed string (truncated to 2000 chars): ' || result;
+      ```
+      This ensures the input string doesn't exceed the 2000 character limit of _StringSub.
+
+  - question: >-
+      Write code to use _StringTokenSub with the optional remainingtokens parameter in Actian 4GL OpenROAD
+      Global Procedures Available in the Core Library.
+    answer: |
+      Here's how to use _StringTokenSub with the remainingtokens parameter:
+      ```
+      declare
+          text = varchar(2000);
+          result = varchar(2000);
+          remaining = integer;
+      enddeclare
+
+      text = 'Replace this and this and this, but not that.';
+
+      result = _StringTokenSub(string = text,
+                               token = 'this',
+                               replacewith = 'that',
+                               remainingtokens = byref(remaining));
+
+      message 'Modified text: ' || result;
+      message 'Number of "this" remaining: ' || char(remaining);
+
+      -- Output:
+      -- Modified text: Replace that and this and this, but not that.
+      -- Number of "this" remaining: 2
+      ```
+      This replaces the first 'this' and reports how many instances remain.
