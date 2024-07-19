@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain FOR loops in Actian 4GL for OpenROAD and compare with C#
+task_description: Explain FOR loops in Actian 4GL for OpenROAD and compare with C# (2.0)
 created_by: nicklamb97
 domain: actian_4gl
 seed_examples:
