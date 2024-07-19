@@ -113,7 +113,7 @@ jobs:
           
           cp -r ../generated/* .
           git add .
-          git commit -m "Auto-generated synthetic data" || echo "No changes to commit"
+          git commit -m "[GENERAL] Auto-generated synthetic data" || echo "No changes to commit"
           
           # Push the new branch
           git push "https://$GITHUB_TOKEN@github.com/nicklamb97/generated.git" $BRANCH_NAME
