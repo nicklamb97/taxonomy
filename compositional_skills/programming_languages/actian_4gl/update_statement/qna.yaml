@@ -1,0 +1,140 @@
+version: 2
+task_description: Use Update Statement in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to use the basic Update Statement to modify values in a database table in Actian 4GL OpenROAD
+      Update Statement?
+    answer: |
+      To modify values in a database table using the basic Update Statement:
+      ```
+      update projects
+           set hours = :hours, duedate = :enddate
+           where name = :name;
+      commit;
+      ```
+      This updates the 'hours' and 'duedate' columns in the 'projects' table where the 'name' matches.
+
+  - question: >-
+      Write code to update multiple columns in a table using a where clause condition in Actian 4GL OpenROAD
+      Update Statement.
+    answer: |
+      Here's how to update multiple columns with a where clause:
+      ```
+      update personnel
+           set sal = :salary * 1.1, last_raise_date = today()
+           where empno = :empno and dept = 'Sales';
+      commit;
+      ```
+      This updates 'sal' and 'last_raise_date' columns for employees in the 'Sales' department.
+
+  - question: >-
+      How to use the 'repeated' keyword for performance enhancement in Actian 4GL OpenROAD Update Statement?
+    answer: |
+      Use the 'repeated' keyword for performance enhancement like this:
+      ```
+      repeated update projects
+           set status = 'Completed'
+           where end_date < today();
+      commit;
+      ```
+      The 'repeated' keyword tells the DBMS to save the query execution plan for repeated use.
+
+  - question: Demonstrate updating with correlation names in Actian 4GL OpenROAD Update Statement.
+    answer: |
+      Update using correlation names like this:
+      ```
+      update employee e from dept d
+           set e.salary = d.std_raise * e.salary
+           where e.jobcat = 'acc' and d.dname = e.dname;
+      commit;
+      ```
+      This uses correlation names 'e' for employee and 'd' for dept tables.
+
+  - question: How to update a row using a cursor in Actian 4GL OpenROAD Update Statement?
+    answer: |
+      Update a row using a cursor like this:
+      ```
+      update emptable
+           set name = :namefield, age = :agefield
+           where current of emp_cursor;
+      commit;
+      ```
+      This updates the row currently pointed to by the 'emp_cursor'.
+
+  - question: Write code to update a table using a computed value in Actian 4GL OpenROAD Update Statement.
+    answer: |
+      Update a table using a computed value:
+      ```
+      update inventory
+           set stock_value = quantity * unit_price,
+               reorder_flag = (quantity < reorder_level)
+           where product_id = :current_product;
+      commit;
+      ```
+      This computes 'stock_value' and sets a boolean flag based on quantity.
+
+  - question: How to use a subquery in the Update Statement in Actian 4GL OpenROAD Update Statement?
+    answer: |
+      Use a subquery in the Update Statement like this:
+      ```
+      update employee
+           set salary = salary * 1.1
+           where dept_id in (select dept_id from department where location = 'New York');
+      commit;
+      ```
+      This gives a 10% raise to employees in New York departments.
+
+  - question: Demonstrate error handling in an Update Statement in Actian 4GL OpenROAD Update Statement.
+    answer: |
+      Handle errors in an Update Statement like this:
+      ```
+      update customer
+           set credit_limit = :new_limit
+           where customer_id = :cust_id;
+
+      if (IIrowcount = 0) then
+          message 'No customer found with ID ' || :cust_id;
+      elseif (IIrowcount = -1) then
+          message 'Error occurred during update';
+      else
+          message 'Customer credit limit updated successfully';
+      endif;
+
+      commit;
+      ```
+      This checks IIrowcount to determine the result of the update operation.
+
+  - question: How to use dynamic names in an Update Statement in Actian 4GL OpenROAD Update Statement?
+    answer: |
+      Use dynamic names in an Update Statement like this:
+      ```
+      declare
+          table_name = varchar(30);
+          column_name = varchar(30);
+          condition = varchar(100);
+      enddeclare
+
+      table_name = 'employees';
+      column_name = 'salary';
+      condition = 'department = ''Sales''';
+
+      update :table_name
+           set :column_name = :column_name * 1.05
+           where :condition;
+      commit;
+      ```
+      This uses variables for table name, column name, and condition.
+
+  - question: Write code to update a table using a join condition in Actian 4GL OpenROAD Update Statement.
+    answer: |
+      Update a table using a join condition:
+      ```
+      update orders o
+           set o.total_amount = o.quantity * p.unit_price
+           from products p
+           where o.product_id = p.product_id
+             and o.order_date = today();
+      commit;
+      ```
+      This updates the total_amount in orders based on the current unit price in products.
