@@ -1,0 +1,6 @@
+Title: Actian 4GL While Statement Overview
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/
+
+The Actian 4GL while statement content is based on the official Actian documentation provided by Actian Corporation. 
+The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.

@@ -1,0 +1,67 @@
+version: 2
+task_description: Explain the usage of the while statement in Actian 4GL (OpenROAD).
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the purpose of the while statement in Actian 4GL?
+    answer: |
+      The while statement in Actian 4GL creates loops that execute a block of code repeatedly
+      as long as a specified condition remains true.
+  - question: What is the syntax of the while statement in Actian 4GL?
+    answer: |
+      The syntax of the while statement is:
+      ```4gl
+      while condition do
+          -- statements to execute
+      endwhile;
+      ```
+      'condition' is a logical expression evaluated before each loop iteration.
+  - question: How can the while statement be used for early exit in Actian 4GL?
+    answer: |
+      Actian 4GL provides the endloop statement to exit the while loop prematurely based on
+      internal conditions, enhancing control over program flow.
+  - question: Can you provide a basic example of a while loop in Actian 4GL?
+    answer: |
+      Here's a basic example:
+      ```4gl
+      define i integer = 1;
+
+      while i <= 3 do
+          MESSAGE i;
+          let i = i + 1;
+      endwhile;
+      ```
+      This prints numbers 1 to 3 sequentially.
+  - question: How does Actian 4GL handle conditions within a while loop?
+    answer: |
+      Actian 4GL evaluates the specified condition before each iteration. If true, the loop
+      continues executing; otherwise, it terminates.
+  - question: What role does the endloop statement play in Actian 4GL's while loop?
+    answer: |
+      The endloop statement allows developers to exit the while loop prematurely based on
+      specific conditions within the loop, optimizing program control.
+  - question: What are scenarios where developers use while loops in Actian 4GL?
+    answer: |
+      While loops in Actian 4GL are utilized for tasks requiring repetitive execution until
+      certain conditions are met, such as data processing and iterative calculations.
+  - question: How does Actian 4GL handle variable updates within a while loop?
+    answer: |
+      Actian 4GL supports variable updates within while loops using assignment operations
+      like `let` to modify loop control variables between iterations.
+  - question: Can while loops in Actian 4GL iterate over arrays or collections?
+    answer: |
+      Actian 4GL while loops primarily iterate based on logical conditions rather than
+      direct array or collection traversal, focusing on conditional repetition.
+  - question: What advantages do while loops offer in Actian 4GL programming?
+    answer: |
+      While loops provide Actian 4GL developers with flexible iterative control, enabling
+      efficient handling of repetitive tasks and conditional processing.
+  - question: How does Actian 4GL handle nested while loops?
+    answer: |
+      Actian 4GL supports nested while loops, allowing developers to create complex
+      control structures for iterative processing within hierarchical data scenarios.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: fc7a163
+  patterns:
+    - while_statement.md
