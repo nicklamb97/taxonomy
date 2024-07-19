@@ -9,7 +9,7 @@ seed_examples:
       of a local procedure defined within the script in OpenROAD Actian 4GL.
     question: What is a LocalProcedureDeclaration in OpenROAD Actian 4GL?
   - answer: 'The basic syntax is:
-
+  
       localprocname = procedure [returning [typewithoutdefault | none]];'
     question: What is the basic syntax of a LocalProcedureDeclaration?
   - answer: No, specifying a return type is optional. The 'returning' clause is enclosed
