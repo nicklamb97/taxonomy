@@ -72,6 +72,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: d1174bf
+  commit: 0769ea3
   patterns:
     - fetch_statement.md
