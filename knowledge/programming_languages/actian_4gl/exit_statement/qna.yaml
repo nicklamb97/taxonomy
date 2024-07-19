@@ -1,5 +1,5 @@
 version: 2
-task_description: Introduce the OpenROAD Actian 4GL exit statement
+task_description: Introduce the OpenROAD Actian 4GL exit statement (2.0)
 created_by: willsjames
 domain: actian_4gl
 seed_examples:
