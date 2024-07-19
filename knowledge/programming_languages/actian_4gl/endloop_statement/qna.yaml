@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the Endloop Statement in Actian 4GL OpenROAD
+task_description: Explain the Endloop Statement in Actian 4GL OpenROAD (2.0)
 created_by: willsjames
 domain: actian_4gl
 seed_examples:
