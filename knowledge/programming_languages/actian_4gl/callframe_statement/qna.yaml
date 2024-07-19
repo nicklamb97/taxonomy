@@ -1,0 +1,42 @@
+version: 2
+task_description: Introduce the callframe statement in Actian 4GL and its usage.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the callframe statement in Actian 4GL?
+    answer: |
+      The callframe statement in Actian 4GL opens a new frame in a new window and transfers control from
+      the current frame to another frame. It is often used to display dialogs for user input relevant to
+      the calling frame.
+  - question: What is the syntax of the callframe statement?
+    answer: |
+      The syntax of the callframe statement in Actian 4GL is:
+      ```4gl
+      [returnvariable =] callframe framename([parameterlist])
+                [withclause];
+      ```
+      - `returnvariable`: Optional. Variable in the calling frame to receive the return value.
+      - `framename`: Name of the frame to be called. It can be a dynamic name.
+      - `parameterlist`: Parameters passed to the called frame.
+      - `withclause`: Additional options for frame placement and behavior.
+  - question: How does the callframe statement handle frame name resolution?
+    answer: |
+      In Actian 4GL, framename can be an actual name or a variable resolved at runtime. Compile-time resolution
+      is used for actual names, while runtime resolution applies to variables, allowing dynamic frame invocation.
+  - question: Can callframe statements be nested?
+    answer: |
+      Yes, callframe statements can be nested, enabling called frames to further call other frames recursively,
+      facilitating complex application flow and interaction.
+  - question: What is the role of return statement with callframe?
+    answer: |
+      The return statement exits a called frame and passes a value back to the calling frame using returnvariable,
+      ensuring compatibility of data types between the frame's return value and the receiving variable.
+  - question: How are parameters passed in the callframe statement?
+    answer: |
+      Parameters in the callframe statement are passed using NamedParameterList syntax, allowing developers to
+      specify parameter values by name or by reference for dynamic interaction between frames.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 1a56dff
+  patterns:
+    - callframe_statement.md
