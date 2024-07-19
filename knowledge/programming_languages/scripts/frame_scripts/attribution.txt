@@ -1,0 +1,6 @@
+Title: Actian 4GL Frame Scripts Syntax
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/index.html#page/Programming%2FFrame_Scripts.htm%23
+
+The knowledge content is based on the general syntax and usage of Actian 4GL Frame Scripts for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
