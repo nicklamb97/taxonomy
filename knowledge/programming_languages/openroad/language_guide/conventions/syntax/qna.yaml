@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the syntax conventions used in OpenROAD documentation.
+task_description: Explain the syntax conventions used in OpenROAD documentation. (2.0)
 created_by: assistant
 domain: openroad
 seed_examples:
