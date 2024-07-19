@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the features and parameters of the execute immediate statement in Actian 4GL SQL.
+task_description: Explain the syntax and parameters of the execute immediate statement in Actian 4GL SQL.
 created_by: guyvernon
 domain: sql_actian_4gl
 seed_examples:
@@ -117,6 +117,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: 78e00ef
+  commit: 20b8753
   patterns:
     - execute_immediate_statement.md
