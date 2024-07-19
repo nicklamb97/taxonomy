@@ -1,0 +1,265 @@
+version: 2
+task_description: Use Procedure Handles (ProcHandle Objects) in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to create a ProcHandle object for a local procedure in Actian 4GL OpenROAD Procedure Handles
+      ProcHandle Objects?
+    answer: |
+      To create a ProcHandle object for a local procedure:
+      ```
+      declare
+          local_proc_handle = ProcHandle;
+      enddeclare
+
+      -- Assume 'my_local_proc' is a local procedure in the current script
+      local_proc_handle = CurScriptScope.GetProcHandle(name = 'my_local_proc');
+      ```
+      This creates a ProcHandle for 'my_local_proc' in the current script's scope.
+
+  - question: >-
+      Write code to execute a procedure using a ProcHandle object in Actian 4GL OpenROAD Procedure Handles
+      ProcHandle Objects.
+    answer: |
+      Here's how to execute a procedure using a ProcHandle object:
+      ```
+      declare
+          proc_handle = ProcHandle;
+          result = integer;
+      enddeclare
+
+      -- Assume 'calculate_sum' is a procedure that takes two integers and returns their sum
+      proc_handle = CurFrame.Scope.GetProcHandle(name = 'calculate_sum');
+
+      result = proc_handle.Call(a = 5, b = 3);
+      message 'Sum: ' || char(result);  -- This will display 'Sum: 8'
+      ```
+      This executes the 'calculate_sum' procedure using a ProcHandle.
+
+  - question: >-
+      How to create a ProcHandle object for a global procedure in Actian 4GL OpenROAD Procedure Handles
+      ProcHandle Objects?
+    answer: |
+      To create a ProcHandle object for a global procedure:
+      ```
+      declare
+          global_proc_handle = ProcHandle;
+      enddeclare
+
+      global_proc_handle = CurSession.Scope.GetProcHandle(name = 'global_procedure_name');
+      ```
+      This creates a ProcHandle for a global procedure using the session scope.
+
+  - question: >-
+      Demonstrate how to use ProcHandle objects to create cleanup procedures in Actian 4GL OpenROAD Procedure
+      Handles ProcHandle Objects.
+    answer: |
+      Here's how to use ProcHandle objects for cleanup procedures:
+      ```
+      -- In the frame script
+      declare
+          cleanup_procs = array of ProcHandle;
+      enddeclare
+
+      -- In a field script
+      declare
+          cleanup_handle = ProcHandle;
+      enddeclare
+
+      procedure field_cleanup =
+      begin
+          -- Cleanup logic for this field
+          message 'Cleaning up field resources';
+      end
+
+      initialize =
+      begin
+          cleanup_handle = CurScriptScope.GetProcHandle(name = 'field_cleanup');
+          cleanup_procs[cleanup_procs.lastrow + 1] = cleanup_handle;
+      end
+
+      -- In the frame's cleanup logic
+      declare
+          i = integer;
+      enddeclare
+
+      for i = 1 to cleanup_procs.lastrow do
+          cleanup_procs[i].Call();
+      endfor;
+      ```
+      This demonstrates creating and using cleanup procedures with ProcHandle objects.
+
+  - question: >-
+      How to create a ProcHandle object for a procedure in an included application in Actian 4GL OpenROAD
+      Procedure Handles ProcHandle Objects?
+    answer: |
+      To create a ProcHandle for a procedure in an included application:
+      ```
+      declare
+          included_proc_handle = ProcHandle;
+      enddeclare
+
+      included_proc_handle = CurSession.Scope.GetProcHandle(name = 'appname!procname');
+      ```
+      This creates a ProcHandle for 'procname' in the included application 'appname'.
+
+  - question: >-
+      Write code to demonstrate the restrictions of using the Call method with ProcHandle objects in Actian
+      4GL OpenROAD Procedure Handles ProcHandle Objects.
+    answer: |
+      Here's a demonstration of Call method restrictions:
+      ```
+      declare
+          proc_handle = ProcHandle;
+          result = integer;
+      enddeclare
+
+      proc_handle = CurFrame.Scope.GetProcHandle(name = 'my_procedure');
+
+      -- Valid: As a standalone statement
+      proc_handle.Call();
+
+      -- Valid: As the right side of an assignment
+      result = proc_handle.Call(param1 = 10, param2 = 20);
+
+      -- Invalid: Inside an expression
+      -- if (proc_handle.Call() = 0) then  -- This would cause an error
+      --     message 'Procedure returned 0';
+      -- endif;
+
+      -- Note: Cannot use Call after the frame has terminated or in a different thread
+      ```
+      This shows valid and invalid uses of the Call method with ProcHandle objects.
+
+  - question: >-
+      How to pass a local procedure as a callback to a called frame using ProcHandle objects in Actian 4GL
+      OpenROAD Procedure Handles ProcHandle Objects?
+    answer: |
+      Here's how to pass a local procedure as a callback:
+      ```
+      -- In the calling frame
+      declare
+          callback_handle = ProcHandle;
+      enddeclare
+
+      procedure local_callback(param = integer) =
+      begin
+          message 'Callback executed with param: ' || char(param);
+      end
+
+      callback_handle = CurScriptScope.GetProcHandle(name = 'local_callback');
+      callframe called_frame(callback = callback_handle);
+
+      -- In the called frame
+      declare
+          callback_proc = ProcHandle;
+      enddeclare
+
+      initialize(callback = ProcHandle) =
+      begin
+          callback_proc = callback;
+      end
+
+      -- Later in the called frame
+      callback_proc.Call(param = 42);
+      ```
+      This demonstrates passing a local procedure as a callback to a called frame.
+
+  - question: >-
+      Demonstrate using ProcHandle objects with different scopes in Actian 4GL OpenROAD Procedure Handles
+      ProcHandle Objects.
+    answer: |
+      Here's a demonstration of using ProcHandle objects with different scopes:
+      ```
+      declare
+          local_handle = ProcHandle;
+          frame_handle = ProcHandle;
+          global_handle = ProcHandle;
+      enddeclare
+
+      -- Local scope (current script)
+      local_handle = CurScriptScope.GetProcHandle(name = 'local_procedure');
+
+      -- Frame scope
+      frame_handle = CurFrame.Scope.GetProcHandle(name = 'frame_procedure');
+
+      -- Global scope (session)
+      global_handle = CurSession.Scope.GetProcHandle(name = 'global_procedure');
+
+      -- Using the handles
+      local_handle.Call();
+      frame_handle.Call();
+      global_handle.Call();
+      ```
+      This shows creating and using ProcHandle objects with different scopes.
+
+  - question: >-
+      How to implement a dynamic procedure selection using ProcHandle objects in Actian 4GL OpenROAD Procedure
+      Handles ProcHandle Objects?
+    answer: |
+      Here's how to implement dynamic procedure selection:
+      ```
+      declare
+          proc_handles = array of ProcHandle;
+          selected_proc = ProcHandle;
+          proc_name = varchar(30);
+          i = integer;
+      enddeclare
+
+      -- Initialize array with procedure handles
+      proc_handles[1] = CurFrame.Scope.GetProcHandle(name = 'proc1');
+      proc_handles[2] = CurFrame.Scope.GetProcHandle(name = 'proc2');
+      proc_handles[3] = CurFrame.Scope.GetProcHandle(name = 'proc3');
+
+      -- Get procedure name from user
+      proc_name = prompt 'Enter procedure name (proc1, proc2, or proc3):';
+
+      -- Find the corresponding handle
+      for i = 1 to proc_handles.lastrow do
+          if proc_handles[i].Name = proc_name then
+              selected_proc = proc_handles[i];
+              exitfor;
+          endif;
+      endfor;
+
+      -- Execute the selected procedure
+      if selected_proc is not null then
+          selected_proc.Call();
+      else
+          message 'Procedure not found';
+      endif;
+      ```
+      This demonstrates dynamically selecting and executing a procedure using ProcHandle objects.
+
+  - question: >-
+      Write code to show error handling when working with ProcHandle objects in Actian 4GL OpenROAD Procedure
+      Handles ProcHandle Objects.
+    answer: |
+      Here's an example of error handling with ProcHandle objects:
+      ```
+      declare
+          proc_handle = ProcHandle;
+          error_occurred = boolean;
+      enddeclare
+
+      proc_handle = CurFrame.Scope.GetProcHandle(name = 'potentially_risky_procedure');
+
+      error_occurred = FALSE;
+
+      -- Attempt to call the procedure
+      begin
+          proc_handle.Call();
+      exception
+      when others then
+          error_occurred = TRUE;
+          message 'Error occurred: ' || SQLCA.SQLERRM;
+      endexception;
+
+      if error_occurred then
+          message 'Procedure call failed. Taking alternative action.';
+          -- Implement alternative logic here
+      else
+          message 'Procedure call successful.';
+      endif;
+      ```
+      This demonstrates error handling when calling a procedure using a ProcHandle object.
