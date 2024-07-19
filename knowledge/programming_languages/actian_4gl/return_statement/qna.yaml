@@ -1,0 +1,59 @@
+version: 2
+task_description: Explain the usage of the return statement in Actian OpenROAD 6.2.
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the purpose of the return statement in Actian OpenROAD 6.2?
+    answer: |
+      The return statement is used to close the current frame or called procedure and return to the calling frame or
+      procedure. It can also pass a value back to the caller.
+  - question: What is the syntax for the return statement in Actian OpenROAD 6.2?
+    answer: |
+      The syntax for the return statement is:
+      ```4gl
+      return [expression];
+      ```
+  - question: What does the return statement do when a frame is called by callframe?
+    answer: |
+      When a frame is called by callframe, the return statement closes the frame and returns control to the calling
+      frame, procedure, or method at the statement following the callframe statement.
+  - question: What happens when the return statement is used in a frame initiated through openframe?
+    answer: |
+      When used in a frame initiated through openframe, the return statement closes the frame, and the user must
+      initiate interaction with an active frame.
+  - question: How does the return statement behave when returning from a called procedure or method?
+    answer: |
+      When returning from a called procedure or method, the return statement passes control back to the calling frame,
+      procedure, or method, resuming execution at the statement following the callproc statement or method invocation.
+  - question: What does the return statement do to the parent of opened frames?
+    answer: |
+      The return statement sends a Terminate event to the parent of opened frames and then closes them.
+  - question: What is the effect of the return statement on all active frames or procedures that are children?
+    answer: |
+      The return statement closes the entire application, functioning as an exit statement, if all active frames or
+      procedures are children.
+  - question: Can the return statement pass values back to the caller? If so, how?
+    answer: |
+      Yes, the return statement can pass a value, such as a return status, back to the calling frame, procedure, or
+      method. The value must be compatible with the return data type defined in the visual development environment.
+  - question: What happens to the return value when a frame is called with openframe?
+    answer: |
+      When a frame is called with openframe, any return value is ignored.
+  - question: Can you provide an example of using the return statement to pass a value back to the calling frame?
+    answer: |
+      Certainly! Here is an example:
+      ```4gl
+      on click file.end =
+      begin
+          return status;
+      end
+      ```
+  - question: Why is the return statement essential in Actian OpenROAD 6.2?
+    answer: |
+      The return statement is essential for controlling the flow of execution between different frames, procedures, and
+      methods. It ensures proper closure of frames and passing of control and values back to the caller.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 36f99fc
+  patterns:
+    - return_statement.md
