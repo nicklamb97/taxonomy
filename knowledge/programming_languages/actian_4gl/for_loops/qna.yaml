@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the usage and syntax of FOR loops in Actian 4GL for OpenROAD
+task_description: Explain the usage and syntax of FOR loops in Actian 4GL for OpenROAD (2.0)
 created_by: nicklamb97
 domain: actian_4gl
 seed_examples:
