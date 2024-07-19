@@ -1,9 +1,8 @@
+task_description: Explain the concept and syntax of 'LocalProcedureDeclaration' in
+  OpenROAD Actian 4GL. (2.0)
+version: 2
 created_by: willsjames
-document:
-  commit: 3e07963
-  patterns:
-    - local_procedure_declaration.md
-  repo: https://github.com/nicklamb97/instructlab-data.git
+
 domain: openroad
 seed_examples:
   - answer: A LocalProcedureDeclaration is used to declare the name and return type
@@ -40,6 +39,8 @@ seed_examples:
       that is only needed within a specific script, promoting code organization and
       modularity.
     question: What is the purpose of using local procedures in OpenROAD Actian 4GL?
-task_description: Explain the concept and syntax of 'LocalProcedureDeclaration' in
-  OpenROAD Actian 4GL.
-version: 2
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 3e07963
+  patterns:
+    - local_procedure_declaration.md
