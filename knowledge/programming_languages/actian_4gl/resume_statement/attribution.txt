@@ -1,0 +1,5 @@
+Title: Actian 4GL Resume Statement Overview
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/
+
+The Actian 4GL resume statement content is based on the official Actian 4GL documentation provided by Actian Corporation. This content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
