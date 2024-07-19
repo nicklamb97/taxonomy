@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the concept and syntax of 'Type' in OpenROAD Actian 4GL.
+task_description: Explain the concept and syntax of 'Type' in OpenROAD Actian 4GL. (2.0)
 created_by: willsjames
 domain: actian_4gl
 seed_examples:
