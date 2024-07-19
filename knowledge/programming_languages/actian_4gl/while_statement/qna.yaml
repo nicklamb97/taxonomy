@@ -1,5 +1,5 @@
 version: 2
-task_description: Explain the usage of the while statement in Actian 4GL (OpenROAD).
+task_description: Explain the usage of the while statement in Actian 4GL (OpenROAD) (new).
 created_by: nicklamb97
 domain: openroad
 seed_examples:
