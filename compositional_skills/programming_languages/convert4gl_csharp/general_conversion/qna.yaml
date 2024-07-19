@@ -1,0 +1,217 @@
+version: 2
+task_description: Learn about the converting Actian 4GL code to c#.
+created_by: vernonguy
+seed_examples:
+  - question: "How would you convert the following 4GL Select statement into C#?
+    SELECT employee_id, first_name, last_name FROM employees WHERE department = 'Sales';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT employee_id, first_name, last_name FROM employees WHERE department = @department",
+              connection))
+          {
+              command.Parameters.AddWithValue("@department", "Sales");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int employeeId = (int)reader["employee_id"];
+                      string firstName = reader["first_name"].ToString();
+                      string lastName = reader["last_name"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#?
+    INSERT INTO employees (first_name, last_name) VALUES ('John', 'Doe');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO employees (first_name, last_name) VALUES (@firstName, @lastName)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@firstName", "John");
+              command.Parameters.AddWithValue("@lastName", "Doe");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Update statement into C#?
+    UPDATE employees SET last_name = 'Smith' WHERE employee_id = 123;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE employees SET last_name = @lastName WHERE employee_id = @employeeId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@lastName", "Smith");
+              command.Parameters.AddWithValue("@employeeId", 123);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Delete statement into C#?
+    DELETE FROM employees WHERE employee_id = 123;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM employees WHERE employee_id = @employeeId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@employeeId", 123);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle database transactions in C# that are similar to 4GL transaction control?
+    BEGIN WORK;
+    INSERT INTO employees (first_name, last_name) VALUES ('John', 'Doe');
+    UPDATE employees SET last_name = 'Smith' WHERE employee_id = 123;
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO employees (first_name, last_name) VALUES (@firstName, @lastName)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@firstName", "John");
+                      command.Parameters.AddWithValue("@lastName", "Doe");
+                      command.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE employees SET last_name = @lastName WHERE employee_id = @employeeId",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@lastName", "Smith");
+                      command.Parameters.AddWithValue("@employeeId", 123);
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "How would you convert error handling in 4GL to equivalent C# code?
+    WHENEVER ERROR CONTINUE
+    LET err_msg = SQLERRMESSAGE;
+    DISPLAY err_msg;"
+    answer: |
+      try
+      {
+          // Database operations
+      }
+      catch (SqlException ex)
+      {
+          string errMsg = ex.Message;
+          Console.WriteLine(errMsg);
+      }
+
+  - question: "How would you convert a 4GL FOR loop that iterates through database results into C#?
+    FOR rec IN SELECT employee_id, first_name, last_name FROM employees
+    DISPLAY rec.employee_id, rec.first_name, rec.last_name;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT employee_id, first_name, last_name FROM employees",
+              connection))
+          {
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int employeeId = (int)reader["employee_id"];
+                      string firstName = reader["first_name"].ToString();
+                      string lastName = reader["last_name"].ToString();
+                      Console.WriteLine($"{employeeId} {firstName} {lastName}");
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert a 4GL WHILE loop into C#?
+    LET i = 1
+    WHILE i <= 10
+    DISPLAY i
+    LET i = i + 1
+    END WHILE;"
+    answer: |
+      int i = 1;
+      while (i <= 10)
+      {
+          Console.WriteLine(i);
+          i++;
+      }
+
+  - question: "How would you convert a 4GL conditional statement into C#?
+    IF employee_id = 123 THEN
+    DISPLAY 'Employee found'
+    ELSE
+    DISPLAY 'Employee not found'
+    END IF;"
+    answer: |
+      if (employeeId == 123)
+      {
+          Console.WriteLine("Employee found");
+      }
+      else
+      {
+          Console.WriteLine("Employee not found");
+      }
+
+  - question: "How would you convert 4GL string concatenation into C#?
+    LET full_name = first_name || ' ' || last_name;"
+    answer: |
+      string fullName = firstName + " " + lastName;
+
+  - question: "How would you convert a 4GL function call to fetch data into C#?
+    CALL get_employee_name(employee_id) RETURNING first_name, last_name;"
+    answer: |
+      public void GetEmployeeName(int employeeId, out string firstName, out string lastName)
+      {
+          firstName = string.Empty;
+          lastName = string.Empty;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "SELECT first_name, last_name FROM employees WHERE employee_id = @employeeId",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@employeeId", employeeId);
+                  using (SqlDataReader reader = command.ExecuteReader())
+                  {
+                      if (reader.Read())
+                      {
+                          firstName = reader["first_name"].ToString();
+                          lastName = reader["last_name"].ToString();
+                      }
+                  }
+              }
+          }
+      }
