@@ -1,0 +1,201 @@
+version: 2
+task_description: Learn about converting Actian OpenROAD 4GL code to C#.
+created_by: OllieBoyes-Park
+seed_examples:
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    SELECT emp_name, emp_salary FROM employees WHERE emp_id = 1234;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "SELECT emp_name, emp_salary FROM employees WHERE emp_id = @empId";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@empId", 1234);
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            string empName = reader["emp_name"].ToString();
+            decimal empSalary = (decimal)reader["emp_salary"];
+        }
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    INSERT INTO employees (emp_id, emp_name, emp_salary) VALUES (1234, 'John Doe', 50000);
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "INSERT INTO employees (emp_id, emp_name, emp_salary) VALUES (@empId, @empName, @empSalary)";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@empId", 1234);
+        cmd.Parameters.AddWithValue("@empName", "John Doe");
+        cmd.Parameters.AddWithValue("@empSalary", 50000);
+        conn.Open();
+        cmd.ExecuteNonQuery();
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    UPDATE employees SET emp_salary = 55000 WHERE emp_id = 1234;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "UPDATE employees SET emp_salary = @empSalary WHERE emp_id = @empId";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@empSalary", 55000);
+        cmd.Parameters.AddWithValue("@empId", 1234);
+        conn.Open();
+        cmd.ExecuteNonQuery();
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    DELETE FROM employees WHERE emp_id = 1234;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "DELETE FROM employees WHERE emp_id = @empId";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@empId", 1234);
+        conn.Open();
+        cmd.ExecuteNonQuery();
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    FOR i = 1 TO 10 DO
+        DISPLAY i;
+    END FOR;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    for (int i = 1; i <= 10; i++)
+    {
+        Console.WriteLine(i);
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    WHILE i <= 10 DO
+        DISPLAY i;
+        i = i + 1;
+    END WHILE;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    while (i <= 10)
+    {
+        Console.WriteLine(i);
+        i++;
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#,
+    IF emp_salary > 50000 THEN
+        DISPLAY 'High salary';
+    ELSE
+        DISPLAY 'Low salary';
+    END IF;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    if (empSalary > 50000)
+    {
+        Console.WriteLine("High salary");
+    }
+    else
+    {
+        Console.WriteLine("Low salary");
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#,
+    CASE day OF
+        1: DISPLAY 'Monday';
+        2: DISPLAY 'Tuesday';
+        3: DISPLAY 'Wednesday';
+        4: DISPLAY 'Thursday';
+        5: DISPLAY 'Friday';
+        6: DISPLAY 'Saturday';
+        7: DISPLAY 'Sunday';
+    ENDCASE;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    switch (day)
+    {
+        case 1:
+            Console.WriteLine("Monday");
+            break;
+        case 2:
+            Console.WriteLine("Tuesday");
+            break;
+        case 3:
+            Console.WriteLine("Wednesday");
+            break;
+        case 4:
+            Console.WriteLine("Thursday");
+            break;
+        case 5:
+            Console.WriteLine("Friday");
+            break;
+        case 6:
+            Console.WriteLine("Saturday");
+            break;
+        case 7:
+            Console.WriteLine("Sunday");
+            break;
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    SELECT COUNT(*) INTO :emp_count FROM employees;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "SELECT COUNT(*) FROM employees";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        conn.Open();
+        int empCount = (int)cmd.ExecuteScalar();
+    }
+    ```
+
+- question: >-
+    Translate the following Actian OpenROAD 4GL code to C#:
+    FOR EACH employee IN employees DO
+        DISPLAY employee.emp_name;
+    END FOR;
+  answer: |
+    Here's the equivalent C# code:
+    ```
+    string query = "SELECT emp_name FROM employees";
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        SqlCommand cmd = new SqlCommand(query, conn);
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            Console.WriteLine(reader["emp_name"].ToString());
+        }
+    }
+    ```

@@ -1,0 +1,6 @@
+Title: Actian 4GL How to convert 4GL to C#
+Author: OllieBoyes-Park
+Source: https://docs.actian.com/openroad/6.2/ and c# documentatoin
+
+The knowledge content is based on how actian 4gl and csharp and is for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
