@@ -1,6 +1,5 @@
 version: 2
-task_description: Explain the conversion of C# code to Actian 4GL for OpenROAD.
-created_by: nicklamb97
+task_description: Explain the conversion of C# code to Actian 4GL for OpenROAD. (2.0)
 domain: programming_language
 seed_examples:
   - question: What are the main variables used in the C# and Actian 4GL examples?
