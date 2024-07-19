@@ -1,0 +1,107 @@
+version: 2
+task_description: Explain the frame scripts in Actian 4GL SQL and how they are used in OpenROAD.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is a frame script in OpenROAD?
+    answer: >
+      A frame script is a script associated with a frame in OpenROAD. It can
+      initialize local variables for the frame, perform start-up operations,
+      include event blocks for events that apply to the frame as a whole, and
+      include event blocks for events on individual fields or menu items.
+  - question: What is the general syntax of a frame script?
+    answer: |
+      The general syntax of a frame script is:
+      ```
+      [initialize [([parameterlist])] =
+      [declare
+              [localvariablelist]
+              [localprocedureforwardreferences]
+      [enddeclare]]
+      [begin
+              statementlist
+      end [;]]
+      {eventblock [;]}
+      {localprocedure [;]}
+      {parameterlist [;]}
+      {localvariablelist [;]}
+      ```
+  - question: What is the purpose of the initialize statement in a frame script?
+    answer: >
+      The initialize statement in a frame script initializes local variables and
+      performs start-up operations for the frame. It must be the first statement
+      in the frame script if used. The initialize statement can also declare
+      parameters and local variables for use within the frame script.
+  - question: How do you declare local variables in a frame script?
+    answer: >
+      Local variables are declared in the declare section of the initialize
+      statement. The syntax is:
+
+      ```
+
+      declare
+          localvariablelist
+      enddeclare
+
+      ```
+
+      These local variables can be used anywhere in the frame script or in any
+      field or menu item scripts associated with the frame.
+  - question: How are event blocks used in frame scripts?
+    answer: >
+      Event blocks in frame scripts contain sequences of statements associated
+      with specific events. The syntax for an event block is:
+
+      ```
+
+      on event [variablename]
+          {, on event [variablename]} =
+      [declare
+              localvariablelist
+      [enddeclare]]
+
+      begin
+              statementlist
+      end[;]
+
+      ```
+
+      When the specified event occurs, OpenROAD executes the statements in the
+      event block.
+  - question: What is a typical frame event included in frame scripts?
+    answer: >
+      Typical frame events included in frame scripts are:
+
+      - Terminate: Exits the frame
+
+      - ChildEntry: Enters a subform, composite field, or any field on the form
+
+      - ChildExit: Exits a subform, composite field, or any field on the form
+
+      - ChildSetValue: Changes a subform, composite field, or any field on the
+      form
+
+      - FrameResized: Changes the size of the window
+
+      - UserEvent: Specifies a user event
+  - question: How do you handle a standard quit sequence in a frame script?
+    answer: >
+      A standard quit sequence in a frame script can be handled with the
+      following event block:
+
+      ```
+
+      on click menu.file_menu.quit_menu,
+
+      on click quit_button =
+
+      begin
+          return;
+      end;
+
+      ```
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: b651070
+  patterns:
+    - frame_scripts.md
