@@ -1,6 +1,6 @@
 version: 2
 task_description: Explain the concept and usage of 'Callproc Statement' in OpenROAD
-  Actian 4GL.
+  Actian 4GL
 created_by: willsjames
 domain: actian_4gl
 seed_examples:
