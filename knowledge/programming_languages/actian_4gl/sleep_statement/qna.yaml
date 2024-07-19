@@ -1,0 +1,75 @@
+version: 2
+task_description: Explain the usage of the sleep statement in Actian 4GL (OpenROAD).
+created_by: nicklamb97
+domain: openroad
+seed_examples:
+  - question: What is the purpose of the sleep statement in Actian 4GL?
+    answer: |
+      The sleep statement in Actian 4GL pauses program execution for a specified duration, creating timed delays
+      or pauses in applications.
+  - question: What is the syntax of the sleep statement in Actian 4GL?
+    answer: |
+      The syntax for the sleep statement is:
+      ```4gl
+      sleep duration;
+      ```
+      Where 'duration' specifies the time to sleep in seconds as an integer literal or variable.
+  - question: How can the sleep statement be used in Actian 4GL?
+    answer: |
+      Developers use the sleep statement to introduce delays in program execution, useful for timed actions or
+      creating pauses before proceeding with further operations.
+  - question: What are some basic examples of using the sleep statement in Actian 4GL?
+    answer: |
+      Here's a basic example:
+      ```4gl
+      i = 1;
+      WHILE i <= 3 DO
+          MESSAGE i;
+          let i = i + 1;
+          sleep 2;
+      ENDWHILE;
+      ```
+      This prints numbers 1 to 3 with a 2-second pause between each.
+  - question: How does Actian 4GL handle the sleep duration parameter?
+    answer: |
+      Actian 4GL expects the sleep duration to be specified in whole seconds. It supports using variables or literal
+      integers to define the sleep period.
+  - question: Can the sleep statement be used to pause after user input in Actian 4GL?
+    answer: |
+      Yes, developers can use the sleep statement to introduce pauses before or after user interactions. For example:
+      ```4gl
+      user_input = 10;
+      IF user_input > 10 then
+          MESSAGE "Input is greater than 10.";
+      ELSE
+          MESSAGE "Input is less than or equal to 10.";
+      ENDIF;
+      sleep 3;
+      MESSAGE "End of program.";
+      ```
+      This waits for 3 seconds before displaying "End of program."
+  - question: What considerations should developers keep in mind when using the sleep statement in Actian 4GL?
+    answer: |
+      Developers should note that the sleep duration must be an integer and that the sleep operation blocks program
+      execution during the specified time period.
+  - question: How does Actian 4GL's sleep statement compare to similar functionalities in other programming languages?
+    answer: |
+      Actian 4GL's sleep statement functions similarly to sleep or delay statements in other languages, providing a
+      straightforward way to introduce pauses in program flow for specified durations.
+  - question: Can you use variables to define the sleep duration in Actian 4GL?
+    answer: |
+      Yes, Actian 4GL allows developers to use variables to dynamically define the duration for which the program
+      should sleep, enhancing flexibility in application design.
+  - question: In what scenarios would a developer use the sleep statement in Actian 4GL?
+    answer: |
+      Developers use the sleep statement in Actian 4GL to synchronize actions, control pacing in animations or
+      timed processes, and manage user interaction timing within applications.
+  - question: How does Actian 4GL handle blocking during the sleep period?
+    answer: |
+      Actian 4GL's sleep statement performs a blocking operation, pausing the entire program execution until the
+      specified sleep duration elapses.
+document:
+  repo: https://github.com/nicklamb97/instructlab-data.git
+  commit: 99aa026
+  patterns:
+    - sleep_statement.md
