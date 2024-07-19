@@ -64,6 +64,6 @@ seed_examples:
       ```
 document:
   repo: https://github.com/nicklamb97/instructlab-data.git
-  commit: bd34a5f
+  commit: 0a8ae55
   patterns:
     - execute_procedure_statement.md
