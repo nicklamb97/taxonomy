@@ -1,0 +1,250 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of an online bookstore management system.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
+    SELECT book_id, title, author, price FROM books WHERE genre = 'Science Fiction' AND stock > 0;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT book_id, title, author, price FROM books WHERE genre = @genre AND stock > @stock",
+              connection))
+          {
+              command.Parameters.AddWithValue("@genre", "Science Fiction");
+              command.Parameters.AddWithValue("@stock", 0);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int bookId = (int)reader["book_id"];
+                      string title = reader["title"].ToString();
+                      string author = reader["author"].ToString();
+                      decimal price = (decimal)reader["price"];
+                      // Process book data
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL Insert statement to C#. Respond only in code:
+    INSERT INTO orders (customer_id, order_date, total_amount) VALUES (1001, CURRENT, 59.99);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@customerId", 1001);
+              command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+              command.Parameters.AddWithValue("@totalAmount", 59.99m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert this 4GL Update statement to C#? Respond only in code:
+    UPDATE customers SET loyalty_points = loyalty_points + 10 WHERE customer_id = 1001;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE customers SET loyalty_points = loyalty_points + @points WHERE customer_id = @customerId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@points", 10);
+              command.Parameters.AddWithValue("@customerId", 1001);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Delete statement to C#. Respond only in code:
+    DELETE FROM shopping_cart WHERE customer_id = 1001 AND add_date < CURRENT - INTERVAL '30' DAY;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM shopping_cart WHERE customer_id = @customerId AND add_date < @expirationDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@customerId", 1001);
+              command.Parameters.AddWithValue("@expirationDate", DateTime.Now.AddDays(-30));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle this 4GL transaction in C#? Respond only in code:
+    BEGIN WORK;
+    UPDATE books SET stock = stock - 1 WHERE book_id = 5001;
+    INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (10001, 5001, 1, 24.99);
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE books SET stock = stock - 1 WHERE book_id = @bookId",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@bookId", 5001);
+                      command.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (@orderId, @bookId, @quantity, @price)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@orderId", 10001);
+                      command.Parameters.AddWithValue("@bookId", 5001);
+                      command.Parameters.AddWithValue("@quantity", 1);
+                      command.Parameters.AddWithValue("@price", 24.99m);
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL error handling to C#. Respond only in code:
+    WHENEVER ERROR RAISE
+    BEGIN
+        LET error_log = 'Error in bookstore system: ' || SQLERRM;
+        INSERT INTO error_logs (log_message, log_date) VALUES (error_log, CURRENT);
+        RAISE EXCEPTION error_log;
+    END"
+    answer: |
+      try
+      {
+          // Bookstore system operations
+      }
+      catch (SqlException ex)
+      {
+          string errorLog = "Error in bookstore system: " + ex.Message;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "INSERT INTO error_logs (log_message, log_date) VALUES (@logMessage, @logDate)",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@logMessage", errorLog);
+                  command.Parameters.AddWithValue("@logDate", DateTime.Now);
+                  command.ExecuteNonQuery();
+              }
+          }
+          throw new Exception(errorLog);
+      }
+
+  - question: "How would you convert this 4GL FOR loop to C#? Respond only in code:
+    FOR book IN SELECT book_id, title, author FROM books WHERE publisher = 'Penguin Books'
+        DISPLAY book.book_id, book.title, book.author;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT book_id, title, author FROM books WHERE publisher = @publisher",
+              connection))
+          {
+              command.Parameters.AddWithValue("@publisher", "Penguin Books");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int bookId = (int)reader["book_id"];
+                      string title = reader["title"].ToString();
+                      string author = reader["author"].ToString();
+                      Console.WriteLine($"{bookId} {title} {author}");
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL WHILE loop to C#. Respond only in code:
+    LET discount_percent = 5
+    WHILE discount_percent <= 25
+        DISPLAY 'Discount:', discount_percent, '%'
+        LET discount_percent = discount_percent + 5
+    END WHILE;"
+    answer: |
+      int discountPercent = 5;
+      while (discountPercent <= 25)
+      {
+          Console.WriteLine($"Discount: {discountPercent}%");
+          discountPercent += 5;
+      }
+
+  - question: "How would you convert this 4GL conditional statement to C#? Respond only in code:
+    IF order_total > 100 THEN
+        LET shipping_cost = 0
+    ELIF order_total > 50 THEN
+        LET shipping_cost = 5
+    ELSE
+        LET shipping_cost = 10
+    END IF;"
+    answer: |
+      decimal shippingCost;
+      if (orderTotal > 100)
+      {
+          shippingCost = 0;
+      }
+      else if (orderTotal > 50)
+      {
+          shippingCost = 5;
+      }
+      else
+      {
+          shippingCost = 10;
+      }
+
+  - question: "Convert this 4GL string concatenation to C#. Respond only in code:
+    LET book_details = title || ' by ' || author || ' (' || TO_CHAR(publication_date, '%Y') || ')';"
+    answer: |
+      string bookDetails = title + " by " + author + " (" + publicationDate.ToString("yyyy") + ")";
+
+  - question: "How would you convert this 4GL function call to C#? Respond only in code:
+    FUNCTION calculate_discount(p_order_total DECIMAL(10,2), p_is_member CHAR(1)) RETURNS DECIMAL(10,2)
+        IF p_is_member = 'Y' THEN
+            RETURN p_order_total * 0.1
+        ELIF p_order_total > 100 THEN
+            RETURN p_order_total * 0.05
+        ELSE
+            RETURN 0
+        END IF
+    END FUNCTION
+
+    LET discount_amount = calculate_discount(150.00, 'Y');"
+    answer: |
+      public decimal CalculateDiscount(decimal orderTotal, bool isMember)
+      {
+          if (isMember)
+          {
+              return orderTotal * 0.1m;
+          }
+          else if (orderTotal > 100)
+          {
+              return orderTotal * 0.05m;
+          }
+          else
+          {
+              return 0;
+          }
+      }
+
+      // Usage
+      decimal discountAmount = CalculateDiscount(150.00m, true);
