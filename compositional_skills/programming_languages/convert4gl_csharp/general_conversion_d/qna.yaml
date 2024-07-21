@@ -246,20 +246,17 @@ seed_examples:
           state ?? "",
           zip_code ?? ""
       }.Where(s => !string.IsNullOrEmpty(s)));
-      
       string formattedAddress = fullAddress.Trim().ToUpper();
 
   - question: "Convert this 4GL function to C#. Respond only in code:
     FUNCTION calculate_shipping_cost(p_weight DECIMAL, p_distance INTEGER) RETURNS DECIMAL
         DEFINE base_rate DECIMAL(5,2);
         DEFINE distance_factor DECIMAL(5,2);
-        
-        LET base_rate = CASE 
+        LET base_rate = CASE
             WHEN p_weight <= 5 THEN 10.00
             WHEN p_weight <= 20 THEN 15.00
             ELSE 20.00
         END;
-        
         LET distance_factor = p_distance / 100;
         
         RETURN base_rate + (base_rate * distance_factor);
@@ -268,15 +265,12 @@ seed_examples:
       public decimal CalculateShippingCost(decimal weight, int distance)
       {
           decimal baseRate;
-          
           if (weight <= 5)
               baseRate = 10.00m;
           else if (weight <= 20)
               baseRate = 15.00m;
           else
               baseRate = 20.00m;
-          
           decimal distanceFactor = distance / 100m;
-          
           return baseRate + (baseRate * distanceFactor);
       }
