@@ -1,0 +1,274 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C#.
+created_by: nicklamb97
+seed_examples:
+  - question: "Convert this 4GL Select statement to C#. Respond only in code:
+    SELECT employee_id, full_name, hire_date FROM employees WHERE department = 'Marketing' AND salary > 50000;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT employee_id, full_name, hire_date FROM employees WHERE department = @department AND salary > @salary",
+              connection))
+          {
+              command.Parameters.AddWithValue("@department", "Marketing");
+              command.Parameters.AddWithValue("@salary", 50000);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int employeeId = (int)reader["employee_id"];
+                      string fullName = reader["full_name"].ToString();
+                      DateTime hireDate = (DateTime)reader["hire_date"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Insert statement to C#? Respond only in code:
+    INSERT INTO suppliers (supplier_name, contact_person, phone_number) VALUES ('TechPro Inc.', 'John Doe', '+1-555-1234');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO suppliers (supplier_name, contact_person, phone_number) VALUES (@supplierName, @contactPerson, @phoneNumber)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@supplierName", "TechPro Inc.");
+              command.Parameters.AddWithValue("@contactPerson", "John Doe");
+              command.Parameters.AddWithValue("@phoneNumber", "+1-555-1234");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Update statement to C#. Respond only in code:
+    UPDATE inventory SET stock_level = stock_level - 10, last_updated = CURRENT WHERE product_id = 789;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE inventory SET stock_level = stock_level - @quantity, last_updated = @currentDate WHERE product_id = @productId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@quantity", 10);
+              command.Parameters.AddWithValue("@currentDate", DateTime.Now);
+              command.Parameters.AddWithValue("@productId", 789);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert this 4GL Delete statement to C#? Respond only in code:
+    DELETE FROM archived_logs WHERE log_date < ADD_MONTHS(CURRENT, -6);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM archived_logs WHERE log_date < @cutoffDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@cutoffDate", DateTime.Now.AddMonths(-6));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL transaction to C#. Respond only in code:
+    BEGIN WORK;
+    INSERT INTO orders (customer_id, order_date, total_amount) VALUES (123, CURRENT, 1500.00);
+    UPDATE customers SET total_orders = total_orders + 1 WHERE customer_id = 123;
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand insertCommand = new SqlCommand(
+                      "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+                      connection, transaction))
+                  {
+                      insertCommand.Parameters.AddWithValue("@customerId", 123);
+                      insertCommand.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                      insertCommand.Parameters.AddWithValue("@totalAmount", 1500.00m);
+                      insertCommand.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand updateCommand = new SqlCommand(
+                      "UPDATE customers SET total_orders = total_orders + 1 WHERE customer_id = @customerId",
+                      connection, transaction))
+                  {
+                      updateCommand.Parameters.AddWithValue("@customerId", 123);
+                      updateCommand.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL error handling to C#? Respond only in code:
+    WHENEVER ERROR
+    BEGIN
+        LET error_code = SQLCA.SQLCODE;
+        LET error_message = SQLCA.SQLERRM;
+        CALL log_error(error_code, error_message);
+        RAISE EXCEPTION error_message;
+    END"
+    answer: |
+      try
+      {
+          // Database operations
+      }
+      catch (SqlException ex)
+      {
+          int errorCode = ex.Number;
+          string errorMessage = ex.Message;
+          LogError(errorCode, errorMessage);
+          throw new Exception(errorMessage);
+      }
+
+  - question: "Convert this 4GL FOR loop to C#. Respond only in code:
+    FOR prod IN SELECT product_id, product_name, unit_price FROM products WHERE category = 'Electronics' AND unit_price > 100
+        LET discounted_price = prod.unit_price * 0.9;
+        DISPLAY prod.product_id, prod.product_name, discounted_price;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT product_id, product_name, unit_price FROM products WHERE category = @category AND unit_price > @minPrice",
+              connection))
+          {
+              command.Parameters.AddWithValue("@category", "Electronics");
+              command.Parameters.AddWithValue("@minPrice", 100m);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int productId = (int)reader["product_id"];
+                      string productName = reader["product_name"].ToString();
+                      decimal unitPrice = (decimal)reader["unit_price"];
+                      decimal discountedPrice = unitPrice * 0.9m;
+                      Console.WriteLine($"{productId} {productName} {discountedPrice:C}");
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL WHILE loop to C#? Respond only in code:
+    LET retry_count = 0;
+    WHILE retry_count < 3
+        TRY
+            CALL process_data();
+            EXIT WHILE;
+        CATCH
+            LET retry_count = retry_count + 1;
+            IF retry_count = 3 THEN
+                RAISE EXCEPTION 'Max retries reached';
+            END IF;
+        END TRY;
+    END WHILE;"
+    answer: |
+      int retryCount = 0;
+      while (retryCount < 3)
+      {
+          try
+          {
+              ProcessData();
+              break;
+          }
+          catch
+          {
+              retryCount++;
+              if (retryCount == 3)
+              {
+                  throw new Exception("Max retries reached");
+              }
+          }
+      }
+
+  - question: "Convert this 4GL conditional statement to C#. Respond only in code:
+    IF order_total >= 1000 THEN
+        IF customer_type = 'Premium' THEN
+            LET discount = 0.15;
+        ELSE
+            LET discount = 0.10;
+        END IF;
+    ELSE
+        LET discount = 0.05;
+    END IF;"
+    answer: |
+      decimal discount;
+      if (orderTotal >= 1000)
+      {
+          if (customerType == "Premium")
+          {
+              discount = 0.15m;
+          }
+          else
+          {
+              discount = 0.10m;
+          }
+      }
+      else
+      {
+          discount = 0.05m;
+      }
+
+  - question: "How would you convert this 4GL string manipulation to C#? Respond only in code:
+    LET full_address = NVL(street_address, '') || ', ' || NVL(city, '') || ', ' || NVL(state, '') || ' ' || NVL(zip_code, '');
+    LET formatted_address = UPSHIFT(TRIM(full_address));"
+    answer: |
+      string fullAddress = string.Join(", ", new[] 
+      { 
+          street_address ?? "", 
+          city ?? "", 
+          state ?? "", 
+          zip_code ?? "" 
+      }.Where(s => !string.IsNullOrEmpty(s)));
+      
+      string formattedAddress = fullAddress.Trim().ToUpper();
+
+  - question: "Convert this 4GL function to C#. Respond only in code:
+    FUNCTION calculate_shipping_cost(p_weight DECIMAL, p_distance INTEGER) RETURNS DECIMAL
+        DEFINE base_rate DECIMAL(5,2);
+        DEFINE distance_factor DECIMAL(5,2);
+        
+        LET base_rate = CASE 
+            WHEN p_weight <= 5 THEN 10.00
+            WHEN p_weight <= 20 THEN 15.00
+            ELSE 20.00
+        END;
+        
+        LET distance_factor = p_distance / 100;
+        
+        RETURN base_rate + (base_rate * distance_factor);
+    END FUNCTION;"
+    answer: |
+      public decimal CalculateShippingCost(decimal weight, int distance)
+      {
+          decimal baseRate;
+          
+          if (weight <= 5)
+              baseRate = 10.00m;
+          else if (weight <= 20)
+              baseRate = 15.00m;
+          else
+              baseRate = 20.00m;
+          
+          decimal distanceFactor = distance / 100m;
+          
+          return baseRate + (baseRate * distanceFactor);
+      }
