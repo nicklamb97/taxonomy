@@ -1,0 +1,232 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of a marathon event management system.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
+    SELECT runner_id, full_name, age_group FROM runners WHERE personal_best < '03:30:00';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT runner_id, full_name, age_group FROM runners WHERE personal_best < @personalBest",
+              connection))
+          {
+              command.Parameters.AddWithValue("@personalBest", TimeSpan.Parse("03:30:00"));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int runnerId = (int)reader["runner_id"];
+                      string fullName = reader["full_name"].ToString();
+                      string ageGroup = reader["age_group"].ToString();
+                      // Process runner data
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL Insert statement to C#. Respond only in code:
+    INSERT INTO race_events (event_name, event_date, distance_km, max_participants) VALUES ('City Marathon 2024', '2024-09-15', 42.2, 5000);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO race_events (event_name, event_date, distance_km, max_participants) VALUES (@eventName, @eventDate, @distanceKm, @maxParticipants)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventName", "City Marathon 2024");
+              command.Parameters.AddWithValue("@eventDate", new DateTime(2024, 9, 15));
+              command.Parameters.AddWithValue("@distanceKm", 42.2);
+              command.Parameters.AddWithValue("@maxParticipants", 5000);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert this 4GL Update statement to C#? Respond only in code:
+    UPDATE runners SET total_races = total_races + 1, last_race_date = CURRENT WHERE runner_id = 1234;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE runners SET total_races = total_races + 1, last_race_date = @currentDate WHERE runner_id = @runnerId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@currentDate", DateTime.Now);
+              command.Parameters.AddWithValue("@runnerId", 1234);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Delete statement to C#. Respond only in code:
+    DELETE FROM race_results WHERE event_id = 42 AND finish_time IS NULL;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM race_results WHERE event_id = @eventId AND finish_time IS NULL",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventId", 42);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle this 4GL transaction in C#? Respond only in code:
+    BEGIN WORK;
+    UPDATE race_events SET current_participants = current_participants + 1 WHERE event_id = 101;
+    INSERT INTO registrations (runner_id, event_id, registration_date) VALUES (5678, 101, CURRENT);
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE race_events SET current_participants = current_participants + 1 WHERE event_id = @eventId",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@eventId", 101);
+                      command.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO registrations (runner_id, event_id, registration_date) VALUES (@runnerId, @eventId, @registrationDate)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@runnerId", 5678);
+                      command.Parameters.AddWithValue("@eventId", 101);
+                      command.Parameters.AddWithValue("@registrationDate", DateTime.Now);
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL error handling to C#. Respond only in code:
+    WHENEVER ERROR RAISE
+    BEGIN
+        LET error_log = 'Error in marathon system: ' || SQLERRM;
+        INSERT INTO system_logs (log_message, log_date) VALUES (error_log, CURRENT);
+        RAISE EXCEPTION error_log;
+    END"
+    answer: |
+      try
+      {
+          // Marathon system operations
+      }
+      catch (SqlException ex)
+      {
+          string errorLog = "Error in marathon system: " + ex.Message;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "INSERT INTO system_logs (log_message, log_date) VALUES (@logMessage, @logDate)",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@logMessage", errorLog);
+                  command.Parameters.AddWithValue("@logDate", DateTime.Now);
+                  command.ExecuteNonQuery();
+              }
+          }
+          throw new Exception(errorLog);
+      }
+
+  - question: "How would you convert this 4GL FOR loop to C#? Respond only in code:
+    FOR runner IN SELECT runner_id, full_name, finish_time FROM race_results WHERE event_id = 42 ORDER BY finish_time
+        DISPLAY runner.runner_id, runner.full_name, runner.finish_time;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT runner_id, full_name, finish_time FROM race_results WHERE event_id = @eventId ORDER BY finish_time",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventId", 42);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int runnerId = (int)reader["runner_id"];
+                      string fullName = reader["full_name"].ToString();
+                      TimeSpan finishTime = (TimeSpan)reader["finish_time"];
+                      Console.WriteLine($"{runnerId} {fullName} {finishTime}");
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL WHILE loop to C#. Respond only in code:
+    LET remaining_slots = 100
+    WHILE remaining_slots > 0
+        DISPLAY 'Slots remaining:', remaining_slots
+        LET remaining_slots = remaining_slots - 1
+    END WHILE;"
+    answer: |
+      int remainingSlots = 100;
+      while (remainingSlots > 0)
+      {
+          Console.WriteLine($"Slots remaining: {remainingSlots}");
+          remainingSlots--;
+      }
+
+  - question: "How would you convert this 4GL conditional statement to C#? Respond only in code:
+    IF finish_time < '02:30:00' THEN
+        LET award_category = 'Elite'
+    ELIF finish_time < '03:00:00' THEN
+        LET award_category = 'Advanced'
+    ELSE
+        LET award_category = 'Standard'
+    END IF;"
+    answer: |
+      string awardCategory;
+      TimeSpan finishTime = TimeSpan.Parse("02:45:30"); // Example finish time
+      if (finishTime < TimeSpan.Parse("02:30:00"))
+      {
+          awardCategory = "Elite";
+      }
+      else if (finishTime < TimeSpan.Parse("03:00:00"))
+      {
+          awardCategory = "Advanced";
+      }
+      else
+      {
+          awardCategory = "Standard";
+      }
+
+  - question: "Convert this 4GL string concatenation to C#. Respond only in code:
+    LET race_info = event_name || ' - ' || TO_CHAR(event_date, '%Y-%m-%d') || ' (' || TO_CHAR(distance_km) || 'km)';"
+    answer: |
+      string raceInfo = eventName + " - " + eventDate.ToString("yyyy-MM-dd") + " (" + distanceKm.ToString("F1") + "km)";
+
+  - question: "How would you convert this 4GL function call to C#? Respond only in code:
+    FUNCTION calculate_pace(p_distance_km DECIMAL, p_finish_time INTERVAL HOUR TO SECOND) RETURNS INTERVAL MINUTE TO SECOND
+        RETURN p_finish_time / p_distance_km
+    END FUNCTION
+
+    LET average_pace = calculate_pace(42.2, '03:30:00');"
+    answer: |
+      public TimeSpan CalculatePace(decimal distanceKm, TimeSpan finishTime)
+      {
+          double totalMinutes = finishTime.TotalMinutes / (double)distanceKm;
+          return TimeSpan.FromMinutes(totalMinutes);
+      }
+
+      // Usage
+      TimeSpan averagePace = CalculatePace(42.2m, TimeSpan.Parse("03:30:00"));
