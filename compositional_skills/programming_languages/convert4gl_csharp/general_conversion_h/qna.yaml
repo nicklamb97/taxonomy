@@ -1,0 +1,294 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in a business context.
+created_by: nicklamb97
+seed_examples:
+  - question: "Convert this 4GL Select statement for retrieving sales data to C#. Respond only in code:
+    SELECT sale_id, employee_name, sale_amount FROM sales WHERE sale_date BETWEEN '2024-01-01' AND '2024-03-31';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT sale_id, employee_name, sale_amount FROM sales WHERE sale_date BETWEEN @startDate AND @endDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@startDate", new DateTime(2024, 1, 1));
+              command.Parameters.AddWithValue("@endDate", new DateTime(2024, 3, 31));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int saleId = (int)reader["sale_id"];
+                      string employeeName = reader["employee_name"].ToString();
+                      decimal saleAmount = (decimal)reader["sale_amount"];
+                      // Process sales data
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL Insert statement for adding a new product to C#. Respond only in code:
+    INSERT INTO products (product_name, category, unit_price, stock_quantity) VALUES ('Ergonomic Chair', 'Office Furniture', 299.99, 50);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO products (product_name, category, unit_price, stock_quantity) VALUES (@productName, @category, @unitPrice, @stockQuantity)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@productName", "Ergonomic Chair");
+              command.Parameters.AddWithValue("@category", "Office Furniture");
+              command.Parameters.AddWithValue("@unitPrice", 299.99m);
+              command.Parameters.AddWithValue("@stockQuantity", 50);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Update statement for adjusting employee salaries to C#. Respond only in code:
+    UPDATE employees SET salary = salary * 1.05 WHERE department = 'Sales' AND performance_rating > 8;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE employees SET salary = salary * @salaryIncrease WHERE department = @department AND performance_rating > @minRating",
+              connection))
+          {
+              command.Parameters.AddWithValue("@salaryIncrease", 1.05m);
+              command.Parameters.AddWithValue("@department", "Sales");
+              command.Parameters.AddWithValue("@minRating", 8);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Delete statement for removing obsolete inventory items to C#. Respond only in code:
+    DELETE FROM inventory WHERE last_sale_date < CURRENT - INTERVAL '2' YEAR AND quantity = 0;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM inventory WHERE last_sale_date < @cutoffDate AND quantity = @quantity",
+              connection))
+          {
+              command.Parameters.AddWithValue("@cutoffDate", DateTime.Now.AddYears(-2));
+              command.Parameters.AddWithValue("@quantity", 0);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL transaction for processing a customer order to C#. Respond only in code:
+    BEGIN WORK;
+    INSERT INTO orders (customer_id, order_date, total_amount) VALUES (1001, CURRENT, 1500.00);
+    UPDATE customers SET total_purchases = total_purchases + 1500.00 WHERE customer_id = 1001;
+    UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 5001;
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand insertOrder = new SqlCommand(
+                      "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+                      connection, transaction))
+                  {
+                      insertOrder.Parameters.AddWithValue("@customerId", 1001);
+                      insertOrder.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                      insertOrder.Parameters.AddWithValue("@totalAmount", 1500.00m);
+                      insertOrder.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand updateCustomer = new SqlCommand(
+                      "UPDATE customers SET total_purchases = total_purchases + @purchaseAmount WHERE customer_id = @customerId",
+                      connection, transaction))
+                  {
+                      updateCustomer.Parameters.AddWithValue("@purchaseAmount", 1500.00m);
+                      updateCustomer.Parameters.AddWithValue("@customerId", 1001);
+                      updateCustomer.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand updateInventory = new SqlCommand(
+                      "UPDATE inventory SET quantity = quantity - 1 WHERE product_id = @productId",
+                      connection, transaction))
+                  {
+                      updateInventory.Parameters.AddWithValue("@productId", 5001);
+                      updateInventory.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL error handling for a critical financial operation to C#. Respond only in code:
+    WHENEVER ERROR RAISE
+    BEGIN
+        LET error_log = 'Financial operation failed: ' || SQLERRM;
+        INSERT INTO error_logs (error_message, error_date) VALUES (error_log, CURRENT);
+        RAISE EXCEPTION error_log;
+    END"
+    answer: |
+      try
+      {
+          // Financial operation code
+      }
+      catch (SqlException ex)
+      {
+          string errorLog = "Financial operation failed: " + ex.Message;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "INSERT INTO error_logs (error_message, error_date) VALUES (@errorMessage, @errorDate)",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@errorMessage", errorLog);
+                  command.Parameters.AddWithValue("@errorDate", DateTime.Now);
+                  command.ExecuteNonQuery();
+              }
+          }
+          throw new Exception(errorLog);
+      }
+
+  - question: "Convert this 4GL FOR loop for calculating quarterly sales bonuses to C#. Respond only in code:
+    FOR emp IN SELECT employee_id, sales_amount FROM employee_sales WHERE quarter = 'Q1'
+        LET bonus = emp.sales_amount * 0.05;
+        UPDATE employees SET quarterly_bonus = bonus WHERE employee_id = emp.employee_id;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand selectCommand = new SqlCommand(
+              "SELECT employee_id, sales_amount FROM employee_sales WHERE quarter = @quarter",
+              connection))
+          {
+              selectCommand.Parameters.AddWithValue("@quarter", "Q1");
+              using (SqlDataReader reader = selectCommand.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int employeeId = (int)reader["employee_id"];
+                      decimal salesAmount = (decimal)reader["sales_amount"];
+                      decimal bonus = salesAmount * 0.05m;
+
+                      using (SqlCommand updateCommand = new SqlCommand(
+                          "UPDATE employees SET quarterly_bonus = @bonus WHERE employee_id = @employeeId",
+                          connection))
+                      {
+                          updateCommand.Parameters.AddWithValue("@bonus", bonus);
+                          updateCommand.Parameters.AddWithValue("@employeeId", employeeId);
+                          updateCommand.ExecuteNonQuery();
+                      }
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL WHILE loop for processing customer complaints to C#. Respond only in code:
+    LET complaints_processed = 0;
+    WHILE complaints_processed < 10
+        SELECT complaint_id INTO v_complaint_id FROM complaints WHERE status = 'Pending' LIMIT 1;
+        IF v_complaint_id IS NOT NULL THEN
+            UPDATE complaints SET status = 'Processing' WHERE complaint_id = v_complaint_id;
+            LET complaints_processed = complaints_processed + 1;
+        ELSE
+            EXIT WHILE;
+        END IF;
+    END WHILE;"
+    answer: |
+      int complaintsProcessed = 0;
+      while (complaintsProcessed < 10)
+      {
+          int? complaintId = null;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand selectCommand = new SqlCommand(
+                  "SELECT TOP 1 complaint_id FROM complaints WHERE status = 'Pending'",
+                  connection))
+              {
+                  object result = selectCommand.ExecuteScalar();
+                  if (result != null)
+                  {
+                      complaintId = (int)result;
+                  }
+              }
+
+              if (complaintId.HasValue)
+              {
+                  using (SqlCommand updateCommand = new SqlCommand(
+                      "UPDATE complaints SET status = 'Processing' WHERE complaint_id = @complaintId",
+                      connection))
+                  {
+                      updateCommand.Parameters.AddWithValue("@complaintId", complaintId.Value);
+                      updateCommand.ExecuteNonQuery();
+                  }
+                  complaintsProcessed++;
+              }
+              else
+              {
+                  break;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL conditional statement for determining customer discounts to C#. Respond only in code:
+    IF customer_total_purchases > 10000 THEN
+        LET discount_percentage = 15
+    ELIF customer_total_purchases > 5000 THEN
+        LET discount_percentage = 10
+    ELIF customer_total_purchases > 1000 THEN
+        LET discount_percentage = 5
+    ELSE
+        LET discount_percentage = 0
+    END IF;"
+    answer: |
+      int discountPercentage;
+      if (customerTotalPurchases > 10000)
+      {
+          discountPercentage = 15;
+      }
+      else if (customerTotalPurchases > 5000)
+      {
+          discountPercentage = 10;
+      }
+      else if (customerTotalPurchases > 1000)
+      {
+          discountPercentage = 5;
+      }
+      else
+      {
+          discountPercentage = 0;
+      }
+
+  - question: "Convert this 4GL string concatenation for generating a product description to C#. Respond only in code:
+    LET product_description = product_name || ' - ' || category || ' (SKU: ' || TO_CHAR(sku_number) || ', Price: $' || TO_CHAR(price, '999.99') || ')';"
+    answer: |
+      string productDescription = $"{productName} - {category} (SKU: {skuNumber}, Price: ${price:F2})";
+
+  - question: "Convert this 4GL function for calculating the total order value with tax to C#. Respond only in code:
+    FUNCTION calculate_order_total(p_subtotal DECIMAL(10,2), p_tax_rate DECIMAL(5,2)) RETURNS DECIMAL(10,2)
+        LET tax_amount = p_subtotal * (p_tax_rate / 100);
+        RETURN p_subtotal + tax_amount;
+    END FUNCTION
+
+    LET order_total = calculate_order_total(1250.00, 8.5);"
+    answer: |
+      public decimal CalculateOrderTotal(decimal subtotal, decimal taxRate)
+      {
+          decimal taxAmount = subtotal * (taxRate / 100m);
+          return subtotal + taxAmount;
+      }
+
+      // Usage
+      decimal orderTotal = CalculateOrderTotal(1250.00m, 8.5m);
