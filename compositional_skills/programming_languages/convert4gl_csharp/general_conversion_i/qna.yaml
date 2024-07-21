@@ -1,5 +1,5 @@
 version: 2
-task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of a fitness center management system.
+task_description: Learn about converting Actian 4GL code for OpenROAD to C#.
 created_by: nicklamb97
 seed_examples:
   - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
@@ -27,13 +27,15 @@ seed_examples:
       }
 
   - question: "Convert this 4GL Insert statement to C#. Respond only in code:
-    INSERT INTO classes (class_name, instructor, max_capacity, schedule) VALUES ('Yoga Basics', 'John Doe', 20, 'Monday 18:00');"
+    INSERT INTO classes (class_name, instructor, max_capacity, schedule)
+    VALUES ('Yoga Basics', 'John Doe', 20, 'Monday 18:00');"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO classes (class_name, instructor, max_capacity, schedule) VALUES (@className, @instructor, @maxCapacity, @schedule)",
+              "INSERT INTO classes (class_name, instructor, max_capacity, schedule)
+              VALUES (@className, @instructor, @maxCapacity, @schedule)",
               connection))
           {
               command.Parameters.AddWithValue("@className", "Yoga Basics");
@@ -99,7 +101,8 @@ seed_examples:
                   }
 
                   using (SqlCommand command = new SqlCommand(
-                      "INSERT INTO reward_redemptions (member_id, reward_id, redemption_date) VALUES (@memberId, @rewardId, @redemptionDate)",
+                      "INSERT INTO reward_redemptions (member_id, reward_id, redemption_date)
+                      VALUES (@memberId, @rewardId, @redemptionDate)",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@memberId", 101);
@@ -212,7 +215,8 @@ seed_examples:
       }
 
   - question: "Convert this 4GL string concatenation to C#. Respond only in code:
-    LET class_description = class_name || ' with ' || instructor || ' (' || TO_CHAR(class_date, '%Y-%m-%d %H:%M') || ')';"
+    LET class_description = class_name || ' with ' || instructor || ' (' ||
+    TO_CHAR(class_date, '%Y-%m-%d %H:%M') || ')';"
     answer: |
       string classDescription = className + " with " + instructor + " (" + classDate.ToString("yyyy-MM-dd HH:mm") + ")";
 
