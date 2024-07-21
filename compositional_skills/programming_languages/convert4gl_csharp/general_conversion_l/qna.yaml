@@ -223,7 +223,7 @@ seed_examples:
     LET result_summary = runner_name || ' finished in ' || TO_CHAR(finish_time, '%H:%M:%S') || ' (Place: ' ||
     TO_CHAR(place) || ')';"
     answer: |
-      string resultSummary = runnerName + " finished in " + 
+      string resultSummary = runnerName + " finished in " +
       finishTime.ToString(@"hh\:mm\:ss") + " (Place: " + place.ToString() + ")";
 
   - question: "How would you convert this 4GL function call to C#? Respond only in code:
