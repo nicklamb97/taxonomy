@@ -28,13 +28,15 @@ seed_examples:
       }
 
   - question: "Convert this 4GL Insert statement for adding a new product to C#. Respond only in code:
-    INSERT INTO products (product_name, category, unit_price, stock_quantity) VALUES ('Ergonomic Chair', 'Office Furniture', 299.99, 50);"
+    INSERT INTO products (product_name, category, unit_price, stock_quantity)
+    VALUES ('Ergonomic Chair', 'Office Furniture', 299.99, 50);"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO products (product_name, category, unit_price, stock_quantity) VALUES (@productName, @category, @unitPrice, @stockQuantity)",
+              "INSERT INTO products (product_name, category, unit_price, stock_quantity)
+              VALUES (@productName, @category, @unitPrice, @stockQuantity)",
               connection))
           {
               command.Parameters.AddWithValue("@productName", "Ergonomic Chair");
@@ -52,7 +54,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "UPDATE employees SET salary = salary * @salaryIncrease WHERE department = @department AND performance_rating > @minRating",
+              "UPDATE employees SET salary = salary * @salaryIncrease
+              WHERE department = @department AND performance_rating > @minRating",
               connection))
           {
               command.Parameters.AddWithValue("@salaryIncrease", 1.05m);
@@ -93,7 +96,8 @@ seed_examples:
               try
               {
                   using (SqlCommand insertOrder = new SqlCommand(
-                      "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+                      "INSERT INTO orders (customer_id, order_date, total_amount)
+                      VALUES (@customerId, @orderDate, @totalAmount)",
                       connection, transaction))
                   {
                       insertOrder.Parameters.AddWithValue("@customerId", 1001);
@@ -103,7 +107,8 @@ seed_examples:
                   }
 
                   using (SqlCommand updateCustomer = new SqlCommand(
-                      "UPDATE customers SET total_purchases = total_purchases + @purchaseAmount WHERE customer_id = @customerId",
+                      "UPDATE customers SET total_purchases = total_purchases + @purchaseAmount
+                      WHERE customer_id = @customerId",
                       connection, transaction))
                   {
                       updateCustomer.Parameters.AddWithValue("@purchaseAmount", 1500.00m);
@@ -272,7 +277,8 @@ seed_examples:
       }
 
   - question: "Convert this 4GL string concatenation for generating a product description to C#. Respond only in code:
-    LET product_description = product_name || ' - ' || category || ' (SKU: ' || TO_CHAR(sku_number) || ', Price: $' || TO_CHAR(price, '999.99') || ')';"
+    LET product_description = product_name || ' - ' || category || ' (SKU: ' ||
+    TO_CHAR(sku_number) || ', Price: $' || TO_CHAR(price, '999.99') || ')';"
     answer: |
       string productDescription = $"{productName} - {category} (SKU: {skuNumber}, Price: ${price:F2})";
 
