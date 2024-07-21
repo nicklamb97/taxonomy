@@ -1,5 +1,5 @@
 version: 2
-task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of a marathon event management system.
+task_description: Learn about converting Actian 4GL code for OpenROAD to C#.
 created_by: nicklamb97
 seed_examples:
   - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
@@ -27,13 +27,15 @@ seed_examples:
       }
 
   - question: "Convert this 4GL Insert statement to C#. Respond only in code:
-    INSERT INTO race_events (event_name, event_date, distance_km, max_participants) VALUES ('City Marathon', '2024-09-15', 42.2, 5000);"
+    INSERT INTO race_events (event_name, event_date, distance_km, max_participants)
+    VALUES ('City Marathon', '2024-09-15', 42.2, 5000);"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO race_events (event_name, event_date, distance_km, max_participants) VALUES (@eventName, @eventDate, @distanceKm, @maxParticipants)",
+              "INSERT INTO race_events (event_name, event_date, distance_km, max_participants)
+              VALUES (@eventName, @eventDate, @distanceKm, @maxParticipants)",
               connection))
           {
               command.Parameters.AddWithValue("@eventName", "City Marathon");
@@ -51,7 +53,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "UPDATE runners SET personal_best = @newBestTime WHERE runner_id = @runnerId AND personal_best > @newBestTime",
+              "UPDATE runners SET personal_best = @newBestTime
+              WHERE runner_id = @runnerId AND personal_best > @newBestTime",
               connection))
           {
               command.Parameters.AddWithValue("@newBestTime", TimeSpan.Parse("02:58:30"));
@@ -61,13 +64,15 @@ seed_examples:
       }
 
   - question: "Convert this 4GL Delete statement to C#. Respond only in code:
-    DELETE FROM race_registrations WHERE event_id = 5 AND payment_status = 'Unpaid' AND registration_date < CURRENT - INTERVAL 7 DAY;"
+    DELETE FROM race_registrations WHERE event_id = 5 AND payment_status = 'Unpaid'
+    AND registration_date < CURRENT - INTERVAL 7 DAY;"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "DELETE FROM race_registrations WHERE event_id = @eventId AND payment_status = @paymentStatus AND registration_date < @cutoffDate",
+              "DELETE FROM race_registrations WHERE event_id = @eventId
+              AND payment_status = @paymentStatus AND registration_date < @cutoffDate",
               connection))
           {
               command.Parameters.AddWithValue("@eventId", 5);
@@ -91,7 +96,8 @@ seed_examples:
               try
               {
                   using (SqlCommand command = new SqlCommand(
-                      "UPDATE race_events SET current_participants = current_participants + 1 WHERE event_id = @eventId",
+                      "UPDATE race_events SET current_participants = current_participants + 1
+                      WHERE event_id = @eventId",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@eventId", 10);
@@ -99,7 +105,8 @@ seed_examples:
                   }
 
                   using (SqlCommand command = new SqlCommand(
-                      "INSERT INTO race_registrations (runner_id, event_id, registration_date) VALUES (@runnerId, @eventId, @registrationDate)",
+                      "INSERT INTO race_registrations (runner_id, event_id, registration_date)
+                      VALUES (@runnerId, @eventId, @registrationDate)",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@runnerId", 2345);
@@ -213,9 +220,11 @@ seed_examples:
       }
 
   - question: "Convert this 4GL string concatenation to C#. Respond only in code:
-    LET result_summary = runner_name || ' finished in ' || TO_CHAR(finish_time, '%H:%M:%S') || ' (Place: ' || TO_CHAR(place) || ')';"
+    LET result_summary = runner_name || ' finished in ' || TO_CHAR(finish_time, '%H:%M:%S') || ' (Place: ' ||
+    TO_CHAR(place) || ')';"
     answer: |
-      string resultSummary = runnerName + " finished in " + finishTime.ToString(@"hh\:mm\:ss") + " (Place: " + place.ToString() + ")";
+      string resultSummary = runnerName + " finished in " + 
+      finishTime.ToString(@"hh\:mm\:ss") + " (Place: " + place.ToString() + ")";
 
   - question: "How would you convert this 4GL function call to C#? Respond only in code:
     FUNCTION calculate_age_category(p_birth_date DATE) RETURNS VARCHAR(20)
