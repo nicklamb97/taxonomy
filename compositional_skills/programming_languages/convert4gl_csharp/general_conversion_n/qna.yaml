@@ -1,0 +1,242 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of an AI.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
+    SELECT model_id, model_name, accuracy FROM ai_models WHERE training_date > '2024-01-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT model_id, model_name, accuracy FROM ai_models WHERE training_date > @trainingDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@trainingDate", new DateTime(2024, 1, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int modelId = (int)reader["model_id"];
+                      string modelName = reader["model_name"].ToString();
+                      double accuracy = (double)reader["accuracy"];
+                      // Process AI model data
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL Insert statement to C#. Respond only in code:
+    INSERT INTO neural_networks (network_name, layers, activation_function) VALUES ('DeepNet-5', 5, 'ReLU');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO neural_networks (network_name, layers, activation_function) VALUES (@networkName, @layers, @activationFunction)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@networkName", "DeepNet-5");
+              command.Parameters.AddWithValue("@layers", 5);
+              command.Parameters.AddWithValue("@activationFunction", "ReLU");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert this 4GL Update statement to C#? Respond only in code:
+    UPDATE training_datasets SET last_used_date = CURRENT WHERE dataset_id = 1234;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE training_datasets SET last_used_date = @currentDate WHERE dataset_id = @datasetId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@currentDate", DateTime.Now);
+              command.Parameters.AddWithValue("@datasetId", 1234);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Delete statement to C#. Respond only in code:
+    DELETE FROM experiment_results WHERE experiment_date < CURRENT - INTERVAL (30) DAY TO DAY AND status = 'Failed';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM experiment_results WHERE experiment_date < @cutoffDate AND status = @status",
+              connection))
+          {
+              command.Parameters.AddWithValue("@cutoffDate", DateTime.Now.AddDays(-30));
+              command.Parameters.AddWithValue("@status", "Failed");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle this 4GL transaction in C#? Respond only in code:
+    BEGIN WORK;
+    UPDATE ai_models SET version = version + 1 WHERE model_id = 101;
+    INSERT INTO model_versions (model_id, version, changelog) VALUES (101, (SELECT version FROM ai_models WHERE model_id = 101), 'Improved accuracy');
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  int newVersion;
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE ai_models SET version = version + 1 WHERE model_id = @modelId; SELECT version FROM ai_models WHERE model_id = @modelId;",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@modelId", 101);
+                      newVersion = (int)command.ExecuteScalar();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO model_versions (model_id, version, changelog) VALUES (@modelId, @version, @changelog)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@modelId", 101);
+                      command.Parameters.AddWithValue("@version", newVersion);
+                      command.Parameters.AddWithValue("@changelog", "Improved accuracy");
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL error handling to C#. Respond only in code:
+    WHENEVER ERROR RAISE
+    BEGIN
+        LET error_log = 'Error in AI system: ' || SQLERRM;
+        INSERT INTO system_logs (log_message, log_date) VALUES (error_log, CURRENT);
+        RAISE EXCEPTION error_log;
+    END"
+    answer: |
+      try
+      {
+          // AI system operations
+      }
+      catch (SqlException ex)
+      {
+          string errorLog = "Error in AI system: " + ex.Message;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "INSERT INTO system_logs (log_message, log_date) VALUES (@logMessage, @logDate)",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@logMessage", errorLog);
+                  command.Parameters.AddWithValue("@logDate", DateTime.Now);
+                  command.ExecuteNonQuery();
+              }
+          }
+          throw new Exception(errorLog);
+      }
+
+  - question: "How would you convert this 4GL FOR loop to C#? Respond only in code:
+    FOR model IN SELECT model_id, model_name, accuracy FROM ai_models WHERE model_type = 'Classification'
+        DISPLAY model.model_id, model.model_name, model.accuracy;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT model_id, model_name, accuracy FROM ai_models WHERE model_type = @modelType",
+              connection))
+          {
+              command.Parameters.AddWithValue("@modelType", "Classification");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int modelId = (int)reader["model_id"];
+                      string modelName = reader["model_name"].ToString();
+                      double accuracy = (double)reader["accuracy"];
+                      Console.WriteLine($"{modelId} {modelName} {accuracy:F2}");
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL WHILE loop to C#. Respond only in code:
+    LET epochs = 100
+    WHILE epochs > 0
+        DISPLAY 'Training epoch:', (101 - epochs)
+        LET epochs = epochs - 1
+    END WHILE;"
+    answer: |
+      int epochs = 100;
+      while (epochs > 0)
+      {
+          Console.WriteLine($"Training epoch: {101 - epochs}");
+          epochs--;
+      }
+
+  - question: "How would you convert this 4GL conditional statement to C#? Respond only in code:
+    IF model_accuracy > 0.95 THEN
+        LET model_status = 'Excellent'
+    ELIF model_accuracy > 0.85 THEN
+        LET model_status = 'Good'
+    ELSE
+        LET model_status = 'Needs Improvement'
+    END IF;"
+    answer: |
+      string modelStatus;
+      if (modelAccuracy > 0.95)
+      {
+          modelStatus = "Excellent";
+      }
+      else if (modelAccuracy > 0.85)
+      {
+          modelStatus = "Good";
+      }
+      else
+      {
+          modelStatus = "Needs Improvement";
+      }
+
+  - question: "Convert this 4GL string concatenation to C#. Respond only in code:
+    LET model_summary = model_name || ' (Type: ' || model_type || ', Accuracy: ' || TO_CHAR(accuracy, '0.00') || ')';"
+    answer: |
+      string modelSummary = modelName + " (Type: " + modelType + ", Accuracy: " + accuracy.ToString("F2") + ")";
+
+  - question: "How would you convert this 4GL function call to C#? Respond only in code:
+    FUNCTION calculate_f1_score(p_precision FLOAT, p_recall FLOAT) RETURNS FLOAT
+        IF p_precision + p_recall = 0 THEN
+            RETURN 0
+        ELSE
+            RETURN 2 * (p_precision * p_recall) / (p_precision + p_recall)
+        END IF
+    END FUNCTION
+
+    LET f1_score = calculate_f1_score(0.8, 0.9);"
+    answer: |
+      public double CalculateF1Score(double precision, double recall)
+      {
+          if (precision + recall == 0)
+          {
+              return 0;
+          }
+          else
+          {
+              return 2 * (precision * recall) / (precision + recall);
+          }
+      }
+
+      // Usage
+      double f1Score = CalculateF1Score(0.8, 0.9);
