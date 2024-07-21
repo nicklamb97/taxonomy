@@ -9,7 +9,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT employee_id, full_name, salary FROM employees WHERE department = @department AND hire_date > @hireDate",
+              "SELECT employee_id, full_name, salary FROM employees
+              WHERE department = @department AND hire_date > @hireDate",
               connection))
           {
               command.Parameters.AddWithValue("@department", "Marketing");
@@ -28,13 +29,15 @@ seed_examples:
       }
 
   - question: "How would you convert this 4GL Insert statement to C#? Respond only in code:
-    INSERT INTO suppliers (supplier_name, contact_person, phone_number) VALUES ('Tech Solutions', 'John Doe', '+1-555-1234');"
+    INSERT INTO suppliers (supplier_name, contact_person, phone_number)
+    VALUES ('Tech Solutions', 'John Doe', '+1-555-1234');"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO suppliers (supplier_name, contact_person, phone_number) VALUES (@supplierName, @contactPerson, @phoneNumber)",
+              "INSERT INTO suppliers (supplier_name, contact_person, phone_number)
+              VALUES (@supplierName, @contactPerson, @phoneNumber)",
               connection))
           {
               command.Parameters.AddWithValue("@supplierName", "Tech Solutions");
@@ -51,7 +54,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "UPDATE inventory SET quantity = quantity - @decreaseAmount, last_updated = @currentDate WHERE product_id = @productId",
+              "UPDATE inventory SET quantity = quantity - @decreaseAmount, last_updated = @currentDate
+              WHERE product_id = @productId",
               connection))
           {
               command.Parameters.AddWithValue("@decreaseAmount", 10);
@@ -90,7 +94,8 @@ seed_examples:
               try
               {
                   using (SqlCommand insertCommand = new SqlCommand(
-                      "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+                      "INSERT INTO orders (customer_id, order_date, total_amount)
+                      VALUES (@customerId, @orderDate, @totalAmount)",
                       connection, transaction))
                   {
                       insertCommand.Parameters.AddWithValue("@customerId", 123);
@@ -148,7 +153,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT product_id, product_name, unit_price, stock FROM products WHERE category = @category AND stock > 0",
+              "SELECT product_id, product_name, unit_price, stock FROM products
+              WHERE category = @category AND stock > 0",
               connection))
           {
               command.Parameters.AddWithValue("@category", "Electronics");
@@ -207,7 +213,8 @@ seed_examples:
       }
 
   - question: "How would you convert this 4GL string concatenation to C#? Respond only in code:
-    LET order_summary = 'Order #' || TO_CHAR(order_id) || ' - ' || customer_name || ' (' || TO_CHAR(order_date, '%Y-%m-%d') || ')';"
+    LET order_summary = 'Order #' || TO_CHAR(order_id) || ' - ' || customer_name || ' (' ||
+    TO_CHAR(order_date, '%Y-%m-%d') || ')';"
     answer: |
       string orderSummary = $"Order #{orderId} - {customerName} ({orderDate:yyyy-MM-dd})";
 
