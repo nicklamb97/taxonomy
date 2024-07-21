@@ -292,7 +292,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT employee_id, first_name, last_name FROM employees WHERE salary > (SELECT AVG(salary) FROM employees)",
+              "SELECT employee_id, first_name, last_name FROM employees
+              WHERE salary > (SELECT AVG(salary) FROM employees)",
               connection))
           {
               using (SqlDataReader reader = command.ExecuteReader())
@@ -315,7 +316,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT customer_id, customer_name FROM customers WHERE customer_id NOT IN (SELECT customer_id FROM orders)",
+              "SELECT customer_id, customer_name FROM customers
+              WHERE customer_id NOT IN (SELECT customer_id FROM orders)",
               connection))
           {
               using (SqlDataReader reader = command.ExecuteReader())
@@ -331,13 +333,15 @@ seed_examples:
       }
 
   - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
-    SELECT product_id, product_name FROM products WHERE EXISTS (SELECT 1 FROM order_items WHERE order_items.product_id = products.product_id);"
+    SELECT product_id, product_name FROM products
+    WHERE EXISTS (SELECT 1 FROM order_items WHERE order_items.product_id = products.product_id);"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT product_id, product_name FROM products WHERE EXISTS (SELECT 1 FROM order_items WHERE order_items.product_id = products.product_id)",
+              "SELECT product_id, product_name FROM products
+              WHERE EXISTS (SELECT 1 FROM order_items WHERE order_items.product_id = products.product_id)",
               connection))
           {
               using (SqlDataReader reader = command.ExecuteReader())
