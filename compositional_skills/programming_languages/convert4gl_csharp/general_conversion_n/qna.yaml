@@ -33,7 +33,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO neural_networks (network_name, layers, activation_function) VALUES (@networkName, @layers, @activationFunction)",
+              "INSERT INTO neural_networks (network_name, layers, activation_function)
+              VALUES (@networkName, @layers, @activationFunction)",
               connection))
           {
               command.Parameters.AddWithValue("@networkName", "DeepNet-5");
@@ -78,7 +79,8 @@ seed_examples:
   - question: "How would you handle this 4GL transaction in C#? Respond only in code:
     BEGIN WORK;
     UPDATE ai_models SET version = version + 1 WHERE model_id = 101;
-    INSERT INTO model_versions (model_id, version, changelog) VALUES (101, (SELECT version FROM ai_models WHERE model_id = 101), 'Improved accuracy');
+    INSERT INTO model_versions (model_id, version, changelog)
+    VALUES (101, (SELECT version FROM ai_models WHERE model_id = 101), 'Improved accuracy');
     COMMIT WORK;"
     answer: |
       using (SqlConnection connection = new SqlConnection(connectionString))
@@ -90,7 +92,8 @@ seed_examples:
               {
                   int newVersion;
                   using (SqlCommand command = new SqlCommand(
-                      "UPDATE ai_models SET version = version + 1 WHERE model_id = @modelId; SELECT version FROM ai_models WHERE model_id = @modelId;",
+                      "UPDATE ai_models SET version = version + 1 WHERE model_id = @modelId;
+                      SELECT version FROM ai_models WHERE model_id = @modelId;",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@modelId", 101);
@@ -98,7 +101,8 @@ seed_examples:
                   }
 
                   using (SqlCommand command = new SqlCommand(
-                      "INSERT INTO model_versions (model_id, version, changelog) VALUES (@modelId, @version, @changelog)",
+                      "INSERT INTO model_versions (model_id, version, changelog)
+                      VALUES (@modelId, @version, @changelog)",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@modelId", 101);
