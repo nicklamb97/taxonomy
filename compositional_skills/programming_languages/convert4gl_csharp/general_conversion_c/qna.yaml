@@ -9,7 +9,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "SELECT employee_id, last_name, salary FROM employees WHERE department_id = @deptId AND hire_date > @hireDate",
+              "SELECT employee_id, last_name, salary FROM employees
+              WHERE department_id = @deptId AND hire_date > @hireDate",
               connection))
           {
               command.Parameters.AddWithValue("@deptId", 10);
@@ -34,7 +35,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO departments (department_name, manager_id, location_id) VALUES (@deptName, @managerId, @locationId)",
+              "INSERT INTO departments (department_name, manager_id, location_id)
+              VALUES (@deptName, @managerId, @locationId)",
               connection))
           {
               command.Parameters.AddWithValue("@deptName", "Research");
@@ -90,7 +92,8 @@ seed_examples:
               try
               {
                   using (SqlCommand insertCommand = new SqlCommand(
-                      "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+                      "INSERT INTO orders (customer_id, order_date, total_amount)
+                      VALUES (@customerId, @orderDate, @totalAmount)",
                       connection, transaction))
                   {
                       insertCommand.Parameters.AddWithValue("@customerId", 1001);
