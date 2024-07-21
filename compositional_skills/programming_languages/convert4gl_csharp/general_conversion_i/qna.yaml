@@ -1,0 +1,246 @@
+version: 2
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of a fitness center management system.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
+    SELECT member_id, full_name, membership_type FROM members WHERE join_date > '2024-01-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT member_id, full_name, membership_type FROM members WHERE join_date > @joinDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@joinDate", new DateTime(2024, 1, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int memberId = (int)reader["member_id"];
+                      string fullName = reader["full_name"].ToString();
+                      string membershipType = reader["membership_type"].ToString();
+                      // Process member data
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL Insert statement to C#. Respond only in code:
+    INSERT INTO classes (class_name, instructor, max_capacity, schedule) VALUES ('Yoga Basics', 'John Doe', 20, 'Monday 18:00');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO classes (class_name, instructor, max_capacity, schedule) VALUES (@className, @instructor, @maxCapacity, @schedule)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@className", "Yoga Basics");
+              command.Parameters.AddWithValue("@instructor", "John Doe");
+              command.Parameters.AddWithValue("@maxCapacity", 20);
+              command.Parameters.AddWithValue("@schedule", "Monday 18:00");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert this 4GL Update statement to C#? Respond only in code:
+    UPDATE equipment SET last_maintenance_date = CURRENT WHERE equipment_id = 1234;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE equipment SET last_maintenance_date = @currentDate WHERE equipment_id = @equipmentId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@currentDate", DateTime.Now);
+              command.Parameters.AddWithValue("@equipmentId", 1234);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "Convert this 4GL Delete statement to C#. Respond only in code:
+    DELETE FROM class_bookings WHERE class_date < CURRENT AND attendance_status = 'No-show';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM class_bookings WHERE class_date < @currentDate AND attendance_status = @status",
+              connection))
+          {
+              command.Parameters.AddWithValue("@currentDate", DateTime.Now);
+              command.Parameters.AddWithValue("@status", "No-show");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle this 4GL transaction in C#? Respond only in code:
+    BEGIN WORK;
+    UPDATE members SET membership_points = membership_points - 100 WHERE member_id = 101;
+    INSERT INTO reward_redemptions (member_id, reward_id, redemption_date) VALUES (101, 5, CURRENT);
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE members SET membership_points = membership_points - @points WHERE member_id = @memberId",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@points", 100);
+                      command.Parameters.AddWithValue("@memberId", 101);
+                      command.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO reward_redemptions (member_id, reward_id, redemption_date) VALUES (@memberId, @rewardId, @redemptionDate)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@memberId", 101);
+                      command.Parameters.AddWithValue("@rewardId", 5);
+                      command.Parameters.AddWithValue("@redemptionDate", DateTime.Now);
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "Convert this 4GL error handling to C#. Respond only in code:
+    WHENEVER ERROR RAISE
+    BEGIN
+        LET error_log = 'Error in fitness center system: ' || SQLERRM;
+        INSERT INTO system_logs (log_message, log_date) VALUES (error_log, CURRENT);
+        RAISE EXCEPTION error_log;
+    END"
+    answer: |
+      try
+      {
+          // Fitness center system operations
+      }
+      catch (SqlException ex)
+      {
+          string errorLog = "Error in fitness center system: " + ex.Message;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "INSERT INTO system_logs (log_message, log_date) VALUES (@logMessage, @logDate)",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@logMessage", errorLog);
+                  command.Parameters.AddWithValue("@logDate", DateTime.Now);
+                  command.ExecuteNonQuery();
+              }
+          }
+          throw new Exception(errorLog);
+      }
+
+  - question: "How would you convert this 4GL FOR loop to C#? Respond only in code:
+    FOR class IN SELECT class_id, class_name, instructor FROM classes WHERE day_of_week = 'Monday'
+        DISPLAY class.class_id, class.class_name, class.instructor;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT class_id, class_name, instructor FROM classes WHERE day_of_week = @dayOfWeek",
+              connection))
+          {
+              command.Parameters.AddWithValue("@dayOfWeek", "Monday");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int classId = (int)reader["class_id"];
+                      string className = reader["class_name"].ToString();
+                      string instructor = reader["instructor"].ToString();
+                      Console.WriteLine($"{classId} {className} {instructor}");
+                  }
+              }
+          }
+      }
+
+  - question: "Convert this 4GL WHILE loop to C#. Respond only in code:
+    LET available_slots = 5
+    WHILE available_slots > 0
+        DISPLAY 'Slots available:', available_slots
+        LET available_slots = available_slots - 1
+    END WHILE;"
+    answer: |
+      int availableSlots = 5;
+      while (availableSlots > 0)
+      {
+          Console.WriteLine($"Slots available: {availableSlots}");
+          availableSlots--;
+      }
+
+  - question: "How would you convert this 4GL conditional statement to C#? Respond only in code:
+    IF membership_type = 'Premium' THEN
+        LET discount = 0.20
+    ELIF membership_type = 'Standard' THEN
+        LET discount = 0.10
+    ELSE
+        LET discount = 0
+    END IF;"
+    answer: |
+      decimal discount;
+      if (membershipType == "Premium")
+      {
+          discount = 0.20m;
+      }
+      else if (membershipType == "Standard")
+      {
+          discount = 0.10m;
+      }
+      else
+      {
+          discount = 0m;
+      }
+
+  - question: "Convert this 4GL string concatenation to C#. Respond only in code:
+    LET class_description = class_name || ' with ' || instructor || ' (' || TO_CHAR(class_date, '%Y-%m-%d %H:%M') || ')';"
+    answer: |
+      string classDescription = className + " with " + instructor + " (" + classDate.ToString("yyyy-MM-dd HH:mm") + ")";
+
+  - question: "How would you convert this 4GL function call to C#? Respond only in code:
+    FUNCTION calculate_membership_fee(p_membership_type VARCHAR(20), p_duration INTEGER) RETURNS DECIMAL(10,2)
+        IF p_membership_type = 'Premium' THEN
+            RETURN 50.00 * p_duration
+        ELIF p_membership_type = 'Standard' THEN
+            RETURN 30.00 * p_duration
+        ELSE
+            RETURN 20.00 * p_duration
+        END IF
+    END FUNCTION
+
+    LET total_fee = calculate_membership_fee('Premium', 12);"
+    answer: |
+      public decimal CalculateMembershipFee(string membershipType, int duration)
+      {
+          switch (membershipType)
+          {
+              case "Premium":
+                  return 50.00m * duration;
+              case "Standard":
+                  return 30.00m * duration;
+              default:
+                  return 20.00m * duration;
+          }
+      }
+
+      // Usage
+      decimal totalFee = CalculateMembershipFee("Premium", 12);
