@@ -258,7 +258,6 @@ seed_examples:
             ELSE 20.00
         END;
         LET distance_factor = p_distance / 100;
-        
         RETURN base_rate + (base_rate * distance_factor);
     END FUNCTION;"
     answer: |
