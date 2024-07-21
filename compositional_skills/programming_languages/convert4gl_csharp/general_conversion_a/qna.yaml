@@ -1,0 +1,228 @@
+version: 2
+task_description: Learn about converting Actian 4GL code to C#.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert the following 4GL Select statement into C#? Respond only in code:
+    SELECT product_id, product_name, price FROM products WHERE category = 'Electronics';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT product_id, product_name, price FROM products WHERE category = @category",
+              connection))
+          {
+              command.Parameters.AddWithValue("@category", "Electronics");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int productId = (int)reader["product_id"];
+                      string productName = reader["product_name"].ToString();
+                      decimal price = (decimal)reader["price"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#?
+    Respond only in code:
+    INSERT INTO customers (customer_name, email) VALUES ('Jane Smith', 'jane@example.com');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO customers (customer_name, email) VALUES (@customerName, @email)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@customerName", "Jane Smith");
+              command.Parameters.AddWithValue("@email", "jane@example.com");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Update statement into C#?
+    Respond only in code:
+    UPDATE products SET stock_quantity = 50 WHERE product_id = 456;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "UPDATE products SET stock_quantity = @stockQuantity WHERE product_id = @productId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@stockQuantity", 50);
+              command.Parameters.AddWithValue("@productId", 456);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Delete statement into C#?
+    Respond only in code:
+    DELETE FROM orders WHERE order_date < '2023-01-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "DELETE FROM orders WHERE order_date < @cutoffDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@cutoffDate", new DateTime(2023, 1, 1));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you handle database transactions in C# that are similar to 4GL transaction control?
+    Respond only in code:
+    BEGIN WORK;
+    INSERT INTO orders (customer_id, order_date) VALUES (789, CURRENT);
+    UPDATE customers SET last_order_date = CURRENT WHERE customer_id = 789;
+    COMMIT WORK;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlTransaction transaction = connection.BeginTransaction())
+          {
+              try
+              {
+                  using (SqlCommand command = new SqlCommand(
+                      "INSERT INTO orders (customer_id, order_date) VALUES (@customerId, @orderDate)",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@customerId", 789);
+                      command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                      command.ExecuteNonQuery();
+                  }
+
+                  using (SqlCommand command = new SqlCommand(
+                      "UPDATE customers SET last_order_date = @lastOrderDate WHERE customer_id = @customerId",
+                      connection, transaction))
+                  {
+                      command.Parameters.AddWithValue("@lastOrderDate", DateTime.Now);
+                      command.Parameters.AddWithValue("@customerId", 789);
+                      command.ExecuteNonQuery();
+                  }
+
+                  transaction.Commit();
+              }
+              catch
+              {
+                  transaction.Rollback();
+                  throw;
+              }
+          }
+      }
+
+  - question: "How would you convert error handling in 4GL to equivalent C# code?
+    Respond only in code:
+    WHENEVER ERROR CONTINUE
+    LET db_error = SQLERRMESSAGE;
+    CALL log_error(db_error);"
+    answer: |
+      try
+      {
+          // Database operations
+      }
+      catch (SqlException ex)
+      {
+          string dbError = ex.Message;
+          LogError(dbError);
+      }
+
+  - question: "How would you convert a 4GL FOR loop that iterates through database results into C#?
+    Respond only in code:
+    FOR prod IN SELECT product_id, product_name, price FROM products WHERE category = 'Books'
+    DISPLAY prod.product_id, prod.product_name, prod.price;
+    END FOR;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT product_id, product_name, price FROM products WHERE category = @category",
+              connection))
+          {
+              command.Parameters.AddWithValue("@category", "Books");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int productId = (int)reader["product_id"];
+                      string productName = reader["product_name"].ToString();
+                      decimal price = (decimal)reader["price"];
+                      Console.WriteLine($"{productId} {productName} {price:C}");
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert a 4GL WHILE loop into C#? Respond only in code:
+    LET counter = 5
+    WHILE counter > 0
+    DISPLAY 'Countdown:', counter
+    LET counter = counter - 1
+    END WHILE;"
+    answer: |
+      int counter = 5;
+      while (counter > 0)
+      {
+          Console.WriteLine($"Countdown: {counter}");
+          counter--;
+      }
+
+  - question: "How would you convert a 4GL conditional statement into C#?
+    IF order_total > 1000 THEN
+    LET discount = 0.1
+    ELSE
+    LET discount = 0.05
+    END IF;"
+    answer: |
+      decimal discount;
+      if (orderTotal > 1000)
+      {
+          discount = 0.1m;
+      }
+      else
+      {
+          discount = 0.05m;
+      }
+
+  - question: "How would you convert 4GL string concatenation into C#? Respond only in code:
+    LET product_description = product_name || ' - ' || category || ' (' || TO_CHAR(price) || ')';"
+    answer: |
+      string productDescription = productName + " - " + category + " (" + price.ToString("C") + ")";
+
+  - question: "How would you convert a 4GL function call to fetch data into C#?
+    Respond only in code:
+    CALL get_product_details(product_id) RETURNING product_name, price, stock_quantity;"
+    answer: |
+      public void GetProductDetails(int productId, out string productName, out decimal price, out int stockQuantity)
+      {
+          productName = string.Empty;
+          price = 0;
+          stockQuantity = 0;
+          using (SqlConnection connection = new SqlConnection(connectionString))
+          {
+              connection.Open();
+              using (SqlCommand command = new SqlCommand(
+                  "SELECT product_name, price, stock_quantity FROM products WHERE product_id = @productId",
+                  connection))
+              {
+                  command.Parameters.AddWithValue("@productId", productId);
+                  using (SqlDataReader reader = command.ExecuteReader())
+                  {
+                      if (reader.Read())
+                      {
+                          productName = reader["product_name"].ToString();
+                          price = (decimal)reader["price"];
+                          stockQuantity = (int)reader["stock_quantity"];
+                      }
+                  }
+              }
+          }
+      }
