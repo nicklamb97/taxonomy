@@ -1,5 +1,5 @@
 version: 2
-task_description: Learn about converting Actian OpenROAD 4GL code to C#.
+task_description: Learn about converting Actian 4GL for OpenROAD code to C#.
 created_by: OllieBoyes-Park
 seed_examples:
 - question: >-
