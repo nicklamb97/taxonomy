@@ -1,0 +1,171 @@
+version: 2
+task_description: Calling Database Procedures in OpenROAD Actian 4GL
+created_by: nicklamb97
+seed_examples:
+  - question: >-
+      How to call a database procedure with multiple parameters in OpenROAD
+      Actian 4GL?
+    answer: >
+      To call a database procedure with multiple parameters in OpenROAD Actian
+      4GL, use the following syntax: ```sql callproc procedurename(param1 =
+      value1, param2 = value2); ``` For example, to call a procedure
+      'update_customer' with an ID and a name: ```sql callproc
+      update_customer(customer_id = 101, customer_name = 'Jane Doe'); ``` This
+      will call 'update_customer' with two parameters: 'customer_id' and
+      'customer_name'.
+  - question: >-
+      Write code to call a database procedure that requires a string and an
+      integer parameter in OpenROAD Actian 4GL.
+    answer: >
+      To call a procedure with a string and an integer parameter, use: ```sql
+      callproc procedurename(string_param = 'example', int_param = 42); ``` For
+      example, calling 'log_event' with a message and a priority: ```sql
+      callproc log_event(message = 'Error occurred', priority = 1); ``` This
+      code passes a message and a priority to the 'log_event' procedure.
+  - question: >-
+      How to handle a procedure call in OpenROAD Actian 4GL that returns a
+      record?
+    answer: >
+      To handle a procedure that returns a record, use the following syntax:
+      ```sql record_variable = callproc procedurename; ``` For example, calling
+      'get_customer_record': ```sql customer_record = callproc
+      get_customer_record; ``` This assigns the returned record from
+      'get_customer_record' to 'customer_record'.
+  - question: >-
+      Write code to call a database procedure in OpenROAD Actian 4GL and check
+      if it executed successfully.
+    answer: >
+      To call a procedure and check execution success, use: ```sql result =
+      callproc procedurename; if result = 0 then
+          // Success handling code
+      else
+          // Error handling code
+      endif; ``` For example, calling 'delete_record' and checking the result:
+      ```sql result = callproc delete_record; if result = 0 then
+          // Record deleted successfully
+      else
+          // Error deleting record
+      endif; ```
+  - question: >-
+      How to call a database procedure with an output parameter in OpenROAD
+      Actian 4GL?
+    answer: >
+      To call a procedure with an output parameter, use: ```sql callproc
+      procedurename(input_param = value, output_param = byref(output_variable));
+      ``` For example, calling 'calculate_tax' with an amount and getting the
+      result: ```sql tax_result = 0; callproc calculate_tax(amount = 1000,
+      tax_amount = byref(tax_result)); ``` This code sets 'tax_result' with the
+      value returned from 'calculate_tax'.
+  - question: >-
+      Write code to call a database procedure and handle exceptions in OpenROAD
+      Actian 4GL.
+    answer: |
+      To call a procedure and handle exceptions, use: ```sql begin
+          callproc procedurename;
+      except
+          // Exception handling code
+      end; ``` For example, calling 'update_inventory': ```sql begin
+          callproc update_inventory;
+      except
+          // Log error or notify user
+      end; ```
+  - question: >-
+      How to call a procedure that requires date parameters in OpenROAD Actian
+      4GL?
+    answer: >
+      To call a procedure with date parameters, use: ```sql callproc
+      procedurename(start_date = '2024-01-01', end_date = '2024-12-31'); ``` For
+      example, calling 'get_sales_summary': ```sql callproc
+      get_sales_summary(start_date = '2024-01-01', end_date = '2024-12-31'); ```
+  - question: >-
+      Write code to call a procedure that performs an insert operation and check
+      the number of rows affected in OpenROAD Actian 4GL.
+    answer: >
+      To call an insert procedure and check rows affected: ```sql rows_affected
+      = callproc insert_record; if rows_affected > 0 then
+          // Insert successful
+      else
+          // Insert failed
+      endif; ``` For example, calling 'insert_employee': ```sql rows_affected =
+      callproc insert_employee; if rows_affected > 0 then
+          // Employee inserted
+      else
+          // Employee not inserted
+      endif; ```
+  - question: How to call a procedure and pass a null parameter in OpenROAD Actian 4GL?
+    answer: >
+      To pass a null parameter to a procedure, use: ```sql callproc
+      procedurename(param1 = null); ``` For example, calling 'update_profile'
+      with a null email: ```sql callproc update_profile(email = null); ```
+  - question: >-
+      Write code to call a procedure that needs a boolean parameter in OpenROAD
+      Actian 4GL.
+    answer: >
+      To call a procedure with a boolean parameter, use: ```sql callproc
+      procedurename(flag = true); ``` For example, calling 'set_active_status':
+      ```sql callproc set_active_status(flag = true); ```
+  - question: >-
+      How to call a procedure and use its return value in a conditional
+      statement in OpenROAD Actian 4GL?
+    answer: >
+      To use a procedure's return value in a conditional statement: ```sql
+      result = callproc procedurename; if result = 1 then
+          // Condition met
+      else
+          // Condition not met
+      endif; ``` For example, calling 'check_access' and checking if access is
+      granted: ```sql access_granted = callproc check_access; if access_granted
+      = 1 then
+          // Access granted
+      else
+          // Access denied
+      endif; ```
+  - question: >-
+      Write code to call a database procedure and store its result in a local
+      variable in OpenROAD Actian 4GL.
+    answer: >
+      To store the result of a procedure call in a local variable: ```sql
+      local_variable = callproc procedurename; ``` For example, calling
+      'get_order_total': ```sql total_amount = callproc get_order_total; ```
+  - question: >-
+      How to call a procedure that updates a record and confirm the update was
+      successful in OpenROAD Actian 4GL?
+    answer: >
+      To confirm a record update: ```sql result = callproc update_record; if
+      result = 1 then
+          // Update successful
+      else
+          // Update failed
+      endif; ``` For example, calling 'update_employee_record': ```sql result =
+      callproc update_employee_record; if result = 1 then
+          // Employee record updated
+      else
+          // Update failed
+      endif; ```
+  - question: >-
+      Write code to call a procedure and pass a complex data type in OpenROAD
+      Actian 4GL.
+    answer: >
+      To pass a complex data type, such as a record, use: ```sql callproc
+      procedurename(record_param = my_record); ``` For example, calling
+      'process_order' with an order record: ```sql callproc
+      process_order(order_record = my_order); ```
+  - question: >-
+      How to handle a procedure call that may return an error code in OpenROAD
+      Actian 4GL?
+    answer: >
+      To handle a procedure that may return an error code: ```sql error_code =
+      callproc procedurename; if error_code <> 0 then
+          // Handle error based on error_code
+      endif; ``` For example, calling 'process_transaction': ```sql error_code =
+      callproc process_transaction; if error_code <> 0 then
+          // Handle transaction error
+      endif; ```
+  - question: >-
+      Write code to call a procedure that requires a floating-point number and a
+      string parameter in OpenROAD Actian 4GL.
+    answer: >
+      To call a procedure with a float and a string parameter: ```sql callproc
+      procedurename(float_param = 123.45, string_param = 'example'); ``` For
+      example, calling 'log_performance': ```sql callproc log_performance(score
+      = 95.5, description = 'Excellent'); ```
