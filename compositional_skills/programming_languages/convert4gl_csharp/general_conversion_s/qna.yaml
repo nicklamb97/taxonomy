@@ -1,0 +1,327 @@
+version: 2
+task_description: Learn about converting Actian 4GL INSERT statements for OpenROAD to C#.
+created_by: nicklamb97
+seed_examples:
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO customers (name, address) VALUES ('John Doe', '123 Elm Street');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO customers (name, address) VALUES (@name, @address)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@name", "John Doe");
+              command.Parameters.AddWithValue("@address", "123 Elm Street");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO orders (order_id, order_date, total_amount) VALUES (1001, '2024-07-22', 250.00);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO orders (order_id, order_date, total_amount) VALUES (@orderId, @orderDate, @totalAmount)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@orderId", 1001);
+              command.Parameters.AddWithValue("@orderDate", new DateTime(2024, 7, 22));
+              command.Parameters.AddWithValue("@totalAmount", 250.00m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO employees (employee_id, name, hire_date) VALUES (12345, 'Alice Smith', '2024-01-10');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO employees (employee_id, name, hire_date) VALUES (@employeeId, @name, @hireDate)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@employeeId", 12345);
+              command.Parameters.AddWithValue("@name", "Alice Smith");
+              command.Parameters.AddWithValue("@hireDate", new DateTime(2024, 1, 10));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO products (product_id, product_name, price) VALUES (789, 'Laptop', 999.99);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO products (product_id, product_name, price) VALUES (@productId, @productName, @price)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@productId", 789);
+              command.Parameters.AddWithValue("@productName", "Laptop");
+              command.Parameters.AddWithValue("@price", 999.99m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO events (event_id, event_date, location) VALUES (501, '2024-12-15', 'Convention Center');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO events (event_id, event_date, location) VALUES (@eventId, @eventDate, @location)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventId", 501);
+              command.Parameters.AddWithValue("@eventDate", new DateTime(2024, 12, 15));
+              command.Parameters.AddWithValue("@location", "Convention Center");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO students (student_id, name, enrollment_date) VALUES (2022, 'Jane Doe', '2024-09-01');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO students (student_id, name, enrollment_date) VALUES (@studentId, @name, @enrollmentDate)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@studentId", 2022);
+              command.Parameters.AddWithValue("@name", "Jane Doe");
+              command.Parameters.AddWithValue("@enrollmentDate", new DateTime(2024, 9, 1));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO invoices (invoice_id, issue_date, amount) VALUES (110, '2024-06-15', 450.75);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO invoices (invoice_id, issue_date, amount) VALUES (@invoiceId, @issueDate, @amount)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@invoiceId", 110);
+              command.Parameters.AddWithValue("@issueDate", new DateTime(2024, 6, 15));
+              command.Parameters.AddWithValue("@amount", 450.75m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO feedback (feedback_id, user_id, comments) VALUES (999, 3456, 'Great service!');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO feedback (feedback_id, user_id, comments) VALUES (@feedbackId, @userId, @comments)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@feedbackId", 999);
+              command.Parameters.AddWithValue("@userId", 3456);
+              command.Parameters.AddWithValue("@comments", "Great service!");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO transactions (transaction_id, transaction_date, amount) VALUES (123456, '2024-02-20', 789.50);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO transactions (transaction_id, transaction_date, amount) VALUES (@transactionId, @transactionDate, @amount)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@transactionId", 123456);
+              command.Parameters.AddWithValue("@transactionDate", new DateTime(2024, 2, 20));
+              command.Parameters.AddWithValue("@amount", 789.50m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO reviews (review_id, reviewer_name, review_date, rating) VALUES (1, 'Tom Riddle', '2024-07-01', 5);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO reviews (review_id, reviewer_name, review_date, rating) VALUES (@reviewId, @reviewerName, @reviewDate, @rating)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@reviewId", 1);
+              command.Parameters.AddWithValue("@reviewerName", "Tom Riddle");
+              command.Parameters.AddWithValue("@reviewDate", new DateTime(2024, 7, 1));
+              command.Parameters.AddWithValue("@rating", 5);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO subscriptions (subscription_id, user_id, start_date) VALUES (888, 54321, '2024-03-15');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO subscriptions (subscription_id, user_id, start_date) VALUES (@subscriptionId, @userId, @startDate)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@subscriptionId", 888);
+              command.Parameters.AddWithValue("@userId", 54321);
+              command.Parameters.AddWithValue("@startDate", new DateTime(2024, 3, 15));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO orders (order_id, customer_id, order_total) VALUES (2002, 789, 150.00);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO orders (order_id, customer_id, order_total) VALUES (@orderId, @customerId, @orderTotal)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@orderId", 2002);
+              command.Parameters.AddWithValue("@customerId", 789);
+              command.Parameters.AddWithValue("@orderTotal", 150.00m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO logs (log_id, log_date, message) VALUES (5001, '2024-08-05', 'System update successful');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO logs (log_id, log_date, message) VALUES (@logId, @logDate, @message)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@logId", 5001);
+              command.Parameters.AddWithValue("@logDate", new DateTime(2024, 8, 5));
+              command.Parameters.AddWithValue("@message", "System update successful");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO messages (message_id, sender_id, message_content) VALUES (1024, 111, 'Hello, World!');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO messages (message_id, sender_id, message_content) VALUES (@messageId, @senderId, @messageContent)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@messageId", 1024);
+              command.Parameters.AddWithValue("@senderId", 111);
+              command.Parameters.AddWithValue("@messageContent", "Hello, World!");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO appointments (appointment_id, user_id, appointment_date) VALUES (3001, 2222, '2024-11-01');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO appointments (appointment_id, user_id, appointment_date) VALUES (@appointmentId, @userId, @appointmentDate)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@appointmentId", 3001);
+              command.Parameters.AddWithValue("@userId", 2222);
+              command.Parameters.AddWithValue("@appointmentDate", new DateTime(2024, 11, 1));
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO tickets (ticket_id, issue_date, priority) VALUES (401, '2024-04-10', 'High');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO tickets (ticket_id, issue_date, priority) VALUES (@ticketId, @issueDate, @priority)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@ticketId", 401);
+              command.Parameters.AddWithValue("@issueDate", new DateTime(2024, 4, 10));
+              command.Parameters.AddWithValue("@priority", "High");
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES (2023, 6789, '2024-05-30', 320.00);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES (@orderId, @customerId, @orderDate, @totalAmount)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@orderId", 2023);
+              command.Parameters.AddWithValue("@customerId", 6789);
+              command.Parameters.AddWithValue("@orderDate", new DateTime(2024, 5, 30));
+              command.Parameters.AddWithValue("@totalAmount", 320.00m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO projects (project_id, start_date, budget) VALUES (7001, '2024-02-01', 100000);"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO projects (project_id, start_date, budget) VALUES (@projectId, @startDate, @budget)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@projectId", 7001);
+              command.Parameters.AddWithValue("@startDate", new DateTime(2024, 2, 1));
+              command.Parameters.AddWithValue("@budget", 100000m);
+              command.ExecuteNonQuery();
+          }
+      }
+
+  - question: "How would you convert the following 4GL Insert statement into C#? Respond only in code:
+    INSERT INTO contacts (contact_id, name, email) VALUES (4002, 'Nancy White', 'nancy@example.com');"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "INSERT INTO contacts (contact_id, name, email) VALUES (@contactId, @name, @email)",
+              connection))
+          {
+              command.Parameters.AddWithValue("@contactId", 4002);
+              command.Parameters.AddWithValue("@name", "Nancy White");
+              command.Parameters.AddWithValue("@email", "nancy@example.com");
+              command.ExecuteNonQuery();
+          }
+      }
