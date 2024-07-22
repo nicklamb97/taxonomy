@@ -1,0 +1,282 @@
+version: 2
+task_description: Use Global Procedures from the Core Library in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to use the _StringParseKeyword procedure to extract an email address from a formatted string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      To extract an email address using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          email = varchar(2000);
+      enddeclare
+
+      str1 = 'Name=John Doe;Email=john.doe@example.com;Phone=123-456-7890';
+      email = _StringParseKeyword(string = str1, keyword = 'email');
+
+      -- email now contains "john.doe@example.com"
+      ```
+      This extracts the email address from the formatted string.
+
+  - question: >-
+      Write code to substitute a single token in a string using the _StringTokenSub procedure in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Here's how to substitute a single token using _StringTokenSub:
+      ```
+      declare
+          result = varchar(2000);
+      enddeclare
+
+      result = _StringTokenSub(string = 'Dear {name}, welcome to {company}!',
+                               token = '{name}',
+                               replacewith = 'Jane Doe');
+
+      -- result now contains "Dear Jane Doe, welcome to {company}!"
+      ```
+      This substitutes the first occurrence of the token in the string.
+
+  - question: >-
+      How to use the _StringSub procedure to format a date string in Actian 4GL OpenROAD Global Procedures
+      Available in the Core Library?
+    answer: |
+      To format a date string using _StringSub:
+      ```
+      declare
+          formatted_date = varchar(2000);
+      enddeclare
+
+      formatted_date = _StringSub(string = 'Today is %1 %2, %3',
+                                  arg1 = 'July',
+                                  arg2 = '22',
+                                  arg3 = '2024');
+
+      -- formatted_date now contains "Today is July 22, 2024"
+      ```
+      This formats a date string by substituting the parameters.
+
+  - question: >-
+      Write code to replace all occurrences of a token in a string using a loop with the _StringTokenSub procedure
+      in Actian 4GL OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Replace all occurrences of a token using a loop:
+      ```
+      declare
+          result = varchar(2000);
+          remainingtokens = integer;
+      enddeclare
+
+      result = 'John loves ice cream. John also loves pizza.';
+      result = _StringTokenSub(string = result, token = 'John', replacewith = 'Jane', remainingtokens = remainingtokens);
+
+      while remainingtokens > 0
+          result = _StringTokenSub(string = result, token = 'John', replacewith = 'Jane', remainingtokens = remainingtokens);
+      endwhile;
+
+      -- result now contains "Jane loves ice cream. Jane also loves pizza."
+      ```
+      This replaces all occurrences of 'John' with 'Jane'.
+
+  - question: >-
+      How to use the _StringParseKeyword procedure to get a phone number from a formatted string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      To get a phone number using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          phone = varchar(2000);
+      enddeclare
+
+      str1 = 'Name=Jane Doe;Phone=987-654-3210;Email=jane.doe@example.com';
+      phone = _StringParseKeyword(string = str1, keyword = 'phone');
+
+      -- phone now contains "987-654-3210"
+      ```
+      This extracts the phone number from the formatted string.
+
+  - question: >-
+      Write code to use the _StringSub procedure to create a personalized greeting message in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Create a personalized greeting message using _StringSub:
+      ```
+      declare
+          greeting = varchar(2000);
+      enddeclare
+
+      greeting = _StringSub(string = 'Hello %1, welcome to %2!',
+                            arg1 = 'Alice',
+                            arg2 = 'Wonderland');
+
+      -- greeting now contains "Hello Alice, welcome to Wonderland!"
+      ```
+      This creates a personalized greeting message.
+
+  - question: >-
+      How to use the _StringTokenSub procedure to update a username in a formatted string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      Update a username using _StringTokenSub:
+      ```
+      declare
+          result = varchar(2000);
+      enddeclare
+
+      result = _StringTokenSub(string = 'User: old_username, Role: Admin',
+                               token = 'old_username',
+                               replacewith = 'new_username');
+
+      -- result now contains "User: new_username, Role: Admin"
+      ```
+      This updates the username in the formatted string.
+
+  - question: >-
+      Write code to use the _StringParseKeyword procedure to retrieve a department from a string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Retrieve a department using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          department = varchar(2000);
+      enddeclare
+
+      str1 = 'Employee=John Doe;Department=HR;Location=NY';
+      department = _StringParseKeyword(string = str1, keyword = 'department');
+
+      -- department now contains "HR"
+      ```
+      This retrieves the department from the formatted string.
+
+  - question: >-
+      How to use the _StringSub procedure to generate a report header in Actian 4GL OpenROAD Global Procedures
+      Available in the Core Library?
+    answer: |
+      Generate a report header using _StringSub:
+      ```
+      declare
+          header = varchar(2000);
+      enddeclare
+
+      header = _StringSub(string = 'Report: %1, Date: %2',
+                          arg1 = 'Sales Summary',
+                          arg2 = '07/22/2024');
+
+      -- header now contains "Report: Sales Summary, Date: 07/22/2024"
+      ```
+      This generates a report header by substituting the parameters.
+
+  - question: >-
+      Write code to use the _StringTokenSub procedure to replace the first occurrence of a token in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Replace the first occurrence of a token using _StringTokenSub:
+      ```
+      declare
+          result = varchar(2000);
+      enddeclare
+
+      result = _StringTokenSub(string = 'Hello {user}, welcome {user}!',
+                               token = '{user}',
+                               replacewith = 'Alice');
+
+      -- result now contains "Hello Alice, welcome {user}!"
+      ```
+      This replaces the first occurrence of the token in the string.
+
+  - question: >-
+      How to use the _StringParseKeyword procedure to extract the city from an address string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      Extract the city using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          city = varchar(2000);
+      enddeclare
+
+      str1 = 'Street=123 Main St;City=Springfield;State=IL';
+      city = _StringParseKeyword(string = str1, keyword = 'city');
+
+      -- city now contains "Springfield"
+      ```
+      This extracts the city from the address string.
+
+  - question: >-
+      Write code to use the _StringSub procedure to format a log message in Actian 4GL OpenROAD Global
+      Procedures Available in the Core Library.
+    answer: |
+      Format a log message using _StringSub:
+      ```
+      declare
+          log_message = varchar(2000);
+      enddeclare
+
+      log_message = _StringSub(string = 'Log Entry: %1 at %2',
+                               arg1 = 'Error occurred',
+                               arg2 = '14:35');
+
+      -- log_message now contains "Log Entry: Error occurred at 14:35"
+      ```
+      This formats a log message by substituting the parameters.
+
+  - question: >-
+      How to use the _StringTokenSub procedure to replace all placeholders in a string using a loop in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library?
+    answer: |
+      Replace all placeholders using _StringTokenSub in a loop:
+      ```
+      declare
+          result = varchar(2000);
+          remainingtokens = integer;
+      enddeclare
+
+      result = 'Task: {task}, Due: {due_date}, Status: {status}';
+      result = _StringTokenSub(string = result, token = '{task}', replacewith = 'Submit Report', remainingtokens = remainingtokens);
+
+      while remainingtokens > 0
+          result = _StringTokenSub(string = result, token = '{task}', replacewith = 'Submit Report', remainingtokens = remainingtokens);
+      endwhile;
+
+      -- result now contains "Task: Submit Report, Due: {due_date}, Status: {status}"
+      ```
+      This replaces all placeholders in the string using a loop.
+
+  - question: >-
+      Write code to use the _StringParseKeyword procedure to retrieve the state from an address string in Actian 4GL
+      OpenROAD Global Procedures Available in the Core Library.
+    answer: |
+      Retrieve the state using _StringParseKeyword:
+      ```
+      declare
+          str1 = varchar(2000);
+          state = varchar(2000);
+      enddeclare
+
+      str1 = 'Street=456 Elm St;City=Metropolis;State=CA';
+      state = _StringParseKeyword(string = str1, keyword = 'state');
+
+      -- state now contains "CA"
+      ```
+      This retrieves the state from the address string.
+
+  - question: >-
+      How to use the _StringSub procedure to generate a customized alert message in Actian 4GL OpenROAD Global
+      Procedures Available in the Core Library?
+    answer: |
+      Generate a customized alert message using _StringSub:
+      ```
+      declare
+          alert_message = varchar(2000);
+      enddeclare
+
+      alert_message = _StringSub(string = 'Alert: %1 has been triggered at %2',
+                                 arg1 = 'High Temperature',
+                                 arg2 = '15:00');
+
+      -- alert_message now contains "Alert: High Temperature has been triggered at 15:00"
+      ```
+      This generates a customized alert message by substituting the parameters.
