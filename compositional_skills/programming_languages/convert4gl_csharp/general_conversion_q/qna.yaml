@@ -350,3 +350,370 @@ seed_examples:
               }
           }
       }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT invoice_id, amount_due FROM invoices WHERE due_date < '2023-12-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT invoice_id, amount_due FROM invoices WHERE due_date < @dueDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@dueDate", new DateTime(2023, 12, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int invoiceId = (int)reader["invoice_id"];
+                      decimal amountDue = (decimal)reader["amount_due"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT payment_id, payment_date FROM payments WHERE amount > 500;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT payment_id, payment_date FROM payments WHERE amount > @amount",
+              connection))
+          {
+              command.Parameters.AddWithValue("@amount", 500);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int paymentId = (int)reader["payment_id"];
+                      DateTime paymentDate = (DateTime)reader["payment_date"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT member_id, member_name FROM members WHERE join_date > '2022-01-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT member_id, member_name FROM members WHERE join_date > @joinDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@joinDate", new DateTime(2022, 1, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int memberId = (int)reader["member_id"];
+                      string memberName = reader["member_name"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT flight_id, destination FROM flights WHERE departure_date = '2023-07-15';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT flight_id, destination FROM flights WHERE departure_date = @departureDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@departureDate", new DateTime(2023, 7, 15));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int flightId = (int)reader["flight_id"];
+                      string destination = reader["destination"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT review_id, comments FROM reviews WHERE rating = 5;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT review_id, comments FROM reviews WHERE rating = @rating",
+              connection))
+          {
+              command.Parameters.AddWithValue("@rating", 5);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int reviewId = (int)reader["review_id"];
+                      string comments = reader["comments"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT session_id, user_id FROM sessions WHERE end_time IS NULL;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT session_id, user_id FROM sessions WHERE end_time IS NULL",
+              connection))
+          {
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int sessionId = (int)reader["session_id"];
+                      int userId = (int)reader["user_id"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT invoice_id, customer_id FROM invoices WHERE status = 'Paid';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT invoice_id, customer_id FROM invoices WHERE status = @status",
+              connection))
+          {
+              command.Parameters.AddWithValue("@status", "Paid");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int invoiceId = (int)reader["invoice_id"];
+                      int customerId = (int)reader["customer_id"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT ticket_id, seat_number FROM tickets WHERE event_date = '2024-05-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT ticket_id, seat_number FROM tickets WHERE event_date = @eventDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventDate", new DateTime(2024, 5, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int ticketId = (int)reader["ticket_id"];
+                      string seatNumber = reader["seat_number"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT course_id, course_name FROM courses WHERE credits = 3;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT course_id, course_name FROM courses WHERE credits = @credits",
+              connection))
+          {
+              command.Parameters.AddWithValue("@credits", 3);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int courseId = (int)reader["course_id"];
+                      string courseName = reader["course_name"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT rental_id, return_date FROM rentals WHERE overdue = true;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT rental_id, return_date FROM rentals WHERE overdue = @overdue",
+              connection))
+          {
+              command.Parameters.AddWithValue("@overdue", true);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int rentalId = (int)reader["rental_id"];
+                      DateTime returnDate = (DateTime)reader["return_date"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT employee_id, salary FROM employees WHERE salary > 80000;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT employee_id, salary FROM employees WHERE salary > @salary",
+              connection))
+          {
+              command.Parameters.AddWithValue("@salary", 80000);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int employeeId = (int)reader["employee_id"];
+                      decimal salary = (decimal)reader["salary"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT transaction_id, amount FROM transactions WHERE transaction_date = '2024-01-01';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT transaction_id, amount FROM transactions WHERE transaction_date = @transactionDate",
+              connection))
+          {
+              command.Parameters.AddWithValue("@transactionDate", new DateTime(2024, 1, 1));
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int transactionId = (int)reader["transaction_id"];
+                      decimal amount = (decimal)reader["amount"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT order_id, quantity FROM orders WHERE product_id = 1001;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT order_id, quantity FROM orders WHERE product_id = @productId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@productId", 1001);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int orderId = (int)reader["order_id"];
+                      int quantity = (int)reader["quantity"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT message_id, content FROM messages WHERE sender_id = 500;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT message_id, content FROM messages WHERE sender_id = @senderId",
+              connection))
+          {
+              command.Parameters.AddWithValue("@senderId", 500);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int messageId = (int)reader["message_id"];
+                      string content = reader["content"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT product_id, stock FROM inventory WHERE stock < 50;"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT product_id, stock FROM inventory WHERE stock < @stock",
+              connection))
+          {
+              command.Parameters.AddWithValue("@stock", 50);
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int productId = (int)reader["product_id"];
+                      int stock = (int)reader["stock"];
+                      // Process data
+                  }
+              }
+          }
+      }
+
+  - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
+    SELECT event_id, location FROM events WHERE event_type = 'Conference';"
+    answer: |
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+          connection.Open();
+          using (SqlCommand command = new SqlCommand(
+              "SELECT event_id, location FROM events WHERE event_type = @eventType",
+              connection))
+          {
+              command.Parameters.AddWithValue("@eventType", "Conference");
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                  while (reader.Read())
+                  {
+                      int eventId = (int)reader["event_id"];
+                      string location = reader["location"].ToString();
+                      // Process data
+                  }
+              }
+          }
+      }
