@@ -2,88 +2,118 @@ version: 2
 task_description: Write Actian 4GL OpenROAD Local Procedures
 created_by: willsjames
 seed_examples:
-  - question: How to declare a forward reference for a local procedure in Actian 4GL OpenROAD Local Procedures?
-    answer: |
+  - question: >-
+      How to declare a forward reference for a local procedure in Actian 4GL
+      OpenROAD Local Procedures?
+    answer: >
       Declare a forward reference like this:
+
       ```
+
       declare
           calculate_tax = procedure returning float8;
       enddeclare
-      ```
-      This declares a forward reference for a local procedure that returns a float8 value.
 
-  - question: >-
-      Write code to define and call a local procedure that calculates a discount in Actian 4GL OpenROAD Local
-      Procedures.
-    answer: |
-      Define and call a discount calculation procedure:
       ```
+
+      This declares a forward reference for a local procedure that returns a
+      float8 value.
+  - question: >-
+      Write code to define and call a local procedure that calculates a discount
+      in Actian 4GL OpenROAD Local Procedures.
+    answer: >
+      Define and call a discount calculation procedure:
+
+      ```
+
       declare
           calculate_discount = procedure returning float8;
       enddeclare
 
+
       procedure calculate_discount(price = float8, discount_rate = float8) =
+
       begin
           return price * (1 - discount_rate);
       end
 
-      -- Usage
-      discounted_price = callproc calculate_discount(price = 100.00, discount_rate = 0.1);
-      ```
-      This defines a procedure to calculate a discounted price and demonstrates its usage.
 
-  - question: >-
-      How to convert a local procedure that adds tax to a price in Actian 4GL OpenROAD to C#? Respond only in code:
-      procedure addtax(tax=float8, price=float8) =
-      {
-           return (price * tax);
-      }
+      -- Usage
+
+      discounted_price = callproc calculate_discount(price = 100.00,
+      discount_rate = 0.1);
+
       ```
-    answer: |
+
+      This defines a procedure to calculate a discounted price and demonstrates
+      its usage.
+  - question: >-
+      How to convert a local procedure that adds tax to a price in Actian 4GL
+      OpenROAD to C#? Respond only in code: procedure addtax(tax=float8,
+      price=float8) = {
+           return (price * tax);
+      } ```
+    answer: >
       ```csharp
+
       private double AddTax(double tax, double price)
+
       {
           return price * tax;
       }
 
-      // Usage
-      double tax = 0.07;
-      double price = 100.00;
-      double result = AddTax(tax, price);
-      ```
-      This C# method replicates the Actian 4GL procedure that calculates the tax amount.
 
-  - question: >-
-      How to convert a local procedure that calculates a total price after discount to C#? Respond only in code:
-      procedure calculate_total(price=float8, discount_rate=float8) =
-      begin
-          return price * (1 - discount_rate);
-      end
+      // Usage
+
+      double tax = 0.07;
+
+      double price = 100.00;
+
+      double result = AddTax(tax, price);
+
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure that calculates the tax
+      amount.
+  - question: >-
+      How to convert a local procedure that calculates a total price after
+      discount to C#? Respond only in code: procedure
+      calculate_total(price=float8, discount_rate=float8) = begin
+          return price * (1 - discount_rate);
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateTotal(double price, double discountRate)
+
       {
           return price * (1 - discountRate);
       }
 
-      // Usage
-      double price = 200.00;
-      double discountRate = 0.15;
-      double totalPrice = CalculateTotal(price, discountRate);
-      ```
-      This C# method mirrors the Actian 4GL procedure that calculates the total price after applying a discount.
 
-  - question: >-
-      How to convert a local procedure that updates an employee record in Actian 4GL to C#? Respond only in code:
-      procedure update_employee(emp_id=int, new_salary=float8) =
-      begin
-          // Code to update the employee record
-      end
+      // Usage
+
+      double price = 200.00;
+
+      double discountRate = 0.15;
+
+      double totalPrice = CalculateTotal(price, discountRate);
+
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure that calculates the total
+      price after applying a discount.
+  - question: >-
+      How to convert a local procedure that updates an employee record in Actian
+      4GL to C#? Respond only in code: procedure update_employee(emp_id=int,
+      new_salary=float8) = begin
+          // Code to update the employee record
+      end ```
+    answer: >
       ```csharp
+
       private void UpdateEmployee(int empId, double newSalary)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -98,19 +128,22 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method replicates the Actian 4GL procedure that updates an employee's salary.
 
-  - question: >-
-      How to convert a local procedure that calculates the average salary in Actian 4GL to C#? Respond only in code:
-      procedure calculate_average_salary() =
-      begin
-          // Code to calculate average salary
-      end
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure that updates an
+      employee's salary.
+  - question: >-
+      How to convert a local procedure that calculates the average salary in
+      Actian 4GL to C#? Respond only in code: procedure
+      calculate_average_salary() = begin
+          // Code to calculate average salary
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateAverageSalary()
+
       {
           double averageSalary = 0.0;
           using (SqlConnection connection = new SqlConnection(connectionString))
@@ -129,19 +162,22 @@ seed_examples:
           }
           return averageSalary;
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure to calculate the average salary.
 
-  - question: >-
-      How to convert a local procedure that retrieves employee details by ID in Actian 4GL to C#? Respond only in code:
-      procedure get_employee_details(emp_id=int) =
-      begin
-          // Code to retrieve employee details
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure to calculate the average
+      salary.
+  - question: >-
+      How to convert a local procedure that retrieves employee details by ID in
+      Actian 4GL to C#? Respond only in code: procedure
+      get_employee_details(emp_id=int) = begin
+          // Code to retrieve employee details
+      end ```
+    answer: >
       ```csharp
+
       private void GetEmployeeDetails(int empId)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -164,19 +200,22 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method replicates the Actian 4GL procedure for retrieving employee details by ID.
 
-  - question: >-
-      How to convert a local procedure that adds a new product to the inventory in Actian 4GL to C#? Respond only in code:
-      procedure add_product(product_name=string, price=float8) =
-      begin
-          // Code to add a new product
-      end
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure for retrieving employee
+      details by ID.
+  - question: >-
+      How to convert a local procedure that adds a new product to the inventory
+      in Actian 4GL to C#? Respond only in code: procedure
+      add_product(product_name=string, price=float8) = begin
+          // Code to add a new product
+      end ```
+    answer: >
       ```csharp
+
       private void AddProduct(string productName, double price)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -191,39 +230,48 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure for adding a new product to the inventory.
 
-  - question: >-
-      How to convert a local procedure that calculates the shipping cost based on weight in Actian 4GL to C#? Respond only in code:
-      procedure calculate_shipping_cost(weight=float8) =
-      begin
-          return weight * 5.00; // example rate
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure for adding a new product
+      to the inventory.
+  - question: >-
+      How to convert a local procedure that calculates the shipping cost based
+      on weight in Actian 4GL to C#? Respond only in code: procedure
+      calculate_shipping_cost(weight=float8) = begin
+          return weight * 5.00; // example rate
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateShippingCost(double weight)
+
       {
           return weight * 5.00; // example rate
       }
 
-      // Usage
-      double weight = 10.0;
-      double shippingCost = CalculateShippingCost(weight);
-      ```
-      This C# method replicates the Actian 4GL procedure for calculating the shipping cost based on weight.
 
-  - question: >-
-      How to convert a local procedure that checks if a product is in stock in Actian 4GL to C#? Respond only in code:
-      procedure is_in_stock(product_id=int) =
-      begin
-          // Code to check stock
-      end
+      // Usage
+
+      double weight = 10.0;
+
+      double shippingCost = CalculateShippingCost(weight);
+
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure for calculating the
+      shipping cost based on weight.
+  - question: >-
+      How to convert a local procedure that checks if a product is in stock in
+      Actian 4GL to C#? Respond only in code: procedure
+      is_in_stock(product_id=int) = begin
+          // Code to check stock
+      end ```
+    answer: >
       ```csharp
+
       private bool IsInStock(int productId)
+
       {
           bool inStock = false;
           using (SqlConnection connection = new SqlConnection(connectionString))
@@ -240,40 +288,50 @@ seed_examples:
           }
           return inStock;
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure for checking if a product is in stock.
 
-  - question: >-
-      How to convert a local procedure that calculates employee bonus based on performance in Actian 4GL to C#? Respond only in code:
-      procedure calculate_bonus(salary=float8, performance_rating=float8) =
-      begin
-          return salary * performance_rating * 0.1; // example bonus calculation
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure for checking if a product
+      is in stock.
+  - question: >-
+      How to convert a local procedure that calculates employee bonus based on
+      performance in Actian 4GL to C#? Respond only in code: procedure
+      calculate_bonus(salary=float8, performance_rating=float8) = begin
+          return salary * performance_rating * 0.1; // example bonus calculation
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateBonus(double salary, double performanceRating)
+
       {
           return salary * performanceRating * 0.1; // example bonus calculation
       }
 
-      // Usage
-      double salary = 50000.00;
-      double performanceRating = 0.8;
-      double bonus = CalculateBonus(salary, performanceRating);
-      ```
-      This C# method replicates the Actian 4GL procedure for calculating employee bonuses based on performance.
 
-  - question: >-
-      How to convert a local procedure that retrieves orders for a specific customer in Actian 4GL to C#? Respond only in code:
-      procedure get_orders(customer_id=int) =
-      begin
-          // Code to retrieve orders
-      end
+      // Usage
+
+      double salary = 50000.00;
+
+      double performanceRating = 0.8;
+
+      double bonus = CalculateBonus(salary, performanceRating);
+
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure for calculating
+      employee bonuses based on performance.
+  - question: >-
+      How to convert a local procedure that retrieves orders for a specific
+      customer in Actian 4GL to C#? Respond only in code: procedure
+      get_orders(customer_id=int) = begin
+          // Code to retrieve orders
+      end ```
+    answer: >
       ```csharp
+
       private void GetOrders(int customerId)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -296,19 +354,22 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure for retrieving orders for a specific customer.
 
-  - question: >-
-      How to convert a local procedure that calculates the total inventory value in Actian 4GL to C#? Respond only in code:
-      procedure calculate_inventory_value() =
-      begin
-          // Code to calculate total inventory value
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure for retrieving orders for
+      a specific customer.
+  - question: >-
+      How to convert a local procedure that calculates the total inventory value
+      in Actian 4GL to C#? Respond only in code: procedure
+      calculate_inventory_value() = begin
+          // Code to calculate total inventory value
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateInventoryValue()
+
       {
           double totalValue = 0.0;
           using (SqlConnection connection = new SqlConnection(connectionString))
@@ -327,19 +388,22 @@ seed_examples:
           }
           return totalValue;
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure to calculate the total inventory value.
 
-  - question: >-
-      How to convert a local procedure that updates the product price based on a percentage increase in Actian 4GL to C#? Respond only in code:
-      procedure update_product_price(product_id=int, percentage_increase=float8) =
-      begin
-          // Code to update product price
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure to calculate the total
+      inventory value.
+  - question: >-
+      How to convert a local procedure that updates the product price based on a
+      percentage increase in Actian 4GL to C#? Respond only in code: procedure
+      update_product_price(product_id=int, percentage_increase=float8) = begin
+          // Code to update product price
+      end ```
+    answer: >
       ```csharp
+
       private void UpdateProductPrice(int productId, double percentageIncrease)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -354,19 +418,22 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method replicates the Actian 4GL procedure for updating product prices based on a percentage increase.
 
-  - question: >-
-      How to convert a local procedure that calculates the average discount given to customers in Actian 4GL to C#? Respond only in code:
-      procedure calculate_average_discount() =
-      begin
-          return (SELECT AVG(discount) FROM customer_discounts);
-      end
       ```
-    answer: |
+
+      This C# method replicates the Actian 4GL procedure for updating product
+      prices based on a percentage increase.
+  - question: >-
+      How to convert a local procedure that calculates the average discount
+      given to customers in Actian 4GL to C#? Respond only in code: procedure
+      calculate_average_discount() = begin
+          return (SELECT AVG(discount) FROM customer_discounts);
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateAverageDiscount()
+
       {
           double averageDiscount = 0.0;
           using (SqlConnection connection = new SqlConnection(connectionString))
@@ -385,19 +452,22 @@ seed_examples:
           }
           return averageDiscount;
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure to calculate the average discount given to customers.
 
-  - question: >-
-      How to convert a local procedure that removes a product from the inventory in Actian 4GL to C#? Respond only in code:
-      procedure remove_product(product_id=int) =
-      begin
-          // Code to remove product
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure to calculate the average
+      discount given to customers.
+  - question: >-
+      How to convert a local procedure that removes a product from the inventory
+      in Actian 4GL to C#? Respond only in code: procedure
+      remove_product(product_id=int) = begin
+          // Code to remove product
+      end ```
+    answer: >
       ```csharp
+
       private void RemoveProduct(int productId)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -411,19 +481,22 @@ seed_examples:
               }
           }
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure for removing a product from the inventory.
 
-  - question: >-
-      How to convert a local procedure that calculates the total revenue generated in Actian 4GL to C#? Respond only in code:
-      procedure calculate_total_revenue() =
-      begin
-          return (SELECT SUM(amount) FROM sales);
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure for removing a product
+      from the inventory.
+  - question: >-
+      How to convert a local procedure that calculates the total revenue
+      generated in Actian 4GL to C#? Respond only in code: procedure
+      calculate_total_revenue() = begin
+          return (SELECT SUM(amount) FROM sales);
+      end ```
+    answer: >
       ```csharp
+
       private double CalculateTotalRevenue()
+
       {
           double totalRevenue = 0.0;
           using (SqlConnection connection = new SqlConnection(connectionString))
@@ -442,19 +515,22 @@ seed_examples:
           }
           return totalRevenue;
       }
-      ```
-      This C# method mirrors the Actian 4GL procedure to calculate the total revenue generated.
 
-  - question: >-
-      How to convert a local procedure that updates customer records with a new address in Actian 4GL to C#? Respond only in code:
-      procedure update_customer_address(customer_id=int, new_address=string) =
-      begin
-          // Code to update customer address
-      end
       ```
-    answer: |
+
+      This C# method mirrors the Actian 4GL procedure to calculate the total
+      revenue generated.
+  - question: >-
+      How to convert a local procedure that updates customer records with a new
+      address in Actian 4GL to C#? Respond only in code: procedure
+      update_customer_address(customer_id=int, new_address=string) = begin
+          // Code to update customer address
+      end ```
+    answer: >
       ```csharp
+
       private void UpdateCustomerAddress(int customerId, string newAddress)
+
       {
           using (SqlConnection connection = new SqlConnection(connectionString))
           {
@@ -469,5 +545,8 @@ seed_examples:
               }
           }
       }
+
       ```
-      This C# method replicates the Actian 4GL procedure for updating customer records with a new address.
+
+      This C# method replicates the Actian 4GL procedure for updating customer
+      records with a new address.
