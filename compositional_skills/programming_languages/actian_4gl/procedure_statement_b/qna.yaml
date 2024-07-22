@@ -1,0 +1,191 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Procedure Statements
+created_by: willsjames
+seed_examples:
+  - question: How do you define a procedure without parameters in Actian 4GL OpenROAD?
+    answer: |
+      Define a procedure without parameters like this:
+      ```
+      procedure display_welcome =
+      begin
+          message 'Welcome to our application!';
+      end;
+      ```
+
+  - question: How can you define a local procedure within a global procedure in Actian 4GL?
+    answer: |
+      Define a local procedure within a global procedure like this:
+      ```
+      procedure global_proc =
+      begin
+          procedure local_proc =
+          begin
+              message 'This is a local procedure';
+          end;
+
+          call local_proc();
+      end;
+      ```
+
+  - question: How do you declare local variables in an Actian 4GL procedure?
+    answer: |
+      Declare local variables in a procedure using a declare block:
+      ```
+      procedure calculate_area =
+      declare
+          length = float;
+          width = float;
+          area = float;
+      begin
+          -- Procedure logic here
+      end;
+      ```
+
+  - question: How can you return a value from an Actian 4GL procedure?
+    answer: |
+      Return a value from a procedure using the 'return' statement:
+      ```
+      procedure calculate_sum(a = integer, b = integer) returning integer =
+      begin
+          return a + b;
+      end;
+      ```
+
+  - question: How do you define a procedure with optional parameters in Actian 4GL?
+    answer: |
+      Define a procedure with optional parameters by providing default values:
+      ```
+      procedure greet(name = string, greeting = string with default 'Hello') =
+      begin
+          message greeting + ', ' + name + '!';
+      end;
+      ```
+
+  - question: How can you pass parameters by reference in an Actian 4GL procedure?
+    answer: |
+      Pass parameters by reference using the 'inout' keyword:
+      ```
+      procedure swap(inout a = integer, inout b = integer) =
+      declare
+          temp = integer;
+      begin
+          temp = a;
+          a = b;
+          b = temp;
+      end;
+      ```
+
+  - question: How do you call another procedure from within a procedure in Actian 4GL?
+    answer: |
+      Call another procedure using the 'call' statement:
+      ```
+      procedure main_proc =
+      begin
+          call sub_proc();
+      end;
+
+      procedure sub_proc =
+      begin
+          message 'Called from main_proc';
+      end;
+      ```
+
+  - question: How can you handle errors within an Actian 4GL procedure?
+    answer: |
+      Handle errors using a 'whenever' statement:
+      ```
+      procedure risky_operation =
+      begin
+          whenever error raise;
+          -- Risky code here
+          whenever error continue;
+      end;
+      ```
+
+  - question: How do you define a procedure that works with database rows in Actian 4GL?
+    answer: |
+      Define a procedure working with database rows like this:
+      ```
+      procedure process_employee(emp = record of employee) =
+      begin
+          message 'Processing employee: ' + emp.name;
+          -- More processing logic here
+      end;
+      ```
+
+  - question: How can you create a variadic procedure in Actian 4GL?
+    answer: |
+      Create a variadic procedure using an array parameter:
+      ```
+      procedure sum_all(numbers = array of integer) returning integer =
+      declare
+          total = integer;
+          i = integer;
+      begin
+          total = 0;
+          for i = 1 to numbers.count()
+              total = total + numbers[i];
+          endfor;
+          return total;
+      end;
+      ```
+
+  - question: How do you define a procedure that returns multiple values in Actian 4GL?
+    answer: |
+      Return multiple values using 'inout' parameters:
+      ```
+      procedure get_circle_info(radius = float, inout area = float, inout circumference = float) =
+      begin
+          area = 3.14159 * radius * radius;
+          circumference = 2 * 3.14159 * radius;
+      end;
+      ```
+
+  - question: How can you create a recursive procedure in Actian 4GL?
+    answer: |
+      Create a recursive procedure by calling itself:
+      ```
+      procedure factorial(n = integer) returning integer =
+      begin
+          if n <= 1 then
+              return 1;
+          else
+              return n * factorial(n - 1);
+          endif;
+      end;
+      ```
+
+  - question: How do you define a procedure that works with global variables in Actian 4GL?
+    answer: |
+      Define a procedure working with global variables like this:
+      ```
+      procedure update_global_counter =
+      begin
+          global counter = counter + 1;
+          message 'Counter updated to: ' + counter;
+      end;
+      ```
+
+  - question: How can you create a procedure that accepts a procedure as a parameter in Actian 4GL?
+    answer: |
+      Create a procedure that accepts a ProcHandle as a parameter:
+      ```
+      procedure execute_callback(callback = ProcHandle) =
+      begin
+          call callback.Call();
+      end;
+      ```
+
+  - question: How do you define a procedure that uses a loop in Actian 4GL?
+    answer: |
+      Define a procedure with a loop like this:
+      ```
+      procedure print_numbers(limit = integer) =
+      declare
+          i = integer;
+      begin
+          for i = 1 to limit
+              message 'Number: ' + i;
+          endfor;
+      end;
+      ```
