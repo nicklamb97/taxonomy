@@ -1,0 +1,183 @@
+version: 2
+task_description: Use procedures in expressions in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How to use a procedure call in a loop condition in Actian 4GL OpenROAD Calling Procedures in Expressions?
+    answer: |
+      Use a procedure call in a loop condition like this:
+      ```
+      while is_data_available() do
+          fetch_next_record();
+      endwhile;
+      ```
+      This loop continues as long as the is_data_available() procedure returns true.
+
+  - question: >-
+      Write code to use a procedure call as part of an assignment expression in Actian 4GL OpenROAD Calling
+      Procedures in Expressions.
+    answer: |
+      Use a procedure call in an assignment expression like this:
+      ```
+      discount_price = calculate_discount(original_price, discount_rate);
+      ```
+      This assigns the result of calculate_discount() to discount_price.
+
+  - question: >-
+      How to call a procedure that returns a boolean in a conditional statement in Actian 4GL OpenROAD Calling
+      Procedures in Expressions?
+    answer: |
+      Call a procedure returning a boolean in a conditional statement like this:
+      ```
+      if is_valid_user(user_id) then
+          grant_access();
+      else
+          deny_access();
+      endif;
+      ```
+      This calls is_valid_user() to check a condition.
+
+  - question: >-
+      Write code to use a procedure call in a mathematical expression in Actian 4GL OpenROAD Calling Procedures
+      in Expressions.
+    answer: |
+      Use a procedure call in a mathematical expression like this:
+      ```
+      final_amount = get_subtotal() + calculate_tax(get_subtotal());
+      ```
+      This adds the result of calculate_tax() to the result of get_subtotal().
+
+  - question: >-
+      How to use a procedure call inside a print statement in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call in a print statement like this:
+      ```
+      print('The current time is: ' + get_current_time());
+      ```
+      This prints the result of get_current_time().
+
+  - question: >-
+      Write code to use a procedure call in a case statement in Actian 4GL OpenROAD Calling Procedures in
+      Expressions.
+    answer: |
+      Use a procedure call in a case statement like this:
+      ```
+      case get_user_role(user_id)
+          when 'Admin'
+              grant_admin_privileges();
+          when 'User'
+              grant_user_privileges();
+          else
+              deny_access();
+      endcase;
+      ```
+      This uses get_user_role() in a case statement.
+
+  - question: >-
+      How to call a procedure that returns a record type in an expression in Actian 4GL OpenROAD Calling
+      Procedures in Expressions?
+    answer: |
+      Call a procedure returning a record type in an expression like this:
+      ```
+      declare
+          emp_record = record of employee;
+      enddeclare
+
+      emp_record = get_employee_record(emp_id);
+      ```
+      This assigns the result of get_employee_record() to emp_record.
+
+  - question: >-
+      Write code to use a procedure call as a function argument in Actian 4GL OpenROAD Calling Procedures in
+      Expressions.
+    answer: |
+      Use a procedure call as a function argument like this:
+      ```
+      log_activity(get_current_user(), 'Logged In');
+      ```
+      This calls get_current_user() and passes its result to log_activity().
+
+  - question: >-
+      How to use a procedure call in a string concatenation in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call in string concatenation like this:
+      ```
+      message 'Welcome ' + get_username(user_id);
+      ```
+      This concatenates 'Welcome ' with the result of get_username().
+
+  - question: >-
+      Write code to use a procedure call in a date comparison in Actian 4GL OpenROAD Calling Procedures in
+      Expressions.
+    answer: |
+      Use a procedure call in a date comparison like this:
+      ```
+      if get_current_date() > project_deadline then
+          message 'Project is overdue';
+      endif;
+      ```
+      This compares get_current_date() with project_deadline.
+
+  - question: >-
+      How to use a procedure call in an array assignment in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call in an array assignment like this:
+      ```
+      declare
+          result_array = array of integer;
+      enddeclare
+
+      result_array = get_prime_numbers(limit);
+      ```
+      This assigns the result of get_prime_numbers() to result_array.
+
+  - question: >-
+      Write code to use a procedure call in a structure field assignment in Actian 4GL OpenROAD Calling Procedures
+      in Expressions.
+    answer: |
+      Use a procedure call in a structure field assignment like this:
+      ```
+      declare
+          customer = record of customer_type;
+      enddeclare
+
+      customer.name = get_customer_name(customer_id);
+      ```
+      This assigns the result of get_customer_name() to customer.name.
+
+  - question: >-
+      How to use a procedure call in a logical expression in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call in a logical expression like this:
+      ```
+      if is_logged_in() and has_permission('ACCESS_DASHBOARD') then
+          open_dashboard();
+      endif;
+      ```
+      This uses is_logged_in() and has_permission() in a logical expression.
+
+  - question: >-
+      Write code to use a procedure call in a comparison operation in Actian 4GL OpenROAD Calling Procedures
+      in Expressions.
+    answer: |
+      Use a procedure call in a comparison operation like this:
+      ```
+      if get_order_count(customer_id) > 10 then
+          apply_discount(customer_id);
+      endif;
+      ```
+      This compares the result of get_order_count() with 10.
+
+  - question: >-
+      How to use a procedure call within another procedure call in Actian 4GL OpenROAD Calling Procedures in
+      Expressions?
+    answer: |
+      Use a procedure call within another procedure call like this:
+      ```
+      send_notification(user_id, 'Your order ' + get_order_id() + ' has been shipped.');
+      ```
+      This uses get_order_id() within send_notification().
