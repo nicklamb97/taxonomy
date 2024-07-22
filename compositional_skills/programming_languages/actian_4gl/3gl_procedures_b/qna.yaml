@@ -1,0 +1,531 @@
+version: 2
+task_description: Write and use 3GL Procedure in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: >-
+      How do you declare parameters for a C# method that will be called from
+      Actian 4GL OpenROAD 3GL Procedures?
+    answer: >
+      To declare parameters for a C# method called from Actian 4GL OpenROAD 3GL
+      Procedures, use these guidelines:
+
+
+      1. For 4GL integer: use `int` in C#
+
+      2. For 4GL smallint: use `short` in C#
+
+      3. For 4GL float or money: use `double` in C#
+
+      4. For 4GL char or varchar: use `string` in C#
+
+      5. For 4GL date: use `DateTime` in C#
+
+
+      Example C# method declaration:
+
+
+      ```csharp
+
+      public int MyProc(int intParam, double floatParam, string stringParam,
+      DateTime dateParam)
+
+      {
+          // Method body
+          return 0;
+      }
+
+      ```
+
+
+      Remember to use `ref` for parameters passed by reference using the `byref`
+      option in 4GL.
+  - question: >-
+      Write a C# method for Actian 4GL OpenROAD 3GL Procedures that accepts an
+      integer and a float, and returns a string.
+    answer: >
+      Here's a C# method for Actian 4GL OpenROAD 3GL Procedures that accepts an
+      integer and a
+
+      float, and returns a string:
+
+
+      ```csharp
+
+      public string IntFloatToString(int intParam, double floatParam)
+
+      {
+          // Format the integer and float into a string
+          return $"Integer: {intParam}, Float: {floatParam:F2}";
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL OpenROAD:
+
+
+      ```4gl
+
+      declare
+          intValue = integer;
+          floatValue = float;
+          resultString = varchar(100);
+      enddeclare
+
+
+      intValue = 42;
+
+      floatValue = 3.14;
+
+
+      resultString = callproc IntFloatToString(intValue, floatValue);
+
+      ```
+  - question: >-
+      How do you handle passing a string parameter to a C# method in Actian 4GL
+      OpenROAD 3GL Procedures?
+    answer: >
+      To handle passing a string parameter to a C# method in Actian 4GL OpenROAD
+      3GL Procedures, ensure:
+
+
+      1. Define the parameter as `string` in C#.
+
+      2. The string should be passed without trailing blanks if it's a `varchar`
+      in 4GL.
+
+
+      Example C# method:
+
+
+      ```csharp
+
+      public void ProcessString(string strParam)
+
+      {
+          // Method body
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL:
+
+
+      ```4gl
+
+      declare
+          strValue = varchar(50);
+      enddeclare
+
+
+      strValue = 'Hello, World!';
+
+      callproc ProcessString(strValue);
+
+      ```
+  - question: >-
+      Write a C# method that accepts a date parameter and returns a formatted
+      string for Actian 4GL OpenROAD 3GL Procedures.
+    answer: >
+      Here's a C# method that accepts a `DateTime` parameter and returns a
+      formatted string:
+
+
+      ```csharp
+
+      public string FormatDate(DateTime dateParam)
+
+      {
+          // Format the date into a string
+          return dateParam.ToString("yyyy-MM-dd");
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL:
+
+
+      ```4gl
+
+      declare
+          dateValue = date;
+          resultString = varchar(20);
+      enddeclare
+
+
+      dateValue = today;
+
+      resultString = callproc FormatDate(dateValue);
+
+      ```
+  - question: >-
+      How do you handle passing a `double` parameter by reference to a C# method
+      in Actian 4GL OpenROAD 3GL Procedures?
+    answer: |
+      To handle passing a `double` parameter by reference, use `ref` in C#:
+
+      ```csharp
+      public void UpdateValue(ref double value)
+      {
+          // Modify the value
+          value *= 2;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          doubleValue = float;
+      enddeclare
+
+      doubleValue = 10.0;
+      callproc UpdateValue(byref(doubleValue));
+      ```
+  - question: >-
+      Write a C# method that returns a `short` value for Actian 4GL OpenROAD 3GL
+      Procedures.
+    answer: |
+      Here's a C# method that returns a `short` value:
+
+      ```csharp
+      public short GetShortValue()
+      {
+          return 12345;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          shortValue = smallint;
+      enddeclare
+
+      shortValue = callproc GetShortValue();
+      ```
+  - question: >-
+      How do you declare a method in C# that returns a `string` for Actian 4GL
+      OpenROAD 3GL Procedures?
+    answer: |
+      To declare a C# method that returns a `string`, use:
+
+      ```csharp
+      public string GetString()
+      {
+          return "Hello, OpenROAD!";
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          resultString = varchar(50);
+      enddeclare
+
+      resultString = callproc GetString();
+      ```
+  - question: >-
+      Write a C# method that accepts multiple parameters including an integer, a
+      float, and a string, and returns a `double`.
+    answer: >
+      Here's a C# method that accepts an integer, a float, and a string, and
+      returns a `double`:
+
+
+      ```csharp
+
+      public double CalculateResult(int intParam, float floatParam, string
+      strParam)
+
+      {
+          // Perform a calculation and return a double
+          return intParam + floatParam + strParam.Length;
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL:
+
+
+      ```4gl
+
+      declare
+          intValue = integer;
+          floatValue = float;
+          strValue = varchar(50);
+          resultValue = float;
+      enddeclare
+
+
+      intValue = 5;
+
+      floatValue = 10.5;
+
+      strValue = 'test';
+
+
+      resultValue = callproc CalculateResult(intValue, floatValue, strValue);
+
+      ```
+  - question: >-
+      How do you declare a C# method that processes a `DateTime` and an `int`,
+      and returns a `string`?
+    answer: >
+      To declare a C# method that processes a `DateTime` and an `int`, and
+      returns a `string`:
+
+
+      ```csharp
+
+      public string ProcessDateTimeAndInt(DateTime dateParam, int intParam)
+
+      {
+          // Process and return a string
+          return $"{dateParam.ToShortDateString()} - {intParam}";
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL:
+
+
+      ```4gl
+
+      declare
+          dateValue = date;
+          intValue = integer;
+          resultString = varchar(50);
+      enddeclare
+
+
+      dateValue = today;
+
+      intValue = 123;
+
+
+      resultString = callproc ProcessDateTimeAndInt(dateValue, intValue);
+
+      ```
+  - question: >-
+      Write a C# method for Actian 4GL OpenROAD 3GL Procedures that handles a
+      nullable `int` parameter.
+    answer: |
+      Here's a C# method that handles a nullable `int` parameter:
+
+      ```csharp
+      public int? ProcessNullableInt(int? intParam)
+      {
+          // Return a default value if intParam is null
+          return intParam ?? -1;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          nullableInt = integer;
+          resultInt = integer;
+      enddeclare
+
+      nullableInt = ifnull(intValue, -1);
+      resultInt = callproc ProcessNullableInt(nullableInt);
+      ```
+  - question: >-
+      How do you handle passing a `char` parameter to a C# method from Actian
+      4GL OpenROAD 3GL Procedures?
+    answer: |
+      To handle passing a `char` parameter, use `string` in C#:
+
+      ```csharp
+      public void ProcessChar(string charParam)
+      {
+          // Process the character string
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          charValue = varchar(1);
+      enddeclare
+
+      charValue = 'A';
+      callproc ProcessChar(charValue);
+      ```
+  - question: 'Write a C# method that takes a `float` by reference and modifies it.'
+    answer: |
+      To take a `float` by reference and modify it:
+
+      ```csharp
+      public void ModifyFloat(ref float floatParam)
+      {
+          floatParam += 10.0f;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          floatValue = float;
+      enddeclare
+
+      floatValue = 20.0;
+      callproc ModifyFloat(byref(floatValue));
+      ```
+  - question: >-
+      How do you declare a C# method that accepts and returns a `double` for
+      Actian 4GL OpenROAD 3GL Procedures?
+    answer: |
+      To declare a C# method that accepts and returns a `double`:
+
+      ```csharp
+      public double DoubleProcessor(double input)
+      {
+          // Process and return a double
+          return input * 2.0;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          inputDouble = float;
+          outputDouble = float;
+      enddeclare
+
+      inputDouble = 15.5;
+      outputDouble = callproc DoubleProcessor(inputDouble);
+      ```
+  - question: >-
+      Write a C# method that processes a `string` and an `int`, and returns a
+      `short`.
+    answer: >
+      Here's a C# method that processes a `string` and an `int`, and returns a
+      `short`:
+
+
+      ```csharp
+
+      public short ProcessStringAndInt(string strParam, int intParam)
+
+      {
+          // Example processing
+          return (short)(strParam.Length + intParam);
+      }
+
+      ```
+
+
+      To call this method from Actian 4GL:
+
+
+      ```4gl
+
+      declare
+          strValue = varchar(50);
+          intValue = integer;
+          shortResult = smallint;
+      enddeclare
+
+
+      strValue = 'Example';
+
+      intValue = 10;
+
+
+      shortResult = callproc ProcessStringAndInt(strValue, intValue);
+
+      ```
+  - question: >-
+      How do you handle passing a `DateTime` parameter to a C# method from
+      Actian 4GL OpenROAD 3GL Procedures?
+    answer: |
+      To handle passing a `DateTime` parameter, ensure:
+
+      1. Use `DateTime` in C# for date parameters.
+      2. Convert the `DateTime` to and from a 25-byte string in 4GL.
+
+      Example C# method:
+
+      ```csharp
+      public DateTime ProcessDateTime(DateTime dateParam)
+      {
+          // Return the same DateTime
+          return dateParam;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          dateValue = date;
+          resultDate = date;
+      enddeclare
+
+      dateValue = today;
+      resultDate = callproc ProcessDateTime(dateValue);
+      ```
+  - question: >-
+      Write a C# method that processes an array of `int` values and returns the
+      sum.
+    answer: |
+      To process an array of `int` values and return the sum:
+
+      ```csharp
+      public int SumArray(int[] values)
+      {
+          int sum = 0;
+          foreach (int value in values)
+          {
+              sum += value;
+          }
+          return sum;
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          intArray = array of integer;
+          arraySum = integer;
+      enddeclare
+
+      intArray = [1, 2, 3, 4, 5];
+      arraySum = callproc SumArray(intArray);
+      ```
+  - question: >-
+      How do you declare a C# method that accepts a `char` array and returns a
+      `string` for Actian 4GL OpenROAD 3GL Procedures?
+    answer: |
+      To declare a C# method that accepts a `char` array and returns a `string`:
+
+      ```csharp
+      public string CharArrayToString(char[] charArray)
+      {
+          return new string(charArray);
+      }
+      ```
+
+      To call this method from Actian 4GL:
+
+      ```4gl
+      declare
+          charArray = array of char;
+          resultString = varchar(100);
+      enddeclare
+
+      charArray = ['H', 'e', 'l', 'l', 'o'];
+      resultString = callproc CharArrayToString(charArray);
+      ```
