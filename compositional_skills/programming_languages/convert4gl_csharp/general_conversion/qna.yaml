@@ -1,5 +1,5 @@
 version: 2
-task_description: Learn about the converting Actian 4GL code to c#.
+task_description: Learn about the converting Actian 4GL for OpenROAD code to c#.
 created_by: vernonguy
 seed_examples:
   - question: "How would you convert the following 4GL Select statement into C#? Respond only in code:
