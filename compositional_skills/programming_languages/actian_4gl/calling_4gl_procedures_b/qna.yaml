@@ -3,7 +3,8 @@ task_description: Write and call 4GL procedure in OpenROAD Actian 4GL
 created_by: willsjames
 seed_examples:
   - question: >-
-      How do you handle errors in a 4GL procedure in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How do you handle errors in a 4GL procedure in Actian 4GL OpenROAD Calling
+      4GL Procedures?
     answer: |
       To handle errors in a 4GL procedure, use a try-catch block:
       ```
@@ -14,18 +15,18 @@ seed_examples:
       endtry;
       ```
       This catches errors during the call to 'some_procedure'.
-
   - question: >-
-      Write code to call a 4GL procedure with a string parameter in Actian 4GL OpenROAD Calling 4GL Procedures.
+      Write code to call a 4GL procedure with a string parameter in Actian 4GL
+      OpenROAD Calling 4GL Procedures.
     answer: |
       Here's how to call a 4GL procedure with a string parameter:
       ```
       callproc greet_user(username = 'Alice');
       ```
       This calls the 'greet_user' procedure with the 'username' parameter.
-
   - question: >-
-      How to call a 4GL procedure dynamically using a variable in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How to call a 4GL procedure dynamically using a variable in Actian 4GL
+      OpenROAD Calling 4GL Procedures?
     answer: |
       To call a 4GL procedure dynamically:
       ```
@@ -37,18 +38,23 @@ seed_examples:
       callproc :proc_name;
       ```
       This sets 'proc_name' and calls the procedure dynamically.
-
   - question: >-
-      Write code to pass multiple parameters to a 4GL procedure in Actian 4GL OpenROAD Calling 4GL Procedures.
-    answer: |
+      Write code to pass multiple parameters to a 4GL procedure in Actian 4GL
+      OpenROAD Calling 4GL Procedures.
+    answer: >
       Here's how to pass multiple parameters:
-      ```
-      callproc update_employee(emp_id = 1234, emp_name = 'John', emp_salary = 50000);
-      ```
-      This calls the 'update_employee' procedure with three parameters.
 
+      ```
+
+      callproc update_employee(emp_id = 1234, emp_name = 'John', emp_salary =
+      50000);
+
+      ```
+
+      This calls the 'update_employee' procedure with three parameters.
   - question: >-
-      How do you handle a procedure that returns a value and also takes parameters in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How do you handle a procedure that returns a value and also takes
+      parameters in Actian 4GL OpenROAD Calling 4GL Procedures?
     answer: |
       To handle a procedure that returns a value and takes parameters:
       ```
@@ -59,9 +65,9 @@ seed_examples:
       result = callproc calculate_bonus(emp_id = 5678, year = 2023);
       ```
       This calls 'calculate_bonus' with parameters and gets the result.
-
   - question: >-
-      How to call a 4GL procedure from within another procedure in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How to call a 4GL procedure from within another procedure in Actian 4GL
+      OpenROAD Calling 4GL Procedures?
     answer: |
       To call a procedure from another procedure:
       ```
@@ -71,18 +77,18 @@ seed_examples:
       end;
       ```
       This calls 'helper_proc' from 'main_proc'.
-
   - question: >-
-      Write code to call a 4GL procedure that updates a database record in Actian 4GL OpenROAD Calling 4GL Procedures.
+      Write code to call a 4GL procedure that updates a database record in
+      Actian 4GL OpenROAD Calling 4GL Procedures.
     answer: |
       Here's how to call a procedure that updates a database record:
       ```
       callproc update_customer_record(cust_id = 101, new_status = 'Active');
       ```
       This calls 'update_customer_record' to update a record.
-
   - question: >-
-      How do you call a 4GL procedure with a return value and store it in a variable in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How do you call a 4GL procedure with a return value and store it in a
+      variable in Actian 4GL OpenROAD Calling 4GL Procedures?
     answer: |
       To call a 4GL procedure with a return value:
       ```
@@ -93,18 +99,18 @@ seed_examples:
       result = callproc get_interest_rate(account_id = 9876);
       ```
       This stores the return value in 'result'.
-
   - question: >-
-      How to call a 4GL procedure that has optional parameters in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How to call a 4GL procedure that has optional parameters in Actian 4GL
+      OpenROAD Calling 4GL Procedures?
     answer: |
       To call a procedure with optional parameters:
       ```
       callproc update_profile(user_id = 42, email = 'new_email@example.com');
       ```
       This calls 'update_profile' with one optional parameter.
-
   - question: >-
-      Write code to call a 4GL procedure that performs a calculation in Actian 4GL OpenROAD Calling 4GL Procedures.
+      Write code to call a 4GL procedure that performs a calculation in Actian
+      4GL OpenROAD Calling 4GL Procedures.
     answer: |
       Here's how to call a calculation procedure:
       ```
@@ -115,9 +121,9 @@ seed_examples:
       total = callproc calculate_total(price = 19.99, quantity = 3);
       ```
       This calls 'calculate_total' and stores the result.
-
   - question: >-
-      How do you call a 4GL procedure and pass an array as a parameter in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How do you call a 4GL procedure and pass an array as a parameter in Actian
+      4GL OpenROAD Calling 4GL Procedures?
     answer: |
       To call a procedure with an array parameter:
       ```
@@ -128,18 +134,23 @@ seed_examples:
       callproc process_items(item_ids = item_ids);
       ```
       This calls 'process_items' with an array.
-
   - question: >-
-      Write code to call a 4GL procedure with mixed parameter types in Actian 4GL OpenROAD Calling 4GL Procedures.
-    answer: |
+      Write code to call a 4GL procedure with mixed parameter types in Actian
+      4GL OpenROAD Calling 4GL Procedures.
+    answer: >
       Here's how to call a procedure with mixed parameter types:
-      ```
-      callproc add_product(product_id = 202, product_name = 'Widget', price = 29.95);
-      ```
-      This calls 'add_product' with different parameter types.
 
+      ```
+
+      callproc add_product(product_id = 202, product_name = 'Widget', price =
+      29.95);
+
+      ```
+
+      This calls 'add_product' with different parameter types.
   - question: >-
-      How to call a 4GL procedure and check for successful execution in Actian 4GL OpenROAD Calling 4GL Procedures?
+      How to call a 4GL procedure and check for successful execution in Actian
+      4GL OpenROAD Calling 4GL Procedures?
     answer: |
       To call a procedure and check for success:
       ```
@@ -155,26 +166,37 @@ seed_examples:
       endif;
       ```
       This checks if 'update_status' executed successfully.
-
   - question: >-
-      Write code to call a 4GL procedure that logs an event in Actian 4GL OpenROAD Calling 4GL Procedures.
-    answer: |
+      Write code to call a 4GL procedure that logs an event in Actian 4GL
+      OpenROAD Calling 4GL Procedures.
+    answer: >
       Here's how to call a logging procedure:
-      ```
-      callproc log_event(event_type = 'ERROR', message = 'An unexpected error occurred');
-      ```
-      This calls 'log_event' to log an error.
 
-  - question: >-
-      How do you handle multiple return values from a 4GL procedure in Actian 4GL OpenROAD Calling 4GL Procedures?
-    answer: |
-      To handle multiple return values:
       ```
+
+      callproc log_event(event_type = 'ERROR', message = 'An unexpected error
+      occurred');
+
+      ```
+
+      This calls 'log_event' to log an error.
+  - question: >-
+      How do you handle multiple return values from a 4GL procedure in Actian
+      4GL OpenROAD Calling 4GL Procedures?
+    answer: >
+      To handle multiple return values:
+
+      ```
+
       declare
           result1 = integer;
           result2 = varchar(100);
       enddeclare
 
-      callproc get_user_info(user_id = 1234, user_age = result1, user_name = result2);
+
+      callproc get_user_info(user_id = 1234, user_age = result1, user_name =
+      result2);
+
       ```
+
       This handles multiple return values from 'get_user_info'.
