@@ -1,0 +1,160 @@
+version: 3
+task_description: OpenROAD Actian 4GL Dynamic Array Variables
+created_by: willsjames
+seed_examples:
+  - question: >
+      "How to declare a dynamic array variable of type Emp in OpenROAD Actian 4GL Dynamic Array Variables?"
+    answer: |
+      "To declare a dynamic array variable of type Emp in OpenROAD Actian 4GL Dynamic Array Variables,
+      use the following syntax:
+
+      emparray = array of Emp;
+
+      This declares an empty array named 'emparray' that can hold objects of the Emp class or its subclasses."
+  - question: >
+      "Write code to reference the title column of all rows in a dynamic array named movies in OpenROAD Actian 4GL
+      Dynamic Array Variables."
+    answer: |
+      "To reference the title column of all rows in a dynamic array named movies in OpenROAD Actian 4GL Dynamic Array
+      Variables, use the following syntax:
+
+      movies[*].title
+
+      This syntax allows you to work with the 'title' attribute across all objects in the 'movies' array. For example,
+      you could use it in an event handler:
+
+      on entry movies[*].title
+          // Event handling code here
+      endentry;"
+  - question: >
+      "How to pass an entire dynamic array as a parameter to a frame in OpenROAD Actian 4GL Dynamic Array Variables?"
+    answer: |
+      "To pass an entire dynamic array as a parameter to a frame in OpenROAD Actian 4GL Dynamic Array Variables, use the
+      following syntax:
+
+      callframe frame_name (parameter_name = array_name);
+
+      For example, if you have an array named 'movies' and want to pass it to a frame named 'movie_list', you would
+      write:
+
+      callframe movie_list (mv_fld = movies);
+
+      This passes the entire 'movies' array as a unit to the 'movie_list' frame."
+  - question: >
+      "Write code to reference an individual row in a dynamic array named employees in OpenROAD Actian 4GL Dynamic Array
+      Variables."
+    answer: |
+      "To reference an individual row in a dynamic array named employees in OpenROAD Actian 4GL Dynamic Array Variables,
+      use the following syntax:
+
+      employees[n]
+
+      Where 'n' is the number of the row you want to reference. For example, to pass the third row of the 'employees'
+      array to a procedure named 'update_employee', you would write:
+
+      callproc update_employee (emp_row = employees[3]);
+
+      This allows you to work with the individual object (employee) in the specified row of the array."
+  - question: >
+      "How to reference a specific cell in a dynamic array in OpenROAD Actian 4GL Dynamic Array Variables?"
+    answer: |
+      "To reference a specific cell in a dynamic array in OpenROAD Actian 4GL Dynamic Array Variables, use the following
+      syntax:
+
+      arrayname[n].columnname
+
+      Where 'arrayname' is the name of the array, 'n' is the row number, and 'columnname' is the name of the column
+      (attribute) you want to access.
+
+      For example, to reference the 'salary' of the 5th employee in an 'employees' array:
+
+      employees[5].salary
+
+      This syntax allows you to work with a specific attribute of a specific object in the array."
+  - question: >
+      "Write code to reference an attribute of a nested object within a dynamic array in OpenROAD Actian 4GL Dynamic
+      Array Variables."
+    answer: |
+      "To reference an attribute of a nested object within a dynamic array in OpenROAD Actian 4GL Dynamic Array
+      Variables, use the following syntax:
+
+      arrayname[n].nestedobject.attribute
+
+      For example, if you have an array named 'employees' where each employee has a nested object 'address', and you
+      want to reference the 'city' attribute of the address for the 3rd employee, you would write:
+
+      employees[3].address.city
+
+      This allows you to access attributes of nested objects within the array elements."
+  - question: >
+      "How to reference an element in a nested array within a dynamic array in OpenROAD Actian 4GL Dynamic Array
+      Variables?"
+    answer: |
+      "To reference an element in a nested array within a dynamic array in OpenROAD Actian 4GL Dynamic Array Variables,
+      use the following syntax:
+
+      arrayname[n].nestedarrayname[x].attribute
+
+      Where:
+      - 'arrayname' is the name of the outer array
+      - 'n' is the row number in the outer array
+      - 'nestedarrayname' is the name of the nested array
+      - 'x' is the row number in the nested array
+      - 'attribute' is the attribute you want to access
+
+      For example, if you have an array 'departments' where each department has a nested array 'employees', and you want
+      to access the 'name' of the 2nd employee in the 3rd department:
+
+      departments[3].employees[2].name
+
+      This syntax allows you to work with nested arrays within your dynamic arrays."
+  - question: >
+      "Write code to detect an Entry event on a column of a dynamic array displayed in a table field in OpenROAD Actian
+      4GL Dynamic Array Variables."
+    answer: |
+      "To detect an Entry event on a column of a dynamic array displayed in a table field in OpenROAD Actian 4GL Dynamic
+      Array Variables, use the following syntax:
+
+      on entry arrayname[*].columnname
+          // Event handling code here
+      endentry;
+
+      For example, to detect when a user enters the 'title' column of a 'movies' array displayed in a table field:
+
+      on entry movies[*].title
+          // This code will run when the user enters any cell in the 'title' column
+          message 'Entering title field';
+      endentry;
+
+      This event handler will be triggered whenever the user enters any cell in the 'title' column of the 'movies' array
+      in the table field."
+  - question: >
+      "How to declare a dynamic array with a default null value in OpenROAD Actian 4GL Dynamic Array Variables?"
+    answer: |
+      "To declare a dynamic array with a default null value in OpenROAD Actian 4GL Dynamic Array Variables, use the
+      following syntax:
+
+      arrayname = array of ClassName with default null;
+
+      For example, to declare a dynamic array of Employee objects with a default null value:
+
+      employeeArray = array of Employee with default null;
+
+      This declaration creates an empty array where any new elements added to the array will have a default value of
+      null until explicitly set to a non-null value."
+  - question: >
+      "Write code to pass a single row from a dynamic array to a procedure in OpenROAD Actian 4GL Dynamic Array
+      Variables."
+    answer: |
+      "To pass a single row from a dynamic array to a procedure in OpenROAD Actian 4GL Dynamic Array Variables, use the
+      following syntax:
+
+      callproc procedure_name (parameter_name = arrayname[n]);
+
+      For example, if you have a dynamic array named 'employees' and want to pass the 5th row to a procedure named
+      'update_employee':
+
+      callproc update_employee (emp_row = employees[5]);
+
+      This code passes the object in the 5th row of the 'employees' array to the 'update_employee' procedure. The
+      procedure can then work with this individual employee object."
