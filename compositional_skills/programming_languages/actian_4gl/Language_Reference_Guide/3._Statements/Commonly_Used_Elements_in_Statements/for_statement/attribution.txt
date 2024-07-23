@@ -1,0 +1,5 @@
+Title: OpenROAD Actian 4GL Statements for 3GL
+Author: Actian Corporation
+Source: https://docs.actian.com/openroad/6.2/#page/LangRef%2FGet_Attribute_Statement.htm%23
+
+The OpenROAD knowledge content is based on the official OpenROAD documentation provided by Actian Corporation. The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
