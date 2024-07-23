@@ -3,7 +3,8 @@ created_by: connorgilchrist99
 domain: OpenROAD Programming
 document_outline: Overview of the Clear Array statement in OpenROAD, including syntax, parameter details, and usage examples.
 seed_examples:
-  - context: "The Clear Array statement in OpenROAD is used to remove all rows from a specified array, effectively resetting it to an empty state. This is similar to the Clear method in the ArrayObject class."
+  - context: "The Clear Array statement in OpenROAD is used to remove all rows from a specified array. This effectively \
+resets the array to an empty state. The statement is similar to the Clear method in the ArrayObject class."
     questions_and_answers:
       - question: What does the Clear Array statement do?
         answer: The Clear Array statement removes all rows from the specified array, effectively clearing its contents.
@@ -35,7 +36,7 @@ seed_examples:
         answer: You can check the array's length or row count to confirm that it has been cleared.
 
 document:
-  repo: https://github.com/openroad-docs/clear-array-statement.git
+  repo: https://github.com/nicklamb97/instructlab-data.git
   commit: 4731aa3
   patterns:
     - clear_array_statement.md
