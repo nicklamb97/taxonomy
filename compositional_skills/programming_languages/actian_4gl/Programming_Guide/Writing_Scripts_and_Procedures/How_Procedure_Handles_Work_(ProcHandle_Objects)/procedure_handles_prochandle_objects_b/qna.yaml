@@ -83,7 +83,7 @@ seed_examples:
       enddeclare
       proc_handle = CurScriptScope.GetProcHandle(name = 'my_procedure');
       call execute_procedure(proc_handle);
-      
+
       procedure execute_procedure(handle = ProcHandle) =
       begin
           call handle.Call();
@@ -100,7 +100,7 @@ seed_examples:
       enddeclare
       button_click_handler = CurScriptScope.GetProcHandle(name = 'handle_button_click');
       call SetButtonClickEvent(button_click_handler);
-      
+
       procedure handle_button_click() =
       begin
           -- Handle button click event
@@ -168,14 +168,14 @@ seed_examples:
           outer_handle = ProcHandle;
       enddeclare
       outer_handle = CurScriptScope.GetProcHandle(name = 'outer_proc');
-      
+
       procedure outer_proc() =
       declare
           inner_handle = ProcHandle;
       begin
           inner_handle = CurScriptScope.GetProcHandle(name = 'inner_proc');
           call inner_handle.Call();
-          
+
           procedure inner_proc() =
           begin
               -- Inner procedure logic
@@ -215,7 +215,7 @@ seed_examples:
       enddeclare
       func_handle = CurScriptScope.GetProcHandle(name = 'calculate_sum');
       result = func_handle.Call(10, 20);
-      
+
       procedure calculate_sum(a = integer, b = integer) returning integer =
       begin
           return a + b;
@@ -232,7 +232,7 @@ seed_examples:
       enddeclare
       chain_handle = CurScriptScope.GetProcHandle(name = 'start_chain');
       call chain_handle.Call().GetProcHandle(name = 'next_step').Call().GetProcHandle(name = 'final_step').Call();
-      
+
       procedure start_chain() returning ProcHandle =
       begin
           -- First step logic
@@ -253,12 +253,12 @@ seed_examples:
       state_a = CurScriptScope.GetProcHandle(name = 'handle_state_a');
       state_b = CurScriptScope.GetProcHandle(name = 'handle_state_b');
       current_state = state_a;
-      
+
       procedure run_state_machine() =
       begin
           call current_state.Call();
       end;
-      
+
       procedure handle_state_a() =
       begin
           -- State A logic
