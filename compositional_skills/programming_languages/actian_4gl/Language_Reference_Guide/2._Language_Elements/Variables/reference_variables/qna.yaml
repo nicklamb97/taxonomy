@@ -1,6 +1,6 @@
-version: 2
+version: 3
 task_description: OpenROAD Actian 4GL Reference Variables
-created_by: nicklamb97
+created_by: willsjames
 seed_examples:
   - question: >
       "How to declare a reference variable of the StringObject class in OpenROAD Actian 4GL Reference Variables?"
