@@ -1,0 +1,50 @@
+version: 2
+task_description: >-
+  Explain the usage and syntax of the Describe statement in OpenROAD for
+  describing the attributes of a class.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the Describe statement in OpenROAD?
+    answer: >
+      The purpose of the Describe statement in OpenROAD is to get a list of the
+      attributes of a class, creating descriptors for the object's or array's
+      attributes in the SQLDA structure specified by the descriptor.
+  - question: What is the syntax for the Describe statement in OpenROAD?
+    answer: >
+      The syntax for the Describe statement in OpenROAD is:
+
+      ```
+
+      exec 4gl describe object into descriptor;
+
+      ```
+
+      - `object`: Specifies the handle of the object or array to be described.
+      This parameter is an integer.
+
+      - `descriptor`: Specifies the name of the descriptor for the SQLDA.
+  - question: What does the Describe statement do for an array in OpenROAD?
+    answer: >
+      For an array, the Describe statement in OpenROAD creates descriptors for
+      the row's type in the SQLDA structure specified by the descriptor.
+  - question: What parameters does the Describe statement require?
+    answer: >
+      The Describe statement requires the following parameters:
+
+      - `object`: Specifies the handle of the object or array to be described.
+      This parameter is an integer.
+
+      - `descriptor`: Specifies the name of the descriptor for the SQLDA.
+  - question: >-
+      In OpenROAD, what is the `descriptor` parameter used for in the Describe
+      statement?
+    answer: >
+      In OpenROAD, the `descriptor` parameter in the Describe statement
+      specifies the name of the descriptor for the SQLDA, which is used to store
+      the descriptors for the object's or array's attributes.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: 8fcc643
+  patterns:
+    - describe_statement.md
