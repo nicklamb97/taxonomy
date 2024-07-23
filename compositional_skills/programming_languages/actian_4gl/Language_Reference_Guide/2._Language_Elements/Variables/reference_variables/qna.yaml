@@ -1,0 +1,194 @@
+version: 2
+task_description: OpenROAD Actian 4GL Reference Variables
+created_by: nicklamb97
+seed_examples:
+  - question: >
+      "How to declare a reference variable of the StringObject class in OpenROAD Actian 4GL Reference Variables?"
+    answer: |
+      To declare a reference variable of the StringObject class in OpenROAD Actian 4GL Reference Variables, use the
+      following syntax:
+
+      ```
+      strobj = StringObject;
+      ```
+
+      This declares a reference variable named 'strobj' of the StringObject class.
+  - question: >
+      "Write code to declare a reference variable with a default null value in OpenROAD Actian 4GL Reference Variables."
+    answer: |
+      To declare a reference variable with a default null value in OpenROAD Actian 4GL Reference Variables, use the
+      following syntax:
+
+      ```
+      myvar = MyClass with default null;
+      ```
+
+      This declares a reference variable named 'myvar' of the MyClass class with a default null value. The object
+      will not be automatically created when the variable is declared.
+  - question: >
+      "How to access and modify an attribute of an object using a reference variable in OpenROAD Actian 4GL Reference
+      Variables?"
+    answer: |
+      To access and modify an attribute of an object using a reference variable in OpenROAD Actian 4GL Reference
+      Variables, use the dot notation:
+
+      ```
+      -- Assuming 'customer' is a reference variable of a class with 'Address' attribute
+      customer.Address = '123 Main St';  -- Modifying the attribute
+      x = customer.Address;  -- Accessing the attribute
+      ```
+
+      This code modifies the 'Address' attribute of the 'customer' object and then retrieves its value into the
+      variable 'x'.
+  - question: >
+      "Write code to check if a reference variable is null in OpenROAD Actian 4GL Reference Variables."
+    answer: |
+      To check if a reference variable is null in OpenROAD Actian 4GL Reference Variables, use the 'is null' operator:
+
+      ```
+      if customer is null then
+          -- Processing statements when customer is null
+          status = 'Customer not found';
+      else
+          -- Processing statements when customer is not null
+          status = 'Customer found';
+      endif;
+      ```
+
+      This code checks if the 'customer' reference variable is null and executes different code blocks based on the
+      result.
+  - question: >
+      "How to create an object for a reference variable using the Create method in OpenROAD Actian 4GL Reference
+      Variables?"
+    answer: |
+      To create an object for a reference variable using the Create method in OpenROAD Actian 4GL Reference
+      Variables, use the following syntax:
+
+      ```
+      -- Declare a reference variable with default null
+      addr = Addr default null;
+
+      -- Create an object for the reference variable
+      addr = Addr.Create();
+
+      -- Now you can use the object
+      addr.Street = 'Main Street';
+      addr.City = 'New York';
+      ```
+
+      This code declares a reference variable 'addr', creates an Addr object for it using the Create method, and
+      then sets values for its attributes.
+  - question: >
+      "Write code to pass a reference variable as a procedure parameter in OpenROAD Actian 4GL Reference Variables."
+    answer: |
+      To pass a reference variable as a procedure parameter in OpenROAD Actian 4GL Reference Variables, use the
+      following syntax:
+
+      ```
+      -- Assuming 'customer' is a reference variable of a Customer class
+      -- and 'update_cust' is a procedure that takes a Customer object as parameter
+
+      callproc update_cust (new = customer);
+      ```
+
+      This code passes the 'customer' reference variable as a parameter to the 'update_cust' procedure. The
+      procedure can then access and modify the customer object's attributes.
+  - question: >
+      "How to declare a reference variable for a subform field in OpenROAD Actian 4GL Reference Variables?"
+    answer: |
+      To declare a reference variable for a subform field in OpenROAD Actian 4GL Reference Variables, you typically
+      don't need to explicitly declare it. OpenROAD automatically declares it when you create the subform. However,
+      if you want to specify the class, you can do so in the field's property inspector:
+
+      ```
+      -- In the field's property inspector:
+      -- Name: customer
+      -- Data Type: CustomerClass  (where CustomerClass is a user-defined class)
+
+      -- In your 4GL code, you can then use it like this:
+      customer.Name = 'John Doe';
+      customer.Address = '123 Main St';
+      ```
+
+      This assumes you've created a subform field named 'customer' of type 'CustomerClass'. OpenROAD will
+      automatically declare the 'customer' reference variable for you.
+  - question: >
+      "Write code to demonstrate the consequences of resetting reference variables in OpenROAD Actian 4GL Reference
+      Variables."
+    answer: |
+      To demonstrate the consequences of resetting reference variables in OpenROAD Actian 4GL Reference Variables:
+
+      ```
+      -- Declare two reference variables
+      a = Addr;
+      b = Addr;
+
+      -- Both 'a' and 'b' now point to separate Addr objects
+
+      -- Reset 'a' to point to the same object as 'b'
+      a = b;
+      -- The original object for 'a' is now freed
+
+      -- Set 'a' to null
+      a = null;
+      -- The object still exists because 'b' references it
+
+      -- Set 'b' to null
+      b = null;
+      -- The object is now freed as no references remain
+      ```
+
+      This code shows how resetting reference variables affects object lifecycles. When all references to an object
+      are removed or set to null, the object is freed.
+  - question: >
+      "How to handle a runtime error when accessing an attribute of a null reference variable in OpenROAD Actian 4GL
+      Reference Variables?"
+    answer: |
+      To handle a runtime error when accessing an attribute of a null reference variable in OpenROAD Actian 4GL
+      Reference Variables, you should check if the variable is null before accessing its attributes:
+
+      ```
+      -- Declare a reference variable
+      customer = CustomerClass;
+
+      -- Later in the code, before accessing attributes:
+      if customer is not null then
+          name = customer.Name;
+          address = customer.Address;
+      else
+          -- Handle the case where customer is null
+          name = 'Unknown';
+          address = 'No address available';
+      endif;
+      ```
+
+      This code checks if the 'customer' reference variable is not null before accessing its attributes. If it is
+      null, it provides default values instead of causing a runtime error.
+  - question: >
+      "Write code to create a field at runtime using a reference variable in OpenROAD Actian 4GL Reference Variables."
+    answer: |
+      To create a field at runtime using a reference variable in OpenROAD Actian 4GL Reference Variables, you can
+      use the Create method of the Class class:
+
+      ```
+      -- Declare a reference variable for the new field
+      newField = Field default null;
+
+      -- Create a new Field object
+      newField = Field.Create();
+
+      -- Set properties of the new field
+      newField.Name = 'dynamicField';
+      newField.DataType = 'varchar(30)';
+      newField.XPosition = 100;
+      newField.YPosition = 100;
+      newField.Width = 200;
+      newField.Height = 30;
+
+      -- Add the field to the current frame
+      currentFrame.AddField(newField);
+      ```
+
+      This code creates a new Field object at runtime, sets its properties, and adds it to the current frame. Note
+      that the exact method names and properties may vary depending on the specific OpenROAD version and available
+      APIs.
