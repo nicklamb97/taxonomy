@@ -167,7 +167,7 @@ seed_examples:
       - question: What is the role of the `arr` parameter in the Clear Array statement
         answer: It specifies the handle of the array to be cleared.
 document:
-  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  repo: https://github.com/nicklamb97/instructlab-data.git
   commit: 4731aa3
   patterns:
     - clear_array_statement.md
