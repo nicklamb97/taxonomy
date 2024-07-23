@@ -8,7 +8,7 @@ seed_examples:
   - context: >-
       The Clear Array statement in OpenROAD is used to remove all rows from a
       specified array. This effectively resets the array to an empty state. The
-      statement is similar to the Clear method in the ArrayObject class.
+      statement is similar to the clear method in the ArrayObject class.
     questions_and_answers:
       - question: What does the Clear Array statement do
         answer: >-
