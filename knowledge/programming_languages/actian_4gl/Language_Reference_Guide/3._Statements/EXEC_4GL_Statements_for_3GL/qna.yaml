@@ -1,7 +1,7 @@
 version: 2
 task_description: >-
   Explain the usage of EXEC 4GL statements in an Embedded SQL for C (ESQL/C)
-  program to pass objects and arrays between 3GL and 4GL routines.
+  program to pass objects and arrays between 3GL and 4GL routines
 created_by: connorgilchrist99
 domain: sql_actian_4gl
 seed_examples:
