@@ -1,0 +1,45 @@
+version: 2
+task_description: >-
+  Explain the usage and syntax of the Clear Array statement in OpenROAD for
+  clearing arrays.
+created_by: connorgilchrist99
+domain: sql_actian_4gl
+seed_examples:
+  - question: What is the purpose of the Clear Array statement in OpenROAD?
+    answer: >
+      The purpose of the Clear Array statement in OpenROAD is to remove all the
+      rows from a specified array, effectively clearing its contents.
+  - question: What is the syntax for the Clear Array statement in OpenROAD?
+    answer: >
+      The syntax for the Clear Array statement in OpenROAD is:
+
+      ```
+
+      exec 4gl clear array arr;
+
+      ```
+
+      - `arr`: Specifies the handle of the array to clear. It is a 4-byte
+      integer.
+  - question: >-
+      How is the Clear Array statement similar to the Clear method used with the
+      ArrayObject class?
+    answer: >
+      The Clear Array statement is similar to the Clear method used with the
+      ArrayObject class because both are used to remove all rows from a
+      specified array, effectively clearing its contents.
+  - question: What parameter does the Clear Array statement require?
+    answer: >
+      The Clear Array statement requires the `arr` parameter, which specifies
+      the handle of the array to clear. This handle is a 4-byte integer.
+  - question: >-
+      Does the Clear Array statement remove specific rows or all rows from the
+      array?
+    answer: >
+      The Clear Array statement removes all rows from the specified array,
+      effectively clearing the entire array.
+document:
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
+  commit: 221da40
+  patterns:
+    - clear_array_statement.md
