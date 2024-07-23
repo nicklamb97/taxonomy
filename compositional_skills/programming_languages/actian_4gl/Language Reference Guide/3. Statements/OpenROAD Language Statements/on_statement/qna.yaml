@@ -1,0 +1,28 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD On Statements
+created_by: willsjames
+seed_examples:
+  - question: How do you create a simple click event handler in Actian 4GL OpenROAD
+      On Statement?
+    answer: "Create a simple click event handler like this:\n            on click return_button\
+      \ =\nbegin\nreturn;\nend"
+  - question: How can you define a user event with parameters in Actian 4GL OpenROAD
+      On Statement?
+    answer: "Define a user event with parameters like this:\n            on userevent\
+      \ 'NewEmp' (\nemployee_location = varchar(32) not null\n) =\nbegin\nMessage 'Adding\
+      \ employee to the '+ employee_location + ' location...';\nend"
+  - question: How would you send a user event with parameters in Actian 4GL OpenROAD
+      On Statement?
+    answer: "Send a user event with parameters like this:\n            on click =\n\
+      declare\nrecframe = FrameExec default null;\nemp_loc = varchar(256) not null default\
+      \ 'New Haven';\nbegin\nrecframe = OpenFrame EmployeeMaint();\nrecframe.SendUserEvent(eventname\
+      \ = 'NewEmp', employee_location = emp_loc);\nend"
+  - question: How can you handle multiple events in a single Actian 4GL OpenROAD On
+      Statement?
+    answer: "Handle multiple events in a single On Statement like this:\n          \
+      \  on click button1, on click button2 =\nbegin\nmessage 'A button was clicked';\n\
+      end"
+  - question: How would you use a declare block in an Actian 4GL OpenROAD On Statement?
+    answer: "Use a declare block in an On Statement like this:\n            on click\
+      \ process_button =\ndeclare\ntotal = float;\ncount = integer;\nbegin\n// Event\
+      \ handling code here\nend"

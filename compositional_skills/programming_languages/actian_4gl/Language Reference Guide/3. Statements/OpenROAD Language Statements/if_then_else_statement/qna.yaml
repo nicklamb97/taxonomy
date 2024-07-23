@@ -1,0 +1,310 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD If-Then-Else Statements (2.0)
+created_by: willsjames
+seed_examples:
+  - question: How to use a basic if-then-endif statement in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's a basic if-then-endif statement:
+      ```
+      if empnum = 0 then
+          employee_number = 'None';
+      endif;
+      ```
+      This code sets employee_number to 'None' if empnum is 0.
+
+  - question: Write code to prompt for user input using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's code to prompt for user input:
+      ```
+      if empnum = 0 then
+          enum = prompt 'Please enter employee number';
+      endif;
+      ```
+      This code prompts the user to enter an employee number if empnum is 0.
+
+  - question: >-
+      How to implement an if-then-elseif-then-else-endif structure in Actian 4GL OpenROAD If Then Else
+      Statement?
+    answer: |
+      Here's an if-then-elseif-then-else-endif structure:
+      ```
+      if status = 'n' then
+          callframe new;
+      elseif status = 'c' then
+          callframe completed;
+      else
+          callframe inprogress;
+      endif;
+      ```
+      This code calls different frames based on the value of status.
+
+  - question: Write code to nest multiple if statements in Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's an example of nested if statements:
+      ```
+      if status = 'n' then
+          if empnum = 0 then
+              employee_number = 'None';
+          else
+              callframe NewEmp;
+          endif;
+      endif;
+      ```
+      This code nests an if statement inside another, checking both status and empnum.
+
+  - question: How to use the if-then-else-endif variant in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's an example of the if-then-else-endif variant:
+      ```
+      if age >= 18 then
+          status = 'Adult';
+      else
+          status = 'Minor';
+      endif;
+      ```
+      This code sets the status based on the age, using both 'then' and 'else' clauses.
+
+  - question: Write code to check multiple conditions in an Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's code checking multiple conditions:
+      ```
+      if (age >= 18 and status = 'active') or (age >= 65 and status = 'retired') then
+          eligible = TRUE;
+      else
+          eligible = FALSE;
+      endif;
+      ```
+      This code sets 'eligible' based on multiple conditions involving age and status.
+
+  - question: How to use the if statement for basic error handling in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's an example of using if for basic error handling:
+      ```
+      if db_status != 0 then
+          message 'Database error occurred';
+          rollback;
+      else
+          commit;
+          message 'Transaction successful';
+      endif;
+      ```
+      This code checks db_status and performs actions based on whether an error occurred.
+
+  - question: Write code to validate user input using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's code to validate user input:
+      ```
+      input_value = prompt 'Enter a number between 1 and 10';
+      if input_value >= 1 and input_value <= 10 then
+          message 'Valid input';
+      else
+          message 'Invalid input. Please try again.';
+      endif;
+      ```
+      This code checks if the input is within the specified range.
+
+  - question: How to use multiple elseif conditions in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's an example with multiple elseif conditions:
+      ```
+      if score >= 90 then
+          grade = 'A';
+      elseif score >= 80 then
+          grade = 'B';
+      elseif score >= 70 then
+          grade = 'C';
+      else
+          grade = 'F';
+      endif;
+      ```
+      This code assigns a grade based on the score using multiple elseif conditions.
+
+  - question: Write code to implement a simple menu system using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's a simple menu system implementation:
+      ```
+      choice = prompt 'Enter your choice (1-3)';
+      if choice = '1' then
+          callframe CustomerInfo;
+      elseif choice = '2' then
+          callframe OrderStatus;
+      elseif choice = '3' then
+          callframe Help;
+      else
+          message 'Invalid choice. Please try again.';
+      endif;
+      ```
+      This code prompts for a menu choice and calls different frames based on the user's input.
+
+  - question: How to use the if statement to handle null values in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's how to handle null values:
+      ```
+      if customer.name is null then
+          display_name = 'Unknown Customer';
+      else
+          display_name = customer.name;
+      endif;
+      ```
+      This code checks if customer.name is null and assigns a default value if it is.
+
+  - question: Write code to implement a simple discount system using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's a simple discount system implementation:
+      ```
+      if total_purchase > 1000 then
+          discount = 0.15;
+      elseif total_purchase > 500 then
+          discount = 0.10;
+      elseif total_purchase > 100 then
+          discount = 0.05;
+      else
+          discount = 0;
+      endif;
+      final_price = total_purchase * (1 - discount);
+      ```
+      This code calculates a discount based on the total purchase amount.
+
+  - question: How to use the if statement for data type checking in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's how to check data types:
+      ```
+      if typeof(input_value) = 'integer' then
+          result = input_value * 2;
+      elseif typeof(input_value) = 'float' then
+          result = input_value / 2;
+      else
+          message 'Invalid data type';
+      endif;
+      ```
+      This code performs different operations based on the data type of input_value.
+
+  - question: Write code to implement a simple login system using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's a simple login system implementation:
+      ```
+      username = prompt 'Enter username';
+      password = prompt 'Enter password';
+      if username = 'admin' and password = 'secret' then
+          message 'Login successful';
+          callframe AdminPanel;
+      else
+          message 'Invalid username or password';
+          callframe LoginRetry;
+      endif;
+      ```
+      This code checks the entered username and password and acts accordingly.
+
+  - question: How to use the if statement for string comparison in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's how to compare strings:
+      ```
+      if lowercase(user_input) = 'yes' then
+          proceed = TRUE;
+      elseif lowercase(user_input) = 'no' then
+          proceed = FALSE;
+      else
+          message 'Invalid input. Please enter Yes or No.';
+      endif;
+      ```
+      This code compares the lowercase version of user_input to 'yes' and 'no'.
+
+  - question: Write code to implement a simple calculator using Actian 4GL OpenROAD If Then Else Statement.
+    answer: |
+      Here's a simple calculator implementation:
+      ```
+      num1 = prompt 'Enter first number';
+      num2 = prompt 'Enter second number';
+      operation = prompt 'Enter operation (+, -, *, /)';
+      if operation = '+' then
+          result = num1 + num2;
+      elseif operation = '-' then
+          result = num1 - num2;
+      elseif operation = '*' then
+          result = num1 * num2;
+      elseif operation = '/' then
+          if num2 != 0 then
+              result = num1 / num2;
+          else
+              message 'Error: Division by zero';
+          endif;
+      else
+          message 'Invalid operation';
+      endif;
+      if result is not null then
+          message 'Result: ' || char(result);
+      endif;
+      ```
+      This code performs basic arithmetic operations based on user input.
+
+  - question: How to use the if statement for date comparison in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's how to compare dates:
+      ```
+      if current_date > due_date then
+          message 'Payment overdue';
+      elseif current_date = due_date then
+          message 'Payment due today';
+      else
+          days_left = due_date - current_date;
+          message 'Payment due in ' || char(days_left) || ' days';
+      endif;
+      ```
+      This code compares the current date with a due date and provides appropriate messages.
+
+  - question: >-
+      Write code to implement a simple password strength checker using Actian 4GL OpenROAD If Then Else
+      Statement.
+    answer: |
+      Here's a simple password strength checker:
+      ```
+      password = prompt 'Enter a password';
+      if length(password) < 8 then
+          strength = 'Weak';
+      elseif length(password) >= 8 and length(password) < 12 then
+          strength = 'Medium';
+      elseif length(password) >= 12 then
+          strength = 'Strong';
+      endif;
+      message 'Password strength: ' || strength;
+      ```
+      This code categorizes password strength based on its length.
+
+  - question: How to use the if statement for file handling in Actian 4GL OpenROAD If Then Else Statement?
+    answer: |
+      Here's how to handle file operations:
+      ```
+      filename = prompt 'Enter filename';
+      if file_exists(filename) then
+          if file_writable(filename) then
+              message 'File can be modified';
+          else
+              message 'File is read-only';
+          endif;
+      else
+          message 'File does not exist';
+      endif;
+      ```
+      This code checks if a file exists and if it's writable.
+
+  - question: >-
+      Write code to implement a simple age category classifier using Actian 4GL OpenROAD If Then Else
+      Statement.
+    answer: |
+      Here's a simple age category classifier:
+      ```
+      age = prompt 'Enter age';
+      if age < 0 then
+          category = 'Invalid age';
+      elseif age < 13 then
+          category = 'Child';
+      elseif age < 20 then
+          category = 'Teenager';
+      elseif age < 65 then
+          category = 'Adult';
+      else
+          category = 'Senior';
+      endif;
+      message 'Age category: ' || category;
+      ```
+      This code classifies a person into age categories based on their age.

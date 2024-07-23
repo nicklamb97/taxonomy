@@ -1,0 +1,134 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Call Statements
+created_by: willsjames
+seed_examples:
+  - question: How to use the basic call statement to invoke Query-By-Forms (QBF) in
+      Actian 4GL OpenROAD Call Statement?
+    answer: 'To call QBF with no parameters:
+
+      ```
+
+      commit;
+
+      call qbf();
+
+      ```
+
+      This will display the QBF catalog frame.'
+  - question: Write code to demonstrate calling Query-By-Forms (QBF) with specific parameters
+      in Actian 4GL OpenROAD Call Statement.
+    answer: 'Here''s an example of calling QBF with specific parameters:
+
+      ```
+
+      commit;
+
+      call qbf(qbfname = ''expenses'', flags = ''-mappend -s'');
+
+      ```
+
+      This runs QBF in insert mode, suppressing status messages, using the QBFName ''expenses''.'
+  - question: How to call a report using the Actian 4GL OpenROAD Call Statement?
+    answer: 'To call a report:
+
+      ```
+
+      commit;
+
+      call report(name = ''emptable'', mode = ''column'');
+
+      ```
+
+      This runs a default report on ''emptable'' in column mode.'
+  - question: Write code to demonstrate calling an OpenROAD application stored in a
+      database using Actian 4GL OpenROAD Call Statement.
+    answer: 'Here''s how to call an OpenROAD application stored in a database:
+
+      ```
+
+      call rundbapp(application = ''inventory'', startcomponent = ''parts'');
+
+      ```
+
+      This calls the ''inventory'' application, starting at the ''parts'' frame.'
+  - question: How to use flag parameters in Actian 4GL OpenROAD Call Statement?
+    answer: 'You can use flag parameters in two ways:
+
+      1. Using keyword synonyms:
+
+      ```
+
+      call qbf(tblfld = ''customer'');
+
+      ```
+
+      2. Using the flags parameter:
+
+      ```
+
+      call qbf(flags = ''-tcustomer'');
+
+      ```
+
+      Both methods call QBF with the -t flag for the ''customer'' table.'
+  - question: Write code to demonstrate calling the SQL Terminal Monitor with flags
+      in Actian 4GL OpenROAD Call Statement.
+    answer: 'To call the SQL Terminal Monitor with flags:
+
+      ```
+
+      call sql(flags = ''+a -d +s'');
+
+      ```
+
+      This calls the SQL Terminal Monitor with the +a, -d, and +s flags.'
+  - question: How to call a report with complex parameters in Actian 4GL OpenROAD Call
+      Statement?
+    answer: 'Here''s an example of calling a report with complex parameters:
+
+      ```
+
+      create table :tbl as select * from orders where status = :status and custno =
+      :custno;
+
+      commit;
+
+      call report(name = ''orders'', param = ''table = "'' + :tbl + ''"'');
+
+      ```
+
+      This creates a temporary table and runs a report on it, passing the table name
+      as a parameter.'
+  - question: Write code to demonstrate calling VIGRAPH in Actian 4GL OpenROAD Call
+      Statement.
+    answer: 'To call VIGRAPH:
+
+      ```
+
+      call rungraph(graph = ''sales_chart'', device = ''screen'', plevel = 3);
+
+      ```
+
+      This calls VIGRAPH to display the ''sales_chart'' graph on the screen with presentation
+      level 3.'
+  - question: How to call an OpenROAD application from an image file using Actian 4GL
+      OpenROAD Call Statement?
+    answer: 'To call an OpenROAD application from an image file:
+
+      ```
+
+      commit;
+
+      call runimage(filename = ''runimage'', startcomponent = ''framename'');
+
+      ```
+
+      This calls the application in ''runimage'', starting at the frame specified in
+      ''framename''.'
+  - question: Write code to demonstrate error handling when using Actian 4GL OpenROAD
+      Call Statement.
+    answer: "Here's an example of error handling with a call statement:\n```\ncall rundbapp(application\
+      \ = 'inventory', startcomponent = 'parts');\nif CurSession.CallSystemStatus !=\
+      \ 0 then\n    message 'Error calling inventory application: ' || char(CurSession.CallSystemStatus);\n\
+      endif;\n```\nThis checks the CurSession.CallSystemStatus after the call to handle\
+      \ any errors."

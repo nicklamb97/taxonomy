@@ -1,0 +1,86 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Initialize Statements
+created_by: willsjames
+seed_examples:
+  - question: How to declare local variables for a frame using the Actian 4GL OpenROAD
+      Initialize Statement?
+    answer: "Here's how to declare local variables for a frame:\n```\ninitialize() =\n\
+      declare\n    customer_id = integer;\n    customer_name = varchar(50);\n    is_active\
+      \ = boolean default TRUE;\nenddeclare\nbegin\n    /* Start-up operations here\
+      \ */\nend\n```\nThis initialize statement declares three local variables for the\
+      \ frame."
+  - question: Write code to demonstrate setting up an Actian 4GL OpenROAD Initialize
+      Statement with parameters for a frame script.
+    answer: "Here's an example of an initialize statement with parameters for a frame\
+      \ script:\n```\ninitialize(\n    idnum = integer default 0,\n    idname = varchar(10)\
+      \ default 'none') =\ndeclare\n    addr = ADDR;\n    emptable = array of EMP;\n\
+      enddeclare\nbegin\n    emptable[1].ssn = 999999999;\nend\n```\nThis initialize\
+      \ statement sets up two parameters and two reference variables, and initializes\
+      \ an array element."
+  - question: How to declare and use a local procedure within the Actian 4GL OpenROAD
+      Initialize Statement?
+    answer: "Here's how to declare and use a local procedure:\n```\ninitialize() =\n\
+      declare\n    calculate_total = procedure returning money;\n    total_amount =\
+      \ money;\nenddeclare\nbegin\n    total_amount = calculate_total();\nend\n\nprocedure\
+      \ calculate_total() =\nbegin\n    /* Calculation logic here */\n    return 1000.00;\
+      \  /* Example return value */\nend\n```\nThis example declares a local procedure\
+      \ and calls it in the initialize block."
+  - question: Write code to demonstrate setting up reference variables for external
+      objects in Actian 4GL OpenROAD Initialize Statement.
+    answer: "Here's an example setting up reference variables for Excel objects:\n```\n\
+      initialize() =\ndeclare\n    xlapp = Application;\n    wrkbook = Workbook default\
+      \ null;\n    wrksheet = Worksheet default null;\n    sheets_coll = Sheets collection\
+      \ of Worksheet default null;\n    setup = Procedure;\nenddeclare\nbegin\n    callproc\
+      \ setup();\nend\n\nprocedure setup() =\nbegin\n    wrkbook = xlapp.workbooks().open('example.xls');\n\
+      \    sheets_coll = wrkbook.worksheets();\n    wrksheet = sheets_coll['sales'];\n\
+      end\n```\nThis initialize statement sets up reference variables for Excel objects\
+      \ and a setup procedure."
+  - question: How to use the Actian 4GL OpenROAD Initialize Statement in a user class
+      constructor?
+    answer: "Here's an example of a user class constructor using initialize:\n```\n\
+      initialize =\ndeclare\n    timetwo = procedure returning integer;\n    value =\
+      \ integer not null;\nenddeclare\nbegin\n    Curobject.uc1_min = 1;\n    curobject.uc1_max\
+      \ = 100;\n    curobject.uc1_value = ifnull(timetwo(num = 5), 0);\n    value =\
+      \ 50;\nend\n\nmethod GetInstValue() =\n{\n    return value;\n}\n\nprocedure timetwo(num\
+      \ = integer not null) =\n{\n    return num * 2;\n}\n```\nThis initialize statement\
+      \ sets up a user class constructor with local variables and procedures."
+  - question: How to execute start-up operations for a frame using the Actian 4GL OpenROAD
+      Initialize Statement?
+    answer: "Here's how to execute start-up operations for a frame:\n```\ninitialize()\
+      \ =\ndeclare\n    customer_count = integer;\nenddeclare\nbegin\n    /* Start-up\
+      \ operations */\n    select count(*) into :customer_count from customers;\n  \
+      \  if customer_count = 0 then\n        message 'No customers found. Please add\
+      \ customers.';\n    endif;\nend\n```\nThis initialize statement performs a database\
+      \ query as a start-up operation."
+  - question: Write code to demonstrate the difference between frame and field Actian
+      4GL OpenROAD Initialize Statements.
+    answer: "Here's an example showing the difference:\nFrame initialize:\n```\ninitialize(customer_id\
+      \ = integer) =\ndeclare\n    customer_name = varchar(50);\nenddeclare\nbegin\n\
+      \    select name into :customer_name from customers where id = :customer_id;\n\
+      end\n```\nField initialize (e.g., for a 'name' field):\n```\ninitialize() =\n\
+      begin\n    self.ForegroundColor = 'blue';\nend\n```\nThe frame initialize can\
+      \ have parameters and declare variables, while the field initialize typically\
+      \ sets field properties."
+  - question: How to handle global variables in the Actian 4GL OpenROAD Initialize Statement?
+    answer: "Here's how to handle global variables:\n```\ninitialize() =\ndeclare\n\
+      \    local_var = integer;\nenddeclare\nbegin\n    if global_user_class is null\
+      \ then\n        global_user_class = create UserClass();\n    endif;\n    local_var\
+      \ = global_user_class.GetValue();\nend\n```\nThis example shows how to safely\
+      \ initialize a global variable that references a user class."
+  - question: Write code to demonstrate error handling in an Actian 4GL OpenROAD Initialize
+      Statement.
+    answer: "Here's an example of error handling in an initialize statement:\n```\n\
+      initialize() =\ndeclare\n    error_code = integer;\nenddeclare\nbegin\n    callproc\
+      \ initialize_data();\n    if error_code != 0 then\n        message 'Initialization\
+      \ failed. Error code: ' || char(error_code);\n    endif;\nend\n\nprocedure initialize_data()\
+      \ =\nbegin\n    /* Initialization logic here */\n    if /* some error condition\
+      \ */ then\n        error_code = 1;\n    endif;\nend\n```\nThis example shows how\
+      \ to handle errors during initialization."
+  - question: How to use the Actian 4GL OpenROAD Initialize Statement to set up a dynamic
+      array and populate it?
+    answer: "Here's how to set up and populate a dynamic array:\n```\ninitialize(max_items\
+      \ = integer default 10) =\ndeclare\n    items = array of ITEM;\n    i = integer;\n\
+      enddeclare\nbegin\n    for i = 1 to max_items do\n        items[i].id = i;\n \
+      \       items[i].name = 'Item ' || char(i);\n        items[i].price = i * 10.00;\n\
+      \    endfor;\nend\n```\nThis initialize statement sets up a dynamic array of ITEM\
+      \ objects and populates it based on a parameter."

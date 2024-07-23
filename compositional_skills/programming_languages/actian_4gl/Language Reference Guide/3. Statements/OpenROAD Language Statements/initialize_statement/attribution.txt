@@ -1,0 +1,5 @@
+Title: OpenROAD Actian 4GL Initialize Statement
+Author: Actian Corporation
+Source: "https://docs.actian.com/openroad/6.2/index.html#page/Welcome%2FOpenROAD_6.2_Guides.htm%23"
+
+The OpenROAD knowledge content is based on the official OpenROAD documentation provided by Actian Corporation. The content is used for educational purposes and to enhance the knowledge base of the InstructLab taxonomy.
