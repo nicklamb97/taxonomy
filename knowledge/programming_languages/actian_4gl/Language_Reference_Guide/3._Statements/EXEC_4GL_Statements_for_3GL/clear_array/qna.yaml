@@ -3,6 +3,7 @@ task_description: >-
   Explain the usage and the syntax of the Clear Array statement in OpenROAD for
   clearing arrays.
 created_by: connorgilchrist99
+domain: sql_actian_4gl
 seed_examples:
   - question: What is the purpose of the Clear Array statement in OpenROAD?
     answer: >
