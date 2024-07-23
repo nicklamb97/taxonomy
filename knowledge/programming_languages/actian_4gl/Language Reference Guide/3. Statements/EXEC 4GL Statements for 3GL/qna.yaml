@@ -1,39 +1,54 @@
 version: 2
-task_description: Explain the usage of EXEC 4GL statements in an Embedded SQL for C (ESQL/C) program to pass objects and arrays between 3GL and 4GL routines.
+task_description: >-
+  Explain the usage of EXEC 4GL statements in an Embedded SQL for C (ESQL/C)
+  program to pass objects and arrays between 3GL and 4GL routines.
 created_by: connorgilchrist99
 domain: sql_actian_4gl
 seed_examples:
   - question: What is the purpose of EXEC 4GL statements in OpenROAD?
-    answer: |
-      EXEC 4GL statements in OpenROAD are used in Embedded SQL for C (ESQL/C) programs to pass objects and arrays between 3GL and 4GL routines. They allow structured data to be handled and transferred between the two environments.
-
+    answer: >
+      EXEC 4GL statements in OpenROAD are used in Embedded SQL for C (ESQL/C)
+      programs to pass objects and arrays between 3GL and 4GL routines. They
+      allow structured data to be handled and transferred between the two
+      environments.
   - question: What is the general syntax of an EXEC 4GL statement?
-    answer: |
+    answer: >
       The general syntax of an EXEC 4GL statement is:
+
       ```
+
       exec 4gl 4gl_statement [terminator]
+
       ```
+
       - `4gl_statement`: Specifies one of the 4GL statements.
-      - `terminator`: Specifies a termination character for the statement, typically a semi-colon (;).
 
+      - `terminator`: Specifies a termination character for the statement,
+      typically a semi-colon (;).
   - question: Where must the EXEC 4GL keywords be placed in an ESQL/C program?
-    answer: |
-      The EXEC 4GL keywords must be placed before each 4GL statement in an Embedded SQL for C (ESQL/C) program. This syntax is similar to that for Embedded SQL and SQL/Forms.
-
+    answer: >
+      The EXEC 4GL keywords must be placed before each 4GL statement in an
+      Embedded SQL for C (ESQL/C) program. This syntax is similar to that for
+      Embedded SQL and SQL/Forms.
   - question: Can EXEC 4GL statements be used outside of Embedded SQL programs?
-    answer: |
-      No, EXEC 4GL statements can only be used in Embedded SQL programs that are designed to pass objects and arrays between 3GL and 4GL routines.
-
-  - question: How is structured data passed to 3GL in the context of EXEC 4GL statements?
-    answer: |
-      Structured data is passed to 3GL as a handle, which is referenced in the EXEC 4GL statements whenever an object or array needs to be indicated. This handle is always a 4-byte integer.
-
-  - question: What should you consult for more information about using handles and passing objects and arrays between 4GL and 3GL routines?
-    answer: |
-      For more information about using handles and passing objects and arrays between 4GL and 3GL routines, you should consult the Programming Guide.
-
+    answer: >
+      No, EXEC 4GL statements can only be used in Embedded SQL programs that are
+      designed to pass objects and arrays between 3GL and 4GL routines.
+  - question: >-
+      How is structured data passed to 3GL in the context of EXEC 4GL
+      statements?
+    answer: >
+      Structured data is passed to 3GL as a handle, which is referenced in the
+      EXEC 4GL statements whenever an object or array needs to be indicated.
+      This handle is always a 4-byte integer.
+  - question: >-
+      What should you consult for more information about using handles and
+      passing objects and arrays between 4GL and 3GL routines?
+    answer: >
+      For more information about using handles and passing objects and arrays
+      between 4GL and 3GL routines, you should consult the Programming Guide.
 document:
-  repo: https://github.com/nicklamb97/instructlab-data.git
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: ecf99cd
   patterns:
     - exec_4gl_statements_for_3gl.md
