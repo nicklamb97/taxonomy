@@ -1,0 +1,268 @@
+version: 3
+task_description: Use Procedure Handles (ProcHandle Objects) in OpenROAD Actian 4GL
+created_by: willsjames
+seed_examples:
+  - question: How can I create a ProcHandle object for a global procedure in Actian 4GL OpenROAD?
+    answer: |
+      To create a ProcHandle object for a global procedure:
+      ```
+      declare
+          global_proc_handle = ProcHandle;
+      enddeclare
+      -- Assume 'my_global_proc' is a global procedure
+      global_proc_handle = GlobalScope.GetProcHandle(name = 'my_global_proc');
+      ```
+      This creates a ProcHandle for 'my_global_proc' in the global scope.
+
+  - question: How do I use a ProcHandle object to call a procedure in Actian 4GL?
+    answer: |
+      To call a procedure using a ProcHandle object:
+      ```
+      declare
+          my_proc_handle = ProcHandle;
+      enddeclare
+      my_proc_handle = CurScriptScope.GetProcHandle(name = 'my_procedure');
+      call my_proc_handle.Call();
+      ```
+      If the procedure takes parameters, you can pass them in the Call() method.
+
+  - question: Can I pass parameters to a procedure when using a ProcHandle in Actian 4GL?
+    answer: |
+      Yes, you can pass parameters when calling a procedure using a ProcHandle:
+      ```
+      declare
+          proc_handle = ProcHandle;
+          param1 = string;
+          param2 = integer;
+      enddeclare
+      proc_handle = CurScriptScope.GetProcHandle(name = 'my_proc_with_params');
+      param1 = 'Hello';
+      param2 = 42;
+      call proc_handle.Call(param1, param2);
+      ```
+      Pass the parameters in the same order as defined in the procedure.
+
+  - question: How do I create an array of ProcHandle objects in Actian 4GL?
+    answer: |
+      To create an array of ProcHandle objects:
+      ```
+      declare
+          proc_handle_array = array of ProcHandle;
+          i = integer;
+      enddeclare
+      for i = 1 to 5
+          proc_handle_array[i] = CurScriptScope.GetProcHandle(name = 'proc_' + i);
+      endfor;
+      ```
+      This creates an array of 5 ProcHandle objects, assuming procedures named 'proc_1' through 'proc_5' exist.
+
+  - question: How can I use ProcHandle objects for cleanup procedures in Actian 4GL?
+    answer: |
+      To use ProcHandle objects for cleanup procedures:
+      ```
+      declare
+          cleanup_handles = array of ProcHandle;
+          i = integer;
+      enddeclare
+      -- In initialize block
+      cleanup_handles[1] = CurScriptScope.GetProcHandle(name = 'cleanup_proc_1');
+      cleanup_handles[2] = CurScriptScope.GetProcHandle(name = 'cleanup_proc_2');
+      -- In cleanup block
+      for i = 1 to 2
+          call cleanup_handles[i].Call();
+      endfor;
+      ```
+      This allows you to define and execute multiple cleanup procedures.
+
+  - question: How do I pass a ProcHandle as a parameter to another procedure in Actian 4GL?
+    answer: |
+      To pass a ProcHandle as a parameter:
+      ```
+      declare
+          proc_handle = ProcHandle;
+      enddeclare
+      proc_handle = CurScriptScope.GetProcHandle(name = 'my_procedure');
+      call execute_procedure(proc_handle);
+      
+      procedure execute_procedure(handle = ProcHandle) =
+      begin
+          call handle.Call();
+      end;
+      ```
+      This allows you to pass procedure handles between different parts of your code.
+
+  - question: Can I use ProcHandle objects with event handlers in Actian 4GL?
+    answer: |
+      Yes, you can use ProcHandle objects with event handlers:
+      ```
+      declare
+          button_click_handler = ProcHandle;
+      enddeclare
+      button_click_handler = CurScriptScope.GetProcHandle(name = 'handle_button_click');
+      call SetButtonClickEvent(button_click_handler);
+      
+      procedure handle_button_click() =
+      begin
+          -- Handle button click event
+      end;
+      ```
+      This allows you to dynamically set event handlers using ProcHandle objects.
+
+  - question: How do I compare two ProcHandle objects in Actian 4GL?
+    answer: |
+      To compare two ProcHandle objects:
+      ```
+      declare
+          handle1 = ProcHandle;
+          handle2 = ProcHandle;
+      enddeclare
+      handle1 = CurScriptScope.GetProcHandle(name = 'proc1');
+      handle2 = CurScriptScope.GetProcHandle(name = 'proc2');
+      if handle1 = handle2 then
+          -- Handles refer to the same procedure
+      endif;
+      ```
+      ProcHandle objects can be compared using the equality operator.
+
+  - question: How can I use ProcHandle objects to implement a simple callback system in Actian 4GL?
+    answer: |
+      To implement a callback system using ProcHandle objects:
+      ```
+      declare
+          callback_handle = ProcHandle;
+      enddeclare
+      procedure set_callback(handle = ProcHandle) =
+      begin
+          callback_handle = handle;
+      end;
+      procedure trigger_callback() =
+      begin
+          if callback_handle is not null then
+              call callback_handle.Call();
+          endif;
+      end;
+      ```
+      This allows you to set and trigger callbacks dynamically.
+
+  - question: How do I check if a ProcHandle object is null in Actian 4GL?
+    answer: |
+      To check if a ProcHandle object is null:
+      ```
+      declare
+          proc_handle = ProcHandle;
+      enddeclare
+      if proc_handle is null then
+          -- Handle is null, hasn't been assigned a procedure
+      else
+          -- Handle is valid, can be used to call the procedure
+          call proc_handle.Call();
+      endif;
+      ```
+      This helps prevent errors when working with uninitialized ProcHandle objects.
+
+  - question: Can I use ProcHandle objects with local procedures in different scopes in Actian 4GL?
+    answer: |
+      Yes, you can use ProcHandle objects with local procedures in different scopes:
+      ```
+      declare
+          outer_handle = ProcHandle;
+      enddeclare
+      outer_handle = CurScriptScope.GetProcHandle(name = 'outer_proc');
+      
+      procedure outer_proc() =
+      declare
+          inner_handle = ProcHandle;
+      begin
+          inner_handle = CurScriptScope.GetProcHandle(name = 'inner_proc');
+          call inner_handle.Call();
+          
+          procedure inner_proc() =
+          begin
+              -- Inner procedure logic
+          end;
+      end;
+      ```
+      This demonstrates using ProcHandle objects across different procedure scopes.
+
+  - question: How can I use ProcHandle objects to implement a simple plugin system in Actian 4GL?
+    answer: |
+      To implement a simple plugin system using ProcHandle objects:
+      ```
+      declare
+          plugins = array of ProcHandle;
+          i = integer;
+      enddeclare
+      procedure register_plugin(plugin_handle = ProcHandle) =
+      begin
+          plugins[plugins.count() + 1] = plugin_handle;
+      end;
+      procedure execute_plugins() =
+      begin
+          for i = 1 to plugins.count()
+              call plugins[i].Call();
+          endfor;
+      end;
+      ```
+      This allows you to register and execute multiple "plugin" procedures dynamically.
+
+  - question: How do I use ProcHandle objects with procedures that return values in Actian 4GL?
+    answer: |
+      To use ProcHandle objects with procedures that return values:
+      ```
+      declare
+          func_handle = ProcHandle;
+          result = integer;
+      enddeclare
+      func_handle = CurScriptScope.GetProcHandle(name = 'calculate_sum');
+      result = func_handle.Call(10, 20);
+      
+      procedure calculate_sum(a = integer, b = integer) returning integer =
+      begin
+          return a + b;
+      end;
+      ```
+      The Call() method returns the value from the procedure when used with functions.
+
+  - question: Can I use ProcHandle objects to implement method chaining in Actian 4GL?
+    answer: |
+      While true method chaining isn't native to 4GL, you can simulate it with ProcHandle objects:
+      ```
+      declare
+          chain_handle = ProcHandle;
+      enddeclare
+      chain_handle = CurScriptScope.GetProcHandle(name = 'start_chain');
+      call chain_handle.Call().GetProcHandle(name = 'next_step').Call().GetProcHandle(name = 'final_step').Call();
+      
+      procedure start_chain() returning ProcHandle =
+      begin
+          -- First step logic
+          return CurScriptScope;
+      end;
+      ```
+      This simulates method chaining by returning the current scope after each call.
+
+  - question: How can I use ProcHandle objects to implement a simple state machine in Actian 4GL?
+    answer: |
+      To implement a simple state machine using ProcHandle objects:
+      ```
+      declare
+          current_state = ProcHandle;
+          state_a = ProcHandle;
+          state_b = ProcHandle;
+      enddeclare
+      state_a = CurScriptScope.GetProcHandle(name = 'handle_state_a');
+      state_b = CurScriptScope.GetProcHandle(name = 'handle_state_b');
+      current_state = state_a;
+      
+      procedure run_state_machine() =
+      begin
+          call current_state.Call();
+      end;
+      
+      procedure handle_state_a() =
+      begin
+          -- State A logic
+          current_state = state_b;
+      end;
+      ```
+      This allows you to implement state transitions using ProcHandle objects.
