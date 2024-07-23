@@ -1,0 +1,61 @@
+version: 2
+task_description: Write Actian 4GL OpenROAD Assignment Statements
+created_by: willsjames
+seed_examples:
+  - question: How do you assign a string value to a variable in Actian 4GL OpenROAD?
+    answer: "To assign a string value to a variable:\n```\nemployee_name = 'John Doe';\n```"
+
+  - question: What happens if you assign a string to a variable that's shorter than the string?
+    answer: "If you assign a string to a variable that's shorter than the string, OpenROAD truncates the string.
+    For example:\n```\ndeclare short_var = char(5);\nshort_var = 'Too long';\n# Result: short_var = 'Too l'\n```"
+
+  - question: How do you assign a value to an individual attribute of a reference variable?
+    answer: "To assign a value to an individual attribute of a reference variable:
+        ```
+        newcustomer.Name = 'Smith';
+        ```"
+
+  - question: How can you assign a value to an individual element in an array?
+    answer: "To assign a value to an individual element in an array:\n```\nclient[3].Address = '123 Main St';\n```"
+
+  - question: What's the syntax for assigning null to a reference variable?
+    answer: "To assign null to a reference variable:\n```\ncustomer_ref = null;\n```"
+
+  - question: How do you assign one reference variable to another?
+    answer: "To assign one reference variable to another:\n```\nnew_customer = existing_customer;\n```"
+
+  - question: What's the rule for assigning reference variables of different classes?
+    answer: "When assigning reference variables, the system class on the right side must be the same as, or a subclass
+    of, the variable on the left. For example:\n```\nActiveField_var = EntryField_var;\n```"
+
+  - question: How do you redirect an array variable to point to another array?
+    answer: "To redirect an array variable to point to another array:\n```\ncurrent_clients = old_clients;\n```"
+
+  - question: Can you assign a row reference from one array to another array? How?
+    answer: "Yes, you can assign a row reference from one array to another. For example:
+        ```
+        new_array[5] = old_array[3];
+        ```"
+
+  - question: How do you assign values to multiple columns in a specific row of a dynamic array?
+    answer: "To assign values to multiple columns in a specific row of a dynamic array:\n```\nchild[2].name = 'Emma';
+    \nchild[2].age = 7;\n```"
+
+  - question: What's the syntax for assigning values to the current row of a table field?
+    answer: "To assign values to the current row of a table field:\n```\nemployee[].name = 'Alice';\nemployee[].salary
+    = 50000;\n```"
+
+  - question: How do you assign a value to a numeric variable in Actian 4GL OpenROAD?
+    answer: "To assign a value to a numeric variable:\n```\ntotal_amount = 1234.56;\n```"
+
+  - question: What happens if you assign a value outside the allowable range for a data type?
+    answer: "If you assign a value outside the allowable range for a data type, OpenROAD will issue an error. Always
+    ensure the assigned value is within the valid range for the variable's data type."
+
+  - question: How can you assign the result of an expression to a variable?
+    answer: "To assign the result of an expression to a variable:\n```\ntotal_cost = base_price + tax_amount +
+    shipping_fee;\n```"
+
+  - question: What's the effect of assigning one reference variable to another on the underlying object?
+    answer: "When you assign one reference variable to another, both variables point to the same object. Changes made
+    through either variable will affect the same underlying object and be visible through both variables."
