@@ -1,173 +1,93 @@
-version: 3
+version: 2
+task_description: >-
+  Explain the usage and the syntax of the Clear Array statement in OpenROAD for
+  clearing arrays.
 created_by: connorgilchrist99
-domain: OpenROAD Programming
-document_outline: >-
-  Overview of the Clear Array statement in OpenROAD, including syntax, parameter
-  details, and usage examples.
 seed_examples:
-  - context: >-
-      The Clear Array statement in OpenROAD is used to remove all rows from a
-      specified array. This effectively resets the array to an empty state. The
-      statement is similar to the clear method in the ArrayObject class.
-    questions_and_answers:
-      - question: What does the Clear Array statement do
-        answer: >-
-          The Clear Array statement removes all rows from the specified array,
-          effectively clearing its contents.
-      - question: What is the syntax for the Clear Array statement
-        answer: The syntax is `exec 4gl clear array arr`
-      - question: What is the parameter `arr` in the Clear Array statement
-        answer: >-
-          The parameter `arr` specifies the handle of the array to clear. It is
-          a 4-byte integer.
-      - question: How does the Clear Array statement affect the specified array
-        answer: 'It removes all rows from the specified array, leaving it empty.'
-      - question: >-
-          Is the Clear Array statement similar to any method in the ArrayObject
-          class
-        answer: >-
-          Yes, it is similar to the Clear method used with the ArrayObject
-          class.
-      - question: What type of value does the `arr` parameter represent
-        answer: >-
-          The `arr` parameter represents the handle of the array, which is a
-          4-byte integer.
-      - question: Can you use the Clear Array statement to clear a non-existent array
-        answer: >-
-          No, the statement can only clear arrays that exist and have been
-          previously defined.
-      - question: How does clearing an array affect its memory usage
-        answer: >-
-          Clearing an array removes all its rows, which can free up the memory
-          previously allocated for those rows.
-      - question: What should you ensure before using the Clear Array statement
-        answer: >-
-          Ensure that the array handle provided is correct and that the array
-          exists to avoid runtime errors.
-      - question: >-
-          Can you specify multiple arrays to clear in a single Clear Array
-          statement
-        answer: 'No, the Clear Array statement can only clear one array at a time.'
-      - question: >-
-          What happens if the Clear Array statement is executed on an array with
-          no rows
-        answer: >-
-          Executing the statement on an array with no rows has no effect; the
-          array remains empty.
-      - question: How would you clear an array named `employeeArray`
-        answer: You would use the statement `exec 4gl clear array employeeArray`
-      - question: >-
-          Can you use the Clear Array statement to clear elements from a
-          specific index
-        answer: >-
-          No, the Clear Array statement clears all rows from the array, not
-          specific elements or indices.
-      - question: 'After clearing an array, how can you confirm that it is empty'
-        answer: >-
-          You can check the array's length or row count to confirm that it has
-          been cleared.
-  - context: >-
-      When working with arrays in OpenROAD, it's often necessary to reset an
-      array to an empty state. The Clear Array statement is designed for this
-      purpose, ensuring that all rows in the array are removed.
-    questions_and_answers:
-      - question: Why would you use the Clear Array statement in OpenROAD
-        answer: >-
-          You would use the Clear Array statement to reset an array to an empty
-          state by removing all its rows.
-      - question: >-
-          What effect does the Clear Array statement have on the rows of an
-          array
-        answer: 'It removes all rows, leaving the array empty.'
-      - question: Can the Clear Array statement be used on any array in OpenROAD
-        answer: >-
-          Yes, as long as the array handle is correctly specified and the array
-          exists.
-      - question: >-
-          Is there a difference between using the Clear Array statement and
-          manually removing rows from an array
-        answer: >-
-          Yes, the Clear Array statement provides a single command to remove all
-          rows, whereas manually removing rows requires iterative commands.
-      - question: How does the Clear Array statement ensure the array is empty
-        answer: 'By removing all rows, it ensures the array contains no data.'
-  - context: >-
-      In OpenROAD programming, clearing an array is a common task to ensure no
-      residual data remains. The Clear Array statement facilitates this by
-      providing a simple command to empty the array.
-    questions_and_answers:
-      - question: What is the purpose of the Clear Array statement in OpenROAD
-        answer: >-
-          Its purpose is to clear all rows from a specified array, resetting it
-          to an empty state.
-      - question: >-
-          What happens to the array handle after executing the Clear Array
-          statement
-        answer: 'The array handle remains valid, but the array itself is empty.'
-      - question: Can the Clear Array statement be used within a transaction in OpenROAD
-        answer: >-
-          Yes, it can be used within a transaction to ensure the array is
-          cleared as part of the transaction.
-      - question: Does the Clear Array statement free the memory allocated to the array
-        answer: >-
-          It can help free memory by removing rows, but the array handle itself
-          still exists.
-      - question: >-
-          How is the Clear Array statement similar to the Clear method in the
-          ArrayObject class
-        answer: >-
-          Both are used to remove all rows from an array, effectively clearing
-          its contents.
-  - context: >-
-      Clearing arrays in OpenROAD ensures that data is correctly managed and
-      that arrays do not retain unwanted rows. The Clear Array statement is a
-      crucial tool for this purpose.
-    questions_and_answers:
-      - question: >-
-          What must you verify about an array before using the Clear Array
-          statement
-        answer: >-
-          You must verify that the array handle is correct and that the array
-          exists.
-      - question: What is the effect of the Clear Array statement on an empty array
-        answer: It has no effect; the array remains empty.
-      - question: How does the Clear Array statement help in memory management
-        answer: >-
-          By clearing rows, it can help free up memory previously used by the
-          array.
-      - question: >-
-          Is it possible to use the Clear Array statement to remove only certain
-          rows
-        answer: 'No, it removes all rows from the array.'
-      - question: >-
-          What is a key difference between the Clear Array statement and other
-          methods of clearing data
-        answer: >-
-          The Clear Array statement is a single command that clears all rows at
-          once, whereas other methods may require iterative commands.
-  - context: >-
-      The Clear Array statement in OpenROAD is essential for resetting arrays
-      quickly and efficiently. It is designed to remove all rows from a
-      specified array, similar to the Clear method in the ArrayObject class.
-    questions_and_answers:
-      - question: Why is the Clear Array statement important in OpenROAD programming
-        answer: >-
-          It allows for efficient resetting of arrays by removing all rows in a
-          single command.
-      - question: What precaution should you take before using the Clear Array statement
-        answer: >-
-          Ensure that the array handle is correct and that the array exists to
-          prevent errors.
-      - question: How does the Clear Array statement impact the data within the array
-        answer: 'It removes all rows, effectively clearing all data from the array.'
-      - question: Can the Clear Array statement be undone
-        answer: >-
-          No, once executed, the rows are removed and cannot be recovered
-          through the statement.
-      - question: What is the role of the `arr` parameter in the Clear Array statement
-        answer: It specifies the handle of the array to be cleared.
+  - question: What is the purpose of the Clear Array statement in OpenROAD?
+    answer: >
+      The purpose of the Clear Array statement in OpenROAD is to remove all the
+      rows from a specified array, effectively clearing its contents.
+  - question: What is the syntax for the Clear Array statement in OpenROAD?
+    answer: >
+      The syntax for the Clear Array statement in OpenROAD is: ``` exec 4gl
+      clear array arr; ``` - `arr`: Specifies the handle of the array to clear.
+      It is a 4-byte integer.
+  - question: >-
+      How is the Clear Array statement similar to the Clear method used with the
+      ArrayObject class?
+    answer: >
+      The Clear Array statement is similar to the Clear method used with the
+      ArrayObject class because both are used to remove all rows from a
+      specified array, effectively clearing its contents.
+  - question: What parameter does the Clear Array statement require?
+    answer: >
+      The Clear Array statement requires the `arr` parameter, which specifies
+      the handle of the array to clear. This handle is a 4-byte integer.
+  - question: >-
+      Does the Clear Array statement remove specific rows or all rows from the
+      array?
+    answer: >
+      The Clear Array statement removes all rows from the specified array,
+      effectively clearing the entire array.
+  - question: Can you use the Clear Array statement on a non-existent array?
+    answer: >
+      No, the Clear Array statement can only be used on arrays that exist and
+      have been previously defined.
+  - question: >-
+      What happens if you execute the Clear Array statement on an already empty
+      array?
+    answer: >
+      If you execute the Clear Array statement on an already empty array, it has
+      no effect; the array remains empty.
+  - question: How do you clear an array named `dataArray` in OpenROAD?
+    answer: >
+      To clear an array named `dataArray`, you would use the statement: ``` exec
+      4gl clear array dataArray; ```
+  - question: >-
+      What is a key difference between the Clear Array statement and manually
+      removing rows from an array?
+    answer: >
+      The key difference is that the Clear Array statement removes all rows from
+      the array in a single command, whereas manually removing rows requires
+      iterative commands.
+  - question: What should you ensure before using the Clear Array statement?
+    answer: >
+      Before using the Clear Array statement, you should ensure that the array
+      handle provided is correct and that the array exists to avoid runtime
+      errors.
+  - question: How does the Clear Array statement affect memory usage of the array?
+    answer: >
+      The Clear Array statement removes all rows from the array, which can free
+      up the memory previously allocated for those rows.
+  - question: >-
+      Is it possible to clear multiple arrays at once with a single Clear Array
+      statement?
+    answer: |
+      No, the Clear Array statement can only clear one array at a time.
+  - question: Can the Clear Array statement be used within a transaction in OpenROAD?
+    answer: >
+      Yes, the Clear Array statement can be used within a transaction to ensure
+      the array is cleared as part of the transaction.
+  - question: >-
+      How can you confirm that an array has been successfully cleared after
+      using the Clear Array statement?
+    answer: >
+      You can confirm that an array has been successfully cleared by checking
+      the array's length or row count to ensure it has been reset to zero.
+  - question: Is the Clear Array statement undoable once executed?
+    answer: >
+      No, once the Clear Array statement is executed, the rows are removed and
+      cannot be recovered through the statement.
+  - question: >-
+      Why is the Clear Array statement important for managing data in OpenROAD
+      applications?
+    answer: >
+      The Clear Array statement is important for managing data in OpenROAD
+      applications because it provides an efficient way to reset arrays,
+      ensuring that they do not retain unwanted rows or residual data.
 document:
-  repo: https://github.com/nicklamb97/instructlab-data.git
+  repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: 4731aa3
   patterns:
     - clear_array_statement.md
