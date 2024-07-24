@@ -88,9 +88,9 @@ document:
   patterns:
     - clear_array_statement.md
 document_outline: >-
-  Overview of the Clear Array statement in OpenROAD, including its definition, 
-  syntax, parameter details, usage examples, comparison with ArrayObject Clear method, 
-  and best practices for implementation. The document covers the statement's purpose 
-  in removing all rows from a specified array, its syntax structure, the importance 
-  of correct array handling, memory implications, and practical usage scenarios in 
+  Overview of the Clear Array statement in OpenROAD, including its definition,
+  syntax, parameter details, usage examples, comparison with ArrayObject Clear method,
+  and best practices for implementation. The document covers the statement's purpose
+  in removing all rows from a specified array, its syntax structure, the importance
+  of correct array handling, memory implications, and practical usage scenarios in
   OpenROAD programming.
