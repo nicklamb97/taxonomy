@@ -10,21 +10,21 @@ seed_examples:
       specified array. This effectively resets the array to an empty state. The
       statement is similar to the clear method in the ArrayObject class."
     questions_and_answers:
-      - question: >
+      - question: |
           "What does the Clear Array statement do"
         answer: |
           "The Clear Array statement removes all rows from the specified array,
           effectively clearing its contents."
-      - question: >
+      - question: |
           "What is the syntax for the Clear Array statement"
         answer: |
           "The syntax is `exec 4gl clear array arr`"
-      - question: >
+      - question: |
           "What is the parameter `arr` in the Clear Array statement"
         answer: |
           "The parameter `arr` specifies the handle of the array to clear. It is
           a 4-byte integer."
-      - question: >
+      - question: |
           "How does the Clear Array statement affect the specified array"
         answer: |
           "It removes all rows from the specified array, leaving it empty."
@@ -34,22 +34,22 @@ seed_examples:
         answer: |
           "Yes, it is similar to the Clear method used with the ArrayObject
           class."
-      - question: >
+      - question: |
           "What type of value does the `arr` parameter represent"
         answer: |
           "The `arr` parameter represents the handle of the array, which is a
           4-byte integer."
-      - question: >
+      - question: |
           "Can you use the Clear Array statement to clear a non-existent array"
         answer: |
           "No, the statement can only clear arrays that exist and have been
           previously defined."
-      - question: >
+      - question: |
           "How does clearing an array affect its memory usage"
         answer: |
           "Clearing an array removes all its rows, which can free up the memory
           previously allocated for those rows."
-      - question: >
+      - question: |
           "What should you ensure before using the Clear Array statement"
         answer: |
           "Ensure that the array handle provided is correct and that the array
@@ -65,7 +65,7 @@ seed_examples:
         answer: |
           "Executing the statement on an array with no rows has no effect; the
           array remains empty."
-      - question: >
+      - question: |
           "How would you clear an array named `employeeArray`"
         answer: |
           "You would use the statement `exec 4gl clear array employeeArray`"
@@ -75,12 +75,12 @@ seed_examples:
         answer: |
           "No, the Clear Array statement clears all rows from the array, not
           specific elements or indices."
-      - question: >
+      - question: |
           "After clearing an array, how can you confirm that it is empty"
         answer: |
           "You can check the length of an array or its row count to confirm that
           it has been cleared."
-      - question: >
+      - question: |
           "Why would you use the Clear Array statement in OpenROAD"
         answer: |
           "You would use the Clear Array statement to reset an array to an empty
@@ -90,7 +90,7 @@ seed_examples:
           array"
         answer: |
           "It removes all rows, leaving the array empty."
-      - question: >
+      - question: |
           "Can the Clear Array statement be used on any array in OpenROAD"
         answer: |
           "Yes, as long as the array handle is correctly specified and the array
@@ -101,11 +101,11 @@ seed_examples:
         answer: |
           "Yes, the Clear Array statement provides a single command to remove
           all rows, whereas manually removing rows requires iterative commands."
-      - question: >
+      - question: |
           "How does the Clear Array statement ensure the array is empty"
         answer: |
           "By removing all rows, it ensures the array contains no data."
-      - question: >
+      - question: |
           "What is the purpose of the Clear Array statement in OpenROAD"
         answer: |
           "Its purpose is to clear all rows from a specified array, resetting it
@@ -116,12 +116,14 @@ seed_examples:
         answer: |
           "The array handle remains valid, but the array itself is empty."
       - question: >
-          "Can the Clear Array statement be used within a transaction in OpenROAD"
+          "Can the Clear Array statement be used within a transaction in
+          OpenROAD"
         answer: |
           "Yes, it can be used within a transaction to ensure the array is
           cleared as part of the transaction."
       - question: >
-          "Does the Clear Array statement free the memory allocated to the array"
+          "Does the Clear Array statement free the memory allocated to the
+          array"
         answer: |
           "It can help free memory by removing rows, but the array handle itself
           still exists."
@@ -137,11 +139,11 @@ seed_examples:
         answer: |
           "You must verify that the array handle is correct and that the array
           exists."
-      - question: >
+      - question: |
           "What is the effect of the Clear Array statement on an empty array"
         answer: |
           "It has no effect; the array remains empty."
-      - question: >
+      - question: |
           "How does the Clear Array statement help in memory management"
         answer: |
           "By clearing rows, it can help free up memory previously used by the
@@ -157,26 +159,27 @@ seed_examples:
         answer: |
           "The Clear Array statement is a single command that clears all rows at
           once, whereas other methods may require iterative commands."
-      - question: >
+      - question: |
           "Why is the Clear Array statement important in OpenROAD programming"
         answer: |
           "It allows for efficient resetting of arrays by removing all rows in a
           single command."
       - question: >
-          "What precaution should you take before using the Clear Array statement"
+          "What precaution should you take before using the Clear Array
+          statement"
         answer: |
           "Ensure that the array handle is correct and that the array exists to
           prevent errors."
-      - question: >
+      - question: |
           "How does the Clear Array statement impact the data within the array"
         answer: |
           "It removes all rows, effectively clearing all data from the array."
-      - question: >
+      - question: |
           "Can the Clear Array statement be undone"
         answer: |
           "No, once executed, the rows are removed and cannot be recovered
           through the statement."
-      - question: >
+      - question: |
           "What is the role of the `arr` parameter in the Clear Array statement"
         answer: |
           "It specifies the handle of the array to be cleared."
