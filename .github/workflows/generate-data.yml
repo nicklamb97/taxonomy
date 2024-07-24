@@ -1,13 +1,17 @@
 name: Generate Synthetic Data for InstructLab
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Lint compositional_skills and knowledge"]
+    types:
+      - completed
     branches:
       - main
 
 jobs:
   Generate:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
     - name: Checkout repository
@@ -17,8 +21,8 @@ jobs:
       
     - name: Get commit message
       run: |
-        echo "📜 Retrieving commit message for SHA: ${{ github.sha }}"
-        COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
+        echo "📜 Retrieving commit message for SHA: ${{ github.event.workflow_run.head_sha }}"
+        COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.event.workflow_run.head_sha }})
         echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
         echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
@@ -69,7 +73,7 @@ jobs:
         git config --local user.name "Nick Lamb"
         git config --local user.email "nick.lamb@diegesis.co.uk"
         git fetch origin
-        TRIGGER_COMMIT="${{ github.sha }}"
+        TRIGGER_COMMIT="${{ github.event.workflow_run.head_sha }}"
         PREVIOUS_COMMIT=$(git rev-parse $TRIGGER_COMMIT^)
         echo "🔗 Trigger commit: $TRIGGER_COMMIT"
         echo "🔙 Previous commit: $PREVIOUS_COMMIT"
