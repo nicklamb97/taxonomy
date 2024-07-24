@@ -14,56 +14,56 @@ seed_examples:
       runtime errors. The statement can only clear one array at a time and does
       not affect arrays that do not exist or have not been previously defined.
     questions_and_answers:
-      question: |
-        What does the Clear Array statement do
-      answer: >
-        The Clear Array statement removes all rows from the specified array,
-        effectively clearing its contents.
-      question: |
-        What is the syntax for the Clear Array statement
-      answer: |
-        The syntax is `exec 4gl clear array arr`
-      question: |
-        What is the parameter `arr` in the Clear Array statement
-      answer: >
-        The parameter `arr` specifies the handle of the array to clear. It is
-        a 4-byte integer.
-      question: |
-        Can you use the Clear Array statement to clear a non-existent array
-      answer: >
-        No, the statement can only clear arrays that exist and have been
-        previously defined.
-      question: |
-        How does clearing an array affect its memory usage
-      answer: >
-        Clearing an array removes all its rows, which can free up the memory
-        previously allocated for those rows.
-      question: |
-        What should you ensure before using the Clear Array statement
-      answer: >
-        Ensure that the array handle provided is correct and that the array
-        exists to avoid runtime errors.
-      question: >
-        Can you specify multiple arrays to clear in a single Clear Array
-        statement
-      answer: |
-        No, the Clear Array statement can only clear one array at a time.
-      question: >
-        What happens if the Clear Array statement is executed on an array with
-        no rows
-      answer: >
-        Executing the statement on an array with no rows has no effect; the
-        array remains empty.
-      question: |
-        How would you clear an array named `employeeArray`
-      answer: |
-        You would use the statement `exec 4gl clear array employeeArray`
-      question: >
-        Can you use the Clear Array statement to clear elements from a
-        specific index
-      answer: >
-        No, the Clear Array statement clears all rows from the array, not
-        specific elements or indices.
+      - question: >
+          What does the Clear Array statement do
+        answer: >
+          The Clear Array statement removes all rows from the specified array,
+          effectively clearing its contents.
+      - question: >
+          What is the syntax for the Clear Array statement
+        answer: >
+          The syntax is `exec 4gl clear array arr`
+      - question: >
+          What is the parameter `arr` in the Clear Array statement
+        answer: >
+          The parameter `arr` specifies the handle of the array to clear. It is
+          a 4-byte integer.
+      - question: >
+          Can you use the Clear Array statement to clear a non-existent array
+        answer: >
+          No, the statement can only clear arrays that exist and have been
+          previously defined.
+      - question: >
+          How does clearing an array affect its memory usage
+        answer: >
+          Clearing an array removes all its rows, which can free up the memory
+          previously allocated for those rows.
+      - question: >
+          What should you ensure before using the Clear Array statement
+        answer: >
+          Ensure that the array handle provided is correct and that the array
+          exists to avoid runtime errors.
+      - question: >
+          Can you specify multiple arrays to clear in a single Clear Array
+          statement
+        answer: >
+          No, the Clear Array statement can only clear one array at a time.
+      - question: >
+          What happens if the Clear Array statement is executed on an array with
+          no rows
+        answer: >
+          Executing the statement on an array with no rows has no effect; the
+          array remains empty.
+      - question: >
+          How would you clear an array named `employeeArray`
+        answer: >
+          You would use the statement `exec 4gl clear array employeeArray`
+      - question: >
+          Can you use the Clear Array statement to clear elements from a
+          specific index
+        answer: >
+          No, the Clear Array statement clears all rows from the array, not
+          specific elements or indices.
 document:
   repo: 'https://github.com/nicklamb97/instructlab-data.git'
   commit: 4731aa3
