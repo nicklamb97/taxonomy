@@ -1,6 +1,6 @@
 version: 3
 created_by: connorgilchrist99
-domain: OpenROAD Programming
+domain: actian_4gl
 document_outline: >
   Overview of the Clear Array statement in OpenROAD, including syntax, parameter
   details, and usage examples.
