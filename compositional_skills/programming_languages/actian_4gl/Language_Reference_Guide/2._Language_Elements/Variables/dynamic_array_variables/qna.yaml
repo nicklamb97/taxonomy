@@ -12,7 +12,7 @@ seed_examples:
 
       This declares an empty array named 'emparray' that can hold objects of the Emp class or its subclasses."
   - question: >
-      "Write code to reference the title column of all rows in a dynamic array named movies in OpenROAD Actian 4GL
+      "Write some code to reference the title column of all rows in a dynamic array named movies in OpenROAD Actian 4GL
       Dynamic Array Variables."
     answer: |
       "To reference the title column of all rows in a dynamic array named movies in OpenROAD Actian 4GL Dynamic Array
