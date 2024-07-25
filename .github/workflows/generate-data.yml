@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  PYTHON_VERSION: '3.10'
+
 jobs:
   Generate:
     runs-on: ubuntu-latest
@@ -31,7 +34,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
       
     - name: Install dependencies
       run: |
@@ -100,9 +111,9 @@ jobs:
         cd "$GITHUB_WORKSPACE"
         echo "📍 Current directory: $(pwd)"
         echo "🔄 Running: ilab taxonomy diff"
-        ilab taxonomy diff || { echo "❌ ilab taxonomy diff failed. Exiting gracefully."; exit 0; }
+        ilab taxonomy diff || { echo "::error::❌ ilab taxonomy diff failed"; exit 1; }
         echo "🔄 Running: ilab data generate"
-        ilab data generate --output-dir ./generated || { echo "❌ ilab data generate failed. Exiting gracefully."; exit 0; }
+        ilab data generate --output-dir ./generated || { echo "::error::ilab data generate failed"; exit 1; }
         echo "✅ Data generation completed successfully"
 
     - name: No qna.yaml changes or model not downloaded
