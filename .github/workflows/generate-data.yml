@@ -38,7 +38,7 @@ jobs:
         echo "🔧 Installing required Python packages..."
         python -m pip install --upgrade pip
         pip install instructlab-schema
-        pip install instructlab==0.17.1 gitpython
+        pip install instructlab gitpython
         echo "✅ Dependencies installed successfully"
         pip list
         echo "📦 Above is the list of installed packages"
