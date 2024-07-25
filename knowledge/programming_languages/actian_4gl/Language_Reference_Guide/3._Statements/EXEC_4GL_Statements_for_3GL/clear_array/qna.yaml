@@ -9,7 +9,7 @@ seed_examples:
       an array without deleting the array itself.
 
     questions_and_answers:
-      - question: What does the Clear Array statement do?
+      - question: What does the Actian 4GL Clear Array statement do?
         answer: |
           The Clear Array statement removes all rows from the specified array,
           effectively clearing its contents.
