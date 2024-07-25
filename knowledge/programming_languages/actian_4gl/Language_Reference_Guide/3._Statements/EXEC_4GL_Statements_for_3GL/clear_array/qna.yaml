@@ -69,7 +69,7 @@ seed_examples:
         answer: |
           No, the Clear Array statement clears all rows from the array, not
           specific elements or indices.
-      - question: After clearing an array, how can you confirm that it is empty?
+      - question: After clearing an array, how can you confirm that it is empty in Actian 4GL for OpenROAD?
         answer: |
           You can check the length of an array or its row count to confirm that it
           has been cleared.
