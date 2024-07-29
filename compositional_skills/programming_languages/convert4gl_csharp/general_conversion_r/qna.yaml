@@ -1,4 +1,4 @@
-version: 2
+version: 3
 task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
 created_by: nicklamb97
 seed_examples:
@@ -397,8 +397,6 @@ seed_examples:
               }
           }
       }
-
-additional_examples:
   - question: "How would you convert this 4GL Select statement into C#? Respond only in code:
     SELECT department_id, department_name FROM departments WHERE location = 'New York';"
     answer: |
