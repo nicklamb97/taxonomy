@@ -1,4 +1,4 @@
-version: 2
+version: 3
 task_description: Learn about converting Actian 4GL INSERT statements for OpenROAD to C#.
 created_by: nicklamb97
 seed_examples:
@@ -144,7 +144,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO transactions (transaction_id, transaction_date, amount) VALUES (@transactionId, @transactionDate, @amount)",
+              "INSERT INTO transactions (transaction_id, transaction_date, amount) VALUES
+              (@transactionId, @transactionDate, @amount)",
               connection))
           {
               command.Parameters.AddWithValue("@transactionId", 123456);
@@ -161,7 +162,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO reviews (review_id, reviewer_name, review_date, rating) VALUES (@reviewId, @reviewerName, @reviewDate, @rating)",
+              "INSERT INTO reviews (review_id, reviewer_name, review_date, rating) VALUES
+              (@reviewId, @reviewerName, @reviewDate, @rating)",
               connection))
           {
               command.Parameters.AddWithValue("@reviewId", 1);
@@ -179,7 +181,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO subscriptions (subscription_id, user_id, start_date) VALUES (@subscriptionId, @userId, @startDate)",
+              "INSERT INTO subscriptions (subscription_id, user_id, start_date) VALUES
+              (@subscriptionId, @userId, @startDate)",
               connection))
           {
               command.Parameters.AddWithValue("@subscriptionId", 888);
@@ -230,7 +233,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO messages (message_id, sender_id, message_content) VALUES (@messageId, @senderId, @messageContent)",
+              "INSERT INTO messages (message_id, sender_id, message_content) VALUES
+              (@messageId, @senderId, @messageContent)",
               connection))
           {
               command.Parameters.AddWithValue("@messageId", 1024);
@@ -247,7 +251,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO appointments (appointment_id, user_id, appointment_date) VALUES (@appointmentId, @userId, @appointmentDate)",
+              "INSERT INTO appointments (appointment_id, user_id, appointment_date) VALUES
+              (@appointmentId, @userId, @appointmentDate)",
               connection))
           {
               command.Parameters.AddWithValue("@appointmentId", 3001);
@@ -281,7 +286,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES (@orderId, @customerId, @orderDate, @totalAmount)",
+              "INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES
+              (@orderId, @customerId, @orderDate, @totalAmount)",
               connection))
           {
               command.Parameters.AddWithValue("@orderId", 2023);
