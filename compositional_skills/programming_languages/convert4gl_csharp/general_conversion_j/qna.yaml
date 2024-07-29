@@ -1,5 +1,6 @@
-version: 2
-task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of an online bookstore management system.
+version: 3
+task_description: Learn about converting Actian 4GL code for OpenROAD to C# in the context of
+                  an online bookstore management system.
 created_by: nicklamb97
 seed_examples:
   - question: "How would you convert this 4GL Select statement to C#? Respond only in code:
@@ -35,7 +36,8 @@ seed_examples:
       {
           connection.Open();
           using (SqlCommand command = new SqlCommand(
-              "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (@customerId, @orderDate, @totalAmount)",
+              "INSERT INTO orders (customer_id, order_date, total_amount) VALUES
+              (@customerId, @orderDate, @totalAmount)",
               connection))
           {
               command.Parameters.AddWithValue("@customerId", 1001);
@@ -99,7 +101,8 @@ seed_examples:
                   }
 
                   using (SqlCommand command = new SqlCommand(
-                      "INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (@orderId, @bookId, @quantity, @price)",
+                      "INSERT INTO order_items (order_id, book_id, quantity, price) VALUES
+                      (@orderId, @bookId, @quantity, @price)",
                       connection, transaction))
                   {
                       command.Parameters.AddWithValue("@orderId", 10001);
