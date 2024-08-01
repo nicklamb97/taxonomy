@@ -410,7 +410,9 @@ IF;
             whereQuery3 += $" AND r.bar_status = '{status}'";
         }
 
-        string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes, r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, ''), r.bar_editcounter, 2 FROM {fromQuery3} {joinQuery3} WHERE {whereQuery3};";
+        string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes, r.bar_dayprice," +
+        "r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, ''), r.bar_editcounter, 2 FROM {fromQuery3}" + 
+        "{joinQuery3} WHERE {whereQuery3};";
         List<FooBarBO> fooBars = new List<FooBarBO>();
 
         try
