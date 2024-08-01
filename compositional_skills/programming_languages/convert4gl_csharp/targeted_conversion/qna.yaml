@@ -55,7 +55,6 @@ seed_examples:
 
     END;"
     answer: |
-    ```csharp
     // API Endpoint - GetObject
     [HttpGet("GetObject/{objectNo:int}/{status}")]
     public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
@@ -89,10 +88,8 @@ seed_examples:
         }
         return Ok(serviceResponse);
     }
-    ```
 
-  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
-    ```4gl
+  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD GetObject
     (
         object_no = INTEGER    NOT NULL;
@@ -127,10 +124,8 @@ seed_examples:
 
         COMMIT;
 
-    END;
-    ```
+    END;"
     answer: |
-    ```csharp
     // Get object SQL calls
     public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
     {
@@ -178,10 +173,8 @@ seed_examples:
 
         return objects;
     }
-    ```
 
-  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
-    ```4gl
+  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     SCP_GetFoo:
 
         /* Input */
@@ -219,10 +212,8 @@ seed_examples:
         ENDIF;
 
         /* Set the return TPO and report if empty list */
-        Result = Mapper.ToFooTPO( bo = l_bo );
-    ```
+        Result = Mapper.ToFooTPO( bo = l_bo );"
     answer: |
-    ```csharp
     // API Endpoint - GetFoo
     [HttpGet("GetFoo/{fooNo:int}/{status}")]
     public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
@@ -255,10 +246,8 @@ seed_examples:
         }
         return Ok(serviceResponse);
     }
-    ```
 
-  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
-    ```4gl
+  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD ValidateFooNo
     (
         p_foo_no       = INTEGER      NOT NULL;
@@ -294,10 +283,8 @@ seed_examples:
 IF;
 
         RETURN ER_OK;
-    End
-    ```
+    End"
     answer: |
-    ```csharp
     public async Task<bool> ValidateFooNo(int fooNo)
     {
         var query = $"SELECT foo_no, footype_code FROM foo WHERE foo_no = {fooNo}";
@@ -328,10 +315,8 @@ IF;
 
         return fooExists;
     }
-    ```
 
-  - question: How would you convert the following Actian 4GL code into c#? Respond only in code:
-    ```4gl
+  - question: "How would you convert the following Actian 4GL code into c#? Respond only in code:
     Method GetBarList
     (
         p_foo_no  = INTEGER    NOT NULL;
@@ -387,10 +372,8 @@ IF;
             RETURN ER_FAIL;
         ENDIF;
 
-    END;
-    ```
+    END;"
     answer: |
-    ```csharp
     public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
     {
         if(!connection.IsConnectionOpen())
@@ -455,10 +438,8 @@ IF;
 
         return fooBars;
     }
-    ```
 
-  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
-    ```4gl
+  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD ToFooTPO
     (
         bo = bo_foo;
@@ -564,10 +545,8 @@ foo_no;
 
         RETURN l_tpo;
 
-    END
-    ```
+    END"
     answer: |
-    ```csharp
     public FooDetailTPO ToFooTPO(FooBO bo)
     {
         FooDetailTPO tpo = new FooDetailTPO()
@@ -662,4 +641,3 @@ foo_no;
 
         return tpo;
     }
-    ```
