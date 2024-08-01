@@ -60,7 +60,8 @@ seed_examples:
       public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
       {
           StringBuilder logMessage = new StringBuilder();
-          logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+          logMessage.AppendLine(StringFunctions
+          .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
 
           await _objectDAO.ValidateObjectNo(objectNo);
           var serviceResponse = new NotificationTPO<ObjectTPO>();
