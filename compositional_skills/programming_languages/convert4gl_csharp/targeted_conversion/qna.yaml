@@ -1,0 +1,663 @@
+version: 3
+task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
+created_by: guyvernon
+seed_examples:
+  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+    ```4gl
+    PROCEDURE GetObject
+    (
+
+        /* Input */
+        ObjectNo = INTEGER    NOT NULL;
+        Status     = VARCHAR(1) NOT NULL;
+
+        /* Output */
+        Result     = tpo_object;
+
+    ) =
+    DECLARE
+
+        return_no     = INTEGER      NOT NULL;
+        return_msg = VARCHAR(100) NOT NULL;
+
+        BOObject   = bo_object;
+
+    ENDDECLARE
+    BEGIN
+
+
+        /*--------------------------------------------------------------------------------------------*/
+        /* Validation                                                                                 */
+        /*--------------------------------------------------------------------------------------------*/
+
+        /* Validate the ObjectNo exists. */
+
+        return_msg = '';
+
+        IF ObjectNo = 0
+        THEN
+            CurUserSession.ValidateFatal( msg = 'Object Number must be set.');
+        ENDIF;
+
+        IF ObjectDAO.ValidateObjectNo (object_no = ObjectNo,
+                                           msg         = BYREF(return_msg)) != ER_OK THEN
+            CurUserSession.ValidateFatal( msg = return_msg );
+        ENDIF;
+
+        /* Retrieve the object */
+
+        return_no = ObjectDAO.GetObject (object_no = ObjectNo,
+                                              status      = Status,
+                                              object    = BYREF(BOObject));
+
+        /* Set the return TPO and report if empty list */
+
+        Result = Mapper.ToObjectTPO( bo = BOObject );
+
+    END;
+    ```
+    answer:
+    ```csharp
+    // API Endpoint - GetObject 
+    [HttpGet("GetObject/{objectNo:int}/{status}")]
+    public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
+    {
+        StringBuilder logMessage = new StringBuilder();
+        logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+
+        await _objectDAO.ValidateObjectNo(objectNo);
+        var serviceResponse = new NotificationTPO<ObjectTPO>();
+        bool success = true;
+        try
+        {
+            await _dbConnection.OpenConnectionWithTransaction();
+            ObjectBO object = await _objectData.GetObject(_dbConnection, objectNo, status);
+            serviceResponse.Result = _objectMapper.ToObjectTPO(object);
+        }
+        catch (Exception e)
+        {
+            success = false;
+            //do not wait for response and continue 
+            _ = _dbConnection.Rollback();
+            logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+            throw new Exception(e.Message, e);
+        }
+        finally
+        {
+            if (success) { await _dbConnection.CommitAndClose(); }
+            logMessage.AppendLine(StringFunctions.LogStringBuilder("GetObject finished"));
+            _logger.LogInformation(logMessage.ToString());
+        }
+        return Ok(serviceResponse);
+    }
+    ```
+
+  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+    ```4gl
+    METHOD GetObject
+    (
+        object_no = INTEGER    NOT NULL;
+        status  	  = VARCHAR(1) NOT NULL;
+
+        object    = bo_object;
+    )=
+    DECLARE
+
+        rowcount = INTEGER      NOT NULL;
+        l_where	 = VARCHAR(100) NOT NULL;
+
+    ENDDECLARE
+    BEGIN
+
+        l_where = ' object_no = ' + VARCHAR(object_no);
+
+        IF status <> '' THEN
+            l_where = l_where + ' AND object_status = ' + HC_QUOTE + status + HC_QUOTE;
+        ENDIF;
+
+        SELECT object_no		AS object.object_no,
+           object_name		AS object.object_name,
+           object_status		AS object.object_status,
+           object_editcounter	AS object.object_editcounter
+        FROM object
+        WHERE :l_where;
+
+        IF sql_check(rowcount = BYREF(rowcount)) <> ER_OK THEN
+            RETURN ER_FAIL;
+        ENDIF;
+
+        COMMIT;
+
+    END;
+    ```
+    answer:
+    ```csharp
+    // Get object SQL calls
+    public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
+    {
+        if (!connection.IsConnectionOpen())
+            throw new Exception("GetObject tried to use a closed connection ");
+
+        string fromQuery = "object f";
+        string whereQuery = $"f.object_no={objectNo} ";
+
+        if (!string.IsNullOrEmpty(status))
+        {
+            whereQuery = $" {whereQuery} AND f.object_status='{status}'";
+        }
+
+        string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter from {fromQuery} where {whereQuery}";
+
+        ObjectBO objects = new ObjectBO();
+        try
+        {
+            DbCommand dbCommand = connection.GetCommand();
+            dbCommand.CommandText = squery;
+            var reader = await dbCommand.ExecuteReaderAsync();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(0))
+                {
+                    objects = new ObjectBO()
+                    {
+                        object_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("object_no"),
+                        object_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("object_name"),
+                        object_status = reader.IsDBNull(2) ? string.Empty : reader.GetString("object_status"),
+                        object_editcounter = reader.IsDBNull(3) ? 0 : reader.GetInt32("object_editcounter")
+                    };
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+
+            _logger.LogError("Error from class ObjectData - method GetObject");
+            throw new Exception(e.Message, e);
+        }
+
+        return objects;
+    }
+    ```
+
+  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+    ```4gl
+    SCP_GetFoo:
+
+        /* Input */
+        FooNo = INTEGER NOT NULL;
+        Status = VARCHAR(1) NOT NULL;
+
+        /* Output */
+        Result = tpo_foo_detail;
+
+        IF FooNo = 0
+        THEN
+        CurUserSession.ValidateFatal( msg = 'Foo Number must be set.');
+        ENDIF;
+
+        IF FooDAO.ValidateFooNo (p_msg      = ByRef(l_return_msg),
+                                     p_foo_no = FooNo) != ER_OK THEN
+            CurUserSession.ValidateFatal( msg = l_return_msg );
+        ENDIF;
+
+        /* Fatal error if any validation errors */
+
+        IF CurNotifications.hasValidationNotifications = TRUE THEN
+            CurUserSession.ValidateFatal( msg = 'Validation notifications.');
+        ENDIF;
+
+        /* Retrieve the foo */
+        l_return = FooDAO.GetFoo (p_foo_no = FooNo,
+                        p_foo    = BYREF(l_bo),
+                        p_status   = Status);
+
+        IF l_return <> ER_OK THEN
+            CurUserSession.ValidateFatal(msg = 'Error occurred getting foo ['
+                                             + VARCHAR(FooNo)
+                                             + ']'  );
+        ENDIF;
+
+        /* Set the return TPO and report if empty list */
+        Result = Mapper.ToFooTPO( bo = l_bo );
+    ```
+    answer:
+    ```csharp
+    // API Endpoint - GetFoo 
+    [HttpGet("GetFoo/{fooNo:int}/{status}")]
+    public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
+    {
+        StringBuilder logMessage = new StringBuilder();
+        logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
+
+        await _fooDAO.ValidateFooNo(fooNo);
+        var serviceResponse = new NotificationTPO<FooTPO>();
+        bool success = true;
+        try
+        {
+            await _dbConnection.OpenConnectionWithTransaction();
+            FooBO foo = await _fooData.GetFoo(_dbConnection, fooNo, status);
+            serviceResponse.Result = _fooMapper.ToFooTPO(foo);
+        }
+        catch (Exception e)
+        {
+            success = false;
+            //do not wait for response and continue 
+            _ = _dbConnection.Rollback();
+            logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
+            throw new Exception(e.Message, e);
+        }
+        finally
+        {
+            if (success) { await _dbConnection.CommitAndClose(); }
+            logMessage.AppendLine(StringFunctions.LogStringBuilder("GetFoo finished"));
+            _logger.LogInformation(logMessage.ToString());
+        }
+        return Ok(serviceResponse);
+    }
+    ```
+
+  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+    ```4gl
+    METHOD ValidateFooNo
+    (
+        p_foo_no       = INTEGER      NOT NULL;
+
+        p_footype_code = VarChar(1)   NOT NULL;
+        p_msg            = VarChar(200) NOT NULL;
+    )=
+    Declare
+
+        l_foo_no   = INTEGER NOT NULL;
+        l_rowcount = INTEGER NOT NULL;
+        l_status   = INTEGER NOT NULL;
+
+    EndDeclare
+    Begin
+
+        SELECT foo_no       AS :l_foo_no,
+               footype_code AS :p_footype_code
+        FROM foo
+        WHERE foo_no = :p_foo_no;
+
+        l_status = CALLPROC sql_check(rowcount = BYREF(l_rowcount));
+
+        IF l_status <> ER_OK THEN
+            RETURN ER_FAIL;
+        ENDIF;
+
+        IF (l_rowcount = 0) THEN
+        p_msg = 'Foo number not found in TmsFoo table.';
+        RETURN ER_FAIL;
+        END
+
+IF;
+
+        RETURN ER_OK;
+    End
+    ```
+    answer:
+    ```csharp
+    public async Task<bool> ValidateFooNo(int fooNo)
+    {
+        var query = $"SELECT foo_no, footype_code FROM foo WHERE foo_no = {fooNo}";
+        bool fooExists = false;
+        try
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        fooExists = reader.HasRows;
+                    }
+                }
+            }
+            if (!fooExists)
+            {
+                throw new Exception("Foo number not found in TmsFoo table.");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error validating foo number {fooNo}: {ex.Message}");
+            throw;
+        }
+
+        return fooExists;
+    }
+    ```
+
+  - question: How would you convert the following Actian 4GL code into c#? Respond only in code:
+    ```4gl
+    Method GetBarList
+    (
+        p_foo_no  = INTEGER    NOT NULL;
+        p_status    = VARCHAR(1) NOT NULL;
+
+        p_bar_list = ARRAY OF bo_foobar;
+    )=
+    DECLARE
+
+        l_rowcount = INTEGER NOT NULL;
+        l_i		 = INTEGER NOT NULL;
+        l_where	 = VARCHAR(100) NOT NULL;
+
+    ENDDECLARE
+    BEGIN
+
+        l_where = ' 1=1';
+
+        IF p_foo_no != 0 THEN
+            l_where = l_where + ' AND r.foo_no = ' + VARCHAR(p_foo_no);
+        ENDIF;
+
+        IF p_status <> '' THEN
+            l_where = l_where + ' AND r.bar_status = ' + HC_QUOTE + p_status + HC_QUOTE;
+        ENDIF;
+
+        l_i = 1;
+        SELECT v.foo_name		 AS p_bar_list[l_i].foo_name,
+               v.foo_no		 AS p_bar_list[l_i].foo_no,
+               r.bar_no			 AS p_bar_list[l_i].bar_no,
+               r.bar_name		 AS p_bar_list[l_i].bar_name,
+               r.bar_max	 AS p_bar_list[l_i].bar_max,
+               r.bar_specialnotes	 AS p_bar_list[l_i].bar_specialnotes,
+               r.bar_dayprice	 	 AS p_bar_list[l_i].bar_dayprice,
+               r.bar_daycost		 AS p_bar_list[l_i].bar_daycost,
+               r.bar_status		 AS p_bar_list[l_i].bar_status,
+               r.qux_code		 AS p_bar_list[l_i].qux_code,
+               r.quxorbaz_id		 AS p_bar_list[l_i].quxorbaz_id,
+               IFNULL(s.qux_name, '') AS p_bar_list[l_i].qux_name,
+               r.bar_editcounter	 AS p_bar_list[l_i].bar_editcounter,
+               2                     	 AS p_bar_list[l_i].state
+        FROM foo v
+        JOIN bar  r
+        ON   v.foo_no = r.foo_no
+        LEFT JOIN qux s
+        ON   r.qux_code = s.qux_code
+        WHERE :l_where
+        BEGIN
+            l_i = l_i + 1;
+        END;
+
+        IF sql_check(rowcount = BYREF(l_rowcount)) <> ER_OK THEN
+            RETURN ER_FAIL;
+        ENDIF;
+
+    END;
+    ```
+    answer:
+    ```csharp
+    public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
+    {
+        if(!connection.IsConnectionOpen())
+            throw new Exception("GetBarList tried to use a closed connection");
+
+        string whereQuery3 = " 1=1";
+        string fromQuery3 = " foo v";
+        string joinQuery3 = " JOIN bar r ON v.foo_no = r.foo_no LEFT JOIN qux s ON r.qux_code = s.qux_code";
+        
+        if(fooNo !=0) 
+        {
+            whereQuery3 += $" AND r.foo_no = {fooNo}";
+        }
+
+        if(!string.IsNullOrEmpty(status))
+        {
+            whereQuery3 += $" AND r.bar_status = '{status}'";
+        }
+
+        string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes, r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, ''), r.bar_editcounter, 2 FROM {fromQuery3} {joinQuery3} WHERE {whereQuery3};";
+        List<FooBarBO> fooBars = new List<FooBarBO>();
+
+        try
+        {
+            DbCommand dbCommand = connection.GetCommand();
+            dbCommand.CommandText = squery3;
+            var reader = await dbCommand.ExecuteReaderAsync();
+            
+            while(reader.Read())
+            {
+                if(!reader.IsDBNull(0))
+                {
+                    FooBarBO fooBar = new FooBarBO()
+                    {
+                        foo_name = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
+                        foo_no = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
+                        bar_no = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
+                        bar_name = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                        bar_max = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
+                        bar_specialnotes = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                        bar_dayprice = reader.IsDBNull(6) ? 0m : reader.GetDecimal(6),
+                        bar_daycost = reader.IsDBNull(7) ? 0m : reader.GetDecimal(7),
+                        bar_status = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                        qux_code = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                        quxorbaz_id = reader.IsDBNull(10) ? 0 : reader.GetInt32(10),
+                        qux_name = reader.IsDBNull(11) ? string.Empty : reader.GetString(11),
+                        bar_editcounter = reader.IsDBNull(12) ? 0 : reader.GetInt32(12),
+                        state = 2
+                    };
+                    fooBars.Add(fooBar);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Error from class FooData - method GetBarList");
+            throw new Exception(e.Message, e);
+        }
+
+        return fooBars;
+    }
+    ```
+
+  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+    ```4gl
+    METHOD ToFooTPO
+    (
+        bo = bo_foo;
+    )=
+    DECLARE
+
+        l_tpo		= tpo_foo_detail;
+        l_tpo_foobody	= tpo_foobody;
+        l_tpo_foobar	= tpo_foobar;
+        l_tpo_barobject  = tpo_barobject;
+
+        l_bo_barobject   = bo_barobject DEFAULT NULL;
+
+        i                   = INTEGER NOT NULL;
+        j                   = INTEGER NOT NULL;
+
+    ENDDECLARE
+    BEGIN
+
+        l_tpo.FooNo		= bo.foo_no;
+        l_tpo.FooName		= bo.foo_name;
+        l_tpo.WebName		= bo.foo_webname;
+        l_tpo.TypeCode		= bo.footype_code;
+        l_tpo.TypeName		= bo.footype_name;
+
+        l_tpo.AddrLine1	        = bo.foo_addr1;
+        l_tpo.AddrLine2	        = bo.foo_addr2;
+        l_tpo.AddrTown	        = bo.foo_town;
+        l_tpo.AddrPostCode	        = bo.foo_postcode;
+        l_tpo.RegionNo              = bo.region_no;
+        l_tpo.RegionName            = bo.region_name;
+
+        l_tpo.quxCode        = bo.qux_code;
+        l_tpo.quxorbazId         = bo.quxorbaz_id;
+        l_tpo.QuxName          = bo.qux_name;
+        l_tpo.DayCost               = bo.foo_daycost;
+
+        l_tpo.CompanyName		= bo.foo_companyname;
+        l_tpo.ContactName	        = bo.foo_contactname;
+        l_tpo.Tel			= bo.foo_tel;
+        l_tpo.Email			= bo.foo_email;
+        l_tpo.Url			= bo.foo_website;
+        l_tpo.ParkingTypeCode	= bo.fooparkingtype_code;
+        l_tpo.ParkingTypeName	= bo.fooparkingtype_name;
+        l_tpo.Directions		= bo.foo_directions;
+        l_tpo.SpecialNotes		= bo.foo_specialnotes;
+        l_tpo.Status		= bo.foo_status;
+        l_tpo.Planned		= bo.foo_planned;
+        l_tpo.FooMax		= bo.foo_max;
+        l_tpo.UnitNo		= bo.unit_no;
+        l_tpo.UnitName		= bo.unit_name;
+        l_tpo.EditCounter		= bo.foo_editcounter;
+        l_tpo.GridRef		= bo.foo_gridref;
+
+        // Body
+        FOR i = 1 TO bo.arr_foo_body.LastRow
+        DO
+            l_tpo_foobody.FooNo		= bo.arr_foo_body[i].
+
+foo_no;
+            l_tpo_foobody.BodyNo		= bo.arr_foo_body[i].body_no;
+            l_tpo_foobody.BodyName	= bo.arr_foo_body[i].body_name;
+            l_tpo_foobody.BodyRef		= bo.arr_foo_body[i].foobody_ref;
+            l_tpo_foobody.State		= bo.arr_foo_body[i].state;
+
+            l_tpo.ArrFooBody.InsertRow( RowObject = l_tpo_foobody.Duplicate() );
+        ENDFOR;
+
+        // Bar
+        FOR i = 1 TO bo.arr_foo_bar.LastRow
+        DO
+            l_tpo_foobar.FooNo		= bo.arr_foo_bar[i].foo_no;
+            l_tpo_foobar.No		= bo.arr_foo_bar[i].bar_no;
+            l_tpo_foobar.Name		= bo.arr_foo_bar[i].bar_name;
+            l_tpo_foobar.MaxDelegate	= bo.arr_foo_bar[i].bar_max;
+            l_tpo_foobar.SpecialNotes	= bo.arr_foo_bar[i].bar_specialnotes;
+            l_tpo_foobar.DayPrice	= bo.arr_foo_bar[i].bar_dayprice;
+            l_tpo_foobar.DayCost		= bo.arr_foo_bar[i].bar_daycost;
+            l_tpo_foobar.Status		= bo.arr_foo_bar[i].bar_status;
+            l_tpo_foobar.quxCode  = bo.arr_foo_bar[i].qux_code;
+            l_tpo_foobar.quxorbazId   = bo.arr_foo_bar[i].quxorbaz_id;
+            l_tpo_foobar.QuxName    = bo.arr_foo_bar[i].qux_name;
+            l_tpo_foobar.EditCounter	= bo.arr_foo_bar[i].bar_editcounter;
+            l_tpo_foobar.State		= bo.arr_foo_bar[i].state;
+
+            l_tpo.ArrFooBar.InsertRow( RowObject = l_tpo_foobar.Duplicate() );
+
+            // Objects linked to a bar, e.g. an overhead projector
+
+            FOR j = 1 TO bo.arr_foo_bar[i].arr_bar_object.LastRow
+            DO
+                l_bo_barobject = bo.arr_foo_bar[i].arr_bar_object[j];
+
+                l_tpo_barobject.No           = l_bo_barobject.bar_no;
+                l_tpo_barobject.ObjectNo   = l_bo_barobject.object_no;
+                l_tpo_barobject.ObjectName = l_bo_barobject.object_name;
+                l_tpo_barobject.State        = l_bo_barobject.state;
+
+                l_tpo.ArrFooBar[1].ArrBarObject.InsertRow( RowObject = l_tpo_barobject.Duplicate() );
+            ENDFOR;
+
+        ENDFOR;
+
+        RETURN l_tpo;
+
+    END
+    ```
+    answer:
+    ```csharp
+    public FooDetailTPO ToFooTPO(FooBO bo)
+    {
+        FooDetailTPO tpo = new FooDetailTPO()
+        {
+            FooNo = bo.foo_no,
+            FooName = bo.foo_name,
+            WebName = bo.foo_webname,
+            TypeCode = bo.footype_code,
+            TypeName = bo.footype_name,
+
+            AddrLine1 = bo.foo_addr1,
+            AddrLine2 = bo.foo_addr2,
+            AddrTown = bo.foo_town,
+            AddrPostCode = bo.foo_postcode,
+            RegionNo = bo.region_no,
+            RegionName = bo.region_name,
+
+            QuxCode = bo.qux_code,
+            quxorbazId = bo.quxorbaz_id,
+            QuxName = bo.qux_name,
+            DayCost = bo.foo_daycost,
+
+            CompanyName = bo.foo_companyname,
+            ContactName = bo.foo_contactname,
+            Tel = bo.foo_tel,
+            Email = bo.foo_email,
+            Url = bo.foo_website,
+            ParkingTypeCode = bo.fooparkingtype_code,
+            ParkingTypeName = bo.fooparkingtype_name,
+            Directions = bo.foo_directions,
+            SpecialNotes = bo.foo_specialnotes,
+            Status = bo.foo_status,
+            Planned = bo.foo_planned,
+            FooMax = bo.foo_max,
+            UnitNo = bo.unit_no,
+            UnitName = bo.unit_name,
+            EditCounter = bo.foo_editcounter,
+            GridRef = bo.foo_gridref
+        };
+
+        List<FooBodyTPO> fooBodies = new List<FooBodyTPO>();
+        foreach (var body in bo.arr_foo_body)
+        {
+            FooBodyTPO fooBody = new FooBodyTPO()
+            {
+                FooNo = body.foo_no,
+                BodyNo = body.body_no,
+                BodyName = body.body_name,
+                BodyRef = body.foobody_ref,
+                State = body.state
+            };
+            fooBodies.Add(fooBody);
+        }
+        tpo.ArrFooBody = fooBodies;
+
+        List<FooBarTPO> fooBars = new List<FooBarTPO>();
+        foreach (var bar in bo.arr_foo_bar)
+        {
+            FooBarTPO fooBar = new FooBarTPO()
+            {
+                FooNo = bar.foo_no,
+                No = bar.bar_no,
+                Name = bar.bar_name,
+                MaxDelegate = bar.bar_max,
+                SpecialNotes = bar.bar_specialnotes,
+                DayPrice = bar.bar_dayprice,
+                DayCost = bar.bar_daycost,
+                Status = bar.bar_status,
+                QuxCode = bar.qux_code,
+                quxorbazId = bar.quxorbaz_id,
+                QuxName = bar.qux_name,
+                EditCounter = bar.bar_editcounter,
+                State = bar.state
+            };
+
+            List<BarObjectTPO> barObjects = new List<BarObjectTPO>();
+            foreach (var obj in bar.arr_bar_object)
+            {
+                BarObjectTPO barObject = new BarObjectTPO()
+                {
+                    No = obj.bar_no,
+                    ObjectNo = obj.object_no,
+                    ObjectName = obj.object_name,
+                    State = obj.state
+                };
+                barObjects.Add(barObject);
+            }
+            fooBar.ArrBarObject = barObjects;
+            fooBars.Add(fooBar);
+        }
+        tpo.ArrFooBar = fooBars;
+
+        return tpo;
+    }
+    ```
