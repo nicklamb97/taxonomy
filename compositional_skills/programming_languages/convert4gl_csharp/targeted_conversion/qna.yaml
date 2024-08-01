@@ -2,8 +2,7 @@ version: 3
 task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
 created_by: guyvernon
 seed_examples:
-  - question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:"
-    ```4gl
+  - question: How would you convert the following Actian 4GL code to csharp? Respond only in code:
     PROCEDURE GetObject
     (
 
@@ -55,7 +54,6 @@ seed_examples:
         Result = Mapper.ToObjectTPO( bo = BOObject );
 
     END;
-    ```
     answer:
     ```csharp
     // API Endpoint - GetObject
