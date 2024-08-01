@@ -61,7 +61,7 @@ seed_examples:
       {
           StringBuilder logMessage = new StringBuilder();
           logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-  
+
           await _objectDAO.ValidateObjectNo(objectNo);
           var serviceResponse = new NotificationTPO<ObjectTPO>();
           bool success = true;
@@ -131,18 +131,18 @@ seed_examples:
       {
           if (!connection.IsConnectionOpen())
               throw new Exception("GetObject tried to use a closed connection ");
-  
+
           string fromQuery = "object f";
           string whereQuery = $"f.object_no={objectNo} ";
-  
+
           if (!string.IsNullOrEmpty(status))
           {
               whereQuery = $" {whereQuery} AND f.object_status='{status}'";
           }
-  
+
           string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter"
           + "from {fromQuery} where {whereQuery}";
-  
+
           ObjectBO objects = new ObjectBO();
           try
           {
@@ -161,16 +161,16 @@ seed_examples:
                           object_editcounter = reader.IsDBNull(3) ? 0 : reader.GetInt32("object_editcounter")
                       };
                   }
-  
+
               }
           }
           catch (Exception e)
           {
-  
+
               _logger.LogError("Error from class ObjectData - method GetObject");
               throw new Exception(e.Message, e);
           }
-  
+
           return objects;
       }
 
@@ -220,7 +220,7 @@ seed_examples:
       {
           StringBuilder logMessage = new StringBuilder();
           logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
-  
+
           await _fooDAO.ValidateFooNo(fooNo);
           var serviceResponse = new NotificationTPO<FooTPO>();
           bool success = true;
@@ -312,7 +312,7 @@ IF;
               _logger.LogError($"Error validating foo number {fooNo}: {ex.Message}");
               throw;
           }
-  
+
           return fooExists;
       }
 
@@ -378,32 +378,32 @@ IF;
       {
           if(!connection.IsConnectionOpen())
               throw new Exception("GetBarList tried to use a closed connection");
-  
+
           string whereQuery3 = " 1=1";
           string fromQuery3 = " foo v";
           string joinQuery3 = " JOIN bar r ON v.foo_no = r.foo_no LEFT JOIN qux s ON r.qux_code = s.qux_code";
-  
+
           if(fooNo !=0)
           {
               whereQuery3 += $" AND r.foo_no = {fooNo}";
           }
-  
+
           if(!string.IsNullOrEmpty(status))
           {
               whereQuery3 += $" AND r.bar_status = '{status}'";
           }
-  
+
           string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes," +
           "r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, '')," +
           "r.bar_editcounter, 2 FROM {fromQuery3}{joinQuery3} WHERE {whereQuery3};";
           List<FooBarBO> fooBars = new List<FooBarBO>();
-  
+
           try
           {
               DbCommand dbCommand = connection.GetCommand();
               dbCommand.CommandText = squery3;
               var reader = await dbCommand.ExecuteReaderAsync();
-  
+
               while(reader.Read())
               {
                   if(!reader.IsDBNull(0))
@@ -428,14 +428,14 @@ IF;
                       fooBars.Add(fooBar);
                   }
               }
-  
+
           }
           catch (Exception e)
           {
               _logger.LogError("Error from class FooData - method GetBarList");
               throw new Exception(e.Message, e);
           }
-  
+
           return fooBars;
       }
 
@@ -556,19 +556,19 @@ foo_no;
               WebName = bo.foo_webname,
               TypeCode = bo.footype_code,
               TypeName = bo.footype_name,
-  
+
               AddrLine1 = bo.foo_addr1,
               AddrLine2 = bo.foo_addr2,
               AddrTown = bo.foo_town,
               AddrPostCode = bo.foo_postcode,
               RegionNo = bo.region_no,
               RegionName = bo.region_name,
-  
+
               QuxCode = bo.qux_code,
               quxorbazId = bo.quxorbaz_id,
               QuxName = bo.qux_name,
               DayCost = bo.foo_daycost,
-  
+
               CompanyName = bo.foo_companyname,
               ContactName = bo.foo_contactname,
               Tel = bo.foo_tel,
@@ -586,7 +586,7 @@ foo_no;
               EditCounter = bo.foo_editcounter,
               GridRef = bo.foo_gridref
           };
-  
+
           List<FooBodyTPO> fooBodies = new List<FooBodyTPO>();
           foreach (var body in bo.arr_foo_body)
           {
@@ -601,7 +601,7 @@ foo_no;
               fooBodies.Add(fooBody);
           }
           tpo.ArrFooBody = fooBodies;
-  
+
           List<FooBarTPO> fooBars = new List<FooBarTPO>();
           foreach (var bar in bo.arr_foo_bar)
           {
@@ -621,7 +621,7 @@ foo_no;
                   EditCounter = bar.bar_editcounter,
                   State = bar.state
               };
-  
+
               List<BarObjectTPO> barObjects = new List<BarObjectTPO>();
               foreach (var obj in bar.arr_bar_object)
               {
@@ -638,6 +638,5 @@ foo_no;
               fooBars.Add(fooBar);
           }
           tpo.ArrFooBar = fooBars;
-  
           return tpo;
       }
