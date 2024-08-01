@@ -126,53 +126,53 @@ seed_examples:
 
     END;"
     answer: |
-    // Get object SQL calls
-    public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
-    {
-        if (!connection.IsConnectionOpen())
-            throw new Exception("GetObject tried to use a closed connection ");
-
-        string fromQuery = "object f";
-        string whereQuery = $"f.object_no={objectNo} ";
-
-        if (!string.IsNullOrEmpty(status))
-        {
-            whereQuery = $" {whereQuery} AND f.object_status='{status}'";
-        }
-
-        string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter"
-        + "from {fromQuery} where {whereQuery}";
-
-        ObjectBO objects = new ObjectBO();
-        try
-        {
-            DbCommand dbCommand = connection.GetCommand();
-            dbCommand.CommandText = squery;
-            var reader = await dbCommand.ExecuteReaderAsync();
-            while (reader.Read())
-            {
-                if (!reader.IsDBNull(0))
-                {
-                    objects = new ObjectBO()
-                    {
-                        object_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("object_no"),
-                        object_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("object_name"),
-                        object_status = reader.IsDBNull(2) ? string.Empty : reader.GetString("object_status"),
-                        object_editcounter = reader.IsDBNull(3) ? 0 : reader.GetInt32("object_editcounter")
-                    };
-                }
-
-            }
-        }
-        catch (Exception e)
-        {
-
-            _logger.LogError("Error from class ObjectData - method GetObject");
-            throw new Exception(e.Message, e);
-        }
-
-        return objects;
-    }
+      // Get object SQL calls
+      public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
+      {
+          if (!connection.IsConnectionOpen())
+              throw new Exception("GetObject tried to use a closed connection ");
+  
+          string fromQuery = "object f";
+          string whereQuery = $"f.object_no={objectNo} ";
+  
+          if (!string.IsNullOrEmpty(status))
+          {
+              whereQuery = $" {whereQuery} AND f.object_status='{status}'";
+          }
+  
+          string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter"
+          + "from {fromQuery} where {whereQuery}";
+  
+          ObjectBO objects = new ObjectBO();
+          try
+          {
+              DbCommand dbCommand = connection.GetCommand();
+              dbCommand.CommandText = squery;
+              var reader = await dbCommand.ExecuteReaderAsync();
+              while (reader.Read())
+              {
+                  if (!reader.IsDBNull(0))
+                  {
+                      objects = new ObjectBO()
+                      {
+                          object_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("object_no"),
+                          object_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("object_name"),
+                          object_status = reader.IsDBNull(2) ? string.Empty : reader.GetString("object_status"),
+                          object_editcounter = reader.IsDBNull(3) ? 0 : reader.GetInt32("object_editcounter")
+                      };
+                  }
+  
+              }
+          }
+          catch (Exception e)
+          {
+  
+              _logger.LogError("Error from class ObjectData - method GetObject");
+              throw new Exception(e.Message, e);
+          }
+  
+          return objects;
+      }
 
   - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     SCP_GetFoo:
@@ -214,38 +214,38 @@ seed_examples:
         /* Set the return TPO and report if empty list */
         Result = Mapper.ToFooTPO( bo = l_bo );"
     answer: |
-    // API Endpoint - GetFoo
-    [HttpGet("GetFoo/{fooNo:int}/{status}")]
-    public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
-    {
-        StringBuilder logMessage = new StringBuilder();
-        logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
-
-        await _fooDAO.ValidateFooNo(fooNo);
-        var serviceResponse = new NotificationTPO<FooTPO>();
-        bool success = true;
-        try
-        {
-            await _dbConnection.OpenConnectionWithTransaction();
-            FooBO foo = await _fooData.GetFoo(_dbConnection, fooNo, status);
-            serviceResponse.Result = _fooMapper.ToFooTPO(foo);
-        }
-        catch (Exception e)
-        {
-            success = false;
-            //do not wait for response and continue
-            _ = _dbConnection.Rollback();
-            logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
-            throw new Exception(e.Message, e);
-        }
-        finally
-        {
-            if (success) { await _dbConnection.CommitAndClose(); }
-            logMessage.AppendLine(StringFunctions.LogStringBuilder("GetFoo finished"));
-            _logger.LogInformation(logMessage.ToString());
-        }
-        return Ok(serviceResponse);
-    }
+      // API Endpoint - GetFoo
+      [HttpGet("GetFoo/{fooNo:int}/{status}")]
+      public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
+      {
+          StringBuilder logMessage = new StringBuilder();
+          logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
+  
+          await _fooDAO.ValidateFooNo(fooNo);
+          var serviceResponse = new NotificationTPO<FooTPO>();
+          bool success = true;
+          try
+          {
+              await _dbConnection.OpenConnectionWithTransaction();
+              FooBO foo = await _fooData.GetFoo(_dbConnection, fooNo, status);
+              serviceResponse.Result = _fooMapper.ToFooTPO(foo);
+          }
+          catch (Exception e)
+          {
+              success = false;
+              //do not wait for response and continue
+              _ = _dbConnection.Rollback();
+              logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
+              throw new Exception(e.Message, e);
+          }
+          finally
+          {
+              if (success) { await _dbConnection.CommitAndClose(); }
+              logMessage.AppendLine(StringFunctions.LogStringBuilder("GetFoo finished"));
+              _logger.LogInformation(logMessage.ToString());
+          }
+          return Ok(serviceResponse);
+      }
 
   - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD ValidateFooNo
@@ -285,36 +285,36 @@ IF;
         RETURN ER_OK;
     End"
     answer: |
-    public async Task<bool> ValidateFooNo(int fooNo)
-    {
-        var query = $"SELECT foo_no, footype_code FROM foo WHERE foo_no = {fooNo}";
-        bool fooExists = false;
-        try
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                using (var command = new SqlCommand(query, connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        fooExists = reader.HasRows;
-                    }
-                }
-            }
-            if (!fooExists)
-            {
-                throw new Exception("Foo number not found in TmsFoo table.");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error validating foo number {fooNo}: {ex.Message}");
-            throw;
-        }
-
-        return fooExists;
-    }
+      public async Task<bool> ValidateFooNo(int fooNo)
+      {
+          var query = $"SELECT foo_no, footype_code FROM foo WHERE foo_no = {fooNo}";
+          bool fooExists = false;
+          try
+          {
+              using (var connection = new SqlConnection(_connectionString))
+              {
+                  await connection.OpenAsync();
+                  using (var command = new SqlCommand(query, connection))
+                  {
+                      using (var reader = await command.ExecuteReaderAsync())
+                      {
+                          fooExists = reader.HasRows;
+                      }
+                  }
+              }
+              if (!fooExists)
+              {
+                  throw new Exception("Foo number not found in TmsFoo table.");
+              }
+          }
+          catch (Exception ex)
+          {
+              _logger.LogError($"Error validating foo number {fooNo}: {ex.Message}");
+              throw;
+          }
+  
+          return fooExists;
+      }
 
   - question: "How would you convert the following Actian 4GL code into c#? Respond only in code:
     Method GetBarList
@@ -374,70 +374,70 @@ IF;
 
     END;"
     answer: |
-    public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
-    {
-        if(!connection.IsConnectionOpen())
-            throw new Exception("GetBarList tried to use a closed connection");
-
-        string whereQuery3 = " 1=1";
-        string fromQuery3 = " foo v";
-        string joinQuery3 = " JOIN bar r ON v.foo_no = r.foo_no LEFT JOIN qux s ON r.qux_code = s.qux_code";
-
-        if(fooNo !=0)
-        {
-            whereQuery3 += $" AND r.foo_no = {fooNo}";
-        }
-
-        if(!string.IsNullOrEmpty(status))
-        {
-            whereQuery3 += $" AND r.bar_status = '{status}'";
-        }
-
-        string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes," +
-        "r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, '')," +
-        "r.bar_editcounter, 2 FROM {fromQuery3}{joinQuery3} WHERE {whereQuery3};";
-        List<FooBarBO> fooBars = new List<FooBarBO>();
-
-        try
-        {
-            DbCommand dbCommand = connection.GetCommand();
-            dbCommand.CommandText = squery3;
-            var reader = await dbCommand.ExecuteReaderAsync();
-
-            while(reader.Read())
-            {
-                if(!reader.IsDBNull(0))
-                {
-                    FooBarBO fooBar = new FooBarBO()
-                    {
-                        foo_name = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
-                        foo_no = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
-                        bar_no = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
-                        bar_name = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
-                        bar_max = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                        bar_specialnotes = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                        bar_dayprice = reader.IsDBNull(6) ? 0m : reader.GetDecimal(6),
-                        bar_daycost = reader.IsDBNull(7) ? 0m : reader.GetDecimal(7),
-                        bar_status = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                        qux_code = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
-                        quxorbaz_id = reader.IsDBNull(10) ? 0 : reader.GetInt32(10),
-                        qux_name = reader.IsDBNull(11) ? string.Empty : reader.GetString(11),
-                        bar_editcounter = reader.IsDBNull(12) ? 0 : reader.GetInt32(12),
-                        state = 2
-                    };
-                    fooBars.Add(fooBar);
-                }
-            }
-
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("Error from class FooData - method GetBarList");
-            throw new Exception(e.Message, e);
-        }
-
-        return fooBars;
-    }
+      public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
+      {
+          if(!connection.IsConnectionOpen())
+              throw new Exception("GetBarList tried to use a closed connection");
+  
+          string whereQuery3 = " 1=1";
+          string fromQuery3 = " foo v";
+          string joinQuery3 = " JOIN bar r ON v.foo_no = r.foo_no LEFT JOIN qux s ON r.qux_code = s.qux_code";
+  
+          if(fooNo !=0)
+          {
+              whereQuery3 += $" AND r.foo_no = {fooNo}";
+          }
+  
+          if(!string.IsNullOrEmpty(status))
+          {
+              whereQuery3 += $" AND r.bar_status = '{status}'";
+          }
+  
+          string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes," +
+          "r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, '')," +
+          "r.bar_editcounter, 2 FROM {fromQuery3}{joinQuery3} WHERE {whereQuery3};";
+          List<FooBarBO> fooBars = new List<FooBarBO>();
+  
+          try
+          {
+              DbCommand dbCommand = connection.GetCommand();
+              dbCommand.CommandText = squery3;
+              var reader = await dbCommand.ExecuteReaderAsync();
+  
+              while(reader.Read())
+              {
+                  if(!reader.IsDBNull(0))
+                  {
+                      FooBarBO fooBar = new FooBarBO()
+                      {
+                          foo_name = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
+                          foo_no = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
+                          bar_no = reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
+                          bar_name = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                          bar_max = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
+                          bar_specialnotes = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                          bar_dayprice = reader.IsDBNull(6) ? 0m : reader.GetDecimal(6),
+                          bar_daycost = reader.IsDBNull(7) ? 0m : reader.GetDecimal(7),
+                          bar_status = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                          qux_code = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                          quxorbaz_id = reader.IsDBNull(10) ? 0 : reader.GetInt32(10),
+                          qux_name = reader.IsDBNull(11) ? string.Empty : reader.GetString(11),
+                          bar_editcounter = reader.IsDBNull(12) ? 0 : reader.GetInt32(12),
+                          state = 2
+                      };
+                      fooBars.Add(fooBar);
+                  }
+              }
+  
+          }
+          catch (Exception e)
+          {
+              _logger.LogError("Error from class FooData - method GetBarList");
+              throw new Exception(e.Message, e);
+          }
+  
+          return fooBars;
+      }
 
   - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD ToFooTPO
@@ -547,97 +547,97 @@ foo_no;
 
     END"
     answer: |
-    public FooDetailTPO ToFooTPO(FooBO bo)
-    {
-        FooDetailTPO tpo = new FooDetailTPO()
-        {
-            FooNo = bo.foo_no,
-            FooName = bo.foo_name,
-            WebName = bo.foo_webname,
-            TypeCode = bo.footype_code,
-            TypeName = bo.footype_name,
-
-            AddrLine1 = bo.foo_addr1,
-            AddrLine2 = bo.foo_addr2,
-            AddrTown = bo.foo_town,
-            AddrPostCode = bo.foo_postcode,
-            RegionNo = bo.region_no,
-            RegionName = bo.region_name,
-
-            QuxCode = bo.qux_code,
-            quxorbazId = bo.quxorbaz_id,
-            QuxName = bo.qux_name,
-            DayCost = bo.foo_daycost,
-
-            CompanyName = bo.foo_companyname,
-            ContactName = bo.foo_contactname,
-            Tel = bo.foo_tel,
-            Email = bo.foo_email,
-            Url = bo.foo_website,
-            ParkingTypeCode = bo.fooparkingtype_code,
-            ParkingTypeName = bo.fooparkingtype_name,
-            Directions = bo.foo_directions,
-            SpecialNotes = bo.foo_specialnotes,
-            Status = bo.foo_status,
-            Planned = bo.foo_planned,
-            FooMax = bo.foo_max,
-            UnitNo = bo.unit_no,
-            UnitName = bo.unit_name,
-            EditCounter = bo.foo_editcounter,
-            GridRef = bo.foo_gridref
-        };
-
-        List<FooBodyTPO> fooBodies = new List<FooBodyTPO>();
-        foreach (var body in bo.arr_foo_body)
-        {
-            FooBodyTPO fooBody = new FooBodyTPO()
-            {
-                FooNo = body.foo_no,
-                BodyNo = body.body_no,
-                BodyName = body.body_name,
-                BodyRef = body.foobody_ref,
-                State = body.state
-            };
-            fooBodies.Add(fooBody);
-        }
-        tpo.ArrFooBody = fooBodies;
-
-        List<FooBarTPO> fooBars = new List<FooBarTPO>();
-        foreach (var bar in bo.arr_foo_bar)
-        {
-            FooBarTPO fooBar = new FooBarTPO()
-            {
-                FooNo = bar.foo_no,
-                No = bar.bar_no,
-                Name = bar.bar_name,
-                MaxDelegate = bar.bar_max,
-                SpecialNotes = bar.bar_specialnotes,
-                DayPrice = bar.bar_dayprice,
-                DayCost = bar.bar_daycost,
-                Status = bar.bar_status,
-                QuxCode = bar.qux_code,
-                quxorbazId = bar.quxorbaz_id,
-                QuxName = bar.qux_name,
-                EditCounter = bar.bar_editcounter,
-                State = bar.state
-            };
-
-            List<BarObjectTPO> barObjects = new List<BarObjectTPO>();
-            foreach (var obj in bar.arr_bar_object)
-            {
-                BarObjectTPO barObject = new BarObjectTPO()
-                {
-                    No = obj.bar_no,
-                    ObjectNo = obj.object_no,
-                    ObjectName = obj.object_name,
-                    State = obj.state
-                };
-                barObjects.Add(barObject);
-            }
-            fooBar.ArrBarObject = barObjects;
-            fooBars.Add(fooBar);
-        }
-        tpo.ArrFooBar = fooBars;
-
-        return tpo;
-    }
+      public FooDetailTPO ToFooTPO(FooBO bo)
+      {
+          FooDetailTPO tpo = new FooDetailTPO()
+          {
+              FooNo = bo.foo_no,
+              FooName = bo.foo_name,
+              WebName = bo.foo_webname,
+              TypeCode = bo.footype_code,
+              TypeName = bo.footype_name,
+  
+              AddrLine1 = bo.foo_addr1,
+              AddrLine2 = bo.foo_addr2,
+              AddrTown = bo.foo_town,
+              AddrPostCode = bo.foo_postcode,
+              RegionNo = bo.region_no,
+              RegionName = bo.region_name,
+  
+              QuxCode = bo.qux_code,
+              quxorbazId = bo.quxorbaz_id,
+              QuxName = bo.qux_name,
+              DayCost = bo.foo_daycost,
+  
+              CompanyName = bo.foo_companyname,
+              ContactName = bo.foo_contactname,
+              Tel = bo.foo_tel,
+              Email = bo.foo_email,
+              Url = bo.foo_website,
+              ParkingTypeCode = bo.fooparkingtype_code,
+              ParkingTypeName = bo.fooparkingtype_name,
+              Directions = bo.foo_directions,
+              SpecialNotes = bo.foo_specialnotes,
+              Status = bo.foo_status,
+              Planned = bo.foo_planned,
+              FooMax = bo.foo_max,
+              UnitNo = bo.unit_no,
+              UnitName = bo.unit_name,
+              EditCounter = bo.foo_editcounter,
+              GridRef = bo.foo_gridref
+          };
+  
+          List<FooBodyTPO> fooBodies = new List<FooBodyTPO>();
+          foreach (var body in bo.arr_foo_body)
+          {
+              FooBodyTPO fooBody = new FooBodyTPO()
+              {
+                  FooNo = body.foo_no,
+                  BodyNo = body.body_no,
+                  BodyName = body.body_name,
+                  BodyRef = body.foobody_ref,
+                  State = body.state
+              };
+              fooBodies.Add(fooBody);
+          }
+          tpo.ArrFooBody = fooBodies;
+  
+          List<FooBarTPO> fooBars = new List<FooBarTPO>();
+          foreach (var bar in bo.arr_foo_bar)
+          {
+              FooBarTPO fooBar = new FooBarTPO()
+              {
+                  FooNo = bar.foo_no,
+                  No = bar.bar_no,
+                  Name = bar.bar_name,
+                  MaxDelegate = bar.bar_max,
+                  SpecialNotes = bar.bar_specialnotes,
+                  DayPrice = bar.bar_dayprice,
+                  DayCost = bar.bar_daycost,
+                  Status = bar.bar_status,
+                  QuxCode = bar.qux_code,
+                  quxorbazId = bar.quxorbaz_id,
+                  QuxName = bar.qux_name,
+                  EditCounter = bar.bar_editcounter,
+                  State = bar.state
+              };
+  
+              List<BarObjectTPO> barObjects = new List<BarObjectTPO>();
+              foreach (var obj in bar.arr_bar_object)
+              {
+                  BarObjectTPO barObject = new BarObjectTPO()
+                  {
+                      No = obj.bar_no,
+                      ObjectNo = obj.object_no,
+                      ObjectName = obj.object_name,
+                      State = obj.state
+                  };
+                  barObjects.Add(barObject);
+              }
+              fooBar.ArrBarObject = barObjects;
+              fooBars.Add(fooBar);
+          }
+          tpo.ArrFooBar = fooBars;
+  
+          return tpo;
+      }
