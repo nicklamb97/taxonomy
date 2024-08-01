@@ -55,39 +55,39 @@ seed_examples:
 
     END;"
     answer: |
-    // API Endpoint - GetObject
-    [HttpGet("GetObject/{objectNo:int}/{status}")]
-    public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
-    {
-        StringBuilder logMessage = new StringBuilder();
-        logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-
-        await _objectDAO.ValidateObjectNo(objectNo);
-        var serviceResponse = new NotificationTPO<ObjectTPO>();
-        bool success = true;
-        try
-        {
-            await _dbConnection.OpenConnectionWithTransaction();
-            ObjectBO object = await _objectData.GetObject(_dbConnection, objectNo, status);
-            serviceResponse.Result = _objectMapper.ToObjectTPO(object);
-        }
-        catch (Exception e)
-        {
-            success = false;
-            //do not wait for response and continue
-            _ = _dbConnection.Rollback();
-            logMessage.AppendLine(StringFunctions
-            .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-            throw new Exception(e.Message, e);
-        }
-        finally
-        {
-            if (success) { await _dbConnection.CommitAndClose(); }
-            logMessage.AppendLine(StringFunctions.LogStringBuilder("GetObject finished"));
-            _logger.LogInformation(logMessage.ToString());
-        }
-        return Ok(serviceResponse);
-    }
+      // API Endpoint - GetObject
+      [HttpGet("GetObject/{objectNo:int}/{status}")]
+      public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
+      {
+          StringBuilder logMessage = new StringBuilder();
+          logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+  
+          await _objectDAO.ValidateObjectNo(objectNo);
+          var serviceResponse = new NotificationTPO<ObjectTPO>();
+          bool success = true;
+          try
+          {
+              await _dbConnection.OpenConnectionWithTransaction();
+              ObjectBO object = await _objectData.GetObject(_dbConnection, objectNo, status);
+              serviceResponse.Result = _objectMapper.ToObjectTPO(object);
+          }
+          catch (Exception e)
+          {
+              success = false;
+              //do not wait for response and continue
+              _ = _dbConnection.Rollback();
+              logMessage.AppendLine(StringFunctions
+              .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+              throw new Exception(e.Message, e);
+          }
+          finally
+          {
+              if (success) { await _dbConnection.CommitAndClose(); }
+              logMessage.AppendLine(StringFunctions.LogStringBuilder("GetObject finished"));
+              _logger.LogInformation(logMessage.ToString());
+          }
+          return Ok(serviceResponse);
+      }
 
   - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD GetObject
