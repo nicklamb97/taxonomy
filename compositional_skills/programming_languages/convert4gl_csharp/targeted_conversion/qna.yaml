@@ -2,7 +2,7 @@ version: 3
 task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
 created_by: guyvernon
 seed_examples:
-  - question: How would you convert the following Actian 4GL code to c#? Respond only in code:
+  - question: How would you convert the following Actian 4GL code to csharp? Respond only in code:
     ```4gl
     PROCEDURE GetObject
     (
@@ -29,7 +29,7 @@ seed_examples:
         /*--------------------------------------------------------------------------------------------*/
         /* Validation                                                                                 */
         /*--------------------------------------------------------------------------------------------*/
-
+        
         /* Validate the ObjectNo exists. */
 
         return_msg = '';
@@ -58,7 +58,7 @@ seed_examples:
     ```
     answer:
     ```csharp
-    // API Endpoint - GetObject 
+    // API Endpoint - GetObject
     [HttpGet("GetObject/{objectNo:int}/{status}")]
     public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
     {
