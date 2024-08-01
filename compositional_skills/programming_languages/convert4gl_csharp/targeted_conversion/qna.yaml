@@ -54,7 +54,7 @@ seed_examples:
         Result = Mapper.ToObjectTPO( bo = BOObject );
 
     END;
-    answer:
+    answer: |
     ```csharp
     // API Endpoint - GetObject
     [HttpGet("GetObject/{objectNo:int}/{status}")]
@@ -129,7 +129,7 @@ seed_examples:
 
     END;
     ```
-    answer:
+    answer: |
     ```csharp
     // Get object SQL calls
     public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
@@ -221,7 +221,7 @@ seed_examples:
         /* Set the return TPO and report if empty list */
         Result = Mapper.ToFooTPO( bo = l_bo );
     ```
-    answer:
+    answer: |
     ```csharp
     // API Endpoint - GetFoo
     [HttpGet("GetFoo/{fooNo:int}/{status}")]
@@ -296,7 +296,7 @@ IF;
         RETURN ER_OK;
     End
     ```
-    answer:
+    answer: |
     ```csharp
     public async Task<bool> ValidateFooNo(int fooNo)
     {
@@ -389,7 +389,7 @@ IF;
 
     END;
     ```
-    answer:
+    answer: |
     ```csharp
     public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
     {
@@ -566,7 +566,7 @@ foo_no;
 
     END
     ```
-    answer:
+    answer: |
     ```csharp
     public FooDetailTPO ToFooTPO(FooBO bo)
     {
