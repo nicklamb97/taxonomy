@@ -29,7 +29,7 @@ seed_examples:
         /*--------------------------------------------------------------------------------------------*/
         /* Validation                                                                                 */
         /*--------------------------------------------------------------------------------------------*/
-        
+
         /* Validate the ObjectNo exists. */
 
         return_msg = '';
@@ -77,7 +77,7 @@ seed_examples:
         catch (Exception e)
         {
             success = false;
-            //do not wait for response and continue 
+            //do not wait for response and continue
             _ = _dbConnection.Rollback();
             logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
             throw new Exception(e.Message, e);
@@ -223,7 +223,7 @@ seed_examples:
     ```
     answer:
     ```csharp
-    // API Endpoint - GetFoo 
+    // API Endpoint - GetFoo
     [HttpGet("GetFoo/{fooNo:int}/{status}")]
     public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
     {
@@ -242,7 +242,7 @@ seed_examples:
         catch (Exception e)
         {
             success = false;
-            //do not wait for response and continue 
+            //do not wait for response and continue
             _ = _dbConnection.Rollback();
             logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
             throw new Exception(e.Message, e);
@@ -399,8 +399,8 @@ IF;
         string whereQuery3 = " 1=1";
         string fromQuery3 = " foo v";
         string joinQuery3 = " JOIN bar r ON v.foo_no = r.foo_no LEFT JOIN qux s ON r.qux_code = s.qux_code";
-        
-        if(fooNo !=0) 
+
+        if(fooNo !=0)
         {
             whereQuery3 += $" AND r.foo_no = {fooNo}";
         }
@@ -418,7 +418,7 @@ IF;
             DbCommand dbCommand = connection.GetCommand();
             dbCommand.CommandText = squery3;
             var reader = await dbCommand.ExecuteReaderAsync();
-            
+
             while(reader.Read())
             {
                 if(!reader.IsDBNull(0))
