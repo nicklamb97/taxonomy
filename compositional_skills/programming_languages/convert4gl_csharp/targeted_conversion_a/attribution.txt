@@ -1,0 +1,5 @@
+Title: Actian 4GL: How to convert 4GL for OpenROAD to C# more specific examples
+Author: guyvernon
+Source: https://docs.actian.com/openroad/6.2/ and C# documentation
+The knowledge content is based on Actian 4GL and C# and is for educational
+purposes and to enhance the knowledge base of the InstructLab taxonomy.
