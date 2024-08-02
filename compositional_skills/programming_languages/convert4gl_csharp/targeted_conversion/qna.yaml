@@ -60,7 +60,8 @@ seed_examples:
       public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
       {
           StringBuilder logMessage = new StringBuilder();
-          logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+          logMessage.AppendLine(StringFunctions
+          .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
 
           await _objectDAO.ValidateObjectNo(objectNo);
           var serviceResponse = new NotificationTPO<ObjectTPO>();
@@ -76,7 +77,8 @@ seed_examples:
               success = false;
               //do not wait for response and continue
               _ = _dbConnection.Rollback();
-              logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
+              logMessage.AppendLine(StringFunctions
+              .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
               throw new Exception(e.Message, e);
           }
           finally
@@ -138,7 +140,8 @@ seed_examples:
               whereQuery = $" {whereQuery} AND f.object_status='{status}'";
           }
 
-          string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter from {fromQuery} where {whereQuery}";
+          string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter"
+          + $"from {fromQuery} where {whereQuery}";
 
           ObjectBO objects = new ObjectBO();
           try
@@ -311,7 +314,7 @@ IF;
 
           return fooExists;
       }
-- question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:
+  - question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:
     PROCEDURE GetObject
     (
         /* Input */
