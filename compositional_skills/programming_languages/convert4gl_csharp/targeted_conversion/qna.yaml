@@ -319,7 +319,7 @@ IF;
     (
         p_foo_no       = INTEGER    NOT NULL;
         p_status         = VARCHAR(1) NOT NULL;
-        p_fully_populate = VARCHAR(1) NOT NULL WITH DEFAULT 'Y'; // 'N'=don\'t populate bars/facilities
+        p_fully_populate = VARCHAR(1) NOT NULL WITH DEFAULT 'Y'; // 'N'
 
         p_foo          = bo_foo;
     )=
@@ -454,7 +454,7 @@ IF;
             l_bo_barobject = bo_barobject.Create();
 
             l_bo_barobject.bar_no = p_foo.arr_foo_bar[l_i].bar_no;
-    
+
             SELECT f.object_no   AS :l_bo_barobject.object_no,
     	       f.object_name AS :l_bo_barobject.object_name,
                    2                  AS :l_bo_barobject.state
@@ -490,12 +490,18 @@ IF;
           {
               whereQuery += $" AND foo_status = '{status}'"
           }
-          string joinQuery = "JOIN footype v ON t.footype_code = v.footype_code LEFT JOIN fooparkingtype p ON t.fooparkingtype_code LEFT JOIN unit u ON t.unit_no = u.unit_no JOIN region r ON t.region_no = r.region_no "
+          string joinQuery = "JOIN footype v ON t.footype_code = v.footype_code LEFT JOIN fooparkingtype p ON" +
+          "t.fooparkingtype_code LEFT JOIN unit u ON t.unit_no = u.unit_no JOIN region r ON t.region_no = r.region_no "
 
-          string squery = $"SELECT t.foo_no, t.foo_name, t.foo_webname, t.footype_code, t.foo_planned,t.foo_max, t.unit_no, IFNULL(u.unit_name, ''),t.qux_code, t.quxorbaz_id,t.foo_daycost, t.foo_addr1, t.foo_addr2,t.foo_town,t.foo_postcode,t.region_no, IFNULL(r.region_name, ''), t.foo_companyname, t.foo_contactname, t.foo_tel,t.foo_email, t.foo_website, IFNULL(p.fooparkingtype_code, ''), IFNULL(p.fooparkingtype_name), t.venus_directions, t.foo_specialnotes, t.foo_status, t.foo_editcounter, t.foo_gridref from {fromQuery}{joinQuery}{whereQuery};"
+          string squery = $"SELECT t.foo_no, t.foo_name, t.foo_webname, t.footype_code, t.foo_planned,t.foo_max,"+
+          "t.unit_no, IFNULL(u.unit_name, ''),t.qux_code, t.quxorbaz_id,t.foo_daycost, t.foo_addr1, t.foo_addr2," +
+          "t.foo_town,t.foo_postcode,t.region_no, IFNULL(r.region_name, ''), t.foo_companyname, t.foo_contactname," +
+          "t.foo_tel,t.foo_email, t.foo_website, IFNULL(p.fooparkingtype_code, ''), IFNULL(p.fooparkingtype_name)," +
+          "t.venus_directions, t.foo_specialnotes, t.foo_status, t.foo_editcounter, t.foo_gridref" +
+          $"from {fromQuery}{joinQuery}{whereQuery};"
 
           FooBO foo;
-          try 
+          try
           {
               DbCommand dbCommand = connection.GetCommand();
               dbCommand.CommandText = squery;
@@ -547,7 +553,7 @@ IF;
           }
 
           if (foo.qux_code != '')
-          {   
+          {
               squery = $"SELECT {foo.qux_code} = s.qux_name FROM qux s WHERE s.qux_code = {foo.qux_code};"
               try
               {
@@ -579,7 +585,8 @@ IF;
           string joinQuery2 = "JOIN body b ON t.body_no = b.body_no ";
           string whereQuery2 = $"t.foo_no = {fooNo}";
 
-          string squery2 = $"SELECT t.foo_no, t.body_no, t.foobody_ref, b.body_name, 2 {fromQuery2}{joinQuery2}{whereQuery2};"
+          string squery2 = $"SELECT t.foo_no, t.body_no, t.foobody_ref, b.body_name, 2 "
+          + $"from {fromQuery2}{joinQuery2}{whereQuery2};"
           List<FooBodyBO> fooBodyArr = new List<FooBodyBO>;
 
           try
@@ -619,7 +626,7 @@ IF;
               string joinQuery4 = " JOIN barobject rf ON rf.object_no = f.object_no";
               string whereQuery4 = $" rf.bar_no = {foo.arr_foo_bar.bar_no}";
 
-              string squery4 = $"SELECT f.object_no, f.object_name, 2{fromQuery4}{joinQuery4}{whereQuery4}";
+              string squery4 = $"SELECT f.object_no, f.object_name, 2 from{fromQuery4}{joinQuery4}{whereQuery4}";
               try
               {
                   DbCommand dbCommand = connection.GetCommand();
@@ -888,7 +895,7 @@ IF;
                       ObjectNo = obj.object_no,
                       ObjectName = obj.object_name,
                   };
-                  barObjects.Add(barObject); 
+                  barObjects.Add(barObject);
               }
               fooBar.ArrBarObject = barObjects;
               fooBars.Add(fooBar);
