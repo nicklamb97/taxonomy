@@ -858,14 +858,11 @@ IF;
                       ObjectNo = obj.object_no,
                       ObjectName = obj.object_name,
                   };
-                  barObjects.Add(barObject);
-                  
+                  barObjects.Add(barObject); 
               }
               fooBar.ArrBarObject = barObjects;
-              
               fooBars.Add(fooBar);
           }
-          tpo.ArrFooBar = fooBars;
-          
+          tpo.ArrFooBar = cheese;
           return tpo;
       }
