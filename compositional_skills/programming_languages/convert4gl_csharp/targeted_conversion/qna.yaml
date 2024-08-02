@@ -437,7 +437,6 @@ IF;
         bo = bo_foo;
     )=
     DECLARE
-
         l_tpo		= tpo_foo_detail;
         l_tpo_foobody	= tpo_foobody;
         l_tpo_foobar	= tpo_foobar;
@@ -447,51 +446,24 @@ IF;
 
         i                   = INTEGER NOT NULL;
         j                   = INTEGER NOT NULL;
-
     ENDDECLARE
     BEGIN
-
         l_tpo.FooNo		= bo.foo_no;
         l_tpo.FooName		= bo.foo_name;
         l_tpo.WebName		= bo.foo_webname;
         l_tpo.TypeCode		= bo.footype_code;
         l_tpo.TypeName		= bo.footype_name;
 
-        l_tpo.AddrLine1	        = bo.foo_addr1;
-        l_tpo.AddrLine2	        = bo.foo_addr2;
-        l_tpo.AddrTown	        = bo.foo_town;
-        l_tpo.AddrPostCode	        = bo.foo_postcode;
-        l_tpo.RegionNo              = bo.region_no;
-        l_tpo.RegionName            = bo.region_name;
-
         l_tpo.quxCode        = bo.qux_code;
         l_tpo.quxorbazId         = bo.quxorbaz_id;
         l_tpo.QuxName          = bo.qux_name;
-        l_tpo.DayCost               = bo.foo_daycost;
-
-        l_tpo.CompanyName		= bo.foo_companyname;
-        l_tpo.ContactName	        = bo.foo_contactname;
-        l_tpo.Tel			= bo.foo_tel;
-        l_tpo.Email			= bo.foo_email;
-        l_tpo.Url			= bo.foo_website;
-        l_tpo.Status		= bo.foo_status;
-        l_tpo.Planned		= bo.foo_planned;
-        l_tpo.FooMax		= bo.foo_max;
-        l_tpo.UnitNo		= bo.unit_no;
-        l_tpo.UnitName		= bo.unit_name;
-        l_tpo.EditCounter		= bo.foo_editcounter;
-        l_tpo.GridRef		= bo.foo_gridref;
 
         // Body
         FOR i = 1 TO bo.arr_foo_body.LastRow
         DO
-            l_tpo_foobody.FooNo		= bo.arr_foo_body[i].
-
-foo_no;
+            l_tpo_foobody.FooNo		= bo.arr_foo_body[i].foo_no;
             l_tpo_foobody.BodyNo		= bo.arr_foo_body[i].body_no;
             l_tpo_foobody.BodyName	= bo.arr_foo_body[i].body_name;
-            l_tpo_foobody.BodyRef		= bo.arr_foo_body[i].foobody_ref;
-            l_tpo_foobody.State		= bo.arr_foo_body[i].state;
 
             l_tpo.ArrFooBody.InsertRow( RowObject = l_tpo_foobody.Duplicate() );
         ENDFOR;
@@ -502,13 +474,8 @@ foo_no;
             l_tpo_foobar.FooNo		= bo.arr_foo_bar[i].foo_no;
             l_tpo_foobar.No		= bo.arr_foo_bar[i].bar_no;
             l_tpo_foobar.Name		= bo.arr_foo_bar[i].bar_name;
-            l_tpo_foobar.MaxDelegate	= bo.arr_foo_bar[i].bar_max;
-            l_tpo_foobar.Status		= bo.arr_foo_bar[i].bar_status;
             l_tpo_foobar.quxCode  = bo.arr_foo_bar[i].qux_code;
-            l_tpo_foobar.quxorbazId   = bo.arr_foo_bar[i].quxorbaz_id;
             l_tpo_foobar.QuxName    = bo.arr_foo_bar[i].qux_name;
-            l_tpo_foobar.EditCounter	= bo.arr_foo_bar[i].bar_editcounter;
-            l_tpo_foobar.State		= bo.arr_foo_bar[i].state;
 
             l_tpo.ArrFooBar.InsertRow( RowObject = l_tpo_foobar.Duplicate() );
 
@@ -521,7 +488,6 @@ foo_no;
                 l_tpo_barobject.No           = l_bo_barobject.bar_no;
                 l_tpo_barobject.ObjectNo   = l_bo_barobject.object_no;
                 l_tpo_barobject.ObjectName = l_bo_barobject.object_name;
-                l_tpo_barobject.State        = l_bo_barobject.state;
 
                 l_tpo.ArrFooBar[1].ArrBarObject.InsertRow( RowObject = l_tpo_barobject.Duplicate() );
             ENDFOR;
@@ -542,30 +508,9 @@ foo_no;
               TypeCode = bo.footype_code,
               TypeName = bo.footype_name,
 
-              AddrLine1 = bo.foo_addr1,
-              AddrLine2 = bo.foo_addr2,
-              AddrTown = bo.foo_town,
-              AddrPostCode = bo.foo_postcode,
-              RegionNo = bo.region_no,
-              RegionName = bo.region_name,
-
               QuxCode = bo.qux_code,
               quxorbazId = bo.quxorbaz_id,
               QuxName = bo.qux_name,
-              DayCost = bo.foo_daycost,
-
-              CompanyName = bo.foo_companyname,
-              ContactName = bo.foo_contactname,
-              Tel = bo.foo_tel,
-              Email = bo.foo_email,
-              Url = bo.foo_website,
-              Status = bo.foo_status,
-              Planned = bo.foo_planned,
-              FooMax = bo.foo_max,
-              UnitNo = bo.unit_no,
-              UnitName = bo.unit_name,
-              EditCounter = bo.foo_editcounter,
-              GridRef = bo.foo_gridref
           };
 
           List<FooBodyTPO> fooBodies = new List<FooBodyTPO>();
@@ -576,8 +521,6 @@ foo_no;
                   FooNo = body.foo_no,
                   BodyNo = body.body_no,
                   BodyName = body.body_name,
-                  BodyRef = body.foobody_ref,
-                  State = body.state
               };
               fooBodies.Add(fooBody);
           }
@@ -591,13 +534,8 @@ foo_no;
                   FooNo = bar.foo_no,
                   No = bar.bar_no,
                   Name = bar.bar_name,
-                  MaxDelegate = bar.bar_max,
-                  Status = bar.bar_status,
                   QuxCode = bar.qux_code,
-                  quxorbazId = bar.quxorbaz_id,
                   QuxName = bar.qux_name,
-                  EditCounter = bar.bar_editcounter,
-                  State = bar.state
               };
 
               List<BarObjectTPO> barObjects = new List<BarObjectTPO>();
@@ -608,7 +546,6 @@ foo_no;
                       No = obj.bar_no,
                       ObjectNo = obj.object_no,
                       ObjectName = obj.object_name,
-                      State = obj.state
                   };
                   barObjects.Add(barObject);
               }
