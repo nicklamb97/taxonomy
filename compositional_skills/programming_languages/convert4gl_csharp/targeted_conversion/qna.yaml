@@ -314,263 +314,76 @@ IF;
 
           return fooExists;
       }
-  - question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:
-    PROCEDURE GetObject
+  - question: "How would you convert the following Actian 4GL code into c#? Respond only in code:
+    METHOD GetFoo
     (
-        /* Input */
-        ObjectNo = INTEGER    NOT NULL;
-        Status     = VARCHAR(1) NOT NULL;
+        p_foo_no       = INTEGER    NOT NULL;
+        p_status         = VARCHAR(1) NOT NULL;
+        p_fully_populate = VARCHAR(1) NOT NULL WITH DEFAULT 'Y'; // 'N'=don\'t populate bars/facilities
 
-        /* Output */
-        Result     = tpo_object;
-    ) =
-    DECLARE
-
-        return_no     = INTEGER      NOT NULL;
-        return_msg = VARCHAR(100) NOT NULL;
-
-        BOObject   = bo_object;
-
-    ENDDECLARE
-    BEGIN
-
-        return_msg = '';
-
-        IF ObjectNo = 0
-        THEN
-            CurUserSession.ValidateFatal( msg = 'Object Number must be set.');
-        ENDIF;
-
-        IF ObjectDAO.ValidateObjectNo (object_no = ObjectNo,
-                                           msg         = BYREF(return_msg)) != ER_OK THEN
-            CurUserSession.ValidateFatal( msg = return_msg );
-        ENDIF;
-
-        /* Retrieve the object */
-
-        return_no = ObjectDAO.GetObject (object_no = ObjectNo,
-                                              status      = Status,
-                                              object    = BYREF(BOObject));
-
-        /* Set the return TPO and report if empty list */
-
-        Result = Mapper.ToObjectTPO( bo = BOObject );
-
-    END;"
-    answer: |
-      // API Endpoint - GetObject
-      [HttpGet("GetObject/{objectNo:int}/{status}")]
-      public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
-      {
-          StringBuilder logMessage = new StringBuilder();
-          logMessage.AppendLine(StringFunctions
-          .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-
-          await _objectDAO.ValidateObjectNo(objectNo);
-          var serviceResponse = new NotificationTPO<ObjectTPO>();
-          bool success = true;
-          try
-          {
-              await _dbConnection.OpenConnectionWithTransaction();
-              ObjectBO object = await _objectData.GetObject(_dbConnection, objectNo, status);
-              serviceResponse.Result = _objectMapper.ToObjectTPO(object);
-          }
-          catch (Exception e)
-          {
-              success = false;
-              //do not wait for response and continue
-              _ = _dbConnection.Rollback();
-              logMessage.AppendLine(StringFunctions
-              .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-              throw new Exception(e.Message, e);
-          }
-          finally
-          {
-              if (success) { await _dbConnection.CommitAndClose(); }
-              logMessage.AppendLine(StringFunctions.LogStringBuilder("GetObject finished"));
-              _logger.LogInformation(logMessage.ToString());
-          }
-          return Ok(serviceResponse);
-      }
-  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
-    METHOD GetObject
-    (
-        object_no = INTEGER    NOT NULL;
-        status  	  = VARCHAR(1) NOT NULL;
-
-        object    = bo_object;
+        p_foo          = bo_foo;
     )=
     DECLARE
 
-        rowcount = INTEGER      NOT NULL;
-        l_where	 = VARCHAR(100) NOT NULL;
+        l_status	           = INTEGER NOT NULL;
+        l_rowcount           = INTEGER NOT NULL;
+        l_i		           = INTEGER NOT NULL;
+        l_where	           = VARCHAR(100) NOT NULL;
+
+        l_bo_arr_bar_object = ARRAY OF bo_barobject DEFAULT NULL;
+        l_bo_barobject      = bo_barobject          DEFAULT NULL;
 
     ENDDECLARE
     BEGIN
 
-        l_where = ' object_no = ' + VARCHAR(object_no);
+        l_where = ' foo_no = ' + VARCHAR(p_foo_no);
 
-        IF status <> '' THEN
-            l_where = l_where + ' AND object_status = ' + HC_QUOTE + status + HC_QUOTE;
+        IF p_status <> '' THEN
+            l_where = l_where + ' AND foo_status = ' + HC_QUOTE + p_status + HC_QUOTE;
         ENDIF;
 
-        SELECT object_no		AS object.object_no,
-           object_name		AS object.object_name,
-           object_status		AS object.object_status,
-           object_editcounter	AS object.object_editcounter
-        FROM object
+        SELECT t.foo_no				AS p_foo.foo_no,
+    	   t.foo_name				AS p_foo.foo_name,
+    	   t.foo_webname				AS p_foo.foo_webname,
+    	   t.footype_code				AS p_foo.footype_code,
+    	   v.footype_name				AS p_foo.footype_name,
+    	   t.foo_planned				AS p_foo.foo_planned,
+    	   t.foo_max			AS p_foo.foo_max,
+    	   t.unit_no              		 	AS p_foo.unit_no,
+    	   IFNULL(u.unit_name, '')			AS p_foo.unit_name,
+    	   t.qux_code                            AS p_foo.qux_code,
+    	   t.quxorbaz_id                             AS p_foo.quxorbaz_id,
+    	   t.foo_daycost                           AS p_foo.foo_daycost,
+
+    	   t.foo_addr1       			AS :p_foo.foo_addr1,
+    	   t.foo_addr2       			AS :p_foo.foo_addr2,
+    	   t.foo_town       			AS :p_foo.foo_town,
+    	   t.foo_postcode    			AS :p_foo.foo_postcode,
+    	   t.region_no         	 		AS :p_foo.region_no,
+    	   IFNULL(r.region_name, '')	 		AS :p_foo.region_name,
+
+    	   t.foo_companyname			AS p_foo.foo_companyname,
+    	   t.foo_contactname			AS p_foo.foo_contactname,
+    	   t.foo_tel				AS p_foo.foo_tel,
+    	   t.foo_email				AS p_foo.foo_email,
+    	   t.foo_website				AS p_foo.foo_website,
+    	   IFNULL(p.fooparkingtype_code, '')	AS p_foo.fooparkingtype_code,
+    	   IFNULL(p.fooparkingtype_name, '')	AS p_foo.fooparkingtype_name,
+    	   t.foo_directions			AS p_foo.foo_directions,
+    	   t.foo_specialnotes			AS p_foo.foo_specialnotes,
+    	   t.foo_status				AS p_foo.foo_status,
+    	   t.foo_editcounter			AS p_foo.foo_editcounter,
+    	   t.foo_gridref				AS p_foo.foo_gridref
+        FROM foo t
+        JOIN footype v
+        ON t.footype_code = v.footype_code
+        LEFT JOIN fooparkingtype p
+        ON t.fooparkingtype_code = p.fooparkingtype_code
+        LEFT JOIN unit u
+        ON t.unit_no = u.unit_no
+        JOIN region r
+        ON t.region_no = r.region_no
         WHERE :l_where;
-
-        IF sql_check(rowcount = BYREF(rowcount)) <> ER_OK THEN
-            RETURN ER_FAIL;
-        ENDIF;
-
-        COMMIT;
-
-    END;"
-    answer: |
-      // Get object SQL calls
-      public async Task<ObjectBO> GetObject(ConnectionHelper connection, int objectNo, string status)
-      {
-          if (!connection.IsConnectionOpen())
-              throw new Exception("GetObject tried to use a closed connection ");
-
-          string fromQuery = "object f";
-          string whereQuery = $"f.object_no={objectNo} ";
-
-          if (!string.IsNullOrEmpty(status))
-          {
-              whereQuery = $" {whereQuery} AND f.object_status='{status}'";
-          }
-
-          string squery = "select f.object_no, f.object_name, f.object_status, f.object_editcounter"
-          + $"from {fromQuery} where {whereQuery}";
-
-          ObjectBO objects = new ObjectBO();
-          try
-          {
-              DbCommand dbCommand = connection.GetCommand();
-              dbCommand.CommandText = squery;
-              var reader = await dbCommand.ExecuteReaderAsync();
-              while (reader.Read())
-              {
-                  if (!reader.IsDBNull(0))
-                  {
-                      objects = new ObjectBO()
-                      {
-                          object_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("object_no"),
-                          object_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("object_name"),
-                          object_status = reader.IsDBNull(2) ? string.Empty : reader.GetString("object_status"),
-                          object_editcounter = reader.IsDBNull(3) ? 0 : reader.GetInt32("object_editcounter")
-                      };
-                  }
-
-              }
-          }
-          catch (Exception e)
-          {
-
-              _logger.LogError("Error from class ObjectData - method GetObject");
-              throw new Exception(e.Message, e);
-          }
-
-          return objects;
-      }
-
-  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
-    SCP_GetFoo:
-
-        /* Input */
-        FooNo = INTEGER NOT NULL;
-        Status = VARCHAR(1) NOT NULL;
-
-        /* Output */
-        Result = tpo_foo_detail;
-
-        IF FooNo = 0
-        THEN
-        CurUserSession.ValidateFatal( msg = 'Foo Number must be set.');
-        ENDIF;
-
-        IF FooDAO.ValidateFooNo (p_msg      = ByRef(l_return_msg),
-                                     p_foo_no = FooNo) != ER_OK THEN
-            CurUserSession.ValidateFatal( msg = l_return_msg );
-        ENDIF;
-
-        /* Fatal error if any validation errors */
-
-        IF CurNotifications.hasValidationNotifications = TRUE THEN
-            CurUserSession.ValidateFatal( msg = 'Validation notifications.');
-        ENDIF;
-
-        /* Retrieve the foo */
-        l_return = FooDAO.GetFoo (p_foo_no = FooNo,
-                        p_foo    = BYREF(l_bo),
-                        p_status   = Status);
-
-        IF l_return <> ER_OK THEN
-            CurUserSession.ValidateFatal(msg = 'Error occurred getting foo ['
-                                             + VARCHAR(FooNo)
-                                             + ']'  );
-        ENDIF;
-
-        /* Set the return TPO and report if empty list */
-        Result = Mapper.ToFooTPO( bo = l_bo );"
-    answer: |
-      // API Endpoint - GetFoo
-      [HttpGet("GetFoo/{fooNo:int}/{status}")]
-      public async Task<ActionResult<NotificationTPO<FooTPO>>> GetFoo(int fooNo, string status)
-      {
-          StringBuilder logMessage = new StringBuilder();
-          logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
-
-          await _fooDAO.ValidateFooNo(fooNo);
-          var serviceResponse = new NotificationTPO<FooTPO>();
-          bool success = true;
-          try
-          {
-              await _dbConnection.OpenConnectionWithTransaction();
-              FooBO foo = await _fooData.GetFoo(_dbConnection, fooNo, status);
-              serviceResponse.Result = _fooMapper.ToFooTPO(foo);
-          }
-          catch (Exception e)
-          {
-              success = false;
-              //do not wait for response and continue
-              _ = _dbConnection.Rollback();
-              logMessage.AppendLine(StringFunctions.LogStringBuilder($"GetFoo Started fooNo={fooNo}, status={status}"));
-              throw new Exception(e.Message, e);
-          }
-          finally
-          {
-              if (success) { await _dbConnection.CommitAndClose(); }
-              logMessage.AppendLine(StringFunctions.LogStringBuilder("GetFoo finished"));
-              _logger.LogInformation(logMessage.ToString());
-          }
-          return Ok(serviceResponse);
-      }
-
-  - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
-    METHOD ValidateFooNo
-    (
-        p_foo_no       = INTEGER      NOT NULL;
-
-        p_footype_code = VarChar(1)   NOT NULL;
-        p_msg            = VarChar(200) NOT NULL;
-    )=
-    Declare
-
-        l_foo_no   = INTEGER NOT NULL;
-        l_rowcount = INTEGER NOT NULL;
-        l_status   = INTEGER NOT NULL;
-
-    EndDeclare
-    Begin
-
-        SELECT foo_no       AS :l_foo_no,
-               footype_code AS :p_footype_code
-        FROM foo
-        WHERE foo_no = :p_foo_no;
 
         l_status = CALLPROC sql_check(rowcount = BYREF(l_rowcount));
 
@@ -578,47 +391,264 @@ IF;
             RETURN ER_FAIL;
         ENDIF;
 
-        IF (l_rowcount = 0) THEN
-        p_msg = 'Foo number not found in TmsFoo table.';
-        RETURN ER_FAIL;
-        END
+        // If the Foo cannot be retrieved, for instance a request for an active Foo
+        // status but the Foo is marked as inactive, then finish populating the Foo object.
 
-IF;
+        IF l_rowcount = 0 THEN
+            RETURN ER_OK;
+        ENDIF;
 
-        RETURN ER_OK;
-    End"
+        IF p_foo.qux_code != '' THEN
+
+            SELECT p_foo.qux_name = s.qux_name
+            FROM qux s
+            WHERE s.qux_code = :p_foo.qux_code;
+
+            IF sql_check() <> ER_OK THEN
+                RETURN ER_FAIL;
+            ENDIF;
+
+        ENDIF;
+
+        IF p_fully_populate = 'N' THEN
+            RETURN ER_OK;
+        ENDIF;
+
+        l_i = 1;
+
+        SELECT t.foo_no	AS p_foo.arr_foo_body[l_i].foo_no,
+    	   t.body_no			AS p_foo.arr_foo_body[l_i].body_no,
+    	   t.foobody_ref	AS p_foo.arr_foo_body[l_i].foobody_ref,
+    	   b.body_name		AS p_foo.arr_foo_body[l_i].body_name,
+    	   2					AS p_foo.arr_foo_body[l_i].state
+        FROM foobody t
+        JOIN body b
+        ON t.body_no = b.body_no
+        WHERE t.foo_no = :p_foo_no
+        BEGIN
+    	l_i = l_i + 1;
+        END;
+
+        l_status = CALLPROC sql_check(rowcount = BYREF(l_rowcount));
+
+        IF l_status <> ER_OK THEN
+            RETURN ER_FAIL;
+        ENDIF;
+
+        // Get the bars associated with the foo.
+
+        IF BarDAO.GetBarList(
+                p_foo_no  = p_foo.foo_no,
+                p_bar_list = BYREF(p_foo.arr_foo_bar)) != ER_OK THEN
+
+            RETURN ER_FAIL;
+        ENDIF;
+
+        // We now have a list of bars linked to the foo now
+        // get the facilities linked to each bar.
+
+        FOR l_i = 1 TO p_foo.arr_foo_bar.LastRow DO
+
+            l_bo_arr_bar_object = p_foo.arr_foo_bar[l_i].arr_bar_object;
+
+            l_bo_barobject = bo_barobject.Create();
+
+            l_bo_barobject.bar_no = p_foo.arr_foo_bar[l_i].bar_no;
+    
+            SELECT f.object_no   AS :l_bo_barobject.object_no,
+    	       f.object_name AS :l_bo_barobject.object_name,
+                   2                  AS :l_bo_barobject.state
+            FROM object     f
+            JOIN barobject rf
+            ON rf.object_no = f.object_no
+            WHERE rf.bar_no = :l_bo_barobject.bar_no
+            BEGIN
+                l_bo_arr_bar_object.InsertRow(rowobject = l_bo_barobject.Duplicate());
+            END;
+
+            IF sql_check(rowcount = BYREF(l_rowcount)) <> ER_OK THEN
+                RETURN ER_FAIL;
+            ENDIF;
+
+            l_bo_arr_bar_object = NULL;
+            l_bo_barobject      = NULL;
+
+        ENDFOR;
+
+    END;"
+
     answer: |
-      public async Task<bool> ValidateFooNo(int fooNo)
+      public async Task<FooBO> GetFoo (IHssConnectionHelper connection, int fooNo, string status, string fullyPopulate = 'Y')
       {
-          var query = $"SELECT foo_no, footype_code FROM foo WHERE foo_no = {fooNo}";
-          bool fooExists = false;
-          try
+          if(!connection.IsConnectionOpen())
+              throw new Exception("GetFoo tried to use a closed connection");
+
+          string fromQuery = "foo t ";
+          string whereQuery = $" foo_no {fooNo}"
+
+          if(status != '')
           {
-              using (var connection = new SqlConnection(_connectionString))
+              whereQuery += $" AND foo_status = '{status}'"
+          }
+          string joinQuery = "JOIN footype v ON t.footype_code = v.footype_code LEFT JOIN fooparkingtype p ON t.fooparkingtype_code LEFT JOIN unit u ON t.unit_no = u.unit_no JOIN region r ON t.region_no = r.region_no "
+
+          string squery = $"SELECT t.foo_no, t.foo_name, t.foo_webname, t.footype_code, t.foo_planned,t.foo_max, t.unit_no, IFNULL(u.unit_name, ''),t.qux_code, t.quxorbaz_id,t.foo_daycost, t.foo_addr1, t.foo_addr2,t.foo_town,t.foo_postcode,t.region_no, IFNULL(r.region_name, ''), t.foo_companyname, t.foo_contactname, t.foo_tel,t.foo_email, t.foo_website, IFNULL(p.fooparkingtype_code, ''), IFNULL(p.fooparkingtype_name), t.venus_directions, t.foo_specialnotes, t.foo_status, t.foo_editcounter, t.foo_gridref from {fromQuery}{joinQuery}{whereQuery};"
+
+          FooBO foo;
+          try 
+          {
+              DbCommand dbCommand = connection.GetCommand();
+              dbCommand.CommandText = squery;
+              var reader = await dbCommand.ExecuteReaderAsync();
+              while (reader.Read())
               {
-                  await connection.OpenAsync();
-                  using (var command = new SqlCommand(query, connection))
+                  if(!reader.IsDBNull(0))
                   {
-                      using (var reader = await command.ExecuteReaderAsync())
+                      foo = new FooBO()
                       {
-                          fooExists = reader.HasRows;
-                      }
+                          foo_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("foo_no"),
+                          foo_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("foo_name"),
+                          foo_webname  = reader.IsDBNull(2) ? string.Empty : reader.GetString("foo_webname"),
+                          footype_code = reader.IsDBNull(3) ? string.Empty : reader.GetString("footype_code"),
+                          footype_name = reader.IsDBNull(4) ? string.Empty : reader.GetString("footype_name"),
+                          foo_planned = reader.IsDBNull(5) ? string.Empty : reader.GetString("foo_planned"),
+                          foo_max = reader.IsDBNull(6) ? 0 : reader.getint32("foo_max"),
+                          unit_no = reader.IsDBNull(7) ? 0 : reader.GetInt32("unit_no"),
+                          unit_name = reader.IsDBNull(8) ? string.Empty : reader.GetString("unit_name"),
+                          qux_code = reader.IsDBNull(9) ? string.Empty : reader.GetString("qux_code"),
+                          quxorbaz_id = reader.IsDBNull(10) ? 0 : reader.GetInt32("quxorbaz_id"),
+                          foo_daycost = reader.IsDBNull(11) ? 0m : reader.GetDecimal("foo_daycost"),
+                          foo_addr1 = reader.IsDBNull(12) ? string.Empty : reader.GetString("foo_addr1"),
+                          foo_addr2 = reader.IsDBNull(13) ? string.Empty : reader.GetString("foo_addr2"),
+                          foo_town = reader.IsDBNull(14) ? string.Empty : reader.GetString("foo_town"),
+                          foo_postcode = reader.IsDBNull(15) ? string.Empty : reader.GetString("foo_postcode"),
+                          region_no = reader.IsDBNull(16) ? 0 : reader.GetInt32("region_no"),
+                          region_name = reader.IsDBNull(17) ? string.Empty : reader.GetString("region_name"),
+                          foo_companyname = reader.IsDBNull(18) ? string.Empty : reader.GetString("foo_companyname"),
+                          foo_contactname = reader.IsDBNull(19) ? string.Empty : reader.GetString("foo_contactname"),
+                          foo_tel = reader.IsDBNull(20) ? string.Empty : reader.GetString("foo_tel"),
+                          foo_email = reader.IsDBNull(21) ? string.Empty : reader.GetString("foo_email"),
+                          foo_website = reader.IsDBNull(22) ? string.Empty : reader.GetString("foo_website"),
+                          fooparkingtype_code = reader.IsDBNull(23) ? string.Empty : reader.GetString("fooparkingtype_code")
+                          fooparkingtype_name = reader.IsDBNull(24) ? string.Empty : reader.GetString("fooparkingtype_name"),
+                          foo_directions = reader.IsDBNull(25) ? string.Empty : reader.GetString("foo_directions"),
+                          foo_specialnotes = reader.IsDBNull(26) ? string.Empty : reader.GetString("foo_specialnotes"),
+                          foo_status = reader.IsDBNull(27) ? string.Empty : reader.GetString("foo_status"),
+                          foo_editcounter = reader.IsDBNull(28) ? 0 : reader.GetInt32("foo_editcounter"),
+                          foo_gridref = reader.IsDBNull(29) ? string.Empty : reader.GetString("foo_gridref")
+                      };
                   }
               }
-              if (!fooExists)
+          }
+          catch (Exception e)
+          {
+              _logger.LogError("Error from class FooData - method GetFoo");
+               throw new Exception(e.Message, e);
+          }
+
+          if (foo.qux_code != '')
+          {   
+              squery = $"SELECT {foo.qux_code} = s.qux_name FROM qux s WHERE s.qux_code = {foo.qux_code};"
+              try
               {
-                  throw new Exception("Foo number not found in TmsFoo table.");
+                  DbCommand dbCommand = connection.GetCommand();
+                  dbCommand.CommandText = squery;
+                  var reader = await dbCommand.ExecuteReaderAsync();
+                  while (reader.read())
+                  {
+                      if(reader.IsDBNull(0))
+                      {
+                          foo.qux_code = reader.IsDBNull(0) ? string.Empty : reader.GetString("qux_code")
+                      };
+                  }
+              }
+              catch (Exception e)
+              {
+                  _logger.LogError("Error from class FooData - method GetFoo");
+                  throw new Exception(e.Message, e);
+              }
+
+          }
+
+          if (fullyPopulate = 'N')
+          {
+              return foo;
+          }
+
+          string fromQuery2 = "foobody t ";
+          string joinQuery2 = "JOIN body b ON t.body_no = b.body_no ";
+          string whereQuery2 = $"t.foo_no = {fooNo}";
+
+          string squery2 = $"SELECT t.foo_no, t.body_no, t.foobody_ref, b.body_name, 2 {fromQuery2}{joinQuery2}{whereQuery2};"
+          List<FooBodyBO> fooBodyArr = new List<FooBodyBO>;
+
+          try
+          {
+              DbCommand dbCommand = connection.GetCommand();
+              dbCommand.CommandText = squery2;
+              var reader = await dbCommand.ExecuteReaderAsync();
+              while (reader.read())
+              {
+                  if(!reader.IsDBNull(0))
+                  {
+                      FooBodyBO fooBodyBO = new FooBodyBO()
+                      {
+                          foo_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("foo_no"),
+                          body_no = reader.IsDBNull(1) ? 0 : reader.GetInt32("body_no"),
+                          foobody_ref = reader.IsDBNull(2) ? string.Empty : reader.GetString("foobody_ref"),
+                          body_name = reader.IsDBNull(3) ? string.Empty : reader.GetString("body_name"),
+                          state = reader.IsDBNull(4) ? 0 : reader.GetInt32("2")
+                      };
+                      fooBodyArr.add(fooBodyBO);
+                  }
               }
           }
-          catch (Exception ex)
+          catch (Exception e)
           {
-              _logger.LogError($"Error validating foo number {fooNo}: {ex.Message}");
-              throw;
+              _logger.LogError("Error from class FooData - method GetFoo");
+              throw new Exception(e.Message, e);
           }
 
-          return fooExists;
-      }
+          foo.arr_foo_body = fooBodyArr;
+          foo.arr_foo_bar = await GetBarList(connection, fooNo, status);
 
+          foreach(FooBarBO iFooBar in foo.arr_foo_bar)
+          {
+              List<BarObjectBO> arrBarObjectBO = new List<BarObjectBO>;
+              string fromQuery4 = " object f";
+              string joinQuery4 = " JOIN barobject rf ON rf.object_no = f.object_no";
+              string whereQuery4 = $" rf.bar_no = {foo.arr_foo_bar.bar_no}";
+
+              string squery4 = $"SELECT f.object_no, f.object_name, 2{fromQuery4}{joinQuery4}{whereQuery4}";
+              try
+              {
+                  DbCommand dbCommand = connection.GetCommand();
+                  dbCommand.CommandText = squery4;
+                  var reader = await dbCommand.ExecuteReaderAsync();
+                  while(reader.read())
+                  {
+                      if(reader.IsDBNull(0))
+                      {
+                          BarObjectBO barObjectBO = new BarObjectBO()
+                          {
+                              bar_no = foo.arr_foo_bar.bar_no,
+                              object_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("object_no"),
+                              object_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("object_name"),
+                              state = reader.IsDBNull(2) ? 0 : reader.GetInt32("2")
+                          };
+                          arrBarObjectBO.add(barObjectBO);
+                      }
+                  }
+                  iFooBar.arr_bar_object = arrBarObjectBO
+              }
+              catch (Exception e)
+              {
+                 _logger.LogError("Error from class FooData - method GetFoo");
+                  throw new Exception(e.Message, e);
+              }
+          }
+          return foo;
+      }
   - question: "How would you convert the following Actian 4GL code into c#? Respond only in code:
     Method GetBarList
     (
