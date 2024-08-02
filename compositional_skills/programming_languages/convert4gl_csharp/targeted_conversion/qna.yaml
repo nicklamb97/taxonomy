@@ -5,14 +5,12 @@ seed_examples:
   - question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:
     PROCEDURE GetObject
     (
-
         /* Input */
         ObjectNo = INTEGER    NOT NULL;
         Status     = VARCHAR(1) NOT NULL;
 
         /* Output */
         Result     = tpo_object;
-
     ) =
     DECLARE
 
@@ -23,13 +21,6 @@ seed_examples:
 
     ENDDECLARE
     BEGIN
-
-
-        /*--------------------------------------------------------------------------------------------*/
-        /* Validation                                                                                 */
-        /*--------------------------------------------------------------------------------------------*/
-
-        /* Validate the ObjectNo exists. */
 
         return_msg = '';
 
@@ -483,10 +474,6 @@ IF;
         l_tpo.Tel			= bo.foo_tel;
         l_tpo.Email			= bo.foo_email;
         l_tpo.Url			= bo.foo_website;
-        l_tpo.ParkingTypeCode	= bo.fooparkingtype_code;
-        l_tpo.ParkingTypeName	= bo.fooparkingtype_name;
-        l_tpo.Directions		= bo.foo_directions;
-        l_tpo.SpecialNotes		= bo.foo_specialnotes;
         l_tpo.Status		= bo.foo_status;
         l_tpo.Planned		= bo.foo_planned;
         l_tpo.FooMax		= bo.foo_max;
@@ -516,9 +503,6 @@ foo_no;
             l_tpo_foobar.No		= bo.arr_foo_bar[i].bar_no;
             l_tpo_foobar.Name		= bo.arr_foo_bar[i].bar_name;
             l_tpo_foobar.MaxDelegate	= bo.arr_foo_bar[i].bar_max;
-            l_tpo_foobar.SpecialNotes	= bo.arr_foo_bar[i].bar_specialnotes;
-            l_tpo_foobar.DayPrice	= bo.arr_foo_bar[i].bar_dayprice;
-            l_tpo_foobar.DayCost		= bo.arr_foo_bar[i].bar_daycost;
             l_tpo_foobar.Status		= bo.arr_foo_bar[i].bar_status;
             l_tpo_foobar.quxCode  = bo.arr_foo_bar[i].qux_code;
             l_tpo_foobar.quxorbazId   = bo.arr_foo_bar[i].quxorbaz_id;
@@ -575,10 +559,6 @@ foo_no;
               Tel = bo.foo_tel,
               Email = bo.foo_email,
               Url = bo.foo_website,
-              ParkingTypeCode = bo.fooparkingtype_code,
-              ParkingTypeName = bo.fooparkingtype_name,
-              Directions = bo.foo_directions,
-              SpecialNotes = bo.foo_specialnotes,
               Status = bo.foo_status,
               Planned = bo.foo_planned,
               FooMax = bo.foo_max,
@@ -612,9 +592,6 @@ foo_no;
                   No = bar.bar_no,
                   Name = bar.bar_name,
                   MaxDelegate = bar.bar_max,
-                  SpecialNotes = bar.bar_specialnotes,
-                  DayPrice = bar.bar_dayprice,
-                  DayCost = bar.bar_daycost,
                   Status = bar.bar_status,
                   QuxCode = bar.qux_code,
                   quxorbazId = bar.quxorbaz_id,
