@@ -387,7 +387,7 @@ IF;
         FOR l_i = 1 TO p_foo.arr_foo_bar.LastRow DO
             l_bo_arr_bar_object = p_foo.arr_foo_bar[l_i].arr_bar_object;
             l_bo_barobject = bo_barobject.Create();
-            l_bo_barobject.bar_no = p_foo.arr_foo_bar[l_i].bar_no; 
+            l_bo_barobject.bar_no = p_foo.arr_foo_bar[l_i].bar_no;
             SELECT f.object_no   AS :l_bo_barobject.object_no,
             FROM object     f
             JOIN barobject rf
