@@ -478,7 +478,8 @@ IF;
     END;"
 
     answer: |
-      public async Task<FooBO> GetFoo (IHssConnectionHelper connection, int fooNo, string status, string fullyPopulate = 'Y')
+      public async Task<FooBO> GetFoo (ConnectionHelper connection, int fooNo, string status,
+      string fullyPopulate = 'Y')
       {
           if(!connection.IsConnectionOpen())
               throw new Exception("GetFoo tried to use a closed connection");
@@ -714,7 +715,7 @@ IF;
 
     END;"
     answer: |
-      public async Task<List<FooBarBO>> GetBarList(IHssConnectionHelper connection, int fooNo, string status)
+      public async Task<List<FooBarBO>> GetBarList(ConnectionHelper connection, int fooNo, string status)
       {
           if(!connection.IsConnectionOpen())
               throw new Exception("GetBarList tried to use a closed connection");
