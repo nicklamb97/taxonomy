@@ -1,0 +1,782 @@
+version: 3
+task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
+created_by: guyvernon
+seed_examples:
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="tpo_object" xsi:type="classsource">
+    <superclass>userobject</superclass>
+    <attributes>
+    <row>
+    <displayname>ObjectNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>ObjectName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>ObjectStatus</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>EditCounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class ObjectTPO {
+          int ObjectNo;
+          string ObjectName;
+          string ObjectStatus;
+          int EditCounter;
+      }
+
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="bo_object" xsi:type="classsource">
+    <superclass>bo__entity</superclass>
+    <attributes>
+    <row>
+    <displayname>state</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>object_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>object_name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>object_status</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>object_editcounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class ObjectBO {
+          int object_no;
+          string object_name;
+          string object_status;
+          int object_editcounter;
+      }
+
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="tpo_foo_put" xsi:type="classsource">
+    <superclass>userobject</superclass>
+    <attributes>
+    <row>
+    <displayname>ArrFooBody</displayname>
+    <datatype>tpo_foobody</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row>
+    <displayname>ArrFooBar</displayname>
+    <datatype>tpo_foobar</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row_class>attributeobject</row_class>
+    <row>
+    <displayname>TypeCode</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>CompanyName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>ContactName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>Tel</displayname>
+    <datatype>varchar(15)</datatype>
+    </row>
+    <row>
+    <displayname>Email</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>Status</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>EditCounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>AddrLine1</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>AddrLine2</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>AddrTown</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>AddrPostCode</displayname>
+    <datatype>varchar(8)</datatype>
+    </row>
+    <row>
+    <displayname>Url</displayname>
+    <datatype>varchar(250)</datatype>
+    </row>
+    <row>
+    <displayname>Directions</displayname>
+    <datatype>varchar(1000)</datatype>
+    </row>
+    <row>
+    <displayname>SpecialNotes</displayname>
+    <datatype>varchar(300)</datatype>
+    </row>
+    <row>
+    <displayname>ParkingTypeCode</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>RegionNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>quxorbazId</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>QuxCode</displayname>
+    <datatype>varchar(7)</datatype>
+    </row>
+    <row>
+    <displayname>DayCost</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>FooName</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>FooNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>WebName</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>Planned</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>FooMax</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>UnitNo</displayname>
+    <datatype>smallint</datatype>
+    </row>
+    <row>
+    <displayname>GridRef</displayname>
+    <datatype>varchar(15)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    <row>
+    <displayname>TypeName</displayname>
+    <datatype>varchar(20)</datatype>
+    </row>
+    <row>
+    <displayname>ParkingTypeName</displayname>
+    <datatype>varchar(20)</datatype>
+    </row>
+    <row>
+    <displayname>RegionName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>QuxName</displayname>
+    <datatype>varchar(35)</datatype>
+    </row>
+    <row>
+    <displayname>UnitName</displayname>
+    <datatype>varchar(25)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooPutTPO {
+          public FooBodyTPO[]? ArrFooBody;
+          public FooBarTPO[]? ArrFooBar;
+          public string TypeCode;
+          public string CompanyName;
+          public string ContactName;
+          public string Tel;
+          public string Email;
+          public string Status;
+          public int EditCounter;
+          public string AddrLine1;
+          public string AddrLine2;
+          public string AddrTown;
+          public string AddrPostCode;
+          public string Url;
+          public string Directions;
+          public string SpecialNotes;
+          public string ParkingTypeCode;
+          public int RegionNo;
+          public int quxorbazId;
+          public string QuxCode;
+          public decimal DayCost;
+          public string FooName;
+          public int FooNo;
+          public string WebName;
+          public string Planned;
+          public int FooMax;
+          public int UnitNo;
+          public string GridRef;
+          public string TypeName;
+          public string ParkingTypeName;
+          public string RegionName;
+          public string QuxName;
+          public string UnitName;
+      }
+
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="tpo_foobody" xsi:type="classsource">
+    <superclass>userobject</superclass>
+    <attributes>
+    <row>
+    <displayname>FooNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>BodyNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>BodyName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>State</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>BodyRef</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooBodyTPO {
+          public int FooNo;
+          public int BodyNo;
+          public string BodyName;
+          public int state;
+          public string BodyRef;
+      }
+
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="tpo_foobar" xsi:type="classsource">
+    <superclass>userobject</superclass>
+    <attributes>
+    <row>
+    <displayname>No</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>FooNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>Name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>MaxDelegate</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>SpecialNotes</displayname>
+    <datatype>varchar(300)</datatype>
+    </row>
+    <row>
+    <displayname>DayCost</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>DayPrice</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>Status</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>EditCounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>State</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>ArrBarObject</displayname>
+    <datatype>tpo_barobject</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row>
+    <displayname>FooName</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>quxorbazId</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>QuxCode</displayname>
+    <datatype>varchar(7)</datatype>
+    </row>
+    <row>
+    <displayname>QuxName</displayname>
+    <datatype>varchar(35)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooBarTPO {
+          public int No;
+          public int FooNo;
+          public string Name;
+          public int MaxDelegate;
+          public string SpecialNotes;
+          public decimal DayCost;
+          public decimal DayPrice;
+          public string Status;
+          public int EditCounter;
+          public int State;
+          public BarObjectTPO[]? ArrBarObject;
+          public string FooName;
+          public int quxorbazId;
+          public string QuxCode;
+          public string QuxName;
+      }
+
+  - question: 
+    How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="tpo_barobject" xsi:type="classsource">
+    <superclass>userobject</superclass>
+    <attributes>
+    <row>
+    <displayname>No</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>ObjectNo</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>State</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>ObjectName</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class BarObjectTPO {
+          public int No;
+          public int ObjectNo;
+          public int State;
+          public string ObjectName;
+      }
+
+  - question: How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="bo_foo" xsi:type="classsource">
+    <superclass>bo__entity</superclass>
+    <attributes>
+    <row>
+    <displayname>state</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>foo_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>foo_name</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>footype_code</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>foo_companyname</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>foo_contactname</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>foo_tel</displayname>
+    <datatype>varchar(15)</datatype>
+    </row>
+    <row>
+    <displayname>foo_email</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>foo_status</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>foo_editcounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>footype_name</displayname>
+    <datatype>varchar(20)</datatype>
+    </row>
+    <row>
+    <displayname>foo_addr1</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>foo_addr2</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>foo_town</displayname>
+    <datatype>varchar(30)</datatype>
+    </row>
+    <row>
+    <displayname>foo_postcode</displayname>
+    <datatype>varchar(8)</datatype>
+    </row>
+    <row>
+    <displayname>foo_website</displayname>
+    <datatype>varchar(250)</datatype>
+    </row>
+    <row>
+    <displayname>foo_directions</displayname>
+    <datatype>varchar(1000)</datatype>
+    </row>
+    <row>
+    <displayname>foo_specialnotes</displayname>
+    <datatype>varchar(300)</datatype>
+    </row>
+    <row>
+    <displayname>fooparkingtype_code</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>fooparkingtype_name</displayname>
+    <datatype>varchar(20)</datatype>
+    </row>
+    <row>
+    <displayname>arr_foo_body</displayname>
+    <datatype>bo_foobody</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row>
+    <displayname>arr_foo_bar</displayname>
+    <datatype>bo_foobar</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row>
+    <displayname>region_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>region_name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>qux_code</displayname>
+    <datatype>varchar(7)</datatype>
+    </row>
+    <row>
+    <displayname>quxorbaz_id</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>qux_name</displayname>
+    <datatype>varchar(35)</datatype>
+    </row>
+    <row>
+    <displayname>foo_daycost</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>foo_webname</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>foo_planned</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>foo_max</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>unit_no</displayname>
+    <datatype>smallint</datatype>
+    </row>
+    <row>
+    <displayname>unit_name</displayname>
+    <datatype>varchar(25)</datatype>
+    </row>
+    <row>
+    <displayname>foo_gridref</displayname>
+    <datatype>varchar(15)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooBO {
+          public int state;
+          public int foo_no;
+          public string foo_name;
+          public string footype_code;
+          public string foo_companyname;
+          public string foo_contactname;
+          public string foo_tel;
+          public string foo_email;
+          public string foo_status;
+          public int foo_editcounter;
+          public string footype_name;
+          public string foo_addr1;
+          public string foo_addr2;
+          public string foo_town;
+          public string foo_postcode;
+          public string foo_website;
+          public string foo_directions;
+          public string foo_specialnotes;
+          public string fooparkingtype_name;
+          public string fooparkingtype_code;
+          public FooBodyBO[] arr_foo_body;
+          public FooBarBO[] arr_foo_bar;
+          public int region_no;
+          public string region_name;
+          public string qux_code;
+          public int quxorbaz_id;
+          public string qux_name;
+          public decimal foo_daycost;
+          public string foo_webname;
+          public string foo_planned;
+          public int foo_max;
+          public int unit_no;
+          public string unit_name;
+          public string foo_gridref;
+      }
+
+  - question: How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="bo_foobody" xsi:type="classsource">
+    <superclass>bo__entity</superclass>
+    <attributes>
+    <row>
+    <displayname>state</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>foo_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>body_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>body_name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>foobody_ref</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooBodyBO {
+          public int state;
+          public int foo_no;
+          public int body_no;
+          public string body_name;
+          public string foobody_ref
+      }
+
+  - question: How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="bo_foobar" xsi:type="classsource">
+    <superclass>bo__entity</superclass>
+    <attributes>
+    <row>
+    <displayname>state</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>bar_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>foo_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>bar_name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>bar_max</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>bar_specialnotes</displayname>
+    <datatype>varchar(300)</datatype>
+    </row>
+    <row>
+    <displayname>bar_dayprice</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>bar_daycost</displayname>
+    <datatype>money</datatype>
+    </row>
+    <row>
+    <displayname>bar_status</displayname>
+    <datatype>varchar(1)</datatype>
+    </row>
+    <row>
+    <displayname>bar_editcounter</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>arr_bar_object</displayname>
+    <datatype>bo_barobject</datatype>
+    <isarray>1</isarray>
+    <isnullable>1</isnullable>
+    </row>
+    <row>
+    <displayname>foo_name</displayname>
+    <datatype>varchar(150)</datatype>
+    </row>
+    <row>
+    <displayname>quxorbaz_id</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>qux_code</displayname>
+    <datatype>varchar(7)</datatype>
+    </row>
+    <row>
+    <displayname>qux_name</displayname>
+    <datatype>varchar(35)</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class FooBarBO {
+          public int state;
+          public int bar_no;
+          public int foo_no;
+          public string bar_name;
+          public int bar_max;
+          public string bar_specialnotes;
+          public decimal bar_dayprice;
+          public decimal bar_daycost;
+          public string bar_status;
+          public int bar_editcounter;
+          public BarObjectBO[]? arr_bar_object;
+          public string foo_name;
+          public int quxorbaz_id;
+          public string qux_code;
+          public string qux_name;
+      }
+
+  - question: How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+    <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
+    <COMPONENT name="bo_barobject" xsi:type="classsource">
+    <superclass>bo__entity</superclass>
+    <attributes>
+    <row>
+    <displayname>bar_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>object_no</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row>
+    <displayname>object_name</displayname>
+    <datatype>varchar(50)</datatype>
+    </row>
+    <row>
+    <displayname>state</displayname>
+    <datatype>integer</datatype>
+    </row>
+    <row_class>attributeobject</row_class>
+    </attributes>
+    </COMPONENT>
+    </OPENROAD>
+
+    answer: |
+      public class BarObjectBO {
+          public int bar_no;
+          public int object_no;
+          public string object_name;
+          public int state;
+      }
