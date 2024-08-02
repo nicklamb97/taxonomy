@@ -2,7 +2,7 @@ version: 3
 task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
 created_by: guyvernon
 seed_examples:
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="tpo_object" xsi:type="classsource">
     <superclass>userobject</superclass>
@@ -26,7 +26,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class ObjectTPO {
@@ -36,7 +36,7 @@ seed_examples:
           int EditCounter;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="bo_object" xsi:type="classsource">
     <superclass>bo__entity</superclass>
@@ -64,7 +64,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class ObjectBO {
@@ -74,7 +74,7 @@ seed_examples:
           int object_editcounter;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="tpo_foo_put" xsi:type="classsource">
     <superclass>userobject</superclass>
@@ -220,7 +220,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooPutTPO {
@@ -259,7 +259,7 @@ seed_examples:
           public string UnitName;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="tpo_foobody" xsi:type="classsource">
     <superclass>userobject</superclass>
@@ -287,7 +287,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooBodyTPO {
@@ -298,7 +298,7 @@ seed_examples:
           public string BodyRef;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="tpo_foobar" xsi:type="classsource">
     <superclass>userobject</superclass>
@@ -368,7 +368,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooBarTPO {
@@ -389,7 +389,7 @@ seed_examples:
           public string QuxName;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="tpo_barobject" xsi:type="classsource">
     <superclass>userobject</superclass>
@@ -413,7 +413,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class BarObjectTPO {
@@ -423,7 +423,7 @@ seed_examples:
           public string ObjectName;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="bo_foo" xsi:type="classsource">
     <superclass>bo__entity</superclass>
@@ -571,7 +571,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooBO {
@@ -611,7 +611,7 @@ seed_examples:
           public string foo_gridref;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="bo_foobody" xsi:type="classsource">
     <superclass>bo__entity</superclass>
@@ -639,7 +639,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooBodyBO {
@@ -650,7 +650,7 @@ seed_examples:
           public string foobody_ref
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="bo_foobar" xsi:type="classsource">
     <superclass>bo__entity</superclass>
@@ -720,7 +720,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class FooBarBO {
@@ -741,7 +741,7 @@ seed_examples:
           public string qux_name;
       }
 
-  - question: "How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
+  - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
     <OPENROAD xmlns:xsi="https://url.uk.m.mimecastprotect.com/s/76gzCAQmQsnpzltX6-g0?domain=w3.org">
     <COMPONENT name="bo_barobject" xsi:type="classsource">
     <superclass>bo__entity</superclass>
@@ -765,7 +765,7 @@ seed_examples:
     <row_class>attributeobject</row_class>
     </attributes>
     </COMPONENT>
-    </OPENROAD>"
+    </OPENROAD>'
 
     answer: |
       public class BarObjectBO {
