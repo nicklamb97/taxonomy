@@ -860,7 +860,7 @@ IF;
                   };
                   barObjects.Add(barObject);
               }
-              fooBar.ArrBarObject = barObjects;
+              fooBar.ArrBarObject =  barObjects;
               fooBars.Add(fooBar);
           }
           tpo.ArrFooBar = fooBars;
