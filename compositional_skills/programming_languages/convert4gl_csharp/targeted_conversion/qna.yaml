@@ -2,85 +2,6 @@ version: 3
 task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
 created_by: guyvernon
 seed_examples:
-  - question: "How would you convert the following Actian 4GL code to csharp? Respond only in code:
-    PROCEDURE GetObject
-    (
-        /* Input */
-        ObjectNo = INTEGER    NOT NULL;
-        Status     = VARCHAR(1) NOT NULL;
-
-        /* Output */
-        Result     = tpo_object;
-    ) =
-    DECLARE
-
-        return_no     = INTEGER      NOT NULL;
-        return_msg = VARCHAR(100) NOT NULL;
-
-        BOObject   = bo_object;
-
-    ENDDECLARE
-    BEGIN
-
-        return_msg = '';
-
-        IF ObjectNo = 0
-        THEN
-            CurUserSession.ValidateFatal( msg = 'Object Number must be set.');
-        ENDIF;
-
-        IF ObjectDAO.ValidateObjectNo (object_no = ObjectNo,
-                                           msg         = BYREF(return_msg)) != ER_OK THEN
-            CurUserSession.ValidateFatal( msg = return_msg );
-        ENDIF;
-
-        /* Retrieve the object */
-
-        return_no = ObjectDAO.GetObject (object_no = ObjectNo,
-                                              status      = Status,
-                                              object    = BYREF(BOObject));
-
-        /* Set the return TPO and report if empty list */
-
-        Result = Mapper.ToObjectTPO( bo = BOObject );
-
-    END;"
-    answer: |
-      // API Endpoint - GetObject
-      [HttpGet("GetObject/{objectNo:int}/{status}")]
-      public async Task<ActionResult<NotificationTPO<ObjectTPO>>> GetObject(int objectNo, string status)
-      {
-          StringBuilder logMessage = new StringBuilder();
-          logMessage.AppendLine(StringFunctions
-          .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-
-          await _objectDAO.ValidateObjectNo(objectNo);
-          var serviceResponse = new NotificationTPO<ObjectTPO>();
-          bool success = true;
-          try
-          {
-              await _dbConnection.OpenConnectionWithTransaction();
-              ObjectBO object = await _objectData.GetObject(_dbConnection, objectNo, status);
-              serviceResponse.Result = _objectMapper.ToObjectTPO(object);
-          }
-          catch (Exception e)
-          {
-              success = false;
-              //do not wait for response and continue
-              _ = _dbConnection.Rollback();
-              logMessage.AppendLine(StringFunctions
-              .LogStringBuilder($"GetObject Started objectNo={objectNo}, status={status}"));
-              throw new Exception(e.Message, e);
-          }
-          finally
-          {
-              if (success) { await _dbConnection.CommitAndClose(); }
-              logMessage.AppendLine(StringFunctions.LogStringBuilder("GetObject finished"));
-              _logger.LogInformation(logMessage.ToString());
-          }
-          return Ok(serviceResponse);
-      }
-
   - question: "How would you convert the following Actian 4GL code to c#? Respond only in code:
     METHOD GetObject
     (
@@ -132,8 +53,8 @@ seed_examples:
               whereQuery = $" {whereQuery} AND f.object_status='{status}'";
           }
 
-          string squery = $"select f.object_no, f.object_name, f.object_status, f.object_editcounter"
-          + "from {fromQuery} where {whereQuery}";
+          string squery = "select f.object_no, f.object_name, f.object_status, f.object_editcounter"
+          + $"from {fromQuery} where {whereQuery}";
 
           ObjectBO objects = new ObjectBO();
           try
@@ -387,7 +308,7 @@ IF;
 
           string squery3 = $"SELECT v.foo_name, v.foo_no, r.bar_no, r.bar_name, r.bar_max, r.bar_specialnotes," +
           "r.bar_dayprice, r.bar_daycost, r.bar_status, r.qux_code, r.quxorbaz_id, IFNULL(s.qux_name, '')," +
-          "r.bar_editcounter, 2 FROM {fromQuery3}{joinQuery3} WHERE {whereQuery3};";
+          $"r.bar_editcounter, 2 FROM {fromQuery3}{joinQuery3} WHERE {whereQuery3};";
           List<FooBarBO> fooBars = new List<FooBarBO>();
 
           try
