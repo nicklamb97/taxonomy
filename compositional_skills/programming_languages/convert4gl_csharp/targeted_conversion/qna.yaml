@@ -326,7 +326,6 @@ IF;
 
         l_status	           = INTEGER NOT NULL;
         l_rowcount           = INTEGER NOT NULL;
-        l_i		           = INTEGER NOT NULL;
         l_where	           = VARCHAR(100) NOT NULL;
 
         l_bo_arr_bar_object = ARRAY OF bo_barobject DEFAULT NULL;
@@ -344,17 +343,11 @@ IF;
         SELECT t.foo_no				AS p_foo.foo_no,
     	   t.foo_name				AS p_foo.foo_name,
     	   t.foo_webname				AS p_foo.foo_webname,
-    	   t.footype_code				AS p_foo.footype_code,
-    	   v.footype_name				AS p_foo.footype_name,
         FROM foo t
         JOIN footype v
         ON t.footype_code = v.footype_code
-        LEFT JOIN fooparkingtype p
-        ON t.fooparkingtype_code = p.fooparkingtype_code
-        LEFT JOIN unit u
-        ON t.unit_no = u.unit_no
-        JOIN region r
-        ON t.region_no = r.region_no
+        LEFT JOIN foopt p
+        ON t.foopt_code = p.foopt_code
         WHERE :l_where;
 
         l_status = CALLPROC sql_check(rowcount = BYREF(l_rowcount));
@@ -364,18 +357,6 @@ IF;
         ENDIF;
         IF l_rowcount = 0 THEN
             RETURN ER_OK;
-        ENDIF;
-
-        IF p_foo.qux_code != '' THEN
-
-            SELECT p_foo.qux_name = s.qux_name
-            FROM qux s
-            WHERE s.qux_code = :p_foo.qux_code;
-
-            IF sql_check() <> ER_OK THEN
-                RETURN ER_FAIL;
-            ENDIF;
-
         ENDIF;
 
         IF BarDAO.GetBarList(
@@ -419,11 +400,10 @@ IF;
           {
               whereQuery += $" AND foo_status = '{status}'"
           }
-          string joinQuery = "JOIN footype v ON t.footype_code = v.footype_code LEFT JOIN fooparkingtype p ON" +
-          "t.fooparkingtype_code LEFT JOIN unit u ON t.unit_no = u.unit_no JOIN region r ON t.region_no = r.region_no "
+          string joinQuery = "JOIN footype v ON t.footype_code = v.footype_code LEFT JOIN foopt p ON" +
+          "t.foopt_code"
 
-          string squery = $"SELECT t.foo_no, t.foo_name, t.foo_webname, t.footype_code, t.foo_planned,t.foo_max,"+
-          "t.unit_no, IFNULL(u.unit_name, ''),t.qux_code" +
+          string squery = $"SELECT t.foo_no, t.foo_name, t.foo_webname, t.footype_code"+
           $"from {fromQuery}{joinQuery}{whereQuery};"
 
           FooBO foo;
@@ -441,8 +421,6 @@ IF;
                           foo_no = reader.IsDBNull(0) ? 0 : reader.GetInt32("foo_no"),
                           foo_name = reader.IsDBNull(1) ? string.Empty : reader.GetString("foo_name"),
                           foo_webname  = reader.IsDBNull(2) ? string.Empty : reader.GetString("foo_webname"),
-                          footype_code = reader.IsDBNull(3) ? string.Empty : reader.GetString("footype_code"),
-                          footype_name = reader.IsDBNull(4) ? string.Empty : reader.GetString("footype_name"),
                       };
                   }
               }
@@ -450,28 +428,6 @@ IF;
           catch (Exception e)
           {
                throw new Exception(e.Message, e);
-          }
-
-          if (foo.qux_code != '')
-          {
-              squery = $"SELECT {foo.qux_code} = s.qux_name FROM qux s WHERE s.qux_code = {foo.qux_code};"
-              try
-              {
-                  DbCommand dbCommand = connection.GetCommand();
-                  dbCommand.CommandText = squery;
-                  var reader = await dbCommand.ExecuteReaderAsync();
-                  while (reader.read())
-                  {
-                      if(reader.IsDBNull(0))
-                      {
-                          foo.qux_code = reader.IsDBNull(0) ? string.Empty : reader.GetString("qux_code")
-                      };
-                  }
-              }
-              catch (Exception e)
-              {
-                  throw new Exception(e.Message, e);
-              }
           }
           foo.arr_foo_bar = await GetBarList(connection, fooNo, status);
 
