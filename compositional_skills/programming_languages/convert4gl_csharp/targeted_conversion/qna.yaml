@@ -859,10 +859,13 @@ IF;
                       ObjectName = obj.object_name,
                   };
                   barObjects.Add(barObject);
+                  
               }
               fooBar.ArrBarObject = barObjects;
+              
               fooBars.Add(fooBar);
           }
           tpo.ArrFooBar = fooBars;
+          
           return tpo;
       }
