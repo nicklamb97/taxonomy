@@ -1,5 +1,5 @@
 version: 3
-task_description: Learn about converting Actian 4GL SELECT statements for OpenROAD to C#.
+task_description: Convert OpenROAD xml components to C# classes
 created_by: guyvernon
 seed_examples:
   - question: 'How would you convert the following OpenRoad xml component into a c# class? Respond only in code:
